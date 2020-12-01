@@ -1,0 +1,197 @@
+<hr>
+<p>title: Java反序列化漏洞学习实践一-从Serializbale接口开始先弹一个计算器<br>date: 2020-09-13 01:19:56<br>categories:</p>
+<ul>
+<li>反序列化<br>tags:</li>
+<li>java反序列化</li>
+</ul>
+<hr>
+<h3 id="0x0、基本概念"><a href="#0x0、基本概念" class="headerlink" title="0x0、基本概念"></a>0x0、基本概念</h3><p><strong>1、什么是序列化和反序列化</strong></p>
+<p>Serialization（序列化）是指把Java对象保存为二进制字节码的过程；反序列化deserialization是把二进制码重新转换成Java对象的过程。</p>
+<p><strong>2、什么情况下需要序列化</strong></p>
+<p>a）当你想把的内存中的对象保存到一个文件中或者数据库中时候；</p>
+<p>b）当你想用套接字在网络上传送对象的时候；</p>
+<p>c）当你想通过RMI传输对象的时候；</p>
+<p>总之，序列化的用途就是传递和存储。</p>
+<p><strong>3、如何实现序列化</strong></p>
+<p>将需要序列化的类实现Serializable接口就可以了，Serializable接口中没有任何方法，可以理解为一个标记，即表明这个类可以被序列化。</p>
+<p>序列化与反序列化都可以理解为“写”和“读”操作 ，通过如下这两个方法可以将对象实例进行“序列化”与“反序列化”操作。</p>
+<pre><code>/**
+
+ * 写入对象内容
+
+ */
+
+private void writeObject(java.io.ObjectOutputStream out)
+
+/**
+
+ * 读取对象内容
+
+ */
+
+private void readObject(java.io.ObjectInputStream in)﻿</code></pre><p><strong>4、一些注意点</strong></p>
+<p>当然，并不是一个实现了序列化接口的类的所有字段及属性，都是可以序列化的：</p>
+<p>如果该类有父类，则分两种情况来考虑：</p>
+<p>1.如果该父类已经实现了可序列化接口，则其父类的相应字段及属性的处理和该类相同；</p>
+<p>2.如果该类的父类没有实现可序列化接口，则该类的父类所有的字段属性将不会序列化，并且反序列化时会调用父类的默认构造函数来初始化父类的属性，而子类却不调用默认构造函数，而是直接从流中恢复属性的值。</p>
+<p>如果该类的某个属性标识为static类型的，则该属性不能序列化。</p>
+<p>如果该类的某个属性采用transient关键字标识，则该属性不能序列化。</p>
+<p>a）当一个父类实现序列化，子类自动实现序列化，不需要显式实现Serializable接口；</p>
+<p>b）当一个对象的实例变量引用其他对象，序列化该对象时也把引用对象进行序列化；</p>
+<h3 id="0x1、简单实例"><a href="#0x1、简单实例" class="headerlink" title="0x1、简单实例"></a>0x1、简单实例</h3><p>以下代码是一个简单的序列化和反序列化操作的demo。</p>
+<pre><code>package 反序列化;
+
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.io.Serializable;
+
+public class deserTest implements Serializable {    
+    //创建一个简单的可被序列化的类，它的实例化后的对象就是可以被序列化的
+    private static final long serialVersionUID = 1L;
+    private int n;
+    public deserTest(int n) {
+        this.n=n;
+    }
+    @Override
+    public String toString() {
+        return &quot;deserTest [n=&quot; + n + &quot;, getClass()=&quot; + getClass() + &quot;, hashCode()=&quot; + hashCode() + &quot;, toString()=&quot;
+                + super.toString() + &quot;]&quot;;
+    }
+    public static void main(String[] args) {
+            deserTest x = new deserTest(5);
+            operation.ser(x);
+            operation.deser();
+            x.toString();
+        }
+}
+
+
+class operation{
+    public static void ser(Object obj) {
+        //序列化操作，写操作
+        try {
+            ObjectOutputStream ooStream = new ObjectOutputStream(new FileOutputStream(&quot;object.obj&quot;));
+            //ObjectOutputStream能把Object输出成Byte流
+            ooStream.writeObject(obj);
+            ooStream.flush();
+            ooStream.close();
+
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }catch (IOException e) {
+            // TODO: handle exception
+            e.printStackTrace();
+        }
+    }
+    public static void deser() {
+        //反序列化，读取操作
+        try {
+            ObjectInputStream iiStream = new ObjectInputStream(new FileInputStream(&quot;object.obj&quot;));
+            Object xObject = iiStream.readObject();
+            System.out.println(xObject);
+            iiStream.close();
+        } catch (FileNotFoundException e) {
+            // TODO: handle exception
+            e.printStackTrace();
+        }catch (IOException e) {
+            // TODO: handle exception
+            e.printStackTrace();
+        } catch (ClassNotFoundException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+    }
+}
+
+        } catch (Exception e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+    }
+}﻿</code></pre><p><img src="https://oss-map.oss-cn-beijing.aliyuncs.com/img/getImage-20200913014255836.png" alt="img"></p>
+<h3 id="0x2、自定义反序列化的行为–弹个计算器"><a href="#0x2、自定义反序列化的行为–弹个计算器" class="headerlink" title="0x2、自定义反序列化的行为–弹个计算器"></a>0x2、自定义反序列化的行为–弹个计算器</h3><p>自定义序列化和反序列化过程，就是重写writeObject和readObject方法。</p>
+<p>对以上代码进行改造，加入readObject方法的重写，再重写函数中加入自己的代码逻辑。</p>
+<pre><code>package 反序列化;
+
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.io.Serializable;
+
+public class deserTest2 implements Serializable {    
+    //创建一个简单的可被序列化的类，它的实例化后的对象就是可以被序列化的
+    private static final long serialVersionUID = 1L;
+    private int n;
+    public deserTest2(int n) {
+        this.n=n;
+    }
+
+    @Override
+    public String toString() {
+        return &quot;deserTest2 [n=&quot; + n + &quot;, getClass()=&quot; + getClass() + &quot;, hashCode()=&quot; + hashCode() + &quot;, toString()=&quot;
+                + super.toString() + &quot;]&quot;;
+    }
+
+    private void readObject(java.io.ObjectInputStream in) throws IOException,ClassNotFoundException{
+        in.defaultReadObject();
+        Runtime.getRuntime().exec(&quot;open /System/Applications/Calculator.app&quot;);
+        System.out.println(&quot;test&quot;);
+    }
+    public static void main(String[] args) {
+            deserTest2 x = new deserTest2(5);
+            operation1.ser(x);
+            operation1.deser();
+            x.toString();
+        }
+}
+
+
+class operation1{
+    public static void ser(Object obj) {
+        //序列化操作，写操作
+        try {
+            ObjectOutputStream ooStream = new ObjectOutputStream(new FileOutputStream(&quot;object.obj&quot;));
+            //ObjectOutputStream能把Object输出成Byte流
+            ooStream.writeObject(obj);
+            ooStream.flush();
+            ooStream.close();
+
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }catch (IOException e) {
+            // TODO: handle exception
+            e.printStackTrace();
+        }
+    }
+    public static void deser() {
+        //反序列化，读取操作
+        try {
+            ObjectInputStream iiStream = new ObjectInputStream(new FileInputStream(&quot;object.obj&quot;));
+            Object xObject = iiStream.readObject();
+            System.out.println(xObject);
+            iiStream.close();
+        } catch (FileNotFoundException e) {
+            // TODO: handle exception
+            e.printStackTrace();
+        }catch (IOException e) {
+            // TODO: handle exception
+            e.printStackTrace();
+        } catch (ClassNotFoundException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+    }
+}﻿</code></pre><p><img src="https://oss-map.oss-cn-beijing.aliyuncs.com/img/getImage-20200913014255733.png" alt="img"></p>
+<p>总结：</p>
+<p>这是一个极端的例子，在真实场景中，不会有人真的这样直接写一句执行命令的代码在readObject()中。但是一般会有其他的代码逻辑，如果它的代码逻辑里，如果有某一个分支有像method.invoke()这种可以调用其他函数的代码，那么就可以跳转过去，再从这个“其他函数”的角度去看有没有执行代码或调用其他函数的可能。这个“其他函数”也就是所谓的gadget了。</p>
+<p>参考：</p>
+<p><a href="http://www.cnblogs.com/xdp-gacl/p/3777987.html">http://www.cnblogs.com/xdp-gacl/p/3777987.html</a></p>
+<p><a href="http://www.importnew.com/20125.html">http://www.importnew.com/20125.html</a></p>
+<p><a href="http://beautyboss.farbox.com/post/study/shen-ru-xue-xi-javaxu-lie-hua">http://beautyboss.farbox.com/post/study/shen-ru-xue-xi-javaxu-lie-hua</a></p>
