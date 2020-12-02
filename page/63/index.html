@@ -1,0 +1,922 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"><meta><title>ol4three</title><meta description="涉猎方向有渗透测试、安全研究、二进制安全、代码审计、Python、Java"><meta property="og:type" content="blog"><meta property="og:title" content="ol4three"><meta property="og:url" content="http://www.ol4three.com/"><meta property="og:site_name" content="ol4three"><meta property="og:description" content="涉猎方向有渗透测试、安全研究、二进制安全、代码审计、Python、Java"><meta property="og:locale" content="en_US"><meta property="og:image" content="http://www.ol4three.com/img/og_image.png"><meta property="article:author" content="ol4three"><meta property="article:tag" content="渗透测试、安全研究、二进制安全、代码审计、Python、Java、C++"><meta property="twitter:card" content="summary"><meta property="twitter:image" content="/img/og_image.png"><script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":"http://www.ol4three.com"},"headline":"ol4three","image":["http://www.ol4three.com/img/og_image.png"],"author":{"@type":"Person","name":"ol4three"},"description":"涉猎方向有渗透测试、安全研究、二进制安全、代码审计、Python、Java"}</script><link rel="icon" href="/img/logo.svg"><link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.12.0/css/all.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@9.12.0/styles/atom-one-light.css"><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@400;600&amp;family=Source+Code+Pro"><link rel="stylesheet" href="/css/default.css"><style>body>.footer,body>.navbar,body>.section{opacity:0}</style><!--!--><!--!--><script src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" defer></script><!--!--><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lightgallery@1.6.8/dist/css/lightgallery.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/css/justifiedGallery.min.css"><!--!--><!--!--><script src="https://cdn.jsdelivr.net/npm/pace-js@1.0.2/pace.min.js"></script><script data-ad-client="1" src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js" async></script><meta name="generator" content="Hexo 5.1.1"><link rel="alternate" href="/atom.xml" title="ol4three" type="application/atom+xml">
+</head><body class="is-2-column"><nav class="navbar navbar-main"><div class="container"><div class="navbar-brand justify-content-center"><a class="navbar-item navbar-logo" href="/"><img src="/img/logo.svg" alt="ol4three" height="28"></a></div><div class="navbar-menu"><div class="navbar-start"><a class="navbar-item" href="/">Home</a><a class="navbar-item" href="/about">About</a><a class="navbar-item" href="/Security%20Incidents">Security Incidents</a><a class="navbar-item" href="/Vulnerabilities">Vulnerabilities</a><a class="navbar-item" href="/Read%20Team">Read Team</a><a class="navbar-item" href="/Stop%20learning">Stop learning</a><a class="navbar-item" href="/archives">Archives</a><a class="navbar-item" href="/categories">Categories</a><a class="navbar-item" href="/tags">Tags</a></div><div class="navbar-end"><a class="navbar-item" target="_blank" rel="noopener" title="Download on GitHub" href="https://github.com/ppoffice/hexo-theme-icarus"><i class="fab fa-github"></i></a><a class="navbar-item search" title="Search" href="javascript:;"><i class="fas fa-search"></i></a></div></div></div></nav><section class="section"><div class="container"><div class="columns"><div class="column order-2 column-main is-8-tablet is-8-desktop is-8-widescreen"><div class="card"><article class="card-content article" role="article"><div class="article-meta size-small is-uppercase level is-mobile"><div class="level-left"><span class="level-item">Posted&nbsp;<time dateTime="2018-03-23T06:12:55.000Z" title="2018-03-23T06:12:55.000Z">2018-03-23</time></span><span class="level-item">Updated&nbsp;<time dateTime="2020-12-01T12:18:00.484Z" title="2020-12-01T12:18:00.484Z">2020-12-01</time></span><span class="level-item"><a class="link-muted" href="/categories/WEB%E5%AE%89%E5%85%A8/">WEB安全</a></span><span class="level-item">2 hours read (About 14853 words)</span></div></div><h1 class="title is-3 is-size-4-mobile"><a class="link-muted" href="/2018/03/23/WEB/Google-hacking/">Google hacking</a></h1><div class="content"><ul>
+<li><p><strong>Google hacking</strong></p>
+<p>​                                      <strong>-ol4three</strong>                                                                                                                                             </p>
+<p><strong>第一章 搜索基础知识</strong></p>
+<p><strong>1.1Google搜索的黄金法则</strong></p>
+<ul>
+<li>Google<strong>限制搜索关键字最多为32个单词</strong></li>
+<li>Google查询是不区分大小写的：     <strong>//or必须大写</strong></li>
+<li>Google的通配符 ： *****    </li>
+<li>Google保留忽略查询关键字的权利：Google会忽略一个搜索中的某些常用单词、字母和一些单独的数字。指出这些词汇常称为<strong>“停用词”</strong></li>
+<li><strong>强制Google使用常见词汇的一种方法是把他们用引号引起来、或者在查询项之前加一个+号</strong></li>
+</ul>
+<p><strong>1.2Google使用布尔操作符和特殊字符</strong></p>
+<ul>
+<li><strong>AND</strong> ：这个操作符用于在查询中包含多个关键字  hacker and cracker (<strong>常用于防止过滤掉一些常用词</strong>)  <strong>// + == “and justice for all”</strong></li>
+<li><strong>NOT</strong> ：这个操作符用于从查询中忽略一个关键字  hacker -golf  ;  hacker -phlegm    (<strong>从你的查询中删除那些令人厌恶的字符</strong>)</li>
+<li><strong>OR</strong>   ：这个操作符命令Google查找搜索中的一个或者另外一个关键字     <strong>//可以用 “|” 或者 OR 来代替   查询看作是一个从左到右的句子即可</strong></li>
+<li><strong>特殊字符</strong>： 特殊字符将被Google默认转化</li>
+</ul>
+<p><strong>1.3网站链接</strong></p>
+<ul>
+<li><a target="_blank" rel="noopener" href="http://www.google.com">www.google.com</a>    <strong>Google的主页，大部分搜索的入口</strong></li>
+<li><a target="_blank" rel="noopener" href="http://groups.google.com">http://groups.google.com</a>        <strong>Google group页面</strong></li>
+<li><a target="_blank" rel="noopener" href="http://www.google.com/language/language_tools">www.google.com/language/language_tools</a>    <strong>各种语言和翻译选项</strong></li>
+<li><a target="_blank" rel="noopener" href="http://www.google.com/advance_search">www.google.com/advance_search</a>        <strong>高级搜索表单</strong></li>
+<li><a target="_blank" rel="noopener" href="http://www.google.com/preferences">www.google.com/preferences</a>        <strong>使用偏好设置</strong></li>
+</ul>
+<p><strong>第二章 高级搜索符</strong></p>
+<p><strong>2.1简介</strong></p>
+<ul>
+<li><strong>intitle,allintitle</strong></li>
+<li><strong>inurl,allinurl</strong></li>
+<li><strong>filetype</strong></li>
+<li><strong>allintext</strong></li>
+<li><strong>site</strong></li>
+<li><strong>link</strong></li>
+<li><strong>inanchor</strong></li>
+<li><strong>daterange</strong></li>
+<li><strong>cache</strong></li>
+<li><strong>info</strong></li>
+<li><strong>related</strong></li>
+<li><strong>phonebook</strong></li>
+<li><strong>rphonebook</strong></li>
+<li><strong>bphonebook</strong></li>
+<li><strong>author</strong></li>
+<li><strong>group</strong></li>
+<li><strong>msgid</strong></li>
+<li><strong>insubject</strong></li>
+<li><strong>stocks</strong></li>
+<li><strong>define</strong></li>
+</ul>
+<p><strong>2.2操作符语法</strong></p>
+<ul>
+<li>在操作符、冒号、搜索关键字之间是没有空格的</li>
+<li>如果用词组作为关键字的话，必须保证在操作符、冒号和词组的第一个引号之间没有任何空        格字符</li>
+<li>高级操作符能够和单独的查询混合使用</li>
+</ul>
+<p><strong>2.3Google高级操作符</strong></p>
+<p><strong>2.3.1 Intitle与Allintitle:    在页面标题中搜索</strong></p>
+<ul>
+<li>在页面标题中查找字符串</li>
+<li>能够很好地和其他操作符混合使用</li>
+<li>擅长搜索网页、Group、图片和新闻</li>
+<li>allintetle 在页面中查找所有的关键字（不能和其他混合使用）</li>
+</ul>
+<p><strong>2.3.2 Allintext: 在网页内容中查找关键字</strong></p>
+<p><strong>2.3.3  Inurl 与 Allinurl: 在URL中查找文本</strong></p>
+<ul>
+<li>在页面的URL中查找字符串</li>
+<li>能够很好地和其他操作符混合使用</li>
+<li>擅长搜索网页加图片</li>
+<li>Allinurl 不能和其他操作符或者关键字混合使用</li>
+<li><strong>URL是统一资源定位符（简单来说它就是网页的地址）</strong></li>
+</ul>
+<p><strong>2.3.4 Site： 搜索精确到特定的站点</strong></p>
+<ul>
+<li>允许你仅在某个特定的网站或者特定的网站或者特定的域中搜索网页</li>
+<li>能够很好地和其他操作符或者关键字混合使用，也可以单独使用</li>
+<li>擅长搜索网页，Group以及图片</li>
+<li>Google搜索是从右向左读取服务器名的</li>
+</ul>
+<p><strong>2.3.5Filetype： 搜索指定类型的文件</strong></p>
+<ul>
+<li>根据文件扩展名查找特定的文件</li>
+<li>等同于ext</li>
+<li>需要附加搜索关键字</li>
+<li>能够附加搜索关键字</li>
+<li>能够很好地和其他操作符混合使用</li>
+</ul>
+<p><strong>2.3.6 Link： 搜索与当前网页存在链接的网页</strong></p>
+<ul>
+<li>搜索链接到一个网站或者URL的链接</li>
+<li>不能很好地和其他操作符和和搜索关键字混合使用</li>
+<li>删除搜索网页、图片和新闻。</li>
+<li>必须提供一个完整的URL（包括协议、服务器、目录以及文件），或者一个部分URL</li>
+<li>当你提交一个无效的Link 给Google 他会当成一个词组来处理</li>
+</ul>
+<p><strong>2.3.7 Inanchor：在链接文本中查找文本</strong></p>
+<ul>
+<li>在链接描述文本中查找文本</li>
+<li>能够很好地和其他操作符和搜索关键字混合使用</li>
+<li>擅长搜索网页、图片和新闻</li>
+<li>可以和其他操作符及搜索关键字混合使用</li>
+</ul>
+<p><strong>2.3.8 Cache： 显示网页的缓存版本</strong></p>
+<ul>
+<li>显示页面的缓存版本</li>
+<li>不能很好地和其他操作符或者关键字混合使用</li>
+<li>擅长搜索网页</li>
+<li>eg： cache: blackhat.org</li>
+</ul>
+<p><strong>2.3.9 Numerange： 搜索数字</strong></p>
+<ul>
+<li>在某一特定范围内查找数字</li>
+<li>能够很好地和其他操作符或搜索关键字混合使用</li>
+<li>擅长搜索网页</li>
+<li>与ext同效</li>
+</ul>
+<p><strong>2.3.10 Daterange： 查找在某个特定日期范围内发布的网页</strong></p>
+<ul>
+<li>这个日期必须使用儒略历</li>
+<li>deterange操作符必须和其他搜索关键字或高级操作符同时使用</li>
+</ul>
+<p><strong>2.3.11 Info： 显示Google的摘要信息</strong></p>
+<ul>
+<li>该操作符的参数必须是一个有效的URL或者网站名。、</li>
+<li>info操作符不能和其他操作符或者搜索关键字混合使用</li>
+<li>显示网页的摘要信息</li>
+</ul>
+<p><strong>2.3.12 Related： 显示相关站点</strong></p>
+<ul>
+<li>显示与“提交的网站或URL相关的” 站点</li>
+<li>不能很多地和其他操作符或者关键字混合使用</li>
+<li>擅长搜索网页</li>
+</ul>
+<p><strong>2.3.13 Author： 搜索Groups中新闻组帖子的作者</strong></p>
+<ul>
+<li>搜索Group帖子的作者</li>
+<li>能够和其他混合使用</li>
+<li>擅长搜索Group</li>
+</ul>
+<p><strong>2.3.14 Group： 搜索Group标题</strong></p>
+<p><strong>2.3.15 Insubject： 搜索Google group主题行</strong></p>
+<ul>
+<li>在Group帖子的主题中查找字符串</li>
+<li>能够很好地和其他操作符或搜索关键字混合使用</li>
+</ul>
+<p><strong>2.3.16 Msgid： 通过消息ID来查找Group帖子</strong></p>
+<ul>
+<li>不能很好的和其他操作符混合使用</li>
+</ul>
+<p><strong>2.3.17 Stocks： 搜索股票信息</strong></p>
+<p><strong>2.3.18 Define： 显示某个术语的定义</strong></p>
+<ul>
+<li>显示对提供的单词或者词组的各种定义</li>
+<li>不能很好地和其他操作符或者关键字混合使用</li>
+<li>擅长搜索网页</li>
+</ul>
+<p><strong>2.3.19 Phonebook: 搜索电话列表</strong></p>
+<ul>
+<li>rphonebook    住宅电话列表</li>
+<li>bphonebook    商业电话列表</li>
+<li>phone book    商业和住宅电话列表</li>
+</ul>
+<p><strong>2.4操作符冲突与糟糕的Search-Fu</strong></p>
+<p>​    <img src="https://oss-map.oss-cn-beijing.aliyuncs.com/img/3926.png" alt="0"></p>
+<p><strong>2.5 网站链接</strong></p>
+<ul>
+<li>Google文件类型FAQ， <strong><a target="_blank" rel="noopener" href="http://www.google.com/help/faq_filetypes.html">www.google.com/help/faq_filetypes.html</a></strong></li>
+<li>文件扩展名信息资源，<strong><a target="_blank" rel="noopener" href="http://www.filext.com">www.filext.com</a></strong>  这个网站能够帮助你找到某个特定的扩展名与何种程序相关联</li>
+<li><strong><a target="_blank" rel="noopener" href="http://searchenginewatch.com/searchday/article.php/20160061">http://searchenginewatch.com/searchday/article.php/20160061</a></strong> 这篇文章讨论了和Google日期限定搜索选项有关的话题</li>
+<li>非常棒的在线Julian日期转换工具，<strong><a target="_blank" rel="noopener" href="http://www.24hourtranslations.co.uk/dates.htm">www.24hourtranslations.co.uk/dates.htm</a></strong>和<strong><a target="_blank" rel="noopener" href="http://www.tesre.bo.cnr.it/~mauro/JD/">www.tesre.bo.cnr.it/~mauro/JD/</a></strong></li>
+</ul>
+<p><strong>第三章 Google hacking基础</strong></p>
+<p><strong>3.1 简介</strong></p>
+<ul>
+<li>在浏览页面的缓存版本时。存在某种匿名隐藏的特征，来隐藏你的浏览行为</li>
+<li>本章我们将了解一种遍历技术， 学习： <strong>目录遍历</strong>、<strong>数字范围扩展</strong>以及<strong>扩展名搜索</strong></li>
+</ul>
+</li>
+</ul>
+<p>  <strong>3.2 使用缓存进行匿名浏览</strong></p>
+<ul>
+<li>Google会保存大部分他所抓取到的网页数据。虽然并不是都是如此而且这种情况也是可以防止的，但是大多数Google抓取的数据都被复制了一份，而且可以通过搜索结果页面的缓存链接来访问</li>
+<li><a target="_blank" rel="noopener" href="http://www.phrack.org">www.phrack.org</a></li>
+<li>点击缓存链接斌不是只从Google的数据库中加载网页，他还会连接到真是的服务器以访问图片以及其他非HTML内容</li>
+<li>在缓存URL的尾部添加<strong>&amp;**</strong>strip=1<strong>将只显示缓存网页的文本。以这种范式访问缓存页面不会连接到网站的真实服务器，而且如果你使用的是本章中提到的剪切和粘贴的方法，还能够保护你的</strong>匿名性**。</li>
+<li>tcpdump -n命令来抓捕这些数据</li>
+<li>也可以使用服务器网站 eg：atomintersoft |  samair.ru</li>
+</ul>
+<p>  <strong>3.3 目录列表</strong></p>
+<ul>
+<li>目录列表是一种能够列出网站服务器上存在的文件和目录的网页类型。</li>
+</ul>
+<p>  <strong>目录列表十分类似于FTP服务器</strong></p>
+<ul>
+<li>它们自身并不安全</li>
+<li>它们显示出来的信息能够帮助攻击者了解网站服务器的某些特定技术细节</li>
+<li>它们无法区分公开的文件和那些私有的文件</li>
+<li>它们通常都是偶然显示出来的，这是因为许多网站服务器都是在顶层索引文件（index.htm、index.htm 、default.asp等）丢失或者无效的时候才会显示目录</li>
+</ul>
+<p>  <strong>3.3.1 查找目录列表</strong></p>
+<ul>
+<li>目录列表包含了大量很有价值的目录</li>
+<li>最好的查找包含目录列表页面的方法是使用诸如intitle:index.of “parent directory” 或者 intitle:index.of name size之类的查询</li>
+</ul>
+<p>  <strong>3.3.2 查找特定的目录</strong></p>
+<ul>
+<li>你可以很容易地在目录列表中查找特定的目录，而只需要index.of查询上加一个目录名即可。例如，intitle:index.of inurl:backup可以用来查找URL中含有单词backup的目录列表。如果URL中含有单词backup，那么很有可能这是一个目录名</li>
+</ul>
+<p>  <strong>3.3.3 查找特定的文件</strong></p>
+<ul>
+<li>你可以很容易地在目录列表中查找特定的文件： 只需要简单地在index.of查询中加入文件名即可，例如intitle:index.of ws_ftp.log</li>
+</ul>
+<p>  <strong>3.3.4 服务器版本</strong></p>
+<ul>
+<li>某些服务器，尤其是Apache和Apache的派生服务器常常会在目录列表的底部加上一个服务器标志。这些服务器标志可以通过拓展index.of搜索来查找到，如intitle:index.of server.at</li>
+<li>你也可以搜索特定版本的web服务器，这是通过添加一个正确格式的服务器标志来实现的。例如， intitle:index.of server.at “Apache Tomcat/“ 能够找到运行各种版本的Apache Tomcat服务其的网站（<strong>同样的nmap也可以来识别</strong>）</li>
+</ul>
+<p>  <strong>3.4 险境：遍历技术</strong></p>
+<p>  <strong>3.4.1  目录遍历</strong></p>
+<ul>
+<li>一旦你在服务器上找到了某个特定的目录，就可以使用这个技术来查找其他的目录或者子目录</li>
+<li>完成这种任务的一个简单的办法就是利用目录列表。只要点击parent directory链接，就可以进入当前目录的上一级目录。如果该父目录仍包含其他的目录列表，那么你可以通过点击其链接来挖掘其他的目录。如果父目录没有显示目录列表，那么你可能就需要诉诸于一种更为复杂的方法了。即猜测目录名并把他们添加到父目录的URL的尾部。或者，考虑在Google搜索中使用site和Inurl关键词</li>
+</ul>
+<p>  <strong>3.4.2 递增置换</strong></p>
+<ul>
+<li>递增置换是 “取一个数并用下一个更大的或者更小的数来代替这个数” 的形象的说法</li>
+<li>这个技术可以用于挖掘在目录名或者文件名中使用数字的站点。这种技术只需要用更大的或者更小的数来替代原来的数字，但是要注意保持文件名或者目录名中剩下的部分不变（注意那些零）。或者，在Google搜索中使用site，在加上inurl或者filetype关键字。</li>
+</ul>
+<p>  <strong>3.4.3 拓展遍历</strong></p>
+<ul>
+<li>这种技术可以用于查找文件名相同，而扩展名不同的文件（例如备份文件）</li>
+<li>实现拓展遍历技术最容易的方法是在URL中，用一种扩展名来替代另一种扩展名，例如，用bak代替html</li>
+<li>目录列表，尤其是缓存目录列表，是最容易判定备份文件是否存在的方法，也能够判定可能用于网站其他部分的扩展名</li>
+</ul>
+<p>  <strong>3.5 网站链接</strong></p>
+<ul>
+<li><strong><a target="_blank" rel="noopener" href="http://www.all-nettools.com/pr.htm">www.all-nettools.com/pr.htm</a></strong>    一个简便的代理检查工具，它能够帮助你测试正在使用的代理服务器</li>
+<li><strong><a target="_blank" rel="noopener" href="http://www.sensepost.com/research/wikto">http://www.sensepost.com/research/wikto</a></strong>    Sensepost的Wikto工具，一个很强大的web扫描工具，它还结合了使用Google hacking数据库的Google查询测试。</li>
+<li><strong>一个简单的Google搜索可以用来在不对站点管理员或侵入检测系统，并且搜集到的信息都可以在以后的评估中重复使用。</strong></li>
+</ul>
+<p>  <strong>第四章 文档加工和数据库挖掘</strong></p>
+<p>  <strong>4.1 简介</strong></p>
+<ul>
+<li>互联网上的文档都是有价值的。“好人”和“坏人”都可以利用在文档中的信息来达到他们各自的目的</li>
+<li>这章我们就来学习一下关于文档的挖掘</li>
+</ul>
+<p>  <strong>4.2 配置文件</strong></p>
+<p>  <strong>4.2.1 基本信息：</strong></p>
+<ul>
+<li>配置文件能够向攻击者泄露<strong>敏感的信息</strong></li>
+<li>尽管配置文件的文件名不同，但是仍可以通过文件的扩展名来找到配置的文件，例如<strong>INI、CONF、CONFIG、或CFG</strong></li>
+<li>配置文件存储了程序的设置和程序的用法</li>
+<li>对于配置文件来说攻击者可以根据其提供的各种信息来寻找相应的方法甚至继续在寻找更深的东西出来</li>
+<li>对于搜索文件来说最好尝试用不同类型的搜索方法 eg:<strong>intitle:index.of ws_ftp.ini</strong> | <strong>filetype:ini inurl:ws_ftp.ini</strong> 都可以找到一些东西</li>
+<li>eg： <strong>filetype:conf inurl: firlwall</strong>  它可以搜索出防火墙的配置文件 </li>
+<li>eg： <strong>(inurl:conf OR inurl:config OR inurl:cfg)</strong>使用这样的联合搜索 正如一个攻击者知道你的配置文件的名称就可以通过filetype inutl 来更准确的寻找需要的文件 </li>
+</ul>
+<p>  <strong>4.2.2 对于一个Google黑客在搜索配置文件是应该注意的一些东西：</strong></p>
+<ul>
+<li>使用可用的配置文件中特有的单词或词组来创建一个强大的基本搜索</li>
+<li>过滤掉sample example test howto tutorial单词以剔除明显的实例文件</li>
+<li>用-cvs过滤掉CVS存储器，他们通常存放了默认的配置文件</li>
+<li>如果是搜索UNIX程序的配置文件，那么就要过滤掉manpage或者Manual</li>
+<li>搜索实例配置文件中最长改变的域，并且对该与执行缩简搜索、以提出可能的样例文件</li>
+</ul>
+<p>  <strong>4.2.3 配置文件搜索实例：</strong></p>
+<p>  ​    <img src="https://oss-map.oss-cn-beijing.aliyuncs.com/img/4958.jpeg" alt="0"></p>
+<p>  ​    <img src="https://oss-map.oss-cn-beijing.aliyuncs.com/img/4957.jpeg" alt="0"></p>
+<p>  <strong>4.3 日志文件</strong></p>
+<ul>
+<li><p>日志文件记录了一些信息 甚至包括一些时间和 IP地址到用户名与口令 例如银行卡账号</p>
+</li>
+<li><p>filetype:log inurl: log 或者是更简单的ext:log log</p>
+</li>
+<li><p>下面列出一些日志文件搜索实例</p>
+<p>​    <img src="https://oss-map.oss-cn-beijing.aliyuncs.com/img/4972.jpeg" alt="0"></p>
+<p>​    <img src="https://oss-map.oss-cn-beijing.aliyuncs.com/img/4974.jpeg" alt="0"></p>
+</li>
+</ul>
+<p>  <strong>filetype:log username putty</strong> 下图为搜索的结果该结果也可以在下一次<strong>继续使用</strong></p>
+<p>  ​    <img src="https://oss-map.oss-cn-beijing.aliyuncs.com/img/4976.jpeg" alt="0"></p>
+<p>  <strong>一些较为敏感的office文档：</strong></p>
+<p>  ​    <img src="https://oss-map.oss-cn-beijing.aliyuncs.com/img/4985.jpeg" alt="0"></p>
+<p>  ​    <img src="https://oss-map.oss-cn-beijing.aliyuncs.com/img/4984.jpeg" alt="0"></p>
+<p>  <strong>4.4 数据库挖掘</strong></p>
+<ul>
+<li>登陆入口，尤其是软件制造商提供的默认入口，是可以很容易就搜索到的 eg：login welcome copyright statements</li>
+<li>位于服务器端和客户端的软件都有帮助文件， 这些文件会泄露关于应用程序配置和用法的信息</li>
+<li>不同的错误消息的内容都能用来剖析目标</li>
+<li>数据库转储已证明是所有数据库的发现中泄露信息最多的，因为他们包括完整的或者部分的数据哭内容，可以通过数据库转储的头部字符搜索来得到， eg: “#Dumping data for table”</li>
+</ul>
+<p>  <strong>4.4.1 登陆入口：</strong></p>
+<ul>
+<li><p>搜索登陆入口 <strong>eg: inurl: admin | login</strong>  等</p>
+</li>
+<li><p>下面是一些搜索的例子</p>
+<p>​    <img src="https://oss-map.oss-cn-beijing.aliyuncs.com/img/4994.jpeg" alt="0"></p>
+<p>​    <img src="https://oss-map.oss-cn-beijing.aliyuncs.com/img/4995.jpeg" alt="0"></p>
+</li>
+</ul>
+<p>  <strong>4.4.2 帮助文件</strong></p>
+<ul>
+<li><p>其可能泄露机器名，用户名和明文口令</p>
+</li>
+<li><p>下面是一些帮助文件的搜索</p>
+<p>​    <img src="https://oss-map.oss-cn-beijing.aliyuncs.com/img/5008.jpeg" alt="0"></p>
+<p>​    <img src="https://oss-map.oss-cn-beijing.aliyuncs.com/img/5009.jpeg" alt="0"></p>
+</li>
+</ul>
+<p>  <strong>4.4.3 错误信息：</strong></p>
+<ul>
+<li><p>错误信息会泄露更多关于服务器上可能存在的漏洞的危险信息</p>
+<p>​    <img src="https://oss-map.oss-cn-beijing.aliyuncs.com/img/5016.jpeg" alt="0"></p>
+<p>​    <img src="https://oss-map.oss-cn-beijing.aliyuncs.com/img/5018.jpeg" alt="0"></p>
+<p>​    <img src="https://oss-map.oss-cn-beijing.aliyuncs.com/img/5017.jpeg" alt="0"></p>
+<p>​    <img src="https://oss-map.oss-cn-beijing.aliyuncs.com/img/5015.jpeg" alt="0"></p>
+</li>
+</ul>
+<p>  <strong>4.4.4 数据库转储：</strong></p>
+<ul>
+<li><p>数据库的任意格式的输出都可以看做是数据库的转储 它可以泄露出很多信息</p>
+<p>​    <img src="https://oss-map.oss-cn-beijing.aliyuncs.com/img/5028.jpeg" alt="0"></p>
+</li>
+</ul>
+<p>  <strong>4.4.5 实际的数据库文件：</strong></p>
+<ul>
+<li><p>对于数据库存储文件来说 Google只适用于用一个特定的文件名或扩展名的文件来表示数据库</p>
+<p>​    <img src="https://oss-map.oss-cn-beijing.aliyuncs.com/img/5035.jpeg" alt="0"></p>
+<p>​    <img src="https://oss-map.oss-cn-beijing.aliyuncs.com/img/5034.jpeg" alt="0"></p>
+</li>
+</ul>
+<p>  <strong>4.6 网站链接：</strong></p>
+<ul>
+<li><strong><a target="_blank" rel="noopener" href="http://www.filext.com">www.filext.com</a></strong>        一个关于文件扩展名信息的不错的资源。</li>
+<li><strong><a target="_blank" rel="noopener" href="http://desktop.google.com">http://desktop.google.com</a></strong>        Google桌面搜索应用程序</li>
+<li><strong>http”//johnny.ihackstuff.com</strong>        Google hacking数据库的主页，在其中你可以找到更多的和本章中列出的那些搜索相近的搜索</li>
+</ul>
+<p>  <strong>4.7 一些感想</strong></p>
+<ul>
+<li>如果防止下载 .INC文件或者将扩展名改为.PHP 隐藏其中的内容</li>
+<li>如果想要防止这方面的信息泄露，应该模拟一次信息的渗透测试来修改你不希望的出现的东西，甚至可以放一些文件来误导攻击者</li>
+<li>对于附录网站敏感信息或者绝对路径的文件，应该放在一些无法read的目录或隐藏</li>
+</ul>
+<p>  <strong>第五章 Google在信息收集框架中扮演的角色</strong></p>
+<p>  <strong>5.1 简介</strong></p>
+<ul>
+<li>黑客实际上是一种心境以及一种思考方式，而不是一种物理属性</li>
+</ul>
+<ol>
+<li>因为他们想了解大多数人所不了解的</li>
+<li>知识就是力量</li>
+</ol>
+<p>  <strong>5.2 自动搜索原则</strong></p>
+<ul>
+<li>确定原始搜索关键字</li>
+<li>扩展 搜索关键字</li>
+<li>从数据源获取数据</li>
+<li>解析数据</li>
+<li>在后期过程中，将数据处理为信息</li>
+</ul>
+<p>  <strong>5.2.1 原始搜索关键字</strong></p>
+<ul>
+<li>清晰的定义目标大概算是所有搜索中最不相同的部分了，好的搜索不可能得到一个不清晰的目标。在进行自动化搜索时，手动搜索中的原则也同样适用：无用的信息输入，无用信息输出。</li>
+</ul>
+<p>  <strong>5.2.2 扩展搜索关键字</strong></p>
+<ul>
+<li>扩展搜索关键字是人类的天性，自动化搜索真正的本领就在于它能思考人类工作过程并且能够将改过程翻译成某种算法</li>
+</ul>
+<p>  <strong>（对于自动化查找则和字典相同去匹配各种邮箱来找到你所使用的东西）</strong></p>
+<ol>
+<li><p>E-mail地址</p>
+</li>
+<li><p>电话号码</p>
+</li>
+<li><p>人</p>
+</li>
+<li><p>获取大量结果</p>
+</li>
+<li><p>更多组合</p>
+</li>
+<li><p>使用“特殊的”操作符</p>
+<p>eg：</p>
+</li>
+</ol>
+<ul>
+<li>filetype:ppt site:www.****.gov</li>
+<li>filetype:doc site:www.****.gov</li>
+<li>filetype:xls site:www.****.gov</li>
+<li>filetype:pdf site:www.****.gov</li>
+</ul>
+<p>  <strong>5.2.3 从数据源获取数据</strong></p>
+<p>  <strong>1.自行抓取——请求并接受响应</strong></p>
+<ul>
+<li>这是获取结果的另一种灵活的方式。你完全可以控制整个过程，并且可以进行诸如设置结果数量这类工作——使用应用编程接口（Applocation Programming Interface, API）你一旦进行了该工作，你的顾虑就被完全打消了，并且会开始着手调节参数</li>
+</ul>
+<p>  <strong>NETCAT</strong></p>
+<ul>
+<li><strong>人们称Netcat是TCP/Internet Protocol (IP)的瑞士军刀。对于黑白两道而言，它都是一个极有的工具；从漏洞利用获取反解的shell（黑帽）到帮助网络管理员分析协议（白帽）。</strong></li>
+</ul>
+<p>  <strong>2. 自行抓取——解析结果</strong></p>
+<ul>
+<li>可以用netcat抓取结果并自动做结果解析</li>
+</ul>
+<p>  <strong>3.Dapper</strong></p>
+<ul>
+<li>Dapper站点（<strong><a target="_blank" rel="noopener" href="http://www.dapper.net">www.dapper.net</a></strong>）支持用户创建一种他们称为Dapper的东西。这些Dapp是很小的程序，可以从任何站点抓取信息，并将这些抓取的数据以几乎任何一种方式传递 （例如，XML、CSV、RSS等）</li>
+</ul>
+<p>  <strong>4.Aura/EvilAPI</strong></p>
+<ul>
+<li>一种能拦截Google API调用并返回简单对象存取协议（Simple Object Access Protocol, SOAP） XML的应用程序——基于仍旧在使用的API的应用程序不需要进行任何改动。</li>
+</ul>
+<p>  <strong>5.使用其他搜索引擎</strong></p>
+<ul>
+<li>除了Google外，世界上还有很多搜索引擎！MSN引擎也支持API</li>
+</ul>
+<p>  <strong>API</strong>：API就是操作系统留给应用程序的一个调用接口，应用程序通过调用操作系统的 API 而使操作系统去执行应用程序的命令（动作）。</p>
+<p>  <strong>5.2.4解析数据</strong></p>
+<ol>
+<li>解析E-mail地址</li>
+<li>域和子域</li>
+<li>电话号码</li>
+</ol>
+<p>  <strong>5.2.5 后期处理</strong></p>
+<ol>
+<li>按相关性对结果进行分类</li>
+<li>非摘要内容</li>
+<li>呈现结果</li>
+</ol>
+<p>  <strong>5.3 搜索关键字</strong></p>
+<p>  <strong>5.3.1 在Web上收集</strong></p>
+<ul>
+<li>你可以从中搜索到其他人的搜索关键字的泄露站点会突然出现，一旦你找到了一些有趣的东西，你将会看到此人执行的所有的其他的搜索</li>
+</ul>
+<p>  <strong>5.3.2 自行收集</strong></p>
+<ul>
+<li>当你搜索某些资料时，查询都会定位到Google计算机。你每次在Google上执行搜索时，他们都会查看你是否通过了一个cookie。如果没有会指示你的浏览器设置一个 </li>
+</ul>
+<p>  <strong>//  然后可以使用burfsuite去搞一些事情</strong></p>
+<ul>
+<li><strong>隐藏 甜言蜜语：</strong> 假设你在运行一个代号为“Sookha”的超级机密项目。没有人知道这个项目的名称。如果某人想去Google上查找单词Sookha，那么你应该在不让搜索者察觉你所了解的事实情况下获知。<strong>你能做的就是注册一个使用Sookha作为关键字的关键字广告。</strong></li>
+</ul>
+<p>  <strong>5.4一些感想</strong></p>
+<ul>
+<li>应该建立一个自己的字典脚本来对于一些查询</li>
+<li>学习一些python脚本来为你的自动搜索做一些事情</li>
+<li>对于一个隐晦的不想让他人通过Google在搜索出来的东西可以以该名字作为一个广告的关键字</li>
+</ul>
+<p>  <strong>第六章 搜索漏洞利用与查找目标</strong></p>
+<p>  <strong>6.1 简介</strong></p>
+<ul>
+<li>漏洞利用（exploit）代码时黑客使用的一种工具。他们设计用来洞察一个目标，大部分黑客都有许多可以随意支配的漏洞利用。而大部分的漏洞利用在某段时间内时不公开的，不过他们最终会公布，发布出来，而我们正式利用这一点来进行Google搜索 找到一些可以使用的和一些可以被攻击的目标</li>
+</ul>
+<p>  <strong>6.2搜索漏洞利用代码</strong></p>
+<ul>
+<li><p>可以通过关注那些常见的字符串，例如exploit或者vulnerablility，来搜索公开的漏洞利用站点。如果想让结果更为精确，可以给查询附上filetype操作符，以查询以特定程序设计语言所编写的漏洞利用  eg:    filetype:c c |  filetype:c exploit |  php</p>
+</li>
+<li><p>即可以使用filetype指定文件扩展名，也可以使用源代码中的常见字符串，例如“include ”，来查找漏洞利用代码</p>
+<p>​    <img src="https://oss-map.oss-cn-beijing.aliyuncs.com/img/5996.jpeg" alt="0"></p>
+<p>​    <img src="https://oss-map.oss-cn-beijing.aliyuncs.com/img/5998.jpeg" alt="0"></p>
+</li>
+</ul>
+<p>  <strong>6.3 Google代码搜索</strong></p>
+<ul>
+<li><p>Google代码搜索，可以用来搜索程序内部的代码，但是它也可以用来搜索导致漏洞的编程错误</p>
+</li>
+<li><p>除了允许查询包括强大的正则表达式外，代码搜索还引入了特殊的搜索符，如下</p>
+<p>​    <img src="https://oss-map.oss-cn-beijing.aliyuncs.com/img/6000.jpeg" alt="0"></p>
+<p>​    <img src="https://oss-map.oss-cn-beijing.aliyuncs.com/img/6002.jpeg" alt="0"></p>
+</li>
+</ul>
+<p>  <strong>6.4 搜索恶意软件和可执行文件</strong></p>
+<ul>
+<li>Google不止会抓取，还会分析二进制文件或者可执行文件</li>
+<li>Google的二进制搜索功能可以用来剖析可执行文件，但是它也可以用来搜索Web上的可用恶意软件</li>
+</ul>
+<p>  <strong>6.5 搜索易受攻击的目标</strong></p>
+<ul>
+<li>攻击者可以利用软件制造商提供的应用程序的演示程序中出现的字符串来搜索潜在的目标</li>
+<li>攻击者也可以下载并选择性安装易受攻击的产品，从而在应用程序显示的字符串中查找特殊的字符串</li>
+<li>不管字符串是如何获得的，它都能够很容易地转换成Google查询，彻底缩短了在公开漏洞公告之后，访问人员花在加固站点安全上的时间</li>
+</ul>
+<p>  <strong>6.5.1 利用演示页面搜索目标</strong></p>
+<ul>
+<li>通过演示页面来获取web对应的一些版本信息在来进行查询</li>
+</ul>
+<p>  <strong>6.5.2 利用源代码搜索目标</strong></p>
+<ul>
+<li>同样的原来在网页上下载对应的网站源代码来找到网站的信息，针对各种信息在做出对应的查询</li>
+</ul>
+<p>  <strong>6.5.3 利用CGI扫描搜索目标</strong></p>
+<ul>
+<li><p>利用CGI扫描器    一个CGI扫描器可以在一个数据文件中列出易受攻击的文件和目录</p>
+</li>
+<li><p>eg： inurl:/cgi-bin/userreg.cgi        |    filetype:cgi inurl:userreg.cgi</p>
+<p>​    </p>
+</li>
+</ul>
+<p>  <strong>6.6 网站链接</strong></p>
+<ul>
+<li><a target="_blank" rel="noopener" href="http://www.sensepost.com/research/wikto/">www.sensepost.com/research/wikto/</a>    Wikto,一个很棒的Google和web扫描器</li>
+<li><a target="_blank" rel="noopener" href="http://www.cirt.net/code/nikto.shtml">www.cirt.net/code/nikto.shtml</a> Nikto, 一很棒的Web扫描器</li>
+<li><a target="_blank" rel="noopener" href="http://packetstormsecurity.com">http://packetstormsecurity.com</a>    一个很棒的工具和漏洞利用站点</li>
+</ul>
+<p>  <strong>6.10 一些想法</strong></p>
+<ul>
+<li>这是因为它能够使用strip=1参数来显示缓存页面</li>
+</ul>
+<p>  <strong>第7章 简单有效的安全性搜索</strong></p>
+<p>  <strong>7.1 简介</strong></p>
+<ul>
+<li>针对安全方面的工作而言，我们来看看在安全性评估中相当有效的10个搜索，但这仅仅是作为你的前10位列表的基础。</li>
+</ul>
+<p>  <strong>7.1.1 site</strong></p>
+<ul>
+<li>site操作符擅长从Google所收集的内容中提取与目标有关的信息</li>
+<li>这个操作符常用于和其他本章中提到的查询组合使用，以对某一目标实现精确搜索</li>
+<li>site搜索也可以用来收集关于目标主机或服务器的信息</li>
+<li>eg：        <strong>site:nytimes.com-site:**</strong><a target="_blank" rel="noopener" href="http://www.nytimes.com">www.nytimes.com</a>**</li>
+</ul>
+<p>  <strong>7.1.2 intitle:index.of</strong> </p>
+<ul>
+<li>针对<strong>Apache</strong>风格的目录列表的通用搜索</li>
+<li>目录列表能够给攻击者提供又价值的信息</li>
+</ul>
+<p>  <strong>7.1.3 error | warning</strong></p>
+<ul>
+<li><strong>(“for more information” | “not found”) (error | warning)</strong> 查询就返回了很多条有趣的结果</li>
+<li>错误消息在每种坏境下都会泄露出很多信息</li>
+<li>在某些情况下，警告文本能够提供目标所使用的代码内部的重要信息</li>
+</ul>
+<p>  <strong>7.1.4 login | logon</strong></p>
+<ul>
+<li>登陆 <strong>(login)</strong> 入口就是一个网站的”前门” 可以查询出来</li>
+<li>这个查询可以高效地搜索出登陆人口</li>
+<li>它也可以用来获取用户名以及解决问题的步骤</li>
+</ul>
+<p>  <strong>7.1.5 username | userid | employee.ID | “your username is”</strong></p>
+<ul>
+<li>有许多不同的方法用来从一个目标系统中获取用户名，即使在大多数的认证机制中，用户名都是不太重要的一半，但是至少应对它进行最低限度的保护，以防止外人获取</li>
+<li><strong>一种获取用户名的最通用的搜索</strong></li>
+<li>当这个查询不能获取用户名时，其周围的上下文也能泄露攻击者可以用于后续攻击行为的信息</li>
+</ul>
+<p>  <strong>7.1.6 passworl | passcode | “your passcode is”</strong></p>
+<ul>
+<li>这个查询反映了<strong>password</strong>的常见的方法</li>
+<li>这个查询能够泄露描述登陆步骤、口令修改步骤以及目标所用的口令策略的文档。对于搜索有关电话会议的信息而言，特别是在<strong>Google</strong>日历搜索中，<strong>passcode</strong>特别有用</li>
+<li>一般性的搜索是没有什么用的但是如果加上site搜索就变得不寻常了</li>
+</ul>
+<p>  <strong>7.1.7 admin | administrator</strong></p>
+<ul>
+<li>该查询用两个最常用的术语来表示网站的所有者或者维护者，可以用来暴露程序上的信息(例如”contact your administrator”)，甚至是管理登陆入口</li>
+</ul>
+<p>  <strong>7.1.8 -ext”:html -ext:html -ext:shtml -ext:asp -ext:php</strong></p>
+<ul>
+<li>当把这个查询和site操作符组合使用时，能够剔除最常见的文件，而暴露更有趣的文档</li>
+<li>该查询也可以针对不同的目标而作相应的修改以剔除其他的常见文件累心</li>
+</ul>
+<p>  <strong>7.1.9 inurl:temp | inurl:tmp | inurl:backup | inurl:bak</strong></p>
+<ul>
+<li>查询也可以针对不同的目标而作相应的修改以剔除其他的常见文件，而暴露出更有趣的文档</li>
+</ul>
+<p>  <strong>7.1.10 intranet | help.desk</strong></p>
+<ul>
+<li>这个查询用来搜索内部网络站点（这些站点应该收到保护以防止外部人员访问）以及服务台联系信息和操作步骤</li>
+</ul>
+<p>  <strong>7.2 一些想法</strong></p>
+<ul>
+<li>规模较大的查询列表中的大多数搜索都是非常特殊的，它们只针对很少的一部分互联网站点。虽然这些特殊查询的效果极佳，但是一般最好还是保存一个规模较小的强大的搜索列表，以在评估中灵活地创造出丰富的搜索，尤其是当你用常规方法感到无计可施时更为有用</li>
+</ul>
+<p>  <strong>第8章 跟踪搜索Web服务器、登陆入口和网络硬件</strong></p>
+<p>  <strong>8.1 简介</strong></p>
+<ul>
+<li>通常认为，渗透测试人员也是专业的黑客，因为它们本质上通过攻入客户的网路来查找、记录并且最终帮助客户解决系统或者网络中的安全缺陷的</li>
+</ul>
+<p>  <strong>8.2 定位并分析Web服务器</strong></p>
+<ul>
+<li>目录列表和默认的服务器生产的错误消息可以提供一些关于服务器的信息。即使这些信息可以通过直接连接到服务器来得到，但是一名拥有针对特定版本的软件的漏洞利用程序的攻击者会使用Google查询来搜索相应的目标，而这些Google查询都是针对这类信息设计的</li>
+<li>攻击者尤其会关注操作系统，Web服务器软件的版本和名称、默认的配置，有漏洞的脚本，或者这些因素的任意组合</li>
+<li>Google查询更为隐蔽而且也给攻击者和目标之前提供了某种程度的隔离</li>
+<li>服务器和应用程序错误消息暴露了大量的信息，从软件的版本和补丁级别到源代码片段以及关于系统进程和程序的信息，错误消息是最被低估的信息泄露途径之一</li>
+</ul>
+<p>  <strong>8.2.1 目录列表</strong></p>
+<ul>
+<li>对与服务器的目录列表的程序“server at “Apache/2.0.52” ” 查找具有Apache 2.0.52 server标记的目录列表的服务器</li>
+</ul>
+<p>  <strong>8.2.2 Web服务器软件的错误信息</strong></p>
+<ul>
+<li>对于Microsoft IIS 默认情况下在IIS 5和IIS 6在服务器遇到某种问题时，会显示相应的静态的HTTP/1.1错误消息，这些错误页面默认保存在%SYSTEMROOT%\help\iishelp\common目录</li>
+<li>对于服务器报错，搜一些错误信息 httpd.conf        bottom.html</li>
+<li>可以使用一些基本的shell命令，我们就能吧错误页面的标题与可能出现在错误页面上的文本分离出来        <strong>//grep -h -r “Content-language: en” -A 10 | grep -A5 “TITLE” | grep -v virtual</strong></li>
+</ul>
+<p>  <strong>8.2.3 应用软件错误消息</strong></p>
+<ul>
+<li>查询”Fatal error: Call to undefined function” -reply -the -next 能查找到ASP错误消息</li>
+<li>查询 intext: “warning: Failed opening “ include_path 可以找到一些常见的错误，许多错误都会泄露路径名和文件名</li>
+</ul>
+<p>  <strong>8.2.4 默认页面</strong></p>
+<ul>
+<li><p>查找特殊类型的服务器或者Web软件的方法时搜索默认的Web页面。大多数的软件，包括Web服务器软件自身，都带有一个或多个默认或测试页面。这些页面可以让管理员方便地测试Web服务器或者应用程序的安装。</p>
+</li>
+<li><p><strong>一些查找特定服务器的查询</strong></p>
+<p>​    <img src="https://oss-map.oss-cn-beijing.aliyuncs.com/img/6832.png" alt="0"></p>
+<p>​    <img src="https://oss-map.oss-cn-beijing.aliyuncs.com/img/6830.png" alt="0"></p>
+<p>​    <img src="https://oss-map.oss-cn-beijing.aliyuncs.com/img/6833.png" alt="0"></p>
+<p>​    <img src="https://oss-map.oss-cn-beijing.aliyuncs.com/img/6831.png" alt="0"></p>
+</li>
+</ul>
+<p>  <strong>8.2.5 默认文档</strong></p>
+<ul>
+<li><p>Web服务器软件通常会附带一些手册和文档，它们位于Web目录中。攻击者可以利用这种文档对Web软件进行剖析或者搜索。</p>
+</li>
+<li><p>大部分一些文档会透露着一些服务器什么的默认设置甚至一些管理员的默认账户密码</p>
+<p>​    <img src="https://oss-map.oss-cn-beijing.aliyuncs.com/img/6884.png" alt="0"></p>
+</li>
+</ul>
+<p>  <strong>8.2.6 示例程序</strong></p>
+<ul>
+<li><p>Web软件除了附带文档和手册之外，一个软件包通常还包含一些默认的应用程序。这些默认的应用程序，例如默认的Web页面，可以帮助演示软件的功能，作为开发者的起点，提供可以用作学习工具的实例函数和代码。</p>
+</li>
+<li><p>例如Microsoft Index Server的内容查找可以允许Web访问者搜索整个网站的内容。在某些情况下，这个查询页面能够查找到没有被其他任何页面链接的页面或者包含敏感信息的页面</p>
+<p>​    <img src="https://oss-map.oss-cn-beijing.aliyuncs.com/img/6902.png" alt="0"></p>
+</li>
+<li><p>你可以使用这些缓存页面与&amp;strip=1选项一道来匿名查看页面，这可以让信息收集工作远离服务器管理员的监视</p>
+</li>
+<li><p>​    <img src="https://oss-map.oss-cn-beijing.aliyuncs.com/img/6911.png" alt="0"></p>
+<p>​    <img src="https://oss-map.oss-cn-beijing.aliyuncs.com/img/6915.png" alt="0"></p>
+</li>
+</ul>
+<p>  <strong>8.3 定位登陆入口</strong></p>
+<ul>
+<li><p>登陆入口会吸引那些正搜索特定类型软件的攻击者。另外，登陆入口也可以作为信息收集攻击的起点。因为大多数登陆入口都是设计成对用户友好的，给新用户提供帮助文档和操作步骤的链接。管理登陆入口和远程股管理工具有时更加危险，尤其是当它们没有被正确的配置时</p>
+</li>
+<li><p>一些登陆入口，类似allinurl:” exchange/logon.asp” 可能会提供大量关于服务器的信息</p>
+<p>​    <img src="https://oss-map.oss-cn-beijing.aliyuncs.com/img/6938.png" alt="0"></p>
+<p>​    <img src="https://oss-map.oss-cn-beijing.aliyuncs.com/img/6942.png" alt="0"></p>
+<p>​    <img src="https://oss-map.oss-cn-beijing.aliyuncs.com/img/6944.png" alt="0"></p>
+<p>​    <img src="https://oss-map.oss-cn-beijing.aliyuncs.com/img/6947.png" alt="0"></p>
+<p>​    <img src="https://oss-map.oss-cn-beijing.aliyuncs.com/img/6949.png" alt="0"></p>
+<p>​    <img src="https://oss-map.oss-cn-beijing.aliyuncs.com/img/6951.png" alt="0"></p>
+<p>​    <img src="https://oss-map.oss-cn-beijing.aliyuncs.com/img/6954.png" alt="0"></p>
+</li>
+</ul>
+<p>  <strong>使用并且查找各种Web工具</strong></p>
+<ul>
+<li><p>虽然Google强大且灵活，但它并不是无所不能的。有时候，如果不用Google反而更简单。当不使用Google来执行类似与WHOIS查询，“pings”，traceroute以及端口扫描等任务时，更为简单方便。</p>
+</li>
+<li><p>NQT网络查询工具（Network Query Tool）。<a target="_blank" rel="noopener" href="http://www.shipmail.gr/index.php">http://www.shipmail.gr/index.php</a></p>
+<p>​    <img src="https://oss-map.oss-cn-beijing.aliyuncs.com/img/6978.png" alt="0"></p>
+</li>
+<li><p>默认的NQT安装允许任何网络用户执行IP主机名和地址查询，DNS查询，WHOIS查询，端口测试与traceroute。NQT是一个基于Web的程序，意思是说任何能够访问该页面的用户都可以对任意目标执行这些功能。器服务器会掩盖用户的真实地址。如果使用一个匿名代理服务器，则可以进一步的隐藏用户的真实身份        //NQT程序也打接受远程的POST请求</p>
+</li>
+</ul>
+<p>  <strong>8.4 瞄准使用Web的网络设备</strong></p>
+<ul>
+<li>各种网络设备都可以用Google查询搜索到。对某些攻击者而言，这些设备不仅知识满足他们技术上的好奇，许多由Web链接了的设备配置不当，而且安全审计人员通常会忽视那些可信的设备。网络摄像头就是一种被忽视的设备，它能够给攻击者提供目标的内部情况，即使只有相当少的一部分目标安装了网络摄像头。当网络打印机被攻陷时，会泄露大量的敏感信息，尤其是对攻击者而言，他们可以查看打印作业和网络信息。</li>
+<li>许多网络设备都预安装一个Web接口以雨荨管理员查询设备的状态或者通过Web浏览器来改变设备的设置</li>
+</ul>
+<p>  <strong>8.5 查找各种网络报告</strong></p>
+<ul>
+<li>网络文档和状态报告，它们能够让外部人员访问所有的信息，从网络上的IP地址到完整的，可用的网络图表    </li>
+<li>来自这些信息可以用来帮助创建网络映射</li>
+</ul>
+<p>  <strong>8.6 查找网络硬件</strong></p>
+<ul>
+<li><p>一个连接到网络的设备通常都具有某种Web页面。如果该设备连接到了互联网上，斌且曾经在一个到该设备的Web页面的链接，那么很有可能该页面存在于Google的数据库之中，等待某个灵巧的查询找到它</p>
+<p>​    <img src="https://oss-map.oss-cn-beijing.aliyuncs.com/img/7046.png" alt="0"></p>
+</li>
+</ul>
+<p>  <strong>8.7 总结即一些感想</strong></p>
+<ul>
+<li>攻击者使用Google由多种目的。攻击者可能拥有一个针对某个Web软件特定版本的漏洞利用程序</li>
+<li>目录列表可以提供设备上所用的软件版本信息。</li>
+<li>服务器报错也会泄露大量的信息</li>
+<li>登陆入口也是攻击的一个手段</li>
+<li>总的来说还是一个固定不变的思想有输入就有攻击，你有反应我就可以作事情，查询一些以有的东西来帮助我做一些事情</li>
+</ul>
+<p>  <strong>第九章 用户名、口令和其他秘密信息</strong></p>
+<p>  <strong>9.1 简介</strong></p>
+<ul>
+<li>这一章的内容不是关于在评估过程中查找敏感数据的，而是关于为了搜索这些数据，那些“坏人”可能会做什么。这一章所提到的例子通常都代表了最常见的安全问题。黑客在每次攻击时都要瞄准这些信息。为了对抗这类攻击者。我们必须十分明确这种攻击会造成的最坏的可能。但是，我们也不用过于了解这些最坏的可能。请不要告诉那些有坏信息的人一些他们尚不知道的观念</li>
+</ul>
+<p>  <strong>9.2搜索用户名</strong></p>
+<ul>
+<li><p>大多数认证系统都是使用用户名和口令来保护信息。为了达到突破这类保护的“前门”的目的，你需要判断用户以及口令。</p>
+</li>
+<li><p>能够在许多地方找到用户名，某些时候，可能需要挖掘文档或E-mail目录</p>
+</li>
+<li><p>一个想“your username is” 这样简单的查询都能有效地搜索用户名</p>
+</li>
+<li><p>在一些帮助文档中包括了一些默认的用户和密码</p>
+<p>​    <img src="https://oss-map.oss-cn-beijing.aliyuncs.com/img/7108.png" alt="0"></p>
+</li>
+<li><p>搜索已知的文件名来查找是否存在信息</p>
+</li>
+<li><p>在Windows注册表保存了各种认证信息，包括用户名和口令，虽然不可能（很少）在Web中搜索到可用的，导出了的Windows注册表文件，但是这都是一种思想</p>
+</li>
+<li><p>可以在公共目录中查找多次，最终会得到接近于包含所有用户信息的列表</p>
+</li>
+</ul>
+<p>  <strong>9.3搜索口令</strong></p>
+<ul>
+<li><p>口令数据是渗透测试中的“圣杯”之一，它应该收到保护。遗憾的是。有许多可以用来在网络上搜索口令查询Google查询的例子</p>
+</li>
+<li><p>一个类似于“Your password” forgot这样简单的查询能够找到提供忘记口令回复机制的页面</p>
+</li>
+<li><p>intext:(password | passcod | pass) intext:(username | userid | user)是另外一种针对口令信息的通用搜索 </p>
+<p>​    <img src="https://oss-map.oss-cn-beijing.aliyuncs.com/img/7137.png" alt="0"></p>
+</li>
+<li><p>下面是各种语言password的翻译文</p>
+<p>​    <img src="https://oss-map.oss-cn-beijing.aliyuncs.com/img/7142.png" alt="0"></p>
+</li>
+</ul>
+<p>  <strong>9.4 搜索信用卡账号和社保号码等</strong></p>
+<ul>
+<li>随着互联网上不可靠的零售商越来越多，出现如此多的信用卡欺骗现象也就没有什么可奇怪的了。并不是只有这些小规模的零售商会受到黑客的攻击。这些年来，成败上千个大新企业的财务数据库也受到了攻击，有些受害公司还是技术比较好并且也非常主义防止攻击的公司</li>
+<li>大多书情况下，包含这些账号的页面都不是从在线零售商或者电子商务网站”泄露出去的“，而很有可能是网络钓鱼欺骗结果。网络钓鱼欺骗是通过电话或者E-mail欺骗用户的个人信息</li>
+<li>甚至一些不负责任的新闻渠道泄漏了能够查找这些信息的功能查询，还可以通过搜索特定的文件扩展名来查找</li>
+</ul>
+<p>  <strong>9.4.1 社保账号</strong></p>
+<ul>
+<li>社保号码和其他铭感数据也可以很容易地通过Google查找到，所用的技术和搜索信用卡账号的技术相同</li>
+</ul>
+<p>  <strong>9.4.2 个人财务数据</strong></p>
+<ul>
+<li><p>在某些情况下，公布个人消息的责任在于钓鱼欺骗，在其他一些情况下，侵犯个人隐私就要归咎于那写攻击网上零售商的黑客了。随这当今社会个人电脑数量的快速增长，差不多有上百种个人财务程序供用户选择使用。许多这种程序都会创建带有特定文件扩展名的数据文件</p>
+<p>​    <img src="https://oss-map.oss-cn-beijing.aliyuncs.com/img/7185.png" alt="0"></p>
+</li>
+</ul>
+<p>  <strong>9.5搜索其他有利可图的信息</strong></p>
+<ul>
+<li><p>Google能找到的但是很难归类的数据。这些数据包括地址簿、聊天日志文件、以及网络漏洞报告等，这些网上的敏感数据都是很有价值的。</p>
+<p>​    <img src="https://oss-map.oss-cn-beijing.aliyuncs.com/img/7194.png" alt="0"></p>
+</li>
+<li><p>Nessus安全扫描工具的输出。Nessus可以在<a target="_blank" rel="noopener" href="http://www.nessus.org上获得。这个很棒的开源工具能够对目标执行一系列的安全测试，并报告各种可能的漏洞">www.nessus.org上获得。这个很棒的开源工具能够对目标执行一系列的安全测试，并报告各种可能的漏洞</a></p>
+</li>
+</ul>
+<p>  <strong>9.6 总结</strong></p>
+<ul>
+<li>不要犯任何错误，因为在网上存在各种敏感的数据，而且Google能够找到这些数据。除非你能够给出恰当的查询，否则可搜索的信息机会没有任何限制。用户名、口令、信用卡账号、社保号码和个人财务数据这些信息都在可搜索的范围内。</li>
+<li>一个泄露的口令就能够提供关于用于其他系统上的口令的线索。大多数策略都进制这种口令共享，但是这种限制通常很难执行</li>
+</ul>
+<p>  <strong>第十章 hacking Google 服务</strong></p>
+<p>  <strong>10.1 AJAX Search API</strong></p>
+<ul>
+<li>AJAX Search API是AJAX前端的主要的Google服务。该项服务有意取代旧的SOAP搜索服务，而SOAP搜索服务的支持在不久前已经被废止了。AJAX Search API被认为是比SOAP服务更强大的一个服务，并且更容易使用。</li>
+<li>该服务的主要目标是使外部网能够寄存Google供给的技术，这些技术提供了位域寄存在Web站点内、外的搜索工具，并且可以是视频剪辑、地图、博客、自定义搜索引擎等等中的一个</li>
+</ul>
+<p>  <strong>10.1.1 嵌入式Google AJAX Search API</strong></p>
+<ul>
+<li><p>Google AJAX Search API 设计为嵌入到外部页内。这使得服务箱单更有用，因为我们可以指导自定义界面来获得更好的对Google底层结构的访问。为了着手启用Google AJAX Search API 你需要理解JavaScrippt和AJAX编程以及你要自行生成的API密钥。</p>
+</li>
+<li><p>XSS和AJAX蠕虫</p>
+</li>
+<li><p>该技术可以通过XSS/AJAX蠕虫来实现目标搜索并且利用目标来获取有用的信息，因此要确保将来的繁殖。XSS/AJAX蠕虫通常都在源域中繁殖和传播。这是因为JavaScript没有执行跨站点请求的能力。本章提到的该技术语序蠕虫绕过JacaScript的限制，并且可以访问在线的其他资源</p>
+</li>
+</ul>
+<p>  <strong>10.2 Calendar</strong></p>
+<ul>
+<li>Google calendar 是一个功能强大的日历管理应用程序，它支持类似日历共享、邀请创建、搜索以及日历发布。该服务也可以于Google Mail （Gmail）结合起来，并且可以通过移动设备来访问。</li>
+<li>因为单个用户可以维护其他用户可能更也很感兴趣的时间列表以及入理。所以calendar共享是一个非常有用的功能。</li>
+<li>共享的日历，通常。甚至是执行那些最基本的搜索时，都完全有可能无意间发现那些可以执行恶意目的的铭感信息</li>
+<li>例如泄露了几个预定的电话会议。注意，会议电话号码和访问代码也列了出来，你可通过对于会议的秘密听取来获得你想要的信息，或者用一些简单的账户密码的搜索来找到一些你想要的信息</li>
+</ul>
+<p>  <strong>10.3 Blogger和Google的Blog Search</strong></p>
+<ul>
+<li>Blogger时Google的博客软件，它位于blogger。com和blogspot。com之上。Blogger是使用得最广泛的博客之一。他允许多个博客实时创建，并且具有一些与其他软件合作并且避免注释和引用垃圾博客的功能</li>
+<li>Splog的搜索引擎的排名在不断地提升，所以他会吸引更多的访问者。如果攻击者拿下了Web浏览器的Splog页面上的漏洞应用的话，他就应该在瞬间接管上百台机器</li>
+</ul>
+<p>  <strong>10.4 信号报警</strong></p>
+<ul>
+<li>google alerts是一个强大的工具，可以用来发觉查询结果合适变化。该系统可以被修改为每天或者每周都发送更新，亦或者是有更新时发送更新</li>
+<li>这是一个很出色的工具，它还可以用于更有趣的目的。假设、我们知道目标服务器使用Mysql作为数据库终端。我们可以使用Google Alerts 来查询目标，并且在出现错误时搜索错误信息</li>
+<li>为警报类型选择Web—通常这是默认的选项。选项警报的频率以及你的E-mail地址并且单击Create Alert（创建警报）</li>
+<li>恶意用户可以使用该服务来警示目标站点上出现的漏洞和有趣信息。这个警示的配置非常低，并不会让目标有所警惕，该业务发生在用户和Google之间。攻击者甚至可以碰到Google Hacking Database中所有条目的警报。</li>
+</ul>
+<p>  <strong>10.5 Google Co-op</strong></p>
+<ul>
+<li>Google Co-op（<a target="_blank" rel="noopener" href="http://www.google.com/coop）是一个非常强大的服务，允许你创建一个强大的自定义搜索引擎。你不需要为了使用该服务而注册为Google用户，但是如果你需要创建一个引擎，则需要注册">www.google.com/coop）是一个非常强大的服务，允许你创建一个强大的自定义搜索引擎。你不需要为了使用该服务而注册为Google用户，但是如果你需要创建一个引擎，则需要注册</a></li>
+</ul>
+<p>  <strong>10.6 Google Code</strong></p>
+<ul>
+<li>Google Code是对允许提供全免费项目的开源代码社区的最大的恩惠。在功能方面，该服务与很多人都知道的Sourceforge十分相似。通过SVN，为研发者提供了Wiki来寄存项目文档、Bug跟踪体系以及版本控制</li>
+<li>Google Code不只是一个开发环境，他还是一个免费的寄存提供者。我们可以使用该系统来隐藏此处的所有信息</li>
+</ul>
+<p>  <strong>10.6.1 SVN简介</strong></p>
+<p>  <strong>10.6.2 在线获取文件</strong></p>
+<ul>
+<li>一旦你的项目提交到源库中，你便可以在线访问它的内容。你可以通过访问<a target="_blank" rel="noopener" href="http://projectname.googlecode.com/svn/trunk来获取提交的项目。记住，提交的文件可以作为内容形式的文件/明码或者内容形式的应用程序/八位字节流使用，这样一来便可以防止它们在浏览器中被解析。这意味着，理论上，你应该能查看/预览上传的图片或者HTML文件">http://projectname.googlecode.com/svn/trunk来获取提交的项目。记住，提交的文件可以作为内容形式的文件/明码或者内容形式的应用程序/八位字节流使用，这样一来便可以防止它们在浏览器中被解析。这意味着，理论上，你应该能查看/预览上传的图片或者HTML文件</a></li>
+<li>尽管这样，攻击者扔旧可以寄存恶意脚本，该脚本可以利用带有漏洞的浏览器，允许系统控制访问者的浏览器。这正是我们着手查看Google Code开发平台真正潜力的入口。没有任何东西可以防止攻击者在线寄存他们的恶意文件，防止攻击者使用它们来攻击无辜的人。因为ISP（互联网服务提供商）不能完全地组织Google来停止恶意传播，所以这种情况很值得关注。很多用户的处境都不容乐观</li>
+<li>哪些熟悉IDS（侵入检测系统）和IPS（侵入预防系统）的人之所以会反对是因为恶意软件也可以通过将签名设置为可以在流行防火墙产品以及诸如Snort之类的开发源项目中找到的签名来查找。因为Google Code的加密选项，在绝大多数时间，攻击者都不会被察觉。正如我们知道的，加密通信能确保隐私的安全。Google为寄存的项目提供了SSL连接</li>
+</ul>
+<p>  <strong>10.6.3 查找代码</strong></p>
+<ul>
+<li><p>我们还可以用Google Code来查询代码，用一些正则表达式来精确的搜索一些我们想要的阿东西</p>
+</li>
+<li><p>例如查找SQL注入漏洞：</p>
+<p>mysql_query.*?_GET lang:php</p>
+</li>
+<li><p>该查询以关键字mysql_query开头——mysql_query是PHP里的标准函数。接着，我们使用.*?序列查找未定义的字符数。最后，在查找HTTP GET参数的关键字_GET。通常，我们查找的SQL查询由$_GET控制。对基于$_POST的SQL注入攻击应用也可以采用相似的策略。记住，本章的实例仅是我们可以进行测试的实例的一小部分变体。Google Code Search是一个非常有用的可以在很多语种中查找漏洞的工具</p>
+</li>
+</ul>
+<p>  <strong>10.7 一些想法</strong></p>
+<ul>
+<li>我们可以使用Google Code Search在我们自己的项目中查找字符串。如果我们有一个巨大的数据集要分析，我们可以简单地将它上传到代码中，并且等待Google机器人程序将它找出来。接着，我们可以使用标准的正则表达式查询来查找我们最感兴趣的数据</li>
+<li>对于一些工具我们可以根据他的源码和一些反应来自己创立一个属于自己的工具来做一些自己想做的事情</li>
+</ul>
+<p>  <strong>第十一章 Google Hacking案例</strong></p>
+<p>  <strong>11.1 简介</strong></p>
+<ul>
+<li>Google 黑客会花上好几个小时在互联网上查找丰富的资源。通过一轮又一轮的搜索，他们会因找到清晰易读的，有意义的的搜索而欣喜若狂。之所以我了解这些是因为我亲眼目睹了这一过程。具有创造力的Google搜索可以泄露医药、金融、所有权甚至是机密信息。尽管政府颁布了法令、规章及保护法案，诸如HIPPA，且不断设置安全装置，这一问题仍然存在。信息仍会驱使网络中这一问题的发生，而这正好被Google黑客逮个正着</li>
+</ul>
+<p>  <strong>11.2 低级信息</strong></p>
+<ul>
+<li>我们将要一同来看一下由Google黑客揭秘的一些更有趣的技术。我们将从查看多种确实无关的、除非你的目标是帮助黑客的工具着手进行。接着，我们将要查看开放的网络设备，并且打开应用程序，它们都不涉及任何真正的可以使用的攻击</li>
+</ul>
+<p>  <strong>11.2.1 工具</strong></p>
+<ul>
+<li>任何黑客都有一个由他自行支配的工具基金，但是本节奏要探讨的该工具的有趣部分是：它们是在线的——它们在网络服务器上运行，且允许黑客有效地试探对该网络服务器的搜索。</li>
+<li>与ping工具不同，finger工具已经很久没有投入使用了。这一烦人的服务允许攻击者查询UNIX机器上的用户，允许枚举各种信息，如用户连接时间、起始目录、全名以及其他的信息</li>
+</ul>
+<p>  <strong>11.2.2 开放的网络设备</strong></p>
+<ul>
+<li>对于所有在网络上开放和管理的网络设备你都可以去了解和控制</li>
+<li>例如比较多的像摄像头，饮水机，打印机，自能手表等多种设备</li>
+</ul>
+<p>  <strong>11.2.3 开放的应用程序</strong></p>
+<ul>
+<li>相对而言，很多主流的Web应用程序都是傻子认证，它们是专门为那些对安全了解甚少而只懂点击操作的大部分人设计的。更重要的是Google攻击社区已经发现了成千上万个开放的在线应用程序，只需等待一个点击操作的脚本的出现并拥有它们即可</li>
+<li>通常可以简单的去发现和控制一些网站甚至是一些服务器</li>
+</ul>
+<p>  <strong>11.3 摄像头</strong></p>
+<ul>
+<li>曾有一段时间，GHDB的所有附件就只有网络摄像头查询。尽管如此，有些网络摄像头查询。尽管如此，有些网络摄像头搜索还是十分有趣的。</li>
+</ul>
+<p>  <strong>11.4 电话设备</strong></p>
+<ul>
+<li>有些网络设备映射的网络暴露的大量的电话信息</li>
+<li>有的管理系统甚至语序网络访问这连接会议电话、断开会议电话连接及监控会议电话，为与会者抓取快照，甚至是更改line(线路设置)，恶意的黑客甚至会更改系统名和密码，锁定合法管理者使其无法进入自己的系统</li>
+</ul>
+<p>  <strong>11.5 电源</strong></p>
+<ul>
+<li>当谈及使用Google攻击电源时，很多人都会感到怀疑。大多数人肯定在想是说UPS系统，对于网络上的一些有网络管理页面的系统来说都可以解决掉</li>
+</ul>
+<p>  <strong>11.6 敏感信息</strong></p>
+<ul>
+<li>敏感信息对于一些日志，文档，警务信息等都会泄露出大量的信息</li>
+</ul>
+<p>  <strong>11.7 社保号码</strong></p>
+<ul>
+<li>社保号码（SSN）是美国公民拥有的最敏感的信息。即使一个外行的罪犯也可以使用一个被到的SSN来开设一个银行账号，设置信用卡的最高限额以及其他的信息，所有均是以受害人的名义进行的。</li>
+<li>对于一些Google泄露的信息来说大部分是攻击者从钓鱼网站上得来的</li>
+</ul>
+<p>  <strong>11.8 Google之外的信息</strong></p>
+<ul>
+<li>在某些情况下，Google都是长长的攻击链中的第一步。通过别的一些信息来获取到一些敏感的信息</li>
+</ul>
+<p>  <strong>11.9 总结</strong></p>
+<ul>
+<li>本章的所有内容都是关于Google攻击威胁被忽略后可能导致的严重错误。不论你何时身处严重的威胁都可以参看本章内容。请帮助传播这一信息，并且成为解决方案的一本而非问题的一本分。在想Google发送暂停或终止文件之前，记住——如果你的敏感数据使它成为在线内容，那么就不是Google的错了</li>
+</ul>
+<p>  <strong>第十二章 防卫Google黑客</strong></p>
+<p>  <strong>12.1 简介</strong></p>
+<ul>
+<li>这本书的目的是在于帮助你理解Google黑客在攻击时可能采取的手段，这样你就能合理地保护自己和你的客户免于遭受这种似乎没有危险的威胁的侵害</li>
+</ul>
+<p>  <strong>12.2 完善且坚固的安全策略</strong></p>
+<ul>
+<li>应该把强制执行的，坚固的安全策略作为所有安全保障措施的基础</li>
+<li>如果没有策略，那么你的安全防卫可能就会无效或者无法强制执行</li>
+</ul>
+<p>  <strong>12.3 Web服务器安全防护</strong></p>
+<ul>
+<li>目录列表、错误消息和不当的配置能提供大量信息</li>
+<li>Robots.txt文件和特殊的META标记可以阻止搜索引擎Crawler访问特定的页面或目录</li>
+<li>即使时最基本的口令机制都能阻止crawler访问受保护的内容</li>
+<li>默认的页面和设置表明该服务器没有很好地维护而且会让该服务器成为黑客的一个目标</li>
+</ul>
+<p>  <strong>12.4 攻击你的站点</strong></p>
+<ul>
+<li>使用site操作符来浏览你负责保护的服务器，警惕任何不属于公开信息的页面</li>
+<li>使用想Gooscan、Athena、GSI、Google Rower或者Advanced Dork这样的工具来评估你的网站的信息泄露情况。这些工具不使用Google API，所以要知道任何滥用或者过分的行为都会导致Google封掉你的IP段</li>
+<li>使用像Wikto这样的工具也能攻击你的站点，而且这些工具使用了Google API，不会担心会被Google惩罚</li>
+<li>利用Google hacking DATabase来跟踪最新的Google hacking查询。把GHDB和Gooscan、Athena或者Wikto这样的工具结合起来使用</li>
+</ul>
+<p>  <strong>12.5 从Google获取帮助</strong></p>
+<ul>
+<li>使用Google的Webmaster页面获取特殊的信息</li>
+<li>使用Google的URL删除工具从Google数据库中删除敏感的数据</li>
+</ul>
+<p>  <strong>12.6 网站链接</strong></p>
+<ul>
+<li><a target="_blank" rel="noopener" href="http://johnny.ihackstuff.com">http://johnny.ihackstuff.com</a> （GHDB），搜索引擎hacking论坛，Gooscan工具和GHDB导出文件的主页</li>
+<li><a target="_blank" rel="noopener" href="http://www.snakeoillabs.com">www.snakeoillabs.com</a>    Athena的主页</li>
+<li><a target="_blank" rel="noopener" href="http://www.seorank.com/robots-tutorial.htm">http://www.seorank.com/robots-tutorial.htm</a>    使用robots.txt文件的优秀指南</li>
+<li><a target="_blank" rel="noopener" href="http://www.sensepost.com/research/aura">www.sensepost.com/research/aura</a>          Sensepost的AURA,它可以模拟Google的SOAP API调用</li>
+<li><a target="_blank" rel="noopener" href="http://www.tankedgenius.com">http://www.tankedgenius.com</a>        JeffBall的Cp的GSI以及Google Rower工具的主页</li>
+<li><a target="_blank" rel="noopener" href="https://addons.mozilla.org/en-US/firfox/addon/2144">https://addons.mozilla.org/en-US/firfox/addon/2144</a>    Cp的Advanced Dork的主页</li>
+</ul>
+</div></article></div><nav class="pagination is-centered mt-4" role="navigation" aria-label="pagination"><div class="pagination-previous"><a href="/page/62/">Previous</a></div><div class="pagination-next is-invisible is-hidden-mobile"><a href="/page/64/">Next</a></div><ul class="pagination-list is-hidden-mobile"><li><a class="pagination-link" href="/">1</a></li><li><span class="pagination-ellipsis">&hellip;</span></li><li><a class="pagination-link" href="/page/62/">62</a></li><li><a class="pagination-link is-current" href="/page/63/">63</a></li></ul></nav></div><div class="column column-left is-4-tablet is-4-desktop is-4-widescreen  order-1"><div class="card widget"><div class="card-content"><nav class="level"><div class="level-item has-text-centered flex-shrink-1"><div><figure class="image is-128x128 mx-auto mb-2"><img class="avatar" src="/img/avatar.png" alt="ol4three"></figure><p class="title is-size-4 is-block line-height-inherit">ol4three</p><p class="is-size-6 is-block">醒来时世界都远了，我需要最狂的风，和最静的海。</p><p class="is-size-6 is-flex justify-content-center"><i class="fas fa-map-marker-alt mr-1"></i><span>Chendu,China</span></p></div></div></nav><nav class="level is-mobile"><div class="level-item has-text-centered is-marginless"><div><p class="heading">Posts</p><a href="/archives"><p class="title">63</p></a></div></div><div class="level-item has-text-centered is-marginless"><div><p class="heading">Categories</p><a href="/categories"><p class="title">12</p></a></div></div><div class="level-item has-text-centered is-marginless"><div><p class="heading">Tags</p><a href="/tags"><p class="title">65</p></a></div></div></nav><div class="level"><a class="level-item button is-primary is-rounded" href="https://github.com/ol4three" target="_blank" rel="noopener">Follow</a></div><div class="level is-mobile"><a class="level-item button is-transparent is-marginless" target="_blank" rel="noopener" title="Github" href="https://github.com/ol4three"><i class="fab fa-github"></i></a><a class="level-item button is-transparent is-marginless" target="_blank" rel="noopener" title="Facebook" href="https://facebook.com"><i class="fab fa-facebook"></i></a><a class="level-item button is-transparent is-marginless" target="_blank" rel="noopener" title="Twitter" href="https://twitter.com"><i class="fab fa-twitter"></i></a><a class="level-item button is-transparent is-marginless" target="_blank" rel="noopener" title="Dribbble" href="https://dribbble.com"><i class="fab fa-dribbble"></i></a><a class="level-item button is-transparent is-marginless" target="_blank" rel="noopener" title="RSS" href="/"><i class="fas fa-rss"></i></a></div></div></div><!--!--><div class="card widget"><div class="card-content"><div class="menu"><h3 class="menu-label">Links</h3><ul class="menu-list"><li><a class="level is-mobile is-mobile" href="http://b0urne.top" target="_blank" rel="noopener"><span class="level-left"><span class="level-item">B0urne</span></span><span class="level-right"><span class="level-item tag">b0urne.top</span></span></a></li><li><a class="level is-mobile is-mobile" href="http://xcniao.ol4three.com" target="_blank" rel="noopener"><span class="level-left"><span class="level-item">Xcniao</span></span><span class="level-right"><span class="level-item tag">xcniao.ol4three.com</span></span></a></li><li><a class="level is-mobile is-mobile" href="http://tengxiaofei.run" target="_blank" rel="noopener"><span class="level-left"><span class="level-item">Tengxiaofei</span></span><span class="level-right"><span class="level-item tag">tengxiaofei.run</span></span></a></li><li><a class="level is-mobile is-mobile" href="https://lalalaxiaoyuren.github.io" target="_blank" rel="noopener"><span class="level-left"><span class="level-item">smail_fish</span></span><span class="level-right"><span class="level-item tag">lalalaxiaoyuren.github.io</span></span></a></li><li><a class="level is-mobile is-mobile" href="https://vinadiak.github.io" target="_blank" rel="noopener"><span class="level-left"><span class="level-item">vinadiak</span></span><span class="level-right"><span class="level-item tag">vinadiak.github.io</span></span></a></li><li><a class="level is-mobile is-mobile" href="http://www.oldthree.site/micro8/" target="_blank" rel="noopener"><span class="level-left"><span class="level-item">Micro8</span></span><span class="level-right"><span class="level-item tag">www.oldthree.site</span></span></a></li><li><a class="level is-mobile is-mobile" href="http://www.oldthree.site/pycharm/" target="_blank" rel="noopener"><span class="level-left"><span class="level-item">Jetbrains</span></span><span class="level-right"><span class="level-item tag">www.oldthree.site</span></span></a></li><li><a class="level is-mobile is-mobile" href="http://118.25.15.216:8080/login" target="_blank" rel="noopener"><span class="level-left"><span class="level-item">Java-sec-code</span></span><span class="level-right"><span class="level-item tag">118.25.15.216</span></span></a></li><li><a class="level is-mobile is-mobile" href="http://www.oldthree.site/hacktool/index.html" target="_blank" rel="noopener"><span class="level-left"><span class="level-item">hacktool</span></span><span class="level-right"><span class="level-item tag">www.oldthree.site</span></span></a></li><li><a class="level is-mobile is-mobile" href="http://www.oldthree.site/wooyun/wooyun_articles-gh-pages/" target="_blank" rel="noopener"><span class="level-left"><span class="level-item">wooyun_drop_page</span></span><span class="level-right"><span class="level-item tag">www.oldthree.site</span></span></a></li></ul></div></div></div><div class="card widget"><div class="card-content"><div class="menu"><h3 class="menu-label">Categories</h3><ul class="menu-list"><li><a class="level is-mobile is-marginless" href="/categories/Android/"><span class="level-start"><span class="level-item">Android</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile is-marginless" href="/categories/Android%E6%B5%8B%E8%AF%95/"><span class="level-start"><span class="level-item">Android测试</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile is-marginless" href="/categories/CTF/"><span class="level-start"><span class="level-item">CTF</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile is-marginless" href="/categories/IOT/"><span class="level-start"><span class="level-item">IOT</span></span><span class="level-end"><span class="level-item tag">19</span></span></a></li><li><a class="level is-mobile is-marginless" href="/categories/WEB/"><span class="level-start"><span class="level-item">WEB</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile is-marginless" href="/categories/WEB%E5%AE%89%E5%85%A8/"><span class="level-start"><span class="level-item">WEB安全</span></span><span class="level-end"><span class="level-item tag">23</span></span></a></li><li><a class="level is-mobile is-marginless" href="/categories/%E4%BA%8C%E8%BF%9B%E5%88%B6%E5%AE%89%E5%85%A8/"><span class="level-start"><span class="level-item">二进制安全</span></span><span class="level-end"><span class="level-item tag">3</span></span></a></li><li><a class="level is-mobile is-marginless" href="/categories/%E5%86%85%E7%BD%91%E6%B8%97%E9%80%8F/"><span class="level-start"><span class="level-item">内网渗透</span></span><span class="level-end"><span class="level-item tag">4</span></span></a></li><li><a class="level is-mobile is-marginless" href="/categories/%E5%8D%8F%E8%AE%AE%E5%88%86%E6%9E%90/"><span class="level-start"><span class="level-item">协议分析</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile is-marginless" href="/categories/%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96/"><span class="level-start"><span class="level-item">反序列化</span></span><span class="level-end"><span class="level-item tag">4</span></span></a></li><li><a class="level is-mobile is-marginless" href="/categories/%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/"><span class="level-start"><span class="level-item">环境配置</span></span><span class="level-end"><span class="level-item tag">3</span></span></a></li><li><a class="level is-mobile is-marginless" href="/categories/%E8%B7%AF%E7%94%B1%E5%99%A8/"><span class="level-start"><span class="level-item">路由器</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li></ul></div></div></div><div class="card widget"><div class="card-content"><h3 class="menu-label">Recents</h3><article class="media"><div class="media-content size-small"><p><time dateTime="2020-10-14T07:17:42.000Z">2020-10-14</time></p><p class="title is-6"><a class="link-muted" href="/2020/10/14/IOT/%E4%BD%BF%E7%94%A8Ubertooth-one%E6%89%AB%E6%8F%8F%E5%97%85%E6%8E%A2%E4%BD%8E%E5%8A%9F%E8%80%97%E8%93%9D%E7%89%99/">使用Ubertooth one扫描嗅探低功耗蓝牙</a></p><p class="is-uppercase"><a class="link-muted" href="/categories/IOT/">IOT</a></p></div></article><article class="media"><div class="media-content size-small"><p><time dateTime="2020-09-24T09:39:19.000Z">2020-09-24</time></p><p class="title is-6"><a class="link-muted" href="/2020/09/24/IOT/%E8%93%9D%E7%89%99%E5%AE%89%E5%85%A8%E4%BB%A5%E5%8F%8A%E7%9B%B8%E5%85%B3%E6%BC%8F%E6%B4%9E%E7%A0%94%E7%A9%B6/">蓝牙安全以及相关漏洞研究</a></p><p class="is-uppercase"><a class="link-muted" href="/categories/IOT/">IOT</a></p></div></article><article class="media"><div class="media-content size-small"><p><time dateTime="2020-09-22T03:53:39.000Z">2020-09-22</time></p><p class="title is-6"><a class="link-muted" href="/2020/09/22/Android/Hook%E6%A1%86%E6%9E%B6Firada/">Hook框架Firada</a></p><p class="is-uppercase"><a class="link-muted" href="/categories/Android/">Android</a></p></div></article><article class="media"><div class="media-content size-small"><p><time dateTime="2020-09-17T09:39:41.000Z">2020-09-17</time></p><p class="title is-6"><a class="link-muted" href="/2020/09/17/WEB/Exploit/Pligg%E8%BF%9C%E7%A8%8B%E5%91%BD%E4%BB%A4%E6%89%A7%E8%A1%8C-CVE-2020-25287/">Pligg远程命令执行(CVE-2020-25287)</a></p><p class="is-uppercase"><a class="link-muted" href="/categories/WEB%E5%AE%89%E5%85%A8/">WEB安全</a></p></div></article><article class="media"><div class="media-content size-small"><p><time dateTime="2020-09-17T09:02:36.000Z">2020-09-17</time></p><p class="title is-6"><a class="link-muted" href="/2020/09/17/WEB/Exploit/Apache-DolphinScheduler%E8%BF%9C%E7%A8%8B%E4%BB%A3%E7%A0%81%E6%89%A7%E8%A1%8C-CVE-2020-11974/">Apache DolphinScheduler远程代码执行(CVE-2020-11974)</a></p><p class="is-uppercase"><a class="link-muted" href="/categories/WEB%E5%AE%89%E5%85%A8/">WEB安全</a></p></div></article></div></div><div class="card widget"><div class="card-content"><div class="menu"><h3 class="menu-label">Archives</h3><ul class="menu-list"><li><a class="level is-mobile is-marginless" href="/archives/2020/10/"><span class="level-start"><span class="level-item">October 2020</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile is-marginless" href="/archives/2020/09/"><span class="level-start"><span class="level-item">September 2020</span></span><span class="level-end"><span class="level-item tag">50</span></span></a></li><li><a class="level is-mobile is-marginless" href="/archives/2020/08/"><span class="level-start"><span class="level-item">August 2020</span></span><span class="level-end"><span class="level-item tag">4</span></span></a></li><li><a class="level is-mobile is-marginless" href="/archives/2019/06/"><span class="level-start"><span class="level-item">June 2019</span></span><span class="level-end"><span class="level-item tag">3</span></span></a></li><li><a class="level is-mobile is-marginless" href="/archives/2018/12/"><span class="level-start"><span class="level-item">December 2018</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile is-marginless" href="/archives/2018/06/"><span class="level-start"><span class="level-item">June 2018</span></span><span class="level-end"><span class="level-item tag">2</span></span></a></li><li><a class="level is-mobile is-marginless" href="/archives/2018/05/"><span class="level-start"><span class="level-item">May 2018</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile is-marginless" href="/archives/2018/03/"><span class="level-start"><span class="level-item">March 2018</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li></ul></div></div></div><div class="card widget"><div class="card-content"><div class="menu"><h3 class="menu-label">Tags</h3><div class="field is-grouped is-grouped-multiline"><div class="control"><a class="tags has-addons" href="/tags/360/"><span class="tag">360</span><span class="tag is-grey-lightest">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/AWD/"><span class="tag">AWD</span><span class="tag is-grey-lightest">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Amazon/"><span class="tag">Amazon</span><span class="tag is-grey-lightest">7</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Android/"><span class="tag">Android</span><span class="tag is-grey-lightest">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Apache/"><span class="tag">Apache</span><span class="tag is-grey-lightest">2</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Apache-Cocoon-XML/"><span class="tag">Apache-Cocoon-XML</span><span class="tag is-grey-lightest">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/BLE/"><span class="tag">BLE</span><span class="tag is-grey-lightest">2</span></a></div><div class="control"><a class="tags has-addons" href="/tags/BadUsb/"><span class="tag">BadUsb</span><span class="tag is-grey-lightest">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/CTF/"><span class="tag">CTF</span><span class="tag is-grey-lightest">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Cisco/"><span class="tag">Cisco</span><span class="tag is-grey-lightest">2</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Drozer/"><span class="tag">Drozer</span><span class="tag is-grey-lightest">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/EDR/"><span class="tag">EDR</span><span class="tag is-grey-lightest">2</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Exchange-Server/"><span class="tag">Exchange-Server</span><span class="tag is-grey-lightest">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Frida/"><span class="tag">Frida</span><span class="tag is-grey-lightest">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Google-Hacking/"><span class="tag">Google-Hacking</span><span class="tag is-grey-lightest">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/HTTP%E8%AF%B7%E6%B1%82%E8%B5%B0%E7%A7%81%E5%8D%8F%E8%AE%AE/"><span class="tag">HTTP请求走私协议</span><span class="tag is-grey-lightest">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Hook/"><span class="tag">Hook</span><span class="tag is-grey-lightest">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Horde-Groupware-Webmail-Edition/"><span class="tag">Horde Groupware Webmail Edition</span><span class="tag is-grey-lightest">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Huawei/"><span class="tag">Huawei</span><span class="tag is-grey-lightest">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/IOT/"><span class="tag">IOT</span><span class="tag is-grey-lightest">17</span></a></div><div class="control"><a class="tags has-addons" href="/tags/JCG/"><span class="tag">JCG</span><span class="tag is-grey-lightest">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/MSF/"><span class="tag">MSF</span><span class="tag is-grey-lightest">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Mac-os/"><span class="tag">Mac os</span><span class="tag is-grey-lightest">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Mybatis/"><span class="tag">Mybatis</span><span class="tag is-grey-lightest">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Mysql-python/"><span class="tag">Mysql-python</span><span class="tag is-grey-lightest">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/NC/"><span class="tag">NC</span><span class="tag is-grey-lightest">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/PHP%E7%BD%91%E7%AB%99/"><span class="tag">PHP网站</span><span class="tag is-grey-lightest">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/PhpStudy/"><span class="tag">PhpStudy</span><span class="tag is-grey-lightest">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Pligg/"><span class="tag">Pligg</span><span class="tag is-grey-lightest">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/PowerSploit/"><span class="tag">PowerSploit</span><span class="tag is-grey-lightest">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Python/"><span class="tag">Python</span><span class="tag is-grey-lightest">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/RCE/"><span class="tag">RCE</span><span class="tag is-grey-lightest">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/SDK/"><span class="tag">SDK</span><span class="tag is-grey-lightest">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Sql%E6%B3%A8%E5%85%A5/"><span class="tag">Sql注入</span><span class="tag is-grey-lightest">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Ubertooth-one/"><span class="tag">Ubertooth one</span><span class="tag is-grey-lightest">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/VIM/"><span class="tag">VIM</span><span class="tag is-grey-lightest">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/VPN/"><span class="tag">VPN</span><span class="tag is-grey-lightest">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/XiaoMi/"><span class="tag">XiaoMi</span><span class="tag is-grey-lightest">2</span></a></div><div class="control"><a class="tags has-addons" href="/tags/ZTE/"><span class="tag">ZTE</span><span class="tag is-grey-lightest">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/crunch/"><span class="tag">crunch</span><span class="tag is-grey-lightest">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/iot/"><span class="tag">iot</span><span class="tag is-grey-lightest">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/java%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96/"><span class="tag">java反序列化</span><span class="tag is-grey-lightest">4</span></a></div><div class="control"><a class="tags has-addons" href="/tags/nginx%E8%A7%A3%E6%9E%90%E6%BC%8F%E6%B4%9E/"><span class="tag">nginx解析漏洞</span><span class="tag is-grey-lightest">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/sangfor/"><span class="tag">sangfor</span><span class="tag is-grey-lightest">4</span></a></div><div class="control"><a class="tags has-addons" href="/tags/scrcpy/"><span class="tag">scrcpy</span><span class="tag is-grey-lightest">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/sql%E6%B3%A8%E5%85%A5/"><span class="tag">sql注入</span><span class="tag is-grey-lightest">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E4%B8%89%E6%98%9F/"><span class="tag">三星</span><span class="tag is-grey-lightest">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E4%BB%A3%E7%90%86%E8%BD%AC%E5%8F%91/"><span class="tag">代理转发</span><span class="tag is-grey-lightest">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E5%86%85%E7%BD%91%E6%B8%97%E9%80%8F/"><span class="tag">内网渗透</span><span class="tag is-grey-lightest">2</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E5%8D%8F%E8%AE%AE%E5%88%86%E6%9E%90/"><span class="tag">协议分析</span><span class="tag is-grey-lightest">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E5%90%8E%E6%B8%97%E9%80%8F/"><span class="tag">后渗透</span><span class="tag is-grey-lightest">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E5%A0%86/"><span class="tag">堆</span><span class="tag is-grey-lightest">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E5%A4%A9%E8%9E%8D%E4%BF%A1/"><span class="tag">天融信</span><span class="tag is-grey-lightest">2</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E5%AE%8F%E7%97%85%E6%AF%92/"><span class="tag">宏病毒</span><span class="tag is-grey-lightest">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E5%AE%9D%E5%A1%94/"><span class="tag">宝塔</span><span class="tag is-grey-lightest">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E6%9C%AA%E6%8E%88%E6%9D%83%E8%AE%BF%E9%97%AE%E6%BC%8F%E6%B4%9E/"><span class="tag">未授权访问漏洞</span><span class="tag is-grey-lightest">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E6%B3%9B%E5%BE%AEOA/"><span class="tag">泛微OA</span><span class="tag is-grey-lightest">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E7%94%A8%E5%8F%8B/"><span class="tag">用友</span><span class="tag is-grey-lightest">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E7%BA%A2%E9%98%9F%E7%99%BE%E7%A7%91%E5%85%A8%E4%B9%A6/"><span class="tag">红队百科全书</span><span class="tag is-grey-lightest">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E7%BB%BF%E7%9B%9F/"><span class="tag">绿盟</span><span class="tag is-grey-lightest">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E8%93%9D%E7%89%99/"><span class="tag">蓝牙</span><span class="tag is-grey-lightest">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E8%B7%AF%E7%94%B1%E5%99%A8/"><span class="tag">路由器</span><span class="tag is-grey-lightest">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E9%80%9A%E8%BE%BEOA/"><span class="tag">通达OA</span><span class="tag is-grey-lightest">3</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E9%BB%98%E8%AE%A4%E5%AF%86%E7%A0%81/"><span class="tag">默认密码</span><span class="tag is-grey-lightest">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E9%BD%90%E6%B2%BB%E5%A0%A1%E5%9E%92%E6%9C%BA/"><span class="tag">齐治堡垒机</span><span class="tag is-grey-lightest">1</span></a></div></div></div></div></div><div class="card widget"><div class="card-content"><div class="menu"><h3 class="menu-label">Subscribe for updates</h3><form action="https://feedburner.google.com/fb/a/mailverify" method="post" target="popupwindow" onsubmit="window.open(&#039;https://feedburner.google.com/fb/a/mailverify?uri=&#039;,&#039;popupwindow&#039;,&#039;scrollbars=yes,width=550,height=520&#039;);return true"><input type="hidden" value="" name="uri"><input type="hidden" name="loc" value="en_US"><div class="field has-addons"><div class="control has-icons-left is-expanded"><input class="input" name="email" type="email" placeholder="Email"><span class="icon is-small is-left"><i class="fas fa-envelope"></i></span></div><div class="control"><input class="button is-primary" type="submit" value="Subscribe"></div></div></form></div></div></div><div class="card widget"><div class="card-content"><div class="menu"><h3 class="menu-label">Advertisement</h3><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script><ins class="adsbygoogle" style="display:block" data-ad-client="1" data-ad-slot="1" data-ad-format="auto" data-full-width-responsive="true"></ins><script>(adsbygoogle = window.adsbygoogle || []).push({});</script></div></div></div></div><!--!--></div></div></section><footer class="footer"><div class="container"><div class="level"><div class="level-start"><a class="footer-logo is-block mb-2" href="/"><img src="/img/logo.svg" alt="ol4three" height="28"></a><p class="size-small"><span>&copy; 2020 ol4three</span>  Powered by <a href="https://www.ol4three.com" target="_blank" rel="noopener">ol4three</a> <br><span id="busuanzi_container_site_uv">Visited by <span id="busuanzi_value_site_uv">0</span> users</span></p></div><div class="level-end"><div class="field has-addons"><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Creative Commons" href="https://creativecommons.org/"><i class="fab fa-creative-commons"></i></a></p><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Attribution 4.0 International" href="https://creativecommons.org/licenses/by/4.0/"><i class="fab fa-creative-commons-by"></i></a></p><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Download on GitHub" href="https://github.com/ppoffice/hexo-theme-icarus"><i class="fab fa-github"></i></a></p></div></div></div></div></footer><script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script><script src="https://cdn.jsdelivr.net/npm/moment@2.22.2/min/moment-with-locales.min.js"></script><script>moment.locale("en");</script><script>var IcarusThemeSettings = {
+            article: {
+                highlight: {
+                    clipboard: true,
+                    fold: 'unfolded'
+                }
+            }
+        };</script><script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.4/dist/clipboard.min.js" defer></script><script src="/js/animation.js"></script><a id="back-to-top" title="Back to top" href="javascript:;"><i class="fas fa-chevron-up"></i></a><script src="/js/back_to_top.js" defer></script><!--!--><!--!--><!--!--><script src="https://cdn.jsdelivr.net/npm/lightgallery@1.6.8/dist/js/lightgallery.min.js" defer></script><script src="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/js/jquery.justifiedGallery.min.js" defer></script><script>window.addEventListener("load", () => {
+            if (typeof $.fn.lightGallery === 'function') {
+                $('.article').lightGallery({ selector: '.gallery-item' });
+            }
+            if (typeof $.fn.justifiedGallery === 'function') {
+                if ($('.justified-gallery > p > .gallery-item').length) {
+                    $('.justified-gallery > p > .gallery-item').unwrap();
+                }
+                $('.justified-gallery').justifiedGallery();
+            }
+        });</script><!--!--><!--!--><!--!--><script src="/js/main.js" defer></script><div class="searchbox"><div class="searchbox-container"><div class="searchbox-header"><div class="searchbox-input-container"><input class="searchbox-input" type="text" placeholder="Type something..."></div><a class="searchbox-close" href="javascript:;">×</a></div><div class="searchbox-body"></div></div></div><script src="/js/insight.js" defer></script><script>document.addEventListener('DOMContentLoaded', function () {
+            loadInsight({"contentUrl":"/content.json"}, {"hint":"Type something...","untitled":"(Untitled)","posts":"Posts","pages":"Pages","categories":"Categories","tags":"Tags"});
+        });</script></body></html>
