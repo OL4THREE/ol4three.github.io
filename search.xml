@@ -3868,7 +3868,7 @@ In get/set mode no capture occurs.</code></pre><blockquote>
   <entry>
     <title>蓝牙安全以及相关漏洞研究</title>
     <url>/2020/09/24/IOT/%E8%93%9D%E7%89%99%E5%AE%89%E5%85%A8%E4%BB%A5%E5%8F%8A%E7%9B%B8%E5%85%B3%E6%BC%8F%E6%B4%9E%E7%A0%94%E7%A9%B6/</url>
-    <content><![CDATA[<p>一图胜千言：</p>
+    <content><![CDATA[<p>放大佬总结的一张图：</p>
 <p><img src="https://oss-map.oss-cn-beijing.aliyuncs.com/img/BLE%E5%AE%89%E5%85%A8.png" alt="BLE安全"></p>
 <p>蓝牙是一种无线通信标准，工作在2.4～2.485Ghz的ISM频段，主要用于短距离的数据连接，可以建立所谓的PAN(Personal Area Network)网络。蓝牙设备最常见的应用是各种以手机和电脑为中心的外围设备，例如与手机配合使用的蓝牙耳机、手机与汽车音响的互联、蓝牙键盘和鼠标等。</p>
 <h2 id="0x00-蓝牙技术简介"><a href="#0x00-蓝牙技术简介" class="headerlink" title="0x00 蓝牙技术简介"></a><strong>0x00 蓝牙技术简介</strong></h2><p>蓝牙”，即Bluetooth，是斯堪的纳维亚语中 Blåtand / Blåtann 的英化版本。该词是十世纪的一位国王Harald Bluetooth的绰号，相传他将纷争不断的丹麦部落统一为一个王国，并引入了基督教。蓝牙技术开发者Jim Kardach于1997年提出用Bluetooth这个名词，据说他当时正在读一本名为The Long Ships的小说，讲述的就是维京人和Harald Bluetooth国王的故事。他认为蓝牙可以把各种不同的通信协议统一在一起，诚如这位国王做的事情一样。至于蓝牙的logo，取自国王Harald Bluetooth名字中的【H】和【B】两个字母的组合，用古北欧文字来表示：</p>
@@ -4203,6 +4203,12 @@ In get/set mode no capture occurs.</code></pre><blockquote>
 <li><a href="https://blog.csdn.net/u013183495/article/details/51736605">体脂秤</a></li>
 </ul>
 <h2 id="0x10-可以研究的点"><a href="#0x10-可以研究的点" class="headerlink" title="0x10 可以研究的点"></a>0x10 可以研究的点</h2><p>经过多年的历史发展，蓝牙本身已经变成一个比较复杂的协议了，如果需要整理完整的攻击面需要对整个蓝牙的实现有很清晰的梳理，网上大部分的文章都是关于协议本身的，对于协议的实现还是说的不是很清楚。而且协议本身的发展方向就是IOT方向，例如GATT这种很明显就是支持物联网设备的协议。所以搞清BLE5.0在真实的物联网设备上的架构以及实现我认为非常关键。</p>
+<h2 id="0x11-参考链接"><a href="#0x11-参考链接" class="headerlink" title="0x11 参考链接"></a>0x11 参考链接</h2><p><a href="https://xuanxuanblingbling.github.io/wireless/ble/2018/08/01/ble/">https://xuanxuanblingbling.github.io/wireless/ble/2018/08/01/ble/</a></p>
+<p><a href="http://www.gandalf.site/2019/02/ble.html">http://www.gandalf.site/2019/02/ble.html</a></p>
+<p><a href="https://www.ndss-symposium.org/wp-content/uploads/2019/02/ndss2019_06B-4_Xu_paper.pdf">https://www.ndss-symposium.org/wp-content/uploads/2019/02/ndss2019_06B-4_Xu_paper.pdf</a></p>
+<p><a href="http://drops.xmd5.com/static/drops/tips-10109.html">http://drops.xmd5.com/static/drops/tips-10109.html</a></p>
+<p><a href="https://blog.csdn.net/u013183495/article/details/51736605">https://blog.csdn.net/u013183495/article/details/51736605</a></p>
+<p><a href="https://www.secpulse.com/archives/75963.html">https://www.secpulse.com/archives/75963.html</a></p>
 <h2 id="更新中…"><a href="#更新中…" class="headerlink" title="更新中…"></a>更新中…</h2>]]></content>
       <categories>
         <category>IOT</category>
