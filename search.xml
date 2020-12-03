@@ -5223,7 +5223,7 @@ In get/set mode no capture occurs.</code></pre><blockquote>
 <p>I/O设备要求DMA传送时可能遇到两种情况：</p>
 <p>​            (1)此时CPU不需要访内，如CPU正在执行乘法指令。由于乘法指令执行时间较长，此时I/O访内与CPU访内没有冲突，即I/O设备挪用一二个内存周期对CPU执行程序没有任何影响。</p>
 <p>​            (2)I/O设备要求访内时CPU也要求访内，这就产生了访内冲突，在这种情况下I/O设备访内优先，因为I/O访内有时间要求，前一个I/O数据必须在下一个访问请求到来之前存取完毕。显然，在这种情况下I/O 设备挪用一二个内存周期，意味着CPU延缓了对指令的执行，或者更明确地说，在CPU执行访内指令的过程中插入DMA请求，挪用了一二个内存周期。 与停止CPU访内的DMA方法比较，周期挪用的方法既实现了I/O传送，又较好地发挥了内存和CPU的效率，是一种广泛采用的方法。但是I/O设备每一次周期挪用都有申请总线控制权、建立线控制权和归还总线控制权的过程，所以传送一个字对内存来说要占用一个周期，但对DMA控制器来说一般要2—5个内存周期(视逻辑线路的延迟而定)。因此，周期挪用的方法适用于I/O设备读写周期大于内存存储周期的情况。</p>
-<p><strong>3.DMA和CPU交替访问</strong></p>
+<p>3.DMA和CPU交替访问</p>
 <p>​            适用于CPU的工作周期比主存存取周期长的情况。这样可以将CPU的周期拆分成两部分，前一部分用于DMA访存，后一部分用于CPU访存</p>
 <p><img src="https://oss-map.oss-cn-beijing.aliyuncs.com/img/image-20201203194201769.png" alt="image-20201203194201769"></p>
 <p>​            这种传送方式又称为“透明的DMA”方式，其来由是这种DMA传送对CPU来说，如同透明的玻璃一般，没有任何感觉或影响。在透明的DMA方式下工作，CPU既不停止主程序的运行，也不进入等待状态，是一种高效率的工作方式。当然，相应的硬件逻辑也就更加复杂。</p>
@@ -5285,7 +5285,7 @@ In get/set mode no capture occurs.</code></pre><blockquote>
 <p>​    这需要有内存（USB3380硬件，FPGA硬件或CVE-2018-1038“ Total Meltdown”）的写访问权。</p>
 <h2 id="0x05-安全思考"><a href="#0x05-安全思考" class="headerlink" title="0x05 安全思考"></a>0x05 安全思考</h2><p>1.设备位于SL1模式下，是否可以 窃取\克隆 已经获得授权的设备ID，以此获得无提示的设备接入。<br>2.针对上一点作出防御的SL2模式，如果在THunderbolt 3外设不支持SL2的情况下会自动降级到SL1。攻击者完全可以随心所欲降级。SL2如果不是强制实施的话等于无效</p>
 <h2 id="0x08-如何缓解"><a href="#0x08-如何缓解" class="headerlink" title="0x08 如何缓解"></a>0x08 如何缓解</h2><p>BIOS中启用VT-d(IOMMU)防护DMA攻击<br><img src="https://oss-map.oss-cn-beijing.aliyuncs.com/img/image-20201203195328413.png" alt="image-20201203195328413"></p>
-<h2 id="0x09-参考链接"><a href="#0x09-参考链接" class="headerlink" title="0x09 参考链接"></a>0x09 参考链接</h2><p><a href="https://en.wikipedia.org/wiki/DMA_attack">https://en.wikipedia.org/wiki/DMA_attack</a><br><a href="https://baike.baidu.com/item/DMA/2385376">https://baike.baidu.com/item/DMA/2385376</a><br><a href="https://github.com/ufrisk/pcileech">https://github.com/ufrisk/pcileech</a><br><a href="https://www.anquanke.com/post/id/86840">https://www.anquanke.com/post/id/86840</a><br>https : //github.com/LuckyPi/PushPin<br><a href="https://www.youtube.com/watch?v=mca3rLsHuTA">https://www.youtube.com/watch?v=mca3rLsHuTA</a><br><a href="https://zhuanlan.zhihu.com/p/50640466">https://zhuanlan.zhihu.com/p/50640466</a><br><a href="https://docs.microsoft.com/zh-cn/windows/security/information-protection/kernel-dma-protection-for-thunderbolt">https://docs.microsoft.com/zh-cn/windows/security/information-protection/kernel-dma-protection-for-thunderbolt</a><br><a href="https://www.youtube.com/watch?v=7uvSZA1F9os">https://www.youtube.com/watch?v=7uvSZA1F9os</a><br><a href="https://www.youtube.com/watch?v=oEfzp4lHpB0">https://www.youtube.com/watch?v=oEfzp4lHpB0</a><br><a href="http://lordcasser.com/2020/07/01/thunderbolt/">http://lordcasser.com/2020/07/01/thunderbolt/</a></p>
+<h2 id="0x09-参考链接"><a href="#0x09-参考链接" class="headerlink" title="0x09 参考链接"></a>0x09 参考链接</h2><p><a href="https://en.wikipedia.org/wiki/DMA_attack">https://en.wikipedia.org/wiki/DMA_attack</a><br><a href="https://baike.baidu.com/item/DMA/2385376">https://baike.baidu.com/item/DMA/2385376</a><br><a href="https://github.com/ufrisk/pcileech">https://github.com/ufrisk/pcileech</a><br><a href="https://www.anquanke.com/post/id/86840">https://www.anquanke.com/post/id/86840</a><br><a href="https://github.com/LuckyPi/PushPin">https://github.com/LuckyPi/PushPin</a><br><a href="https://www.youtube.com/watch?v=mca3rLsHuTA">https://www.youtube.com/watch?v=mca3rLsHuTA</a><br><a href="https://zhuanlan.zhihu.com/p/50640466">https://zhuanlan.zhihu.com/p/50640466</a><br><a href="https://docs.microsoft.com/zh-cn/windows/security/information-protection/kernel-dma-protection-for-thunderbolt">https://docs.microsoft.com/zh-cn/windows/security/information-protection/kernel-dma-protection-for-thunderbolt</a><br><a href="https://www.youtube.com/watch?v=7uvSZA1F9os">https://www.youtube.com/watch?v=7uvSZA1F9os</a><br><a href="https://www.youtube.com/watch?v=oEfzp4lHpB0">https://www.youtube.com/watch?v=oEfzp4lHpB0</a><br><a href="http://lordcasser.com/2020/07/01/thunderbolt/">http://lordcasser.com/2020/07/01/thunderbolt/</a></p>
 ]]></content>
       <categories>
         <category>IOT</category>
@@ -5620,7 +5620,8 @@ In get/set mode no capture occurs.</code></pre><blockquote>
 <h4 id="ipwndfu-提取-SecureROM"><a href="#ipwndfu-提取-SecureROM" class="headerlink" title="ipwndfu 提取 SecureROM"></a>ipwndfu 提取 SecureROM</h4><p>使用<a href="https://github.com/axi0mX/ipwndfu/">ipwndfu</a>完成dump固件。但是其并不是对任何iPhone都支持，在readme中可见支持说明：</p>
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">current SoC support: s5l8947x, s5l8950x, s5l8955x, s5l8960x, t8002, t8004, t8010, t8011, t8015</span><br><span class="line">future SoC support: s5l8940x, s5l8942x, s5l8945x, s5l8747x, t7000, t7001, s7002, s8000, s8001, s8003, t8012</span><br></pre></td></tr></table></figure>
 
-<p>这些SoC版本对应的苹果设备型号可以参考：<a href="https://www.theiphonewiki.com/，可见iPhone5s是s5l8960刚好可以，然后我们将手机置于DFU模式，方法参考[iPhone">https://www.theiphonewiki.com/，可见iPhone5s是s5l8960刚好可以，然后我们将手机置于DFU模式，方法参考[iPhone</a> 进恢复模式和 DFU 模式有什么区别？](<a href="https://www.i4.cn/news_detail_30618.html)，iPhone">https://www.i4.cn/news_detail_30618.html)，iPhone</a> 5s 进入DFU 模式的方法：<br>1、打开iTune<br>2、按住苹果顶部的power键3秒;<br>3、不要松开power键同时按住home键10秒;<br>4、松开power键继续按住home键，一直到iTunes会自动检测到出于恢复模式的iPhone后再松开</p>
+<p>这些SoC版本对应的苹果设备型号可以参考：<a href="https://www.theiphonewiki.com/，可见iPhone5s是s5l8960刚好可以，然后我们将手机置于DFU模式，方法参考">https://www.theiphonewiki.com/，可见iPhone5s是s5l8960刚好可以，然后我们将手机置于DFU模式，方法参考</a></p>
+<p><a href="https://www.i4.cn/news_detail_30618.html">iPhone 进恢复模式和 DFU 模式有什么区别？</a>，iPhone 5s 进入DFU 模式的方法：<br>1、打开iTune<br>2、按住苹果顶部的power键3秒;<br>3、不要松开power键同时按住home键10秒;<br>4、松开power键继续按住home键，一直到iTunes会自动检测到出于恢复模式的iPhone后再松开</p>
 <p>安装libusb</p>
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">brew install libusb</span><br></pre></td></tr></table></figure>
 
@@ -5672,7 +5673,15 @@ In get/set mode no capture occurs.</code></pre><blockquote>
 <li><a href="https://beta.4hou.com/technology/13937.html">如何构建iBoot？</a></li>
 <li><a href="https://nyansatan.github.io/building-iboot/">Building iBoot</a></li>
 </ul>
-<h3 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h3><p><a href="https://checkm8.info/blog/jailbreak-mac-apple-t2-chip">https://checkm8.info/blog/jailbreak-mac-apple-t2-chip</a></p>
+<h2 id="0x05-调试"><a href="#0x05-调试" class="headerlink" title="0x05 调试"></a>0x05 调试</h2><p>JTAG相关</p>
+<ul>
+<li><a href="http://newosxbook.com/bonus/iBoot.pdf">iBoot</a></li>
+<li><a href="https://www.youtube.com/watch?v=-ziD74n9lr4">SEPROM dump</a></li>
+<li><a href="https://threader.app/thread/1177856941139337216">https://threader.app/thread/1177856941139337216</a></li>
+<li><a href="https://twitter.com/nyan_satan/status/1090989650280398849">https://twitter.com/nyan_satan/status/1090989650280398849</a></li>
+<li><a href="https://youtu.be/3zpwSUXlz6A">YouTube: iPhone 7平台用checkm8漏洞以及Bonobo JTAG电缆和OpenOCD + GDB进行调试</a></li>
+</ul>
+<h3 id="0x06-参考"><a href="#0x06-参考" class="headerlink" title="0x06 参考"></a>0x06 参考</h3><p><a href="https://checkm8.info/blog/jailbreak-mac-apple-t2-chip">https://checkm8.info/blog/jailbreak-mac-apple-t2-chip</a></p>
 <p><a href="https://xuanxuanblingbling.github.io/ios/2020/07/10/checkm8/#">https://xuanxuanblingbling.github.io/ios/2020/07/10/checkm8/#</a><br><a href="https://ironpeak.be/blog/crouching-t2-hidden-danger/">https://ironpeak.be/blog/crouching-t2-hidden-danger/</a></p>
 ]]></content>
       <categories>
