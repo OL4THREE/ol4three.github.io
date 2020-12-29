@@ -7116,4 +7116,70 @@ In get/set mode no capture occurs.</code></pre><blockquote>
         <tag>Httpdecrypy</tag>
       </tags>
   </entry>
+  <entry>
+    <title>crackme-系列之-crackme3</title>
+    <url>/2020/12/28/%E4%BA%8C%E8%BF%9B%E5%88%B6%E5%AE%89%E5%85%A8/crackme%E7%B3%BB%E5%88%97/crackme-%E7%B3%BB%E5%88%97%E4%B9%8B-crackme3/</url>
+    <content><![CDATA[<h2 id="首先打开程序进行查看"><a href="#首先打开程序进行查看" class="headerlink" title="首先打开程序进行查看"></a>首先打开程序进行查看</h2><img src="https://oss-map.oss-cn-beijing.aliyuncs.com/img/image-20201228160158599.png" alt="image-20201228160158599" style="zoom:50%;">
+
+<p>发现存在一个neg窗口</p>
+<h2 id="去除neg窗口"><a href="#去除neg窗口" class="headerlink" title="去除neg窗口"></a>去除neg窗口</h2><h3 id="方法一"><a href="#方法一" class="headerlink" title="方法一"></a>方法一</h3><p>使用VBExploere把timer改为1 破解neg</p>
+<p>根据提示框下断点进行分析</p>
+<h3 id="方法二"><a href="#方法二" class="headerlink" title="方法二"></a>方法二</h3><p>首先将内存定位到程序开始处0x401000</p>
+<p><img src="https://oss-map.oss-cn-beijing.aliyuncs.com/img/image-20201228160748180.png" alt="image-20201228160748180"></p>
+<p>搜索Timer，Timer是VB程序默认的定时器变量</p>
+<p><img src="https://oss-map.oss-cn-beijing.aliyuncs.com/img/image-20201228160816008.png" alt="image-20201228160816008"></p>
+<p>我们找到Timer之后 在上面的位置可以看到一个0x1B58，这个是计时器的秒数。也就是十进制的7000,7000毫秒就 是7秒。所以第一种去Neg的方法就是将0x1B58改为0x0001 但是此种方法也有一定的局限性，如果程序的作者将计时器的默认名称改掉之后 根本无法在内存中搜索到Timer关键 字 也就无法下手。下面介绍一种通用的解决方法</p>
+<h3 id="方法三"><a href="#方法三" class="headerlink" title="方法三"></a>方法三</h3><p>Virtual Basic可执行程序结构研究 对于Visual Basic5/6编译生成的程序，不管自然编译还是伪编译，其程序入口点处的结构都是一样的。来到OEP处：</p>
+<p><img src="https://oss-map.oss-cn-beijing.aliyuncs.com/img/image-20201228161030007.png" alt="image-20201228161030007"></p>
+<p>指针0x4067D4指向的结构就是Virtual Basic程序的VBHeader结构，由此伸展开，整个VB程序的框架<strong>就在这了。 Virtual Basic程序框架结构</strong></p>
+<p> 可能的Virtual Basic程序框架结构如图</p>
+<p>​    <img src="https://oss-map.oss-cn-beijing.aliyuncs.com/img/image-20201228161100147.png" alt="image-20201228161100147"></p>
+<p>TVBHeader结构定义</p>
+<p><img src="https://oss-map.oss-cn-beijing.aliyuncs.com/img/image-20201228161129407.png" alt="image-20201228161129407"></p>
+<p><img src="https://oss-map.oss-cn-beijing.aliyuncs.com/img/image-20201228161203921.png" alt="image-20201228161203921"></p>
+<p>AGUTTable(4C的位置)结构定义</p>
+<p>以AfkayAs.2.exe为例说明：</p>
+<p><img src="https://oss-map.oss-cn-beijing.aliyuncs.com/img/image-20201228161225305.png" alt="image-20201228161225305"></p>
+<p>其对应每个字节的含义如下表</p>
+<p><img src="https://oss-map.oss-cn-beijing.aliyuncs.com/img/image-20201228161314880.png" alt="image-20201228161314880"></p>
+<h2 id="4C法实战"><a href="#4C法实战" class="headerlink" title="4C法实战"></a>4C法实战</h2><p>在程序载入到入口点之后的第一个push也就是VBHeader的位置，数据窗口跟随。</p>
+<p><img src="https://oss-map.oss-cn-beijing.aliyuncs.com/img/image-20201228161416594.png" alt="image-20201228161416594"></p>
+<p>然后在数据窗口输入刚才的地址+4C，找到form GUI描述表的指针</p>
+<p><img src="https://oss-map.oss-cn-beijing.aliyuncs.com/img/image-20201228161433897.png" alt="image-20201228161433897"></p>
+<p>数据窗口跟随DWORD</p>
+<p><img src="https://oss-map.oss-cn-beijing.aliyuncs.com/img/image-20201228161501143.png" alt="image-20201228161501143"></p>
+<p>00  01 指的是窗体的序号 10则为第一个窗体的启动标志</p>
+<p>所以 我们只要把第一个窗体数据块的00改成10 然后把第二个窗体的数据块的10改成00，或者将窗体的序号调换。即 可去除neg。</p>
+<p><img src="https://oss-map.oss-cn-beijing.aliyuncs.com/img/image-20201228161703623.png" alt="image-20201228161703623"></p>
+<img src="https://oss-map.oss-cn-beijing.aliyuncs.com/img/image-20201228161721626.png" alt="image-20201228161721626" style="zoom:50%;">
+
+<h2 id="算法分析"><a href="#算法分析" class="headerlink" title="算法分析"></a>算法分析</h2><h3 id="第一步"><a href="#第一步" class="headerlink" title="第一步"></a>第一步</h3><p><img src="https://oss-map.oss-cn-beijing.aliyuncs.com/img/image-20201228161902354.png" alt="image-20201228161902354"></p>
+<p>和002一样获取哟弄个户名长度然后根据得到的结果算出来一个值 我这里这个值为355601</p>
+<h3 id="第二步"><a href="#第二步" class="headerlink" title="第二步"></a>第二步</h3><p><img src="https://oss-map.oss-cn-beijing.aliyuncs.com/img/image-20201228161949962.png" alt="image-20201228161949962"></p>
+<p>首先将刚才计算的结果转为浮点数 放入到FPU栈 然后将结果加上2.0 得到355603。逆向这个程序你并不需要 看懂每一条浮点指令，只需要单步跟踪 然后时时观察FPU栈的情况。</p>
+<h3 id="第三步"><a href="#第三步" class="headerlink" title="第三步"></a>第三步</h3><p><img src="https://oss-map.oss-cn-beijing.aliyuncs.com/img/image-20201228162027293.png" alt="image-20201228162027293"></p>
+<p>还是将刚才的结果转为浮点数并入栈 然后将355603乘以一个值再减去一个值 最后得到结果ST0=1066807.0000</p>
+<h3 id="第四步"><a href="#第四步" class="headerlink" title="第四步"></a>第四步</h3><p><img src="https://oss-map.oss-cn-beijing.aliyuncs.com/img/image-20201228162141525.png" alt="image-20201228162141525"></p>
+<p>将刚才那个值 -（-15） 到此验证结束</p>
+<p>1066822</p>
+<h3 id="结果"><a href="#结果" class="headerlink" title="结果"></a>结果</h3><img src="https://oss-map.oss-cn-beijing.aliyuncs.com/img/image-20201228162235299.png" alt="image-20201228162235299" style="zoom:50%;">
+
+<p>编写注册机</p>
+<p><img src="https://oss-map.oss-cn-beijing.aliyuncs.com/img/image-20201228162444993.png" alt="image-20201228162444993"></p>
+<p><img src="https://oss-map.oss-cn-beijing.aliyuncs.com/img/image-20201228162502213.png" alt="image-20201228162502213"></p>
+<h3 id="脚本编写"><a href="#脚本编写" class="headerlink" title="脚本编写"></a>脚本编写</h3><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">print(((ord(s[0])+len(s)*(0x15b38))+2)*3-2+15)</span><br></pre></td></tr></table></figure>
+
+
+
+<p><img src="https://oss-map.oss-cn-beijing.aliyuncs.com/img/image-20201228162854781.png" alt="image-20201228162854781"></p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">print(&quot;please input your username :&quot;)</span><br><span class="line">s &#x3D; input()</span><br><span class="line"># 获取用户名长度*0x15b38 +  用户名首位</span><br><span class="line">print(ord(s[0])+len(s)*(0x15b38))	</span><br><span class="line"># 变成浮点数然后数值加2</span><br><span class="line">print((ord(s[0])+len(s)*(0x15b38))+2)</span><br><span class="line"># 相应的浮点数 * 3 - 2</span><br><span class="line">print(((ord(s[0])+len(s)*(0x15b38))+2)*3-2)</span><br><span class="line">print(&quot;your password is:&quot;)</span><br><span class="line"># 让相应的值- (-15) 相当于+15</span><br><span class="line">print(((ord(s[0])+len(s)*(0x15b38))+2)*3-2+15)</span><br></pre></td></tr></table></figure>
+
+]]></content>
+      <categories>
+        <category>二进制安全</category>
+      </categories>
+      <tags>
+        <tag>crackme</tag>
+      </tags>
+  </entry>
 </search>
