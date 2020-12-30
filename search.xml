@@ -7226,15 +7226,12 @@ In get/set mode no capture occurs.</code></pre><blockquote>
     <content><![CDATA[<blockquote>
 <p>⽹上整理的⾯试问题⼤全，有些 HW ⾯试的题，已经收集好了，提供给⼤家。现在就是毕业季节，希望各位都能找到好⼯作。</p>
 </blockquote>
-<h2 id="渗透篇"><a href="#渗透篇" class="headerlink" title="渗透篇"></a>渗透篇</h2><p>1、介绍⼀下⾃认为有趣的挖洞经历 </p>
-<p>挖洞也有分很多种类型，⼀种是以渗透、⼀种是以找漏洞为主，如果是前者会想各种办法获取权限继⽽获取想要的的东 </p>
+<h2 id="渗透篇"><a href="#渗透篇" class="headerlink" title="渗透篇"></a>渗透篇</h2><h4 id="1、介绍⼀下⾃认为有趣的挖洞经历"><a href="#1、介绍⼀下⾃认为有趣的挖洞经历" class="headerlink" title="1、介绍⼀下⾃认为有趣的挖洞经历"></a>1、介绍⼀下⾃认为有趣的挖洞经历</h4><p>挖洞也有分很多种类型，⼀种是以渗透、⼀种是以找漏洞为主，如果是前者会想各种办法获取权限继⽽获取想要的的东 </p>
 <p>⻄完成渗透⽬标，这类跟 HW 类似，⽬标各种漏洞不算，要有 Shell，服务器权限才给分，这才是最接近实战渗透，跟某 </p>
 <p>部⻔有合作的话也是属于这种打击⽹络犯罪获得权限、传销数据、组织架构，服务器权限、等……</p>
-<p>2、你平时⽤的⽐较多的漏洞是哪些？相关漏洞的原理？以及对应漏洞的修复⽅案？ </p>
-<p>SQL 注⼊、密码组合, 前者防护分为⼏种，CDN -&gt; Web -&gt; 数据库 -&gt; 主机, 设置最⼩权限来应对。密码组合根据个⼈ </p>
+<h4 id="2、你平时⽤的⽐较多的漏洞是哪些？相关漏洞的原理？以及对应漏洞的修复⽅案？"><a href="#2、你平时⽤的⽐较多的漏洞是哪些？相关漏洞的原理？以及对应漏洞的修复⽅案？" class="headerlink" title="2、你平时⽤的⽐较多的漏洞是哪些？相关漏洞的原理？以及对应漏洞的修复⽅案？"></a>2、你平时⽤的⽐较多的漏洞是哪些？相关漏洞的原理？以及对应漏洞的修复⽅案？</h4><p>SQL 注⼊、密码组合, 前者防护分为⼏种，CDN -&gt; Web -&gt; 数据库 -&gt; 主机, 设置最⼩权限来应对。密码组合根据个⼈ </p>
 <p>习惯</p>
-<p>3、php/java 反序列化漏洞的原理? 解决⽅案? </p>
-<p>php 中围绕着 serialize()，unserialize() 这两个函数，序列化就是把⼀个对象变成可以传输的字符串, 如果服务器能够接 </p>
+<h4 id="3、php-java-反序列化漏洞的原理-解决⽅案"><a href="#3、php-java-反序列化漏洞的原理-解决⽅案" class="headerlink" title="3、php/java 反序列化漏洞的原理? 解决⽅案?"></a>3、php/java 反序列化漏洞的原理? 解决⽅案?</h4><p>php 中围绕着 serialize()，unserialize() 这两个函数，序列化就是把⼀个对象变成可以传输的字符串, 如果服务器能够接 </p>
 <p>收我们反序列化过的字符串、并且未经过滤的把其中的变量直接放进这些魔术⽅法⾥⾯的话，就容易造成很严重的漏洞 </p>
 <p>了。</p>
 <p>O:7:”chybeta”:1:{s:4:”test”;s:3:”123”;} </p>
@@ -7245,8 +7242,7 @@ In get/set mode no capture occurs.</code></pre><blockquote>
 <p>JAVA Java 序列化是指把 Java 对象转换为字节序列的过程便于保存在内存、⽂件、数据库中，ObjectOutputStream 类 </p>
 <p>的 writeObject() ⽅法可以实现序列化。Java 反序列化是指把字节序列恢复为 Java 对象的过程，ObjectInputStream 类 </p>
 <p>的 readObject() ⽅法⽤于反序列化。 </p>
-<p>4、如果⼀台服务器被⼊侵后, 你会如何做应急响应? </p>
-<ol>
+<h4 id="4、如果⼀台服务器被⼊侵后-你会如何做应急响应"><a href="#4、如果⼀台服务器被⼊侵后-你会如何做应急响应" class="headerlink" title="4、如果⼀台服务器被⼊侵后, 你会如何做应急响应?"></a>4、如果⼀台服务器被⼊侵后, 你会如何做应急响应?</h4><ol>
 <li><p>准备相关的⼯具，查后⻔等⼯具 </p>
 </li>
 <li><p>初步判断事件类型, 事件等级。 </p>
@@ -7261,19 +7257,15 @@ In get/set mode no capture occurs.</code></pre><blockquote>
 </li>
 </ol>
 <p>以上是常规的回答，想知道你是否有这⽅⾯应急相关的经验，像这类问题甲⽅⾯试⽐较多。 </p>
-<p>5、你平时使⽤哪些⼯具? 以及对应⼯具的特点? </p>
-<p>AWVS、Masscan、BurpSuite </p>
+<h4 id="5、你平时使⽤哪些⼯具-以及对应⼯具的特点"><a href="#5、你平时使⽤哪些⼯具-以及对应⼯具的特点" class="headerlink" title="5、你平时使⽤哪些⼯具? 以及对应⼯具的特点?"></a>5、你平时使⽤哪些⼯具? 以及对应⼯具的特点?</h4><p>AWVS、Masscan、BurpSuite </p>
 <p>AWVS 常规漏洞扫描，masscan 快速查找端⼝，burp 重复提交数据包 </p>
 <p>想知道是否有⾃⼰开发⼯具，如果没有你对每个安全⼯具有哪些独特的⻅解以及别⼈不知道的技巧⽤法。如：awvs 如何 </p>
 <p>批量扫描？burpsuite 如何爆破 401､脱库等、等等… </p>
-<p>6、如果遇到 waf 的情况下如何进⾏ sql 注⼊ / 上传 Webshell 怎么做？请写出曾经绕过 WAF 的经过 (SQLi，XSS， </p>
-<p>上传漏洞选⼀)PHP 上传，⽆法上传 php、解析、后台没有办法拿到，只有⼀处点可以上传。通过 Windows 特性 shell.php::$DATA， </p>
+<h4 id="6、如果遇到-waf-的情况下如何进⾏-sql-注⼊-上传-Webshell-怎么做？请写出曾经绕过-WAF-的经过-SQLi，XSS，"><a href="#6、如果遇到-waf-的情况下如何进⾏-sql-注⼊-上传-Webshell-怎么做？请写出曾经绕过-WAF-的经过-SQLi，XSS，" class="headerlink" title="6、如果遇到 waf 的情况下如何进⾏ sql 注⼊ / 上传 Webshell 怎么做？请写出曾经绕过 WAF 的经过 (SQLi，XSS，"></a>6、如果遇到 waf 的情况下如何进⾏ sql 注⼊ / 上传 Webshell 怎么做？请写出曾经绕过 WAF 的经过 (SQLi，XSS，</h4><p>上传漏洞选⼀)PHP 上传，⽆法上传 php、解析、后台没有办法拿到，只有⼀处点可以上传。通过 Windows 特性 shell.php::$DATA， </p>
 <p>是⼀个项⽬管理系统</p>
-<p>7、如何判断 sql 注⼊，有哪些⽅法 </p>
-<p>提交错误语句是否有异常，除此之外这些显示的错误可以通过 sleep, 修眠语句执⾏ 5 秒等，除此之外通过 DNSlog 判断 </p>
+<h4 id="7、如何判断-sql-注⼊，有哪些⽅法"><a href="#7、如何判断-sql-注⼊，有哪些⽅法" class="headerlink" title="7、如何判断 sql 注⼊，有哪些⽅法"></a>7、如何判断 sql 注⼊，有哪些⽅法</h4><p>提交错误语句是否有异常，除此之外这些显示的错误可以通过 sleep, 修眠语句执⾏ 5 秒等，除此之外通过 DNSlog 判断 </p>
 <p>是还有传回值 </p>
-<p>8、如何判断 SQL 注⼊漏洞成因，如何防范？注⼊⽅式有哪些？除了数据库数据，利⽤⽅式还有哪些？ </p>
-<p>select * from news where id = ‘$SQL’; </p>
+<h4 id="8、如何判断-SQL-注⼊漏洞成因，如何防范？注⼊⽅式有哪些？除了数据库数据，利⽤⽅式还有哪些？"><a href="#8、如何判断-SQL-注⼊漏洞成因，如何防范？注⼊⽅式有哪些？除了数据库数据，利⽤⽅式还有哪些？" class="headerlink" title="8、如何判断 SQL 注⼊漏洞成因，如何防范？注⼊⽅式有哪些？除了数据库数据，利⽤⽅式还有哪些？"></a>8、如何判断 SQL 注⼊漏洞成因，如何防范？注⼊⽅式有哪些？除了数据库数据，利⽤⽅式还有哪些？</h4><p>select * from news where id = ‘$SQL’; </p>
 <p>当程序执⾏访问新闻等⼀些操作都会执⾏到 sql 语句进⾏调⽤，如果在此调⽤过程中，提交了不合法的数据，⽽数据库 </p>
 <p>⽆法识别则会报错。也就是⼀切输⼊都是有害的。 </p>
 <p>注⼊类型有 6 种，可以参考 SQLMAP，报错、盲注、联合、时间、内联、堆叠 </p>
@@ -7281,27 +7273,20 @@ In get/set mode no capture occurs.</code></pre><blockquote>
 <p>利⽤⽅式：具体看什么数据库类型，像 SQLSERVER 可以命令执⾏，MYSQL 写 shell 有些权限⼤也可以执⾏命令但是 </p>
 <p>条件是在 lINUX 环境下。 </p>
 <p>防范: 边界, CDN -&gt; 脚本语⾔过滤 -&gt; 数据库过滤最⼩权限 -&gt; 主机 </p>
-<p>9、为什么有的时候没有错误回显 </p>
-<p>没有进⾏错误打印或者错误屏蔽 </p>
-<p>10、宽字符注⼊的原理？如何利⽤宽字符注⼊漏洞，payload 如何构造？ </p>
-<p>在 mysql 中使⽤了 gbk 编码，占⽤ 2 个字节, ⽽ mysql 的⼀种特性, GBK 是多字节编码，它认为两个字节就代表⼀个汉 </p>
+<h4 id="9、为什么有的时候没有错误回显"><a href="#9、为什么有的时候没有错误回显" class="headerlink" title="9、为什么有的时候没有错误回显"></a>9、为什么有的时候没有错误回显</h4><p>没有进⾏错误打印或者错误屏蔽 </p>
+<h4 id="10、宽字符注⼊的原理？如何利⽤宽字符注⼊漏洞，payload-如何构造？"><a href="#10、宽字符注⼊的原理？如何利⽤宽字符注⼊漏洞，payload-如何构造？" class="headerlink" title="10、宽字符注⼊的原理？如何利⽤宽字符注⼊漏洞，payload 如何构造？"></a>10、宽字符注⼊的原理？如何利⽤宽字符注⼊漏洞，payload 如何构造？</h4><p>在 mysql 中使⽤了 gbk 编码，占⽤ 2 个字节, ⽽ mysql 的⼀种特性, GBK 是多字节编码，它认为两个字节就代表⼀个汉 </p>
 <p>字，所以 %df 时候会和转义符 \ %5c 进⾏结合, 所以单引号就逃逸了出来, 当第⼀个字节的 ascii 码⼤于 128，就可以了。</p>
-<p>11、CRLF 注⼊的原理 </p>
-<p>CRLF 注⼊在 OWASP ⾥⾯被称为 HTTP 拆分攻击（HTTP Splitting）CRLF 是” 回⻋ + 换⾏”（\r\n）的简称, 在 HTTP </p>
+<h4 id="11、CRLF-注⼊的原理"><a href="#11、CRLF-注⼊的原理" class="headerlink" title="11、CRLF 注⼊的原理"></a>11、CRLF 注⼊的原理</h4><p>CRLF 注⼊在 OWASP ⾥⾯被称为 HTTP 拆分攻击（HTTP Splitting）CRLF 是” 回⻋ + 换⾏”（\r\n）的简称, 在 HTTP </p>
 <p>协议中，HTTP Header 与 HTTP Body 是⽤两个 CRLF 分隔的，浏览器就是根据这两个 CRLF 来取出 HTTP 内容并显 </p>
 <p>示出来。所以，⼀旦我们能够控制 HTTP 消息头中的字符，注⼊⼀些恶意的换⾏ </p>
-<p>12、mysql 的⽹站注⼊，5.0 以上和 5.0 以下有什么区别？ </p>
-<p>5.0 以下没有 information_schema 这个系统表，⽆法列表名等，只能暴⼒跑表名。 </p>
+<h4 id="12、mysql-的⽹站注⼊，5-0-以上和-5-0-以下有什么区别？"><a href="#12、mysql-的⽹站注⼊，5-0-以上和-5-0-以下有什么区别？" class="headerlink" title="12、mysql 的⽹站注⼊，5.0 以上和 5.0 以下有什么区别？"></a>12、mysql 的⽹站注⼊，5.0 以上和 5.0 以下有什么区别？</h4><p>5.0 以下没有 information_schema 这个系统表，⽆法列表名等，只能暴⼒跑表名。 </p>
 <p>5.0 以下是多⽤户单操作，5.0 以上是多⽤户多操作。 </p>
-<p>13、php.ini 可以设置哪些安全特性 </p>
-<p>禁⽤ PHP 函数 </p>
+<h4 id="13、php-ini-可以设置哪些安全特性"><a href="#13、php-ini-可以设置哪些安全特性" class="headerlink" title="13、php.ini 可以设置哪些安全特性"></a>13、php.ini 可以设置哪些安全特性</h4><p>禁⽤ PHP 函数 </p>
 <p>允许 include 或打开访问远程资源 </p>
-<p>14、php 的 %00 截断的原理是什么？ </p>
-<p>因为在 C 语⾔中字符串的结束标识符 %00 是结束符号，⽽ PHP 就是 C 写的，所以继承了 C 的特性，所以判断为 </p>
+<h4 id="14、php-的-00-截断的原理是什么？"><a href="#14、php-的-00-截断的原理是什么？" class="headerlink" title="14、php 的 %00 截断的原理是什么？"></a>14、php 的 %00 截断的原理是什么？</h4><p>因为在 C 语⾔中字符串的结束标识符 %00 是结束符号，⽽ PHP 就是 C 写的，所以继承了 C 的特性，所以判断为 </p>
 <p>%00 是结束符号不会继续往后执⾏ </p>
 <p>条件：PHP&lt;5.3.29，且 GPC 关闭 </p>
-<p>15、webshell 检测，有哪些⽅法 </p>
-<p>grep、关键词、关键函数 </p>
+<h4 id="15、webshell-检测，有哪些⽅法"><a href="#15、webshell-检测，有哪些⽅法" class="headerlink" title="15、webshell 检测，有哪些⽅法"></a>15、webshell 检测，有哪些⽅法</h4><p>grep、关键词、关键函数 </p>
 <p>安全狗、D 盾</p>
 <p>的 本地包含 洞 什么 段带有 洞的代 ⼿ 的话如何发掘 如 报错 你 怎么16、php 的 LFI，本地包含漏洞原理是什么？写⼀段带有漏洞的代码。⼿⼯的话如何发掘？如果⽆报错回显，你是怎么 </p>
 <p>遍历⽂件的？ </p>
@@ -7311,8 +7296,7 @@ In get/set mode no capture occurs.</code></pre><blockquote>
 <p>ON 通过测试参数的地⽅进⾏本地⽂件 / etc/passwd 等包含 如何存在漏洞⽽且没有回显，有可能没有显示在⻚⾯⽽是 </p>
 <p>在⽹⻚源代码中，除了些可以利⽤ DNSlog 进⾏获取包含的信息。从 index.php ⽂件⼀级级往读取 也可以利⽤ PHP 封 </p>
 <p>装协议读取⽂件 </p>
-<p>17、说说常⻅的中间件解析漏洞利⽤⽅式 </p>
-<p>IIS 6.0</p>
+<h4 id="17、说说常⻅的中间件解析漏洞利⽤⽅式"><a href="#17、说说常⻅的中间件解析漏洞利⽤⽅式" class="headerlink" title="17、说说常⻅的中间件解析漏洞利⽤⽅式"></a>17、说说常⻅的中间件解析漏洞利⽤⽅式</h4><p>IIS 6.0</p>
 <p>/xx.asp/xx.jpg “xx.asp” 是⽂件夹名 </p>
 <p>IIS 7.0/7.5 </p>
 <p>默认 Fast-CGI 开启，直接在 url 中图⽚地址后⾯输⼊ / 1.php，会把正常图⽚当成 php 解析 </p>
@@ -7324,27 +7308,22 @@ In get/set mode no capture occurs.</code></pre><blockquote>
 <p>的 户名密 存放在 张表 密 采 种加密⽅式18、mysql 的⽤户名密码是存放在那张表⾥⾯？mysql 密码采⽤哪种加密⽅式？ </p>
 <p>mysql -&gt; users </p>
 <p>SHA1 </p>
-<p>19、Windows、Linux、数据库的加固降权思路，任选其⼀ </p>
-<p>禁⽤ root </p>
+<h4 id="19、Windows、Linux、数据库的加固降权思路，任选其⼀"><a href="#19、Windows、Linux、数据库的加固降权思路，任选其⼀" class="headerlink" title="19、Windows、Linux、数据库的加固降权思路，任选其⼀"></a>19、Windows、Linux、数据库的加固降权思路，任选其⼀</h4><p>禁⽤ root </p>
 <p>禁⽌远程访问 </p>
 <p>禁⽌写⼊</p>
 <p>单独帐号 </p>
 <p>禁⽌执⾏ system 等函数 </p>
-<p>20、你使⽤什么⼯具来判断系统是否存在后⻔ </p>
-<p>Chkrootkit </p>
+<h4 id="20、你使⽤什么⼯具来判断系统是否存在后⻔"><a href="#20、你使⽤什么⼯具来判断系统是否存在后⻔" class="headerlink" title="20、你使⽤什么⼯具来判断系统是否存在后⻔"></a>20、你使⽤什么⼯具来判断系统是否存在后⻔</h4><p>Chkrootkit </p>
 <p>Rkhunter </p>
-<p>31、如何绕过 CDN 获取⽬标⽹站真实 IP，谈谈你的思路？ </p>
-<p>类似 phpinfo、⽹站信息 </p>
+<h4 id="21、如何绕过-CDN-获取⽬标⽹站真实-IP，谈谈你的思路？"><a href="#21、如何绕过-CDN-获取⽬标⽹站真实-IP，谈谈你的思路？" class="headerlink" title="21、如何绕过 CDN 获取⽬标⽹站真实 IP，谈谈你的思路？"></a>21、如何绕过 CDN 获取⽬标⽹站真实 IP，谈谈你的思路？</h4><p>类似 phpinfo、⽹站信息 </p>
 <p>C 段、⼦域名</p>
 <p>历史解析记录 </p>
 <p>DDOSzmap 全⽹扫描识别 http 头 </p>
 <p>⽹站域名管理员邮箱，注册过的域名等相关信息关联 </p>
-<p>22、如果给你⼀个⽹站, 你的渗透测试思路是什么? 在获取书⾯授权的前提下。 </p>
-<p>其实这是⼀个⾮常⼤的话题，渗透⼤部分思路都是如此，⽽⾯试官是想听到你回答不⼀样的答案让⼈眼前⼀亮 如何才做 </p>
+<h4 id="22、如果给你⼀个⽹站-你的渗透测试思路是什么-在获取书⾯授权的前提下。"><a href="#22、如果给你⼀个⽹站-你的渗透测试思路是什么-在获取书⾯授权的前提下。" class="headerlink" title="22、如果给你⼀个⽹站, 你的渗透测试思路是什么? 在获取书⾯授权的前提下。"></a>22、如果给你⼀个⽹站, 你的渗透测试思路是什么? 在获取书⾯授权的前提下。</h4><p>其实这是⼀个⾮常⼤的话题，渗透⼤部分思路都是如此，⽽⾯试官是想听到你回答不⼀样的答案让⼈眼前⼀亮 如何才做 </p>
 <p>到让⼈眼前⼀亮都需要看你的经验，把你实践的过程拿出来说，以及遇到什么问题如何解决，最终取得成果 渗透其它⼤ </p>
 <p>同⼩异, ⽽做为渗透者知识的储备、基础扎实、耐⼼、细⼼都是必不可少。 </p>
-<p>23、谈⼀谈 Windows 系统与 Linux 系统提权的思路？ </p>
-<p>Windows </p>
+<h4 id="23、谈⼀谈-Windows-系统与-Linux-系统提权的思路？"><a href="#23、谈⼀谈-Windows-系统与-Linux-系统提权的思路？" class="headerlink" title="23、谈⼀谈 Windows 系统与 Linux 系统提权的思路？"></a>23、谈⼀谈 Windows 系统与 Linux 系统提权的思路？</h4><p>Windows </p>
 <p>Windows 服务⽐较多所以⽅法也如此，最基本的就是 Exp 提权，数据库 SQLServer、MYSQL UDF 等、第三⽅软件提 </p>
 <p>权。</p>
 <p>除此之外提权的成功与否和在于信息收集也⾮常重要，你对这台服务器和管理员了解多少。 </p>
@@ -7369,8 +7348,7 @@ In get/set mode no capture occurs.</code></pre><blockquote>
 <p>通过键盘记录仪窃取密码 </p>
 <p>其它有⽤的和提权相关的东⻄ </p>
 <p>内核提权 </p>
-<p>24、列举出您所知道的所有开源组件⾼危漏洞 (⼗个以上) </p>
-<p>Tomcat </p>
+<h4 id="24、列举出您所知道的所有开源组件⾼危漏洞-⼗个以上"><a href="#24、列举出您所知道的所有开源组件⾼危漏洞-⼗个以上" class="headerlink" title="24、列举出您所知道的所有开源组件⾼危漏洞 (⼗个以上)"></a>24、列举出您所知道的所有开源组件⾼危漏洞 (⼗个以上)</h4><p>Tomcat </p>
 <p>NginxApache </p>
 <p>Hadhoop </p>
 <p>Docker </p>
@@ -7380,123 +7358,87 @@ In get/set mode no capture occurs.</code></pre><blockquote>
 <p>MongoDB </p>
 <p>Redis </p>
 <p>GlassFish </p>
-<p>25、反弹 shell 的常⽤命令？⼀般常反弹哪⼀种 shell？为什么？ </p>
-<p>nc -lvvp 7777 -e /bin/bash </p>
+<h4 id="25、反弹-shell-的常⽤命令？⼀般常反弹哪⼀种-shell？为什么？"><a href="#25、反弹-shell-的常⽤命令？⼀般常反弹哪⼀种-shell？为什么？" class="headerlink" title="25、反弹 shell 的常⽤命令？⼀般常反弹哪⼀种 shell？为什么？"></a>25、反弹 shell 的常⽤命令？⼀般常反弹哪⼀种 shell？为什么？</h4><p>nc -lvvp 7777 -e /bin/bash </p>
 <p>bash 是交互式, 否则像 useradd ⽆法执⾏交互</p>
-<p>26、CMD 命令⾏如何查询远程终端开放端⼝ </p>
-<p>tasklist /svc </p>
+<h4 id="26、CMD-命令⾏如何查询远程终端开放端⼝"><a href="#26、CMD-命令⾏如何查询远程终端开放端⼝" class="headerlink" title="26、CMD 命令⾏如何查询远程终端开放端⼝"></a>26、CMD 命令⾏如何查询远程终端开放端⼝</h4><p>tasklist /svc </p>
 <p>netstat -ano </p>
-<p>27、服务器为 IIS+PHP+MySQL，发现 root 权限注⼊漏洞，讲讲你的渗透思路 </p>
-<p>可以读取 IIS 信息，知道路径, 如果像 WAMMP 类似构建，通过 @@datadir 知道数据库路径也可以猜测⽹站路径。或者直接写 Shell </p>
-<p>28、请写出 Mysql5 数据库中查询库</p>
-<p>’</p>
-<p>helloworld</p>
-<p>’</p>
-<p>中</p>
-<p>’</p>
-<p>users</p>
-<p>’</p>
-<p>表所有列名的语句 </p>
-<p>select COLUMN_NAME from information_schema.COLUMNS where table_name = ‘your_table_name’ and </p>
+<h4 id="27、服务器为-IIS-PHP-MySQL，发现-root-权限注⼊漏洞，讲讲你的渗透思路"><a href="#27、服务器为-IIS-PHP-MySQL，发现-root-权限注⼊漏洞，讲讲你的渗透思路" class="headerlink" title="27、服务器为 IIS+PHP+MySQL，发现 root 权限注⼊漏洞，讲讲你的渗透思路"></a>27、服务器为 IIS+PHP+MySQL，发现 root 权限注⼊漏洞，讲讲你的渗透思路</h4><p>可以读取 IIS 信息，知道路径, 如果像 WAMMP 类似构建，通过 @@datadir 知道数据库路径也可以猜测⽹站路径。或者直接写 Shell </p>
+<h4 id="28、请写出-Mysql5-数据库中查询库表所有列名的语句"><a href="#28、请写出-Mysql5-数据库中查询库表所有列名的语句" class="headerlink" title="28、请写出 Mysql5 数据库中查询库表所有列名的语句"></a>28、请写出 Mysql5 数据库中查询库表所有列名的语句</h4><p>select COLUMN_NAME from information_schema.COLUMNS where table_name = ‘your_table_name’ and </p>
 <p>table_schema = ‘your_db_name’; </p>
-<p>29、下⾯这段代码存在漏洞吗？如果存在请说出存在什么漏洞并利⽤ </p>
-<p><a href="http://www.exp.com/1.php">http://www.exp.com/1.php</a> </p>
-<?php 
-
-$s_func = $_GET['s_func']; 
-
-$info = $_GET['info']; 
-
-$s_func($info); 
-
-?>
+<h4 id="29、下⾯这段代码存在漏洞吗？如果存在请说出存在什么漏洞并利⽤"><a href="#29、下⾯这段代码存在漏洞吗？如果存在请说出存在什么漏洞并利⽤" class="headerlink" title="29、下⾯这段代码存在漏洞吗？如果存在请说出存在什么漏洞并利⽤"></a>29、下⾯这段代码存在漏洞吗？如果存在请说出存在什么漏洞并利⽤</h4><p><a href="http://www.exp.com/1.php">http://www.exp.com/1.php</a> </p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&lt;?php </span><br><span class="line"></span><br><span class="line">$s_func &#x3D; $_GET[&#39;s_func&#39;]; </span><br><span class="line"></span><br><span class="line">$info &#x3D; $_GET[&#39;info&#39;]; </span><br><span class="line"></span><br><span class="line">$s_func($info); </span><br><span class="line"></span><br><span class="line">?&gt;</span><br></pre></td></tr></table></figure>
 
 <p>代码执⾏, 通过 assert 调⽤ </p>
-<p>30、udf 提权 </p>
-<p>MySQL 可以⾃定义函数, 通过⾃定义函数做到类似 xp_cmdshell 效果 </p>
-<p>31、SQL 头注⼊点 </p>
-<p>UserAgent </p>
+<h4 id="30、udf-提权"><a href="#30、udf-提权" class="headerlink" title="30、udf 提权"></a>30、udf 提权</h4><p>MySQL 可以⾃定义函数, 通过⾃定义函数做到类似 xp_cmdshell 效果 </p>
+<h4 id="31、SQL-头注⼊点"><a href="#31、SQL-头注⼊点" class="headerlink" title="31、SQL 头注⼊点"></a>31、SQL 头注⼊点</h4><p>UserAgent </p>
 <p>Referer </p>
 <p>CookieCookie </p>
 <p>X-FOR-I </p>
-<p>32、php 中命令执⾏涉及到的函数 </p>
-<p>eval() </p>
+<h4 id="32、php-中命令执⾏涉及到的函数"><a href="#32、php-中命令执⾏涉及到的函数" class="headerlink" title="32、php 中命令执⾏涉及到的函数"></a>32、php 中命令执⾏涉及到的函数</h4><p>eval() </p>
 <p>assert() </p>
 <p>system() </p>
 <p>exec() </p>
 <p>shell_exec() </p>
-<p>33、SSRF 漏洞的成因 防御 绕过 </p>
-<p>模拟服务器对其它资源进⾏请求 IP 探测，如果想漏洞利⽤必需要构造好 Payload 禁⽌跳转，限制协议，内外⽹限制， </p>
+<h4 id="33、SSRF-漏洞的成因-防御-绕过"><a href="#33、SSRF-漏洞的成因-防御-绕过" class="headerlink" title="33、SSRF 漏洞的成因 防御 绕过"></a>33、SSRF 漏洞的成因 防御 绕过</h4><p>模拟服务器对其它资源进⾏请求 IP 探测，如果想漏洞利⽤必需要构造好 Payload 禁⽌跳转，限制协议，内外⽹限制， </p>
 <p>URL 限制 针对 IP 格式 </p>
-<p>34、mysql 写 shell 有⼏种⽅法 </p>
-<p>outfifile、dumpfifile、开启 log 写 webshell </p>
-<p>35、Metasploit 打开反向监听的命令 </p>
-<p>use exploit/multi/handler </p>
+<h4 id="34、mysql-写-shell-有⼏种⽅法"><a href="#34、mysql-写-shell-有⼏种⽅法" class="headerlink" title="34、mysql 写 shell 有⼏种⽅法"></a>34、mysql 写 shell 有⼏种⽅法</h4><p>outfifile、dumpfifile、开启 log 写 webshell </p>
+<h4 id="35、Metasploit-打开反向监听的命令"><a href="#35、Metasploit-打开反向监听的命令" class="headerlink" title="35、Metasploit 打开反向监听的命令"></a>35、Metasploit 打开反向监听的命令</h4><p>use exploit/multi/handler </p>
 <p>set payload windows/meterpreter/reverse_tcp </p>
-<p>36、应急响应的步骤 </p>
-<p>\1. 准备已经编译好的⼯具以及取证分析等⼯具⼲净可靠放 U 盘 </p>
-<p>2 初步判断事件的类型 是被⼊侵 ddos 还是其它的原因2. 初步判断事件的类型，是被⼊侵、ddos 还是其它的原因 </p>
-<p>\3. ⾸先抑制范围、影响范围，隔离使受害⾯不继续扩⼤。 </p>
-<p>\4. 寻找原因，封堵攻击源。 </p>
-<p>\5. 把业务恢复⾄正常⽔平 </p>
-<p>\6. 监控有⽆异常，报告、管理环节的⾃省和改进措施。 </p>
-<p>37、有哪些反向代理的⼯具? </p>
-<p>reGeirg、EW、lcx、Ngrok、frp </p>
-<p>38、有什么⽐较曲折的渗透经历 </p>
-<p>这个问题想知道你⼯作渗透到什么样的程度，只是简单的漏扫搬砖，还是有毅⼒坚持完成整个渗透，如：对⽬标不放 </p>
+<h4 id="36、应急响应的步骤"><a href="#36、应急响应的步骤" class="headerlink" title="36、应急响应的步骤"></a>36、应急响应的步骤</h4><ol>
+<li><p>准备已经编译好的⼯具以及取证分析等⼯具⼲净可靠放 U 盘 </p>
+</li>
+<li><p>初步判断事件的类型 是被⼊侵 ddos 还是其它的原因2. 初步判断事件的类型，是被⼊侵、ddos 还是其它的原因  </p>
+</li>
+<li><p>⾸先抑制范围、影响范围，隔离使受害⾯不继续扩⼤。 </p>
+</li>
+<li><p>寻找原因，封堵攻击源。 </p>
+</li>
+<li><p>把业务恢复⾄正常⽔平 </p>
+</li>
+<li><p>监控有⽆异常，报告、管理环节的⾃省和改进措施。 </p>
+</li>
+</ol>
+<h4 id="37、有哪些反向代理的⼯具"><a href="#37、有哪些反向代理的⼯具" class="headerlink" title="37、有哪些反向代理的⼯具?"></a>37、有哪些反向代理的⼯具?</h4><p>reGeirg、EW、lcx、Ngrok、frp </p>
+<h4 id="38、有什么⽐较曲折的渗透经历"><a href="#38、有什么⽐较曲折的渗透经历" class="headerlink" title="38、有什么⽐较曲折的渗透经历"></a>38、有什么⽐较曲折的渗透经历</h4><p>这个问题想知道你⼯作渗透到什么样的程度，只是简单的漏扫搬砖，还是有毅⼒坚持完成整个渗透，如：对⽬标不放 </p>
 <p>弃，坚持⼀个⽉最终通过各种⼿段，曲折的过程拿下⽬标。 </p>
-<p>39、UpdateTime:2019.5.11 </p>
-<p>怎么查找域控 </p>
-<p>⽅法有很多 </p>
-<p>\1. 通过 DNS 查询 </p>
+<h4 id="39、怎么查找域控"><a href="#39、怎么查找域控" class="headerlink" title="39、怎么查找域控"></a>39、怎么查找域控</h4><p>⽅法有很多 </p>
+<p>1.通过 DNS 查询 </p>
 <p>dig -t SRV _gc._tcp.lab.ropnop.com </p>
 <p>dig -t SRV _ldap._tcp.lab.ropnop.com </p>
 <p>dig -t SRV _kerberos._tcp.lab.ropnop.com </p>
 <p>dig -t SRV _kpasswd._tcp.lab.ropnop.com </p>
-<p>2 端⼝扫描2. 端⼝扫描 </p>
+<p>2.端⼝扫描 </p>
 <p>域服务器都会开启 389 端⼝，所以可以通过扫描端⼝进⾏识别。 </p>
-<p>\3. 其实很多域环境⾥，DNS 服务器就是域控制根本不需要怎么找。 </p>
-<p>\4. 各种命令 </p>
+<p>3.其实很多域环境⾥，DNS 服务器就是域控制根本不需要怎么找。 </p>
+<p>4.各种命令 </p>
 <p>dsquery </p>
 <p>net group “Domain controllers” </p>
 <p>nltest /DCLIST:pentest.com </p>
 <p>…… </p>
-<p>前端篇</p>
-<p>1、什么是同源策略? </p>
-<p>源就是主机、协议、端⼝名的⼀个三元组 同源策略 (Same Origin Policy, SOP) 是 Web 应⽤程序的⼀种安全模型，被⼴ </p>
+<h2 id="前端篇"><a href="#前端篇" class="headerlink" title="前端篇"></a>前端篇</h2><h4 id="1、什么是同源策略"><a href="#1、什么是同源策略" class="headerlink" title="1、什么是同源策略?"></a>1、什么是同源策略?</h4><p>源就是主机、协议、端⼝名的⼀个三元组 同源策略 (Same Origin Policy, SOP) 是 Web 应⽤程序的⼀种安全模型，被⼴ </p>
 <p>泛地应⽤在处理 WEB 内容的各种客户端上，⽐如各⼤浏览器，微软的 Silverlight，Adobe 的 Flash/Acrobat 等等。 </p>
-<p>2、XSS 能⽤来做什么？</p>
-<p>⽹络钓⻥、窃取⽤户 Cookies、弹⼴告刷流量、具备改⻚⾯信息、删除⽂章、获取客户端信息、传播蠕⾍ </p>
-<p>3、XSS 的三种类型，防御⽅法 </p>
-<p>反射型、Dom Base XSS、存储型 防御⽅法这个只能说个⼤概，毕竟这是⼀个⽐较⼤的话题，⽽且防御的⽅法还得看所 </p>
+<h4 id="2、XSS-能⽤来做什么？"><a href="#2、XSS-能⽤来做什么？" class="headerlink" title="2、XSS 能⽤来做什么？"></a>2、XSS 能⽤来做什么？</h4><p>⽹络钓⻥、窃取⽤户 Cookies、弹⼴告刷流量、具备改⻚⾯信息、删除⽂章、获取客户端信息、传播蠕⾍ </p>
+<h4 id="3、XSS-的三种类型，防御⽅法"><a href="#3、XSS-的三种类型，防御⽅法" class="headerlink" title="3、XSS 的三种类型，防御⽅法"></a>3、XSS 的三种类型，防御⽅法</h4><p>反射型、Dom Base XSS、存储型 防御⽅法这个只能说个⼤概，毕竟这是⼀个⽐较⼤的话题，⽽且防御的⽅法还得看所 </p>
 <p>在的业务等。从⽹络层、主机层、Web 层、数据库，通过 CDN 都有过滤常⻅⼀些攻击⼿法，但不能有 CDN 就以为可</p>
 <p>以了，添加 CDN 只是让攻击成本增⾼，开启 HttpOnly，以防确实存在避免 cookies 被获取，CSP 策略、再就是语⾔中 </p>
 <p>提供的函数对输⼊过滤，以及输出编码以及 ModSecurity 类的防⽕墙。 </p>
-<p>4、存储型 xss 原理?如⽹站留⾔版，把插⼊的记录存储在数据库中，插⼊的代码会⼀直留在⻚⾯上，当其它⽤户访问会从数据库中读取并触 </p>
+<h4 id="4、存储型-xss-原理"><a href="#4、存储型-xss-原理" class="headerlink" title="4、存储型 xss 原理?"></a>4、存储型 xss 原理?</h4><p>如⽹站留⾔版，把插⼊的记录存储在数据库中，插⼊的代码会⼀直留在⻚⾯上，当其它⽤户访问会从数据库中读取并触 </p>
 <p>发漏洞。 </p>
-<p>5、你怎么理解 xss 攻击？ </p>
-<p>是⼀种被动型，在不知道的情况下触发类似⽆感型，在渗透很多情况下平常的渗透⼿段以及取得⽬标的信息，⽽ XSS 就 </p>
+<h4 id="5、你怎么理解-xss-攻击？"><a href="#5、你怎么理解-xss-攻击？" class="headerlink" title="5、你怎么理解 xss 攻击？"></a>5、你怎么理解 xss 攻击？</h4><p>是⼀种被动型，在不知道的情况下触发类似⽆感型，在渗透很多情况下平常的渗透⼿段以及取得⽬标的信息，⽽ XSS 就 </p>
 <p>能轻松获取，类似 QQ 邮箱你不可能渗透这么⼤的互联⽹就算可以时间成本都⾮常的⾼，XSS ⽐较有针对性。 </p>
-<p>6、如何快速发现 xss 位置？ </p>
-<p>各种输⼊的点，名称、上传、留⾔、可交互的地⽅，⼀切输⼊都是在害原则。 </p>
-<p>7、Dom xss 原理 / 防范 </p>
-<p>DOM 型 XSS 并不需要服务器解析响应的直接参与触发 XSS 靠的是浏览器 DOM 解析 DOM—based XSS 漏洞是基于⽂ </p>
+<h4 id="6、如何快速发现-xss-位置？"><a href="#6、如何快速发现-xss-位置？" class="headerlink" title="6、如何快速发现 xss 位置？"></a>6、如何快速发现 xss 位置？</h4><p>各种输⼊的点，名称、上传、留⾔、可交互的地⽅，⼀切输⼊都是在害原则。 </p>
+<h4 id="7、Dom-xss-原理-防范"><a href="#7、Dom-xss-原理-防范" class="headerlink" title="7、Dom xss 原理 / 防范"></a>7、Dom xss 原理 / 防范</h4><p>DOM 型 XSS 并不需要服务器解析响应的直接参与触发 XSS 靠的是浏览器 DOM 解析 DOM—based XSS 漏洞是基于⽂ </p>
 <p>档对象模型 Document Objeet Model,DOM) 的⼀种漏洞。 </p>
 <p>cument.getElementById(“a”).innerHTML=”yyyyyy”; </p>
 <p>在输⼊点过滤敏感关键字 </p>
-<p>8、DOM 型 XSS 与反射型 XSS 区别？ </p>
-<p>DOM 型就是 JavaScript 中的 Document 对象 HTML 注⼊，直接浏览器处理。 </p>
-<p>9、如何使得前端 referer 为空</p>
-<p>通过地址栏输⼊、从书签⾥⾯选择或者浏览器的插件 BurpSuite 修改。 </p>
-<p>10、cookie 参数，security ⼲什么的 </p>
-<p>Httponly：防⽌ cookie 被 xss 偷https：防⽌ cookie 在⽹络中被偷 </p>
+<h4 id="8、DOM-型-XSS-与反射型-XSS-区别？"><a href="#8、DOM-型-XSS-与反射型-XSS-区别？" class="headerlink" title="8、DOM 型 XSS 与反射型 XSS 区别？"></a>8、DOM 型 XSS 与反射型 XSS 区别？</h4><p>DOM 型就是 JavaScript 中的 Document 对象 HTML 注⼊，直接浏览器处理。 </p>
+<h4 id="9、如何使得前端-referer-为空"><a href="#9、如何使得前端-referer-为空" class="headerlink" title="9、如何使得前端 referer 为空"></a>9、如何使得前端 referer 为空</h4><p>通过地址栏输⼊、从书签⾥⾯选择或者浏览器的插件 BurpSuite 修改。 </p>
+<h4 id="10、cookie-参数，security-⼲什么的"><a href="#10、cookie-参数，security-⼲什么的" class="headerlink" title="10、cookie 参数，security ⼲什么的"></a>10、cookie 参数，security ⼲什么的</h4><p>Httponly：防⽌ cookie 被 xss 偷https：防⽌ cookie 在⽹络中被偷 </p>
 <p>Secure：阻⽌ cookie 在⾮ https 下传输，很多全站 https 时会漏掉 </p>
 <p>Path : 区分 cookie 的标识，安全上作⽤不⼤，和浏览器同源冲突 </p>
-<p>11、如果 SRC 上报了⼀个 XSS 漏洞，payload 已经写⼊⻚⾯，但未给出具体位置，如何快速介⼊？ </p>
-<p>看是否什么类型的 XSS，XSS 反射型看提交的地址，指的参数是哪个位置，通过这个⻚⾯进⾏ fuzzing 测试。如果是存 </p>
+<h4 id="11、如果-SRC-上报了⼀个-XSS-漏洞，payload-已经写⼊⻚⾯，但未给出具体位置，如何快速介⼊？"><a href="#11、如果-SRC-上报了⼀个-XSS-漏洞，payload-已经写⼊⻚⾯，但未给出具体位置，如何快速介⼊？" class="headerlink" title="11、如果 SRC 上报了⼀个 XSS 漏洞，payload 已经写⼊⻚⾯，但未给出具体位置，如何快速介⼊？"></a>11、如果 SRC 上报了⼀个 XSS 漏洞，payload 已经写⼊⻚⾯，但未给出具体位置，如何快速介⼊？</h4><p>看是否什么类型的 XSS，XSS 反射型看提交的地址，指的参数是哪个位置，通过这个⻚⾯进⾏ fuzzing 测试。如果是存 </p>
 <p>储型⻚⾯查找关键字。 </p>
-<p>12、XSS， CSRF， CRLF ⽐较容易弄混，说说三者的原理，防御⽅法 </p>
-<p>CSRF 跨站请求伪造，构造已知的所有参数让对⽅访问, </p>
+<h4 id="12、XSS，-CSRF，-CRLF-⽐较容易弄混，说说三者的原理，防御⽅法"><a href="#12、XSS，-CSRF，-CRLF-⽐较容易弄混，说说三者的原理，防御⽅法" class="headerlink" title="12、XSS， CSRF， CRLF ⽐较容易弄混，说说三者的原理，防御⽅法"></a>12、XSS， CSRF， CRLF ⽐较容易弄混，说说三者的原理，防御⽅法</h4><p>CSRF 跨站请求伪造，构造已知的所有参数让对⽅访问, </p>
 <p>防护 CSRF: 防御原理：不让你那么容易伪造请求 (cookie 中加⼊随机数，要求请求中带上，⽽攻击者获取不到 cookie </p>
 <p>中的随机数, 验证 HTTP Referer 字段, 在请求地址中添加 takon 验证 </p>
 <p>CRLF 原理: </p>
@@ -7504,15 +7446,13 @@ $s_func($info);
 <p>在 HTTP 协议中，HTTP Header 与 HTTP Body 是⽤两个 CRLF 分隔的，浏览器就是根据这两个 CRLF 来取出 HTTP </p>
 <p>内容并显示出来。所以，⼀旦我们能够控制 HTTP 消息头中的字符，注⼊⼀些恶意的换⾏，这样我们就能注⼊⼀些会话 </p>
 <p>Cookie 或者 HTML 代码，所以 CRLF Injection ⼜叫 HTTP Response Splitting，简称 HRS。 </p>
-<p>13、csrf 如何不带 referer 访问</p>
-<p>通过地址栏，⼿动输⼊；从书签⾥⾯选择；通过实现设定好的⼿势。上⾯说的这三种都是⽤户⾃⼰去操作，因此不算 </p>
+<h4 id="13、csrf-如何不带-referer-访问"><a href="#13、csrf-如何不带-referer-访问" class="headerlink" title="13、csrf 如何不带 referer 访问"></a>13、csrf 如何不带 referer 访问</h4><p>通过地址栏，⼿动输⼊；从书签⾥⾯选择；通过实现设定好的⼿势。上⾯说的这三种都是⽤户⾃⼰去操作，因此不算 </p>
 <p>CSRF。 </p>
 <p>跨协议间提交请求。常⻅的协议：ftp://,http://,https://,fifile://,javascript:,data:. 最简单的情况就是我们在本地打开⼀个</p>
 <p>HTML ⻚⾯ 这个时候浏览器地址栏是 fifile:// 开头的 如果这个 HTML ⻚⾯向任何 http 站点提交请求的话 这些请求HTML ⻚⾯，这个时候浏览器地址栏是 fifile:// 开头的，如果这个 HTML ⻚⾯向任何 http 站点提交请求的话，这些请求 </p>
 <p>的 Referer 都是空的。那么我们接下来可以利⽤ data: 协议来构造⼀个⾃动提交的 CSRF 攻击。当然这个协议是 IE 不⽀ </p>
 <p>持的，我们可以换⽤ javascript: </p>
-<p>14、CSRF 成因及防御措施；如果不⽤ token 如何做防御？ </p>
-<p>X-Frame-Options </p>
+<h4 id="14、CSRF-成因及防御措施；如果不⽤-token-如何做防御？"><a href="#14、CSRF-成因及防御措施；如果不⽤-token-如何做防御？" class="headerlink" title="14、CSRF 成因及防御措施；如果不⽤ token 如何做防御？"></a>14、CSRF 成因及防御措施；如果不⽤ token 如何做防御？</h4><p>X-Frame-Options </p>
 <p>DENY(禁⽌被 加载进任何 frame) </p>
 <p>SAMEORIGIN(仅允许被加载进同域内的 frame) </p>
 <p>X-XSS-Protection </p>
@@ -7521,40 +7461,29 @@ $s_func($info);
 <p>1;mode=block（强制不熏染，在 Chrome 下直接跳转到空⽩⻚，在 IE 下返回⼀个 #符号） </p>
 <p>这个策略仅针对反射型，对付不了存储型 XSS，能识别出反射型是因为提交请求的 URL 中带有可疑的 XSS 代码⽚段。 </p>
 <p>X-Content-Security-Policy </p>
-<p>15、Xss worm 原理 </p>
-<p>攻击者发现⽬标⽹站存在 XSS 漏洞，并且可以编写 XSS 蠕⾍。利⽤⼀个宿主（如博客空间）作为传播源头进⾏ XSS 攻 </p>
+<h4 id="15、Xss-worm-原理"><a href="#15、Xss-worm-原理" class="headerlink" title="15、Xss worm 原理"></a>15、Xss worm 原理</h4><p>攻击者发现⽬标⽹站存在 XSS 漏洞，并且可以编写 XSS 蠕⾍。利⽤⼀个宿主（如博客空间）作为传播源头进⾏ XSS 攻 </p>
 <p>击。</p>
-<p>16、Cookie 的 P3P 性质 </p>
-<p>HTTP 响应头的 p3 字段是 W3C 公布的⼀项隐私保护推荐标准，该字段⽤于标识是否允许⽬标⽹站的 cookie 被另⼀个</p>
+<h4 id="16、Cookie-的-P3P-性质"><a href="#16、Cookie-的-P3P-性质" class="headerlink" title="16、Cookie 的 P3P 性质"></a>16、Cookie 的 P3P 性质</h4><p>HTTP 响应头的 p3 字段是 W3C 公布的⼀项隐私保护推荐标准，该字段⽤于标识是否允许⽬标⽹站的 cookie 被另⼀个</p>
 <p>域通过加载⽬标⽹站⽽设置或发送，仅 IE 执⾏了该策略。17、CSRF 有何危害？ </p>
 <p>篡改⽬标⽹站上的⽤户数据 盗取⽤户隐私数据 传播 CSRF 蠕 </p>
-<p>⼀、思路流程 </p>
-<p>1、信息收集 </p>
-<p>a、服务器的相关信息（真实 ip，系统类型，版本，开放端⼝，WAF 等） </p>
+<h3 id="⼀、思路流程"><a href="#⼀、思路流程" class="headerlink" title="⼀、思路流程"></a>⼀、思路流程</h3><h4 id="1、信息收集"><a href="#1、信息收集" class="headerlink" title="1、信息收集"></a>1、信息收集</h4><p>a、服务器的相关信息（真实 ip，系统类型，版本，开放端⼝，WAF 等） </p>
 <p>b、⽹站指纹识别（包括，cms，cdn，证书等），dns 记录 </p>
 <p>c、whois 信息，姓名，备案，邮箱，电话反查（邮箱丢社⼯库，社⼯准备等） </p>
 <p>e、⼦域名收集，旁站，C 段等 </p>
 <p>f、google hacking 针对化搜索，pdf ⽂件，中间件版本，弱⼝令扫描等 </p>
 <p>g、扫描⽹站⽬录结构，爆后台，⽹站 banner，测试⽂件，备份等敏感⽂件泄漏等 </p>
 <p>h、传输协议，通⽤漏洞，exp，github 源码等 </p>
-<p>2、漏洞挖掘</p>
-<p>a、浏览⽹站，看看⽹站规模，功能，特点等 </p>
+<h4 id="2、漏洞挖掘"><a href="#2、漏洞挖掘" class="headerlink" title="2、漏洞挖掘"></a>2、漏洞挖掘</h4><p>a、浏览⽹站，看看⽹站规模，功能，特点等 </p>
 <p>b、端⼝，弱⼝令，⽬录等扫描, 对响应的端⼝进⾏漏洞探测，⽐如 rsync, ⼼脏出⾎，mysql,ftp,ssh 弱⼝令等。 </p>
 <p>c、XSS，SQL 注⼊，上传，命令注⼊，CSRF，cookie 安全检测，敏感信息，通信数据传输，暴⼒破解，任意⽂件上 </p>
 <p>传，越权访问，未授权访问，⽬录遍历，⽂件 包含，重放攻击（短信轰炸），服务器漏洞检测，最后使⽤漏扫⼯具等 </p>
-<p>3、漏洞利⽤ &amp; 权限提升 </p>
-<p>a mysql 提权 serv u 提权 oracle 提权a、mysql 提权，serv-u 提权，oracle 提权 </p>
+<h4 id="3、漏洞利⽤-amp-权限提升"><a href="#3、漏洞利⽤-amp-权限提升" class="headerlink" title="3、漏洞利⽤ &amp; 权限提升"></a>3、漏洞利⽤ &amp; 权限提升</h4><p>a mysql 提权 serv u 提权 oracle 提权a、mysql 提权，serv-u 提权，oracle 提权 </p>
 <p>b、windows 溢出提权 </p>
 <p>c、linux 脏⽜, 内核漏洞提权 e </p>
-<p>4、清除测试数据 &amp; 输出报告 </p>
-<p>⽇志、测试数据的清理 </p>
+<h4 id="4、清除测试数据-amp-输出报告"><a href="#4、清除测试数据-amp-输出报告" class="headerlink" title="4、清除测试数据 &amp; 输出报告"></a>4、清除测试数据 &amp; 输出报告</h4><p>⽇志、测试数据的清理 </p>
 <p>总结，输出渗透测试报告，附修复⽅案 </p>
-<p>5、复测 </p>
-<p>验证并发现是否有新漏洞，输出报告，归档 </p>
-<p>⼆、问题</p>
-<p>1、拿到⼀个待检测的站，你觉得应该先做什么？ </p>
-<p>信息收集 </p>
-<p>a、获取域名的 whois 信息, 获取注册者邮箱姓名电话等，丢社⼯库⾥看看有没有泄露密码，然后尝试⽤泄露的密码进⾏ </p>
+<h4 id="5、复测"><a href="#5、复测" class="headerlink" title="5、复测"></a>5、复测</h4><p>验证并发现是否有新漏洞，输出报告，归档 </p>
+<h3 id="⼆、问题"><a href="#⼆、问题" class="headerlink" title="⼆、问题"></a>⼆、问题</h3><h4 id="1、拿到⼀个待检测的站，你觉得应该先做什么？"><a href="#1、拿到⼀个待检测的站，你觉得应该先做什么？" class="headerlink" title="1、拿到⼀个待检测的站，你觉得应该先做什么？"></a>1、拿到⼀个待检测的站，你觉得应该先做什么？</h4><h5 id="信息收集"><a href="#信息收集" class="headerlink" title="信息收集"></a>信息收集</h5><p>a、获取域名的 whois 信息, 获取注册者邮箱姓名电话等，丢社⼯库⾥看看有没有泄露密码，然后尝试⽤泄露的密码进⾏ </p>
 <p>登录后台。⽤邮箱做关键词进⾏丢进搜索引擎。利⽤搜索到的关联信息找出其他邮箱进⽽得到常⽤社交账号。社⼯找出 </p>
 <p>社交账号，⾥⾯或许会找出管理员设置密码的习惯 。利⽤已有信息⽣成专⽤字典。 </p>
 <p>b、查询服务器旁站以及⼦域名站点，因为主站⼀般⽐较难，所以先看看旁站有没有通⽤性的 cms 或者其他漏洞。 </p>
@@ -7562,28 +7491,18 @@ $s_func($info);
 <p>d、查看 IP，进⾏ IP 地址端⼝扫描，对响应的端⼝进⾏漏洞探测，⽐如 rsync, ⼼脏出⾎，mysql,ftp,ssh 弱⼝令等。 </p>
 <p>e、扫描⽹站⽬录结构，看看是否可以遍历⽬录，或者敏感⽂件泄漏，⽐如 php 探针 </p>
 <p>f、google hack 进⼀步探测⽹站的信息，后台，敏感⽂件 </p>
-<p>漏洞扫描 </p>
-<p>开始检测漏洞 如 XSS XSRF sql 注⼊ 代码执⾏ 命令执⾏ 越权访问 ⽬录读取 任意⽂件读取 下载 ⽂件包含开始检测漏洞，如 XSS,XSRF,sql 注⼊，代码执⾏，命令执⾏，越权访问，⽬录读取，任意⽂件读取，下载，⽂件包含， </p>
+<h5 id="漏洞扫描"><a href="#漏洞扫描" class="headerlink" title="漏洞扫描"></a>漏洞扫描</h5><p>开始检测漏洞 如 XSS XSRF sql 注⼊ 代码执⾏ 命令执⾏ 越权访问 ⽬录读取 任意⽂件读取 下载 ⽂件包含开始检测漏洞，如 XSS,XSRF,sql 注⼊，代码执⾏，命令执⾏，越权访问，⽬录读取，任意⽂件读取，下载，⽂件包含， </p>
 <p>远程命令执⾏，弱⼝令，上传，编辑器漏洞，暴⼒破解等 </p>
-<p>漏洞利⽤ </p>
-<p>利⽤以上的⽅式拿到 webshell，或者其他权限 </p>
-<p>权限提升 </p>
-<p>提权服务器，⽐如 windows 下 mysql 的 udf 提权，serv-u 提权，windows 低版本的漏洞，如 iis6,pr, 巴⻄烤⾁，linux </p>
+<h5 id="漏洞利⽤"><a href="#漏洞利⽤" class="headerlink" title="漏洞利⽤"></a>漏洞利⽤</h5><p>利⽤以上的⽅式拿到 webshell，或者其他权限 </p>
+<h5 id="权限提升"><a href="#权限提升" class="headerlink" title="权限提升"></a>权限提升</h5><p>提权服务器，⽐如 windows 下 mysql 的 udf 提权，serv-u 提权，windows 低版本的漏洞，如 iis6,pr, 巴⻄烤⾁，linux </p>
 <p>脏⽜漏洞，linux 内核版本漏洞提权，linux 下的 mysql system 提权以及 oracle 低权限提权 </p>
-<p>⽇志清理 </p>
-<p>总结报告及修复⽅案 </p>
-<p>2、判断出⽹站的 CMS 对渗透有什么意义？ </p>
-<p>查找⽹上已曝光的程序漏洞。 </p>
+<h5 id="⽇志清理"><a href="#⽇志清理" class="headerlink" title="⽇志清理"></a>⽇志清理</h5><h5 id="总结报告及修复⽅案"><a href="#总结报告及修复⽅案" class="headerlink" title="总结报告及修复⽅案"></a>总结报告及修复⽅案</h5><h4 id="2、判断出⽹站的-CMS-对渗透有什么意义？"><a href="#2、判断出⽹站的-CMS-对渗透有什么意义？" class="headerlink" title="2、判断出⽹站的 CMS 对渗透有什么意义？"></a>2、判断出⽹站的 CMS 对渗透有什么意义？</h4><p>查找⽹上已曝光的程序漏洞。 </p>
 <p>如果开源，还能下载相对应的源码进⾏代码审计。 </p>
-<p>\3. ⼀个成熟并且相对安全的 CMS，渗透时扫⽬录的意义？ </p>
-<p>敏感⽂件、⼆级⽬录扫描 </p>
+<h4 id="3-⼀个成熟并且相对安全的-CMS，渗透时扫⽬录的意义？"><a href="#3-⼀个成熟并且相对安全的-CMS，渗透时扫⽬录的意义？" class="headerlink" title="3. ⼀个成熟并且相对安全的 CMS，渗透时扫⽬录的意义？"></a>3. ⼀个成熟并且相对安全的 CMS，渗透时扫⽬录的意义？</h4><p>敏感⽂件、⼆级⽬录扫描 </p>
 <p>站⻓的误操作⽐如：⽹站备份的压缩⽂件、说明. txt、⼆级⽬录可能存放着其他站点 </p>
-<p>\4. 常⻅的⽹站服务器容器。 </p>
-<p>IIS、Apache、nginx、Lighttpd、Tomcat </p>
-<p>5.mysql 注⼊点，⽤⼯具对⽬标站直接写⼊⼀句话，需要哪些条件？ </p>
-<p>以 站的绝对路root 权限以及⽹站的绝对路径。 </p>
-<p>\6. ⽬前已知哪些版本的容器有解析漏洞，具体举例。 </p>
-<p>a、IIS 6.0</p>
+<h4 id="4-常⻅的⽹站服务器容器。"><a href="#4-常⻅的⽹站服务器容器。" class="headerlink" title="4.常⻅的⽹站服务器容器。"></a>4.常⻅的⽹站服务器容器。</h4><p>IIS、Apache、nginx、Lighttpd、Tomcat </p>
+<h4 id="5-mysql-注⼊点，⽤⼯具对⽬标站直接写⼊⼀句话，需要哪些条件？"><a href="#5-mysql-注⼊点，⽤⼯具对⽬标站直接写⼊⼀句话，需要哪些条件？" class="headerlink" title="5.mysql 注⼊点，⽤⼯具对⽬标站直接写⼊⼀句话，需要哪些条件？"></a>5.mysql 注⼊点，⽤⼯具对⽬标站直接写⼊⼀句话，需要哪些条件？</h4><p>以 站的绝对路root 权限以及⽹站的绝对路径。 </p>
+<h4 id="6-⽬前已知哪些版本的容器有解析漏洞，具体举例。"><a href="#6-⽬前已知哪些版本的容器有解析漏洞，具体举例。" class="headerlink" title="6.⽬前已知哪些版本的容器有解析漏洞，具体举例。"></a>6.⽬前已知哪些版本的容器有解析漏洞，具体举例。</h4><p>a、IIS 6.0</p>
 <p>/xx.asp/xx.jpg “xx.asp” 是⽂件夹名 </p>
 <p>b、IIS 7.0/7.5 </p>
 <p>默认 Fast-CGI 开启，直接在 url 中图⽚地址后⾯输⼊ / 1.php，会把正常图⽚当成 php 解析 </p>
@@ -7591,100 +7510,73 @@ $s_func($info);
 <p>版本⼩于等于 0.8.37，利⽤⽅法和 IIS 7.0/7.5 ⼀样，Fast-CGI 关闭情况下也可利⽤。空字节代码 xxx.jpg.php </p>
 <p>d、Apache 上传的⽂件命名为：test.php.x1.x2.x3，Apache 是从右往左判断后缀 </p>
 <p>e、lighttpd xx.jpg/xx.php，不全, 请⼩伙伴们在评论处不吝补充，谢谢！ </p>
-<p>\7. 如何⼿⼯快速判断⽬标站是 windows 还是 linux 服务器？ </p>
+<ol start="7">
+<li><h4 id="如何⼿⼯快速判断⽬标站是-windows-还是-linux-服务器？"><a href="#如何⼿⼯快速判断⽬标站是-windows-还是-linux-服务器？" class="headerlink" title="如何⼿⼯快速判断⽬标站是 windows 还是 linux 服务器？"></a>如何⼿⼯快速判断⽬标站是 windows 还是 linux 服务器？</h4></li>
+</ol>
 <p>linux ⼤⼩写敏感, windows ⼤⼩写不敏感。 </p>
-<p>\8. 为何⼀个 mysql 数据库的站，只有⼀个 80 端⼝开放？ </p>
-<p>更改了端⼝，没有扫描出来。 </p>
+<h4 id="8-为何⼀个-mysql-数据库的站，只有⼀个-80-端⼝开放？"><a href="#8-为何⼀个-mysql-数据库的站，只有⼀个-80-端⼝开放？" class="headerlink" title="8. 为何⼀个 mysql 数据库的站，只有⼀个 80 端⼝开放？"></a>8. 为何⼀个 mysql 数据库的站，只有⼀个 80 端⼝开放？</h4><p>更改了端⼝，没有扫描出来。 </p>
 <p>站库分离。 </p>
 <p>3306 端⼝不对外开放 </p>
-<p>9、3389 ⽆法连接的⼏种情况 </p>
-<p>没开放 3389 端⼝ </p>
+<h4 id="9、3389-⽆法连接的⼏种情况"><a href="#9、3389-⽆法连接的⼏种情况" class="headerlink" title="9、3389 ⽆法连接的⼏种情况"></a>9、3389 ⽆法连接的⼏种情况</h4><p>没开放 3389 端⼝ </p>
 <p>端⼝被修改防护拦截</p>
 <p>处于内⽹ (需进⾏端⼝转发) </p>
-<p>\10. 如何突破注⼊时字符被转义？</p>
-<p>宽字符注⼊ </p>
+<h4 id="10-如何突破注⼊时字符被转义？"><a href="#10-如何突破注⼊时字符被转义？" class="headerlink" title="10. 如何突破注⼊时字符被转义？"></a>10. 如何突破注⼊时字符被转义？</h4><p>宽字符注⼊ </p>
 <p>hex 编码绕过 </p>
-<p>\11. 在某后台新闻编辑界⾯看到编辑器，应该先做什么？ </p>
-<p>查看编辑器的名称版本, 然后搜索公开的漏洞。 </p>
-<p>\12. 拿到⼀个 webshell 发现⽹站根⽬录下有. htaccess ⽂件，我们能做什么？ </p>
-<p>能做的事情很多，⽤隐藏⽹⻢来举例⼦： </p>
+<h4 id="11-在某后台新闻编辑界⾯看到编辑器，应该先做什么？"><a href="#11-在某后台新闻编辑界⾯看到编辑器，应该先做什么？" class="headerlink" title="11. 在某后台新闻编辑界⾯看到编辑器，应该先做什么？"></a>11. 在某后台新闻编辑界⾯看到编辑器，应该先做什么？</h4><p>查看编辑器的名称版本, 然后搜索公开的漏洞。 </p>
+<h4 id="12-拿到⼀个-webshell-发现⽹站根⽬录下有-htaccess-⽂件，我们能做什么？"><a href="#12-拿到⼀个-webshell-发现⽹站根⽬录下有-htaccess-⽂件，我们能做什么？" class="headerlink" title="12. 拿到⼀个 webshell 发现⽹站根⽬录下有. htaccess ⽂件，我们能做什么？"></a>12. 拿到⼀个 webshell 发现⽹站根⽬录下有. htaccess ⽂件，我们能做什么？</h4><p>能做的事情很多，⽤隐藏⽹⻢来举例⼦： </p>
 <p>插⼊</p>
 <p>&lt;FilesMatch “xxx.jpg”&gt; SetHandler application/x-httpd-php </p>
 <p>.jpg ⽂件会被解析成. php ⽂件。 </p>
 <p>具体其他的事情，不好详说，建议⼤家⾃⼰去搜索语句来玩玩。 </p>
-<p>\13. 注⼊漏洞只能查账号密码？ </p>
-<p>只要权限⼴，拖库脱到⽼。 </p>
-<p>\14. 安全狗会追踪变量，从⽽发现出是⼀句话⽊⻢吗？</p>
-<p>是根据特征码，所以很好绕过了，只要思路宽，绕狗绕到欢，但这应该不会是⼀成不变的。 </p>
-<p><strong>15.access 扫出后缀为 asp 的数据库⽂件，访问乱码，</strong> 如何实现到本地利⽤？ </p>
-<p>迅雷下载，直接改后缀为. mdb。 </p>
-<p>\16. 提权时选择可读写⽬录，为何尽量不⽤带空格的⽬录？因为 exp 执⾏多半需要空格界定参数 </p>
-<p>\17. 某服务器有站点 A,B 为何在 A 的后台添加 test ⽤户，访问 B 的后台。发现也添加上了 test ⽤户？ </p>
-<p>同数据库。 </p>
-<p>\18. 注⼊时可以不使⽤ and 或 or 或 xor，直接 order by 开始注⼊吗？ </p>
-<p>and/or/xor，前⾯的 1=1、1=2 步骤只是为了判断是否为注⼊点，如果已经确定是注⼊点那就可以省那步骤去。 </p>
-<p>19: 某个防注⼊系统，在注⼊时会提示：</p>
-<p>系统检测到你有⾮法注⼊的⾏为。 </p>
+<h4 id="13-注⼊漏洞只能查账号密码？"><a href="#13-注⼊漏洞只能查账号密码？" class="headerlink" title="13. 注⼊漏洞只能查账号密码？"></a>13. 注⼊漏洞只能查账号密码？</h4><p>只要权限⼴，拖库脱到⽼。 </p>
+<h4 id="14-安全狗会追踪变量，从⽽发现出是⼀句话⽊⻢吗？"><a href="#14-安全狗会追踪变量，从⽽发现出是⼀句话⽊⻢吗？" class="headerlink" title="14. 安全狗会追踪变量，从⽽发现出是⼀句话⽊⻢吗？"></a>14. 安全狗会追踪变量，从⽽发现出是⼀句话⽊⻢吗？</h4><p>是根据特征码，所以很好绕过了，只要思路宽，绕狗绕到欢，但这应该不会是⼀成不变的。 </p>
+<h4 id="15-access-扫出后缀为-asp-的数据库⽂件，访问乱码，-如何实现到本地利⽤？"><a href="#15-access-扫出后缀为-asp-的数据库⽂件，访问乱码，-如何实现到本地利⽤？" class="headerlink" title="15.access 扫出后缀为 asp 的数据库⽂件，访问乱码， 如何实现到本地利⽤？"></a><strong>15.access 扫出后缀为 asp 的数据库⽂件，访问乱码，</strong> 如何实现到本地利⽤？</h4><p>迅雷下载，直接改后缀为. mdb。 </p>
+<h4 id="16-提权时选择可读写⽬录，为何尽量不⽤带空格的⽬录？因为-exp-执⾏多半需要空格界定参数"><a href="#16-提权时选择可读写⽬录，为何尽量不⽤带空格的⽬录？因为-exp-执⾏多半需要空格界定参数" class="headerlink" title="16. 提权时选择可读写⽬录，为何尽量不⽤带空格的⽬录？因为 exp 执⾏多半需要空格界定参数"></a>16. 提权时选择可读写⽬录，为何尽量不⽤带空格的⽬录？因为 exp 执⾏多半需要空格界定参数</h4><h4 id="17-某服务器有站点-A-B-为何在-A-的后台添加-test-⽤户，访问-B-的后台。发现也添加上了-test-⽤户？"><a href="#17-某服务器有站点-A-B-为何在-A-的后台添加-test-⽤户，访问-B-的后台。发现也添加上了-test-⽤户？" class="headerlink" title="17. 某服务器有站点 A,B 为何在 A 的后台添加 test ⽤户，访问 B 的后台。发现也添加上了 test ⽤户？"></a>17. 某服务器有站点 A,B 为何在 A 的后台添加 test ⽤户，访问 B 的后台。发现也添加上了 test ⽤户？</h4><p>同数据库。 </p>
+<h4 id="18-注⼊时可以不使⽤-and-或-or-或-xor，直接-order-by-开始注⼊吗？"><a href="#18-注⼊时可以不使⽤-and-或-or-或-xor，直接-order-by-开始注⼊吗？" class="headerlink" title="18. 注⼊时可以不使⽤ and 或 or 或 xor，直接 order by 开始注⼊吗？"></a>18. 注⼊时可以不使⽤ and 或 or 或 xor，直接 order by 开始注⼊吗？</h4><p>and/or/xor，前⾯的 1=1、1=2 步骤只是为了判断是否为注⼊点，如果已经确定是注⼊点那就可以省那步骤去。 </p>
+<h4 id="19-某个防注⼊系统，在注⼊时会提示："><a href="#19-某个防注⼊系统，在注⼊时会提示：" class="headerlink" title="19: 某个防注⼊系统，在注⼊时会提示："></a>19: 某个防注⼊系统，在注⼊时会提示：</h4><p>系统检测到你有⾮法注⼊的⾏为。 </p>
 <p>已记录您的 ip xx.xx.xx.xx </p>
 <p>时间: 2016:01-23 </p>
 <p>提交⻚⾯: test.asp?id=15 </p>
 <p>提交内容: and 1=1 </p>
-<p>20、如何利⽤这个防注⼊系统拿 shell？ </p>
-<p>在 URL ⾥⾯直接提交⼀句话，这样⽹站就把你的⼀句话也记录进数据库⽂件了 这个时候可以尝试寻找⽹站的配置⽂件 </p>
+<h4 id="20、如何利⽤这个防注⼊系统拿-shell？"><a href="#20、如何利⽤这个防注⼊系统拿-shell？" class="headerlink" title="20、如何利⽤这个防注⼊系统拿 shell？"></a>20、如何利⽤这个防注⼊系统拿 shell？</h4><p>在 URL ⾥⾯直接提交⼀句话，这样⽹站就把你的⼀句话也记录进数据库⽂件了 这个时候可以尝试寻找⽹站的配置⽂件 </p>
 <p>直接上菜⼑链接。 </p>
-<p>\21. 上传⼤⻢后访问乱码时，有哪些解决办法？ </p>
-<p>浏览器中改编码。 </p>
-<p>\22. 审查上传点的元素有什么意义？ </p>
-<p>有些站点的上传⽂件类型的限制是在前端实现的，这时只要增加上传类型就能突破限制了。 </p>
-<p>\23. ⽬标站禁⽌注册⽤户，找回密码处随便输⼊⽤户名提示：</p>
-<p>“</p>
+<h4 id="21-上传⼤⻢后访问乱码时，有哪些解决办法？"><a href="#21-上传⼤⻢后访问乱码时，有哪些解决办法？" class="headerlink" title="21. 上传⼤⻢后访问乱码时，有哪些解决办法？"></a>21. 上传⼤⻢后访问乱码时，有哪些解决办法？</h4><p>浏览器中改编码。 </p>
+<h4 id="22-审查上传点的元素有什么意义？"><a href="#22-审查上传点的元素有什么意义？" class="headerlink" title="22. 审查上传点的元素有什么意义？"></a>22. 审查上传点的元素有什么意义？</h4><p>有些站点的上传⽂件类型的限制是在前端实现的，这时只要增加上传类型就能突破限制了。 </p>
+<h4 id="23-⽬标站禁⽌注册⽤户，找回密码处随便输⼊⽤户名提示："><a href="#23-⽬标站禁⽌注册⽤户，找回密码处随便输⼊⽤户名提示：" class="headerlink" title="23. ⽬标站禁⽌注册⽤户，找回密码处随便输⼊⽤户名提示："></a>23. ⽬标站禁⽌注册⽤户，找回密码处随便输⼊⽤户名提示：</h4><p>“</p>
 <p>此⽤户不存在</p>
 <p>”</p>
 <p>，你觉得这⾥怎样利⽤？先爆破⽤户名，再利⽤被爆破出来的⽤户名爆破密码。 </p>
 <p>其实有些站点，在登陆处也会这样提示 </p>
 <p>所有和数据库有交互的地⽅都有可能有注⼊。 </p>
-<p>\24. ⽬标站发现某 txt 的下载地址为 </p>
-<p><a href="http://www.test.com/down/down.php?fifile=/upwdown/1.txt，你有什么思路？">http://www.test.com/down/down.php?fifile=/upwdown/1.txt，你有什么思路？</a> </p>
+<h4 id="24-⽬标站发现某-txt-的下载地址为"><a href="#24-⽬标站发现某-txt-的下载地址为" class="headerlink" title="24. ⽬标站发现某 txt 的下载地址为"></a>24. ⽬标站发现某 txt 的下载地址为</h4><p><a href="http://www.test.com/down/down.php?fifile=/upwdown/1.txt，你有什么思路？">http://www.test.com/down/down.php?fifile=/upwdown/1.txt，你有什么思路？</a> </p>
 <p>这就是传说中的下载漏洞！在 fifile = 后⾯尝试输⼊ index.php 下载他的⾸⻚⽂件，然后在⾸⻚⽂件⾥继续查找其他⽹站 </p>
 <p>的配置⽂件，可以找出⽹站的数据库密码和数据库的地址。 </p>
-<p>\25. 甲给你⼀个⽬标站，并且告诉你根⽬录下存在 / abc / ⽬录，并且此⽬录下存在编辑器和 admin ⽬录。请问你的想 </p>
-<p>法是？ </p>
+<h4 id="25-甲给你⼀个⽬标站，并且告诉你根⽬录下存在-abc-⽬录，并且此⽬录下存在编辑器和-admin-⽬录。请问你的想"><a href="#25-甲给你⼀个⽬标站，并且告诉你根⽬录下存在-abc-⽬录，并且此⽬录下存在编辑器和-admin-⽬录。请问你的想" class="headerlink" title="25. 甲给你⼀个⽬标站，并且告诉你根⽬录下存在 / abc / ⽬录，并且此⽬录下存在编辑器和 admin ⽬录。请问你的想"></a>25. 甲给你⼀个⽬标站，并且告诉你根⽬录下存在 / abc / ⽬录，并且此⽬录下存在编辑器和 admin ⽬录。请问你的想</h4><p>法是？ </p>
 <p>直接在⽹站⼆级⽬录 / abc / 下扫描敏感⽂件及⽬录。 </p>
-<p>\26. 在有 shell 的情况下，如何使⽤ xss 实现对⽬标站的⻓久控制？</p>
-<p>后台登录处加⼀段记录登录账号密码的 js，并且判断是否登录成功，如果登录成功，就把账号密码记录到⼀个⽣僻的路 </p>
+<h4 id="26-在有-shell-的情况下，如何使⽤-xss-实现对⽬标站的⻓久控制？"><a href="#26-在有-shell-的情况下，如何使⽤-xss-实现对⽬标站的⻓久控制？" class="headerlink" title="26. 在有 shell 的情况下，如何使⽤ xss 实现对⽬标站的⻓久控制？"></a>26. 在有 shell 的情况下，如何使⽤ xss 实现对⽬标站的⻓久控制？</h4><p>后台登录处加⼀段记录登录账号密码的 js，并且判断是否登录成功，如果登录成功，就把账号密码记录到⼀个⽣僻的路 </p>
 <p>径的⽂件中或者直接发到⾃⼰的⽹站⽂件中。(此⽅法适合有价值并且需要深⼊控制权限的⽹络)。 </p>
 <p>在登录后才可以访问的⽂件中插⼊ XSS 脚本。 </p>
-<p>\27. 后台修改管理员密码处，原密码显示为 *。你觉得该怎样实现读出这个⽤户的密码？ </p>
-<p>审查元素 把密码处的 password 属性改成 text 就明⽂显示了 </p>
-<p>\28. ⽬标站⽆防护，上传图⽚可以正常访问，上传脚本格式访问则 403. 什么原因？ </p>
-<p>原因很多，有可能 web 服务器配置把上传⽬录写死了不执⾏相应脚本，尝试改后缀名绕过 </p>
-<p>\29. 审查元素得知⽹站所使⽤的防护软件，你觉得怎样做到的？ </p>
-<p>在敏感操作被拦截，通过界⾯信息⽆法具体判断是什么防护的时候，F12 看 HTML 体部 ⽐如护卫神就可以在名称那看到内容。 </p>
-<p>\30. 在 win2003 服务器中建⽴⼀个 .zhongzi ⽂件夹⽤意何为？ </p>
-<p>隐藏⽂件夹，为了不让管理员发现你传上去的⼯具。 </p>
-<p>31、sql 注⼊有以下两个测试选项，选⼀个并且阐述不选另⼀个的理由： </p>
-<p>A. demo.jsp?id=2+1 </p>
+<h4 id="27-后台修改管理员密码处，原密码显示为-。你觉得该怎样实现读出这个⽤户的密码？"><a href="#27-后台修改管理员密码处，原密码显示为-。你觉得该怎样实现读出这个⽤户的密码？" class="headerlink" title="27. 后台修改管理员密码处，原密码显示为 *。你觉得该怎样实现读出这个⽤户的密码？"></a>27. 后台修改管理员密码处，原密码显示为 *。你觉得该怎样实现读出这个⽤户的密码？</h4><p>审查元素 把密码处的 password 属性改成 text 就明⽂显示了 </p>
+<h4 id="28-⽬标站⽆防护，上传图⽚可以正常访问，上传脚本格式访问则-403-什么原因？"><a href="#28-⽬标站⽆防护，上传图⽚可以正常访问，上传脚本格式访问则-403-什么原因？" class="headerlink" title="28. ⽬标站⽆防护，上传图⽚可以正常访问，上传脚本格式访问则 403. 什么原因？"></a>28. ⽬标站⽆防护，上传图⽚可以正常访问，上传脚本格式访问则 403. 什么原因？</h4><p>原因很多，有可能 web 服务器配置把上传⽬录写死了不执⾏相应脚本，尝试改后缀名绕过 </p>
+<h4 id="29-审查元素得知⽹站所使⽤的防护软件，你觉得怎样做到的？"><a href="#29-审查元素得知⽹站所使⽤的防护软件，你觉得怎样做到的？" class="headerlink" title="29. 审查元素得知⽹站所使⽤的防护软件，你觉得怎样做到的？"></a>29. 审查元素得知⽹站所使⽤的防护软件，你觉得怎样做到的？</h4><p>在敏感操作被拦截，通过界⾯信息⽆法具体判断是什么防护的时候，F12 看 HTML 体部 ⽐如护卫神就可以在名称那看到内容。 </p>
+<h4 id="30-在-win2003-服务器中建⽴⼀个-zhongzi-⽂件夹⽤意何为？"><a href="#30-在-win2003-服务器中建⽴⼀个-zhongzi-⽂件夹⽤意何为？" class="headerlink" title="30. 在 win2003 服务器中建⽴⼀个 .zhongzi ⽂件夹⽤意何为？"></a>30. 在 win2003 服务器中建⽴⼀个 .zhongzi ⽂件夹⽤意何为？</h4><p>隐藏⽂件夹，为了不让管理员发现你传上去的⼯具。 </p>
+<h4 id="31、sql-注⼊有以下两个测试选项，选⼀个并且阐述不选另⼀个的理由："><a href="#31、sql-注⼊有以下两个测试选项，选⼀个并且阐述不选另⼀个的理由：" class="headerlink" title="31、sql 注⼊有以下两个测试选项，选⼀个并且阐述不选另⼀个的理由："></a>31、sql 注⼊有以下两个测试选项，选⼀个并且阐述不选另⼀个的理由：</h4><p>A. demo.jsp?id=2+1 </p>
 <p>B. demo.jsp?id=2-1 </p>
 <p>选 B，在 URL 编码中 + 代表空格，可能会造成混淆</p>
-<p>32、以下链接存在 sql 注⼊漏洞，对于这个变形注⼊，你有什么思路？ </p>
-<p>demo.do?DATA=AjAxNg== </p>
+<h4 id="32、以下链接存在-sql-注⼊漏洞，对于这个变形注⼊，你有什么思路？"><a href="#32、以下链接存在-sql-注⼊漏洞，对于这个变形注⼊，你有什么思路？" class="headerlink" title="32、以下链接存在 sql 注⼊漏洞，对于这个变形注⼊，你有什么思路？"></a>32、以下链接存在 sql 注⼊漏洞，对于这个变形注⼊，你有什么思路？</h4><p>demo.do?DATA=AjAxNg== </p>
 <p>DATA 有可能经过了 base64 编码再传⼊服务器，所以我们也要对参数进⾏ base64 编码才能正确完成测试 </p>
-<p>33、发现 demo.jsp?uid=110 注⼊点，你有哪⼏种思路获取 webshell，哪种是优选？ </p>
-<p>有写⼊权限的，构造联合查询语句使⽤ using INTO OUTFILE，可以将查询的输出重定向到系统的⽂件中，这样去写⼊</p>
+<h4 id="33、发现-demo-jsp-uid-110-注⼊点，你有哪⼏种思路获取-webshell，哪种是优选？"><a href="#33、发现-demo-jsp-uid-110-注⼊点，你有哪⼏种思路获取-webshell，哪种是优选？" class="headerlink" title="33、发现 demo.jsp?uid=110 注⼊点，你有哪⼏种思路获取 webshell，哪种是优选？"></a>33、发现 demo.jsp?uid=110 注⼊点，你有哪⼏种思路获取 webshell，哪种是优选？</h4><p>有写⼊权限的，构造联合查询语句使⽤ using INTO OUTFILE，可以将查询的输出重定向到系统的⽂件中，这样去写⼊</p>
 <p>WebShell 使⽤ sqlmap –os-shell 原理和上⾯⼀种相同，来直接获得⼀个 Shell，这样效率更⾼ 通过构造联合查询语句 </p>
 <p>得到⽹站管理员的账户和密码，然后扫后台登录后台，再在后台通过改包上传等⽅法上传 Shell </p>
-<p>34、CSRF 和 XSS 和 XXE 有什么区别，以及修复⽅式？ </p>
-<p>XSS 是跨站脚本攻击，⽤户提交的数据中可以构造代码来执⾏，从⽽实现窃取⽤户信息等攻击。修复⽅式：对字符实体 </p>
+<h4 id="34、CSRF-和-XSS-和-XXE-有什么区别，以及修复⽅式？"><a href="#34、CSRF-和-XSS-和-XXE-有什么区别，以及修复⽅式？" class="headerlink" title="34、CSRF 和 XSS 和 XXE 有什么区别，以及修复⽅式？"></a>34、CSRF 和 XSS 和 XXE 有什么区别，以及修复⽅式？</h4><p>XSS 是跨站脚本攻击，⽤户提交的数据中可以构造代码来执⾏，从⽽实现窃取⽤户信息等攻击。修复⽅式：对字符实体 </p>
 <p>进⾏转义、使⽤ HTTP Only 来禁⽌ JavaScript 读取 Cookie 值、输⼊时校验、浏览器与 Web 应⽤端采⽤相同的字符编 </p>
 <p>码。</p>
 <p>CSRF 是跨站请求伪造攻击，XSS 是实现 CSRF 的诸多⼿段中的⼀种，是由于没有在关键操作执⾏时进⾏是否由⽤户⾃ </p>
 <p>愿发起的确认。修复⽅式：筛选出需要防范 CSRF 的⻚⾯然后嵌⼊ Token、再次输⼊密码、检验 Referer XXE 是 XML </p>
 <p>外部实体注⼊攻击，XML 中可以通过调⽤实体来请求本地或者远程内容，和远程⽂件保护类似，会引发相关安全问题，例如敏感⽂件读取。修复⽅式：XML 解析库在调⽤时严格禁⽌对外部实体的解析。 </p>
-<p>35、CSRF、SSRF 和重放攻击有什么区别？ </p>
-<p>CSRF 是跨站请求伪造攻击，由客户端发起 SSRF 是服务器端请求伪造，由服务器发起 重放攻击是将截获的数据包进⾏ </p>
+<h4 id="35、CSRF、SSRF-和重放攻击有什么区别？"><a href="#35、CSRF、SSRF-和重放攻击有什么区别？" class="headerlink" title="35、CSRF、SSRF 和重放攻击有什么区别？"></a>35、CSRF、SSRF 和重放攻击有什么区别？</h4><p>CSRF 是跨站请求伪造攻击，由客户端发起 SSRF 是服务器端请求伪造，由服务器发起 重放攻击是将截获的数据包进⾏ </p>
 <p>重放，达到身份认证等⽬的</p>
-<p>36、说出⾄少三种业务逻辑漏洞，以及修复⽅式？ </p>
-<p>密码找回漏洞中存在 </p>
+<h4 id="36、说出⾄少三种业务逻辑漏洞，以及修复⽅式？"><a href="#36、说出⾄少三种业务逻辑漏洞，以及修复⽅式？" class="headerlink" title="36、说出⾄少三种业务逻辑漏洞，以及修复⽅式？"></a>36、说出⾄少三种业务逻辑漏洞，以及修复⽅式？</h4><p>密码找回漏洞中存在 </p>
 <p>1）密码允许暴⼒破解、 </p>
 <p>2）存在通⽤型找回凭证、 </p>
 <p>3）可以跳过验证步骤、 </p>
@@ -7695,8 +7587,7 @@ $s_func($info);
 <p>只要得到 Session 或 Cookie 即可伪造⽤户身份。验证码漏洞中存在 </p>
 <p>1）验证码允许暴⼒破解 </p>
 <p>2）验证码可以通过 Javascript 或者改包的⽅法来进⾏绕过 </p>
-<p>37、圈出下⾯会话中可能存在问题的项，并标注可能会存在的问题？</p>
-<p>get /ecskins/demo jsp?uid=2016031900&amp;keyword=”hello world”get /ecskins/demo.jsp?uid=2016031900&amp;keyword= hello world</p>
+<h4 id="37、圈出下⾯会话中可能存在问题的项，并标注可能会存在的问题？"><a href="#37、圈出下⾯会话中可能存在问题的项，并标注可能会存在的问题？" class="headerlink" title="37、圈出下⾯会话中可能存在问题的项，并标注可能会存在的问题？"></a>37、圈出下⾯会话中可能存在问题的项，并标注可能会存在的问题？</h4><p>get /ecskins/demo jsp?uid=2016031900&amp;keyword=”hello world”get /ecskins/demo.jsp?uid=2016031900&amp;keyword= hello world</p>
 <p>HTTP/1.1Host:***.com:82User-Agent:Mozilla/</p>
 <p>5.0 Firefox/40Accept:text/css,/;q=0.1</p>
 <p>Accept-Language:zh-CN;zh;q=0.8;en-US;q=0.5,en;q=0.3</p>
@@ -7710,20 +7601,15 @@ $s_func($info);
 <p>有写⼊权限的，构造联合查询语句使⽤ using INTO OUTFILE，可以将查询的输出重定向到系统的⽂件中，这样去写⼊</p>
 <p>WebShell 使⽤ sqlmap –os-shell 原理和上⾯⼀种相同，来直接获得⼀个 Shell，这样效率更⾼ 通过构造联合查询语句 </p>
 <p>得到⽹站管理员的账户和密码，然后扫后台登录后台，再在后台通过改包上传等⽅法上传 Shell </p>
-<p>38、给你⼀个⽹站你是如何来渗透测试的? 在获取书⾯授权的前提下。 </p>
-<p>39、sqlmap，怎么对⼀个注⼊点注⼊？ </p>
-<p>1）如果是 get 型号，直接，sqlmap -u “诸如点⽹址”. </p>
+<h4 id="38、给你⼀个⽹站你是如何来渗透测试的-在获取书⾯授权的前提下。"><a href="#38、给你⼀个⽹站你是如何来渗透测试的-在获取书⾯授权的前提下。" class="headerlink" title="38、给你⼀个⽹站你是如何来渗透测试的? 在获取书⾯授权的前提下。"></a>38、给你⼀个⽹站你是如何来渗透测试的? 在获取书⾯授权的前提下。</h4><h4 id="39、sqlmap，怎么对⼀个注⼊点注⼊？"><a href="#39、sqlmap，怎么对⼀个注⼊点注⼊？" class="headerlink" title="39、sqlmap，怎么对⼀个注⼊点注⼊？"></a>39、sqlmap，怎么对⼀个注⼊点注⼊？</h4><p>1）如果是 get 型号，直接，sqlmap -u “诸如点⽹址”. </p>
 <p>2) 如果是 post 型诸如点，可以 sqlmap -u “注⼊点⽹址” –data=”post 的参数 “ </p>
 <p>3）如果是 cookie，X-Forwarded-For 等，可以访问的时候，⽤ burpsuite 抓包，注⼊处⽤号替换，放到⽂件⾥，然后 </p>
 <p>sqlmap -r “⽂件地址” </p>
-<p>40、nmap，扫描的⼏种⽅式 </p>
-<p>41、sql 注⼊的⼏种类型？ </p>
-<p>1）报错注⼊ </p>
+<h4 id="40、nmap，扫描的⼏种⽅式"><a href="#40、nmap，扫描的⼏种⽅式" class="headerlink" title="40、nmap，扫描的⼏种⽅式"></a>40、nmap，扫描的⼏种⽅式</h4><h4 id="41、sql-注⼊的⼏种类型？"><a href="#41、sql-注⼊的⼏种类型？" class="headerlink" title="41、sql 注⼊的⼏种类型？"></a>41、sql 注⼊的⼏种类型？</h4><p>1）报错注⼊ </p>
 <p>2）bool 型注⼊ </p>
 <p>3）延时注⼊ </p>
 <p>4）宽字节注⼊ </p>
-<p>42、报错注⼊的函数有哪些？10 个 </p>
-<p>1）and extractvalue(1, concat(0x7e,(select @@version),0x7e))】】】</p>
+<h4 id="42、报错注⼊的函数有哪些？10-个"><a href="#42、报错注⼊的函数有哪些？10-个" class="headerlink" title="42、报错注⼊的函数有哪些？10 个"></a>42、报错注⼊的函数有哪些？10 个</h4><p>1）and extractvalue(1, concat(0x7e,(select @@version),0x7e))】】】</p>
 <p>2）通过floor报错 向下取整3）+and updatexml(1, concat(0x7e,(secect @@version),0x7e),1) </p>
 <p>4）.geometrycollection()select from test where id=1 and geometrycollection((select from(selectfrom(select user())a)</p>
 <p>b));</p>
@@ -7733,22 +7619,16 @@ $s_func($info);
 <p>8）.linestring()select from test where id=1 and linestring((select from(select from(select user())a)b));</p>
 <p>9）.multilinestring()select from test where id=1 and multilinestring((select from(select from(select user())a)b));</p>
 <p>10）.exp()select from test where id=1 and exp(~(select * from(select user())a));</p>
-<p>43、延时注⼊如何来判断？</p>
-<p>if(ascii(substr(“hello”, 1, 1))=104, sleep(5), 1) </p>
-<p>44、盲注和延时注⼊的共同点？ </p>
-<p>都是⼀个字符⼀个字符的判断 </p>
-<p>45、如何拿⼀个⽹站的 webshell？上传，后台编辑模板，sql 注⼊写⽂件，命令执⾏，代码执⾏， ⼀些已经爆出的 cms</p>
-<p>漏洞，⽐如 dedecms 后台可以直接建⽴脚本⽂件，wordpress 上传插件包含脚本⽂件 zip 压缩包等 </p>
-<p>46、sql 注⼊写⽂件都有哪些函数？</p>
-<p>select ‘⼀句话’ into outfile ‘路径’</p>
+<h4 id="43、延时注⼊如何来判断？"><a href="#43、延时注⼊如何来判断？" class="headerlink" title="43、延时注⼊如何来判断？"></a>43、延时注⼊如何来判断？</h4><p>if(ascii(substr(“hello”, 1, 1))=104, sleep(5), 1) </p>
+<h4 id="44、盲注和延时注⼊的共同点？"><a href="#44、盲注和延时注⼊的共同点？" class="headerlink" title="44、盲注和延时注⼊的共同点？"></a>44、盲注和延时注⼊的共同点？</h4><p>都是⼀个字符⼀个字符的判断 </p>
+<h4 id="45、如何拿⼀个⽹站的-webshell？上传，后台编辑模板，sql-注⼊写⽂件，命令执⾏，代码执⾏，-⼀些已经爆出的-cms"><a href="#45、如何拿⼀个⽹站的-webshell？上传，后台编辑模板，sql-注⼊写⽂件，命令执⾏，代码执⾏，-⼀些已经爆出的-cms" class="headerlink" title="45、如何拿⼀个⽹站的 webshell？上传，后台编辑模板，sql 注⼊写⽂件，命令执⾏，代码执⾏， ⼀些已经爆出的 cms"></a>45、如何拿⼀个⽹站的 webshell？上传，后台编辑模板，sql 注⼊写⽂件，命令执⾏，代码执⾏， ⼀些已经爆出的 cms</h4><p>漏洞，⽐如 dedecms 后台可以直接建⽴脚本⽂件，wordpress 上传插件包含脚本⽂件 zip 压缩包等 </p>
+<h4 id="46、sql-注⼊写⽂件都有哪些函数？"><a href="#46、sql-注⼊写⽂件都有哪些函数？" class="headerlink" title="46、sql 注⼊写⽂件都有哪些函数？"></a>46、sql 注⼊写⽂件都有哪些函数？</h4><p>select ‘⼀句话’ into outfile ‘路径’</p>
 <p>select ‘⼀句话’ into dumpfile ‘路径’</p>
 <p>select ‘<?php eval($_POST[1]) ?>‘ into dumpfile ‘d:\wwwroot\baidu.com\nvhack.php’; </p>
-<p>47、如何防⽌ CSRF? </p>
-<p>1）验证 referer </p>
+<h4 id="47、如何防⽌-CSRF"><a href="#47、如何防⽌-CSRF" class="headerlink" title="47、如何防⽌ CSRF?"></a>47、如何防⽌ CSRF?</h4><p>1）验证 referer </p>
 <p>2）验证 token </p>
 <p>详细：<a href="http://cnodejs.org/topic/5533dd6e9138f09b629674fd">http://cnodejs.org/topic/5533dd6e9138f09b629674fd</a> </p>
-<p>48、owasp 漏洞都有哪些？ </p>
-<p>1）SQL 注⼊防护⽅法： </p>
+<h4 id="48、owasp-漏洞都有哪些？"><a href="#48、owasp-漏洞都有哪些？" class="headerlink" title="48、owasp 漏洞都有哪些？"></a>48、owasp 漏洞都有哪些？</h4><p>1）SQL 注⼊防护⽅法： </p>
 <p>2）失效的身份认证和会话管理2）失效的身份认证和会话管理 </p>
 <p>3）跨站脚本攻击 XSS </p>
 <p>4）直接引⽤不安全的对象 </p>
@@ -7758,38 +7638,31 @@ $s_func($info);
 <p>8）跨站请求伪造 CSRF </p>
 <p>9）使⽤含有已知漏洞的组件 </p>
 <p>10）未验证的重定向和转发 </p>
-<p>49、SQL 注⼊防护⽅法？ </p>
-<p>1）使⽤安全的 API </p>
+<h4 id="49、SQL-注⼊防护⽅法？"><a href="#49、SQL-注⼊防护⽅法？" class="headerlink" title="49、SQL 注⼊防护⽅法？"></a>49、SQL 注⼊防护⽅法？</h4><p>1）使⽤安全的 API </p>
 <p>2）对输⼊的特殊字符进⾏ Escape 转义处理 </p>
 <p>3）使⽤⽩名单来规范化输⼊验证⽅法 </p>
 <p>4）对客户端输⼊进⾏控制，不允许输⼊ SQL 注⼊相关的特殊字符 </p>
 <p>5）服务器端在提交数据库进⾏ SQL 查询之前，对特殊字符进⾏过滤、转义、替换、删除。 </p>
-<p>50、代码执⾏，⽂件读取，命令执⾏的函数都有哪些？ </p>
-<p>1）代码执⾏：</p>
+<h4 id="50、代码执⾏，⽂件读取，命令执⾏的函数都有哪些？"><a href="#50、代码执⾏，⽂件读取，命令执⾏的函数都有哪些？" class="headerlink" title="50、代码执⾏，⽂件读取，命令执⾏的函数都有哪些？"></a>50、代码执⾏，⽂件读取，命令执⾏的函数都有哪些？</h4><p>1）代码执⾏：</p>
 <p>eval,preg_replace+/e,assert,call_user_func,call_user_func_array,create_function</p>
 <p>2）⽂件读取：</p>
 <p>file_get_contents(),highlight_file(),fopen(),read</p>
 <p>file(),fread(),fgetss(), fgets(),parse_ini_file(),show_source(),file()等</p>
 <p>3)命令执⾏：</p>
 <p>system(), exec(), shell_exec(), passthru() ,pcntl_exec(), popen(),proc_open()</p>
-<p>51、img 标签除了 onerror 属性外，还有其他获取管理员路径的办法吗？ </p>
-<p>src 指定⼀个远程的脚本⽂件，获取 referer52、img 标签除了 onerror 属性外，并且 src 属性的后缀名，必须以. jpg 结尾，怎么获取管理员路径。 </p>
+<h4 id="51、img-标签除了-onerror-属性外，还有其他获取管理员路径的办法吗？"><a href="#51、img-标签除了-onerror-属性外，还有其他获取管理员路径的办法吗？" class="headerlink" title="51、img 标签除了 onerror 属性外，还有其他获取管理员路径的办法吗？"></a>51、img 标签除了 onerror 属性外，还有其他获取管理员路径的办法吗？</h4><p>src 指定⼀个远程的脚本⽂件，获取 referer52、img 标签除了 onerror 属性外，并且 src 属性的后缀名，必须以. jpg 结尾，怎么获取管理员路径。 </p>
 <p>1）远程服务器修改 apache 配置⽂件，配置. jpg ⽂件以 php ⽅式来解析 AddType application/x-httpd-php .jpg &lt;img </p>
 <p>src=<a href="http://xss.tv/1.jpg&gt;">http://xss.tv/1.jpg&gt;</a> 会以 php ⽅式来解析 </p>
-<p>53、为什么 aspx ⽊⻢权限⽐ asp ⼤？ </p>
-<p>aspx 使⽤的是. net 技术。IIS 中默认不⽀持，ASP 只是脚本语⾔⽽已。⼊侵的时候 asp 的⽊⻢⼀般是 guest 权限… </p>
+<h4 id="53、为什么-aspx-⽊⻢权限⽐-asp-⼤？"><a href="#53、为什么-aspx-⽊⻢权限⽐-asp-⼤？" class="headerlink" title="53、为什么 aspx ⽊⻢权限⽐ asp ⼤？"></a>53、为什么 aspx ⽊⻢权限⽐ asp ⼤？</h4><p>aspx 使⽤的是. net 技术。IIS 中默认不⽀持，ASP 只是脚本语⾔⽽已。⼊侵的时候 asp 的⽊⻢⼀般是 guest 权限… </p>
 <p>APSX 的⽊⻢⼀般是 users 权限。 </p>
-<p>54、如何绕过 waf？ </p>
-<p>⼤⼩写转换法 </p>
+<h4 id="54、如何绕过-waf？"><a href="#54、如何绕过-waf？" class="headerlink" title="54、如何绕过 waf？"></a>54、如何绕过 waf？</h4><p>⼤⼩写转换法 </p>
 <p>⼲扰字符 /<em>!</em>/</p>
 <p>编码 base64 unicode hex url ascll </p>
 <p>复参数 </p>
-<p>55、如何向服务器写⼊ webshell？ </p>
-<p>各种上传漏洞</p>
+<h4 id="55、如何向服务器写⼊-webshell？"><a href="#55、如何向服务器写⼊-webshell？" class="headerlink" title="55、如何向服务器写⼊ webshell？"></a>55、如何向服务器写⼊ webshell？</h4><p>各种上传漏洞</p>
 <p>mysql具有写⼊权限,⽤sql语句写⼊shell</p>
 <p>http put⽅法 </p>
-<p>56、渗透测试中常⻅的端⼝ </p>
-<p>a、web 类 (web 漏洞 / 敏感⽬录) 第三⽅通⽤组件漏洞 struts thinkphp jboss ganglia zabbix</p>
+<h4 id="56、渗透测试中常⻅的端⼝"><a href="#56、渗透测试中常⻅的端⼝" class="headerlink" title="56、渗透测试中常⻅的端⼝"></a>56、渗透测试中常⻅的端⼝</h4><p>a、web 类 (web 漏洞 / 敏感⽬录) 第三⽅通⽤组件漏洞 struts thinkphp jboss ganglia zabbix</p>
 <p>80 web </p>
 <p>80-89 web </p>
 <p>8000-9090 web</p>
@@ -7814,50 +7687,11 @@ $s_func($info);
 <p>23 Telnet </p>
 <p>2601,2604 zebra路由，默认密码zebra</p>
 <p>3389 远程桌⾯ </p>
-<p>ALL、端⼝合计详情</p>
-<p>21 ftp </p>
-<p>22 SSH </p>
-<p>23 Telnet </p>
-<p>80 web </p>
-<p>80-89 web </p>
-<p>161 SNMP </p>
-<p>389 LDAP </p>
-<p>443 SSL⼼脏滴⾎以及⼀些web漏洞测试</p>
-<p>445 SMB 512,513,514 Rexec </p>
-<p>873 Rsync未授权</p>
-<p>1025,111 NFS </p>
-<p>1433 MSSQL </p>
-<p>1521 Oracle:(iSqlPlus Port:5560,7778) </p>
-<p>2082/2083 cpanel主机管理系统登陆 （国外⽤较多）</p>
-<p>2222 DA虚拟主机管理系统登陆 （国外⽤较多）</p>
-<p>2601,2604 zebra路由，默认密码zebra</p>
-<p>3128 squid代理默认端⼝，如果没设置⼝令很可能就直接漫游内⽹了</p>
-<p>3306 MySQL </p>
-<p>3312/3311 kangle主机管理系统登陆</p>
-<p>3389 远程桌⾯</p>
-<p>4440 rundeck 参考WooYun: 借⽤新浪某服务成功漫游新浪内⽹</p>
-<p>5432 PostgreSQL </p>
-<p>5900 vnc </p>
-<p>5984 CouchDB <a href="http://xxx:5984/_utils/">http://xxx:5984/_utils/</a> </p>
-<p>6082 varnish 参考WooYun: Varnish HTTP accelerator CLI 未授权访问易导致⽹站被直接篡改或者作为代理进⼊内⽹</p>
-<p>6379 redis未授权</p>
-<p>7001,7002 WebLogic默认弱⼝令，反序列</p>
-<p>7778 Kloxo主机控制⾯板登录</p>
-<p>8000-9090 都是⼀些常⻅的web端⼝，有些运维喜欢把管理后台开在这些⾮80的端⼝上</p>
-<p>8080 tomcat/WDCP主机管理系统，默认弱⼝令</p>
-<p>8080,8089,9090 JBOSS </p>
-<p>8083 Vestacp主机管理系统 （国外⽤较多）</p>
-<p>8649 ganglia </p>
-<p>8888 amh/LuManager 主机管理系统默认端⼝</p>
-<p>9200,9300 elasticsearch 参考WooYun: 多玩某服务器ElasticSearch命令执⾏漏洞</p>
-<p>10000 Virtualmin/Webmin 服务器虚拟主机管理系统</p>
-<p>11211 memcache未授权访问</p>
-<p>27017,27018 Mongodb未授权访问</p>
-<p>28017 mongodb统计⻚⾯</p>
-<p>50000 SAP命令执⾏</p>
-<p>50070,50030 hadoop默认端⼝未授权访问 </p>
-<p>三、深信服⼀⾯ </p>
-<p>了解哪些漏洞⽂件上传有哪些防护⽅式 </p>
+<h5 id="ALL、端⼝合计详情"><a href="#ALL、端⼝合计详情" class="headerlink" title="ALL、端⼝合计详情"></a>ALL、端⼝合计详情</h5><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">21 ftp </span><br><span class="line"></span><br><span class="line">22 SSH </span><br><span class="line"></span><br><span class="line">23 Telnet </span><br><span class="line"></span><br><span class="line">80 web </span><br><span class="line"></span><br><span class="line">80-89 web </span><br><span class="line"></span><br><span class="line">161 SNMP </span><br><span class="line"></span><br><span class="line">389 LDAP </span><br><span class="line"></span><br><span class="line">443 SSL⼼脏滴⾎以及⼀些web漏洞测试</span><br><span class="line"></span><br><span class="line">445 SMB 512,513,514 Rexec </span><br><span class="line"></span><br><span class="line">873 Rsync未授权</span><br><span class="line"></span><br><span class="line">1025,111 NFS </span><br><span class="line"></span><br><span class="line">1433 MSSQL </span><br><span class="line"></span><br><span class="line">1521 Oracle:(iSqlPlus Port:5560,7778) </span><br><span class="line"></span><br><span class="line">2082&#x2F;2083 cpanel主机管理系统登陆 （国外⽤较多）</span><br><span class="line"></span><br><span class="line">2222 DA虚拟主机管理系统登陆 （国外⽤较多）</span><br><span class="line"></span><br><span class="line">2601,2604 zebra路由，默认密码zebra</span><br><span class="line"></span><br><span class="line">3128 squid代理默认端⼝，如果没设置⼝令很可能就直接漫游内⽹了</span><br><span class="line"></span><br><span class="line">3306 MySQL </span><br><span class="line"></span><br><span class="line">3312&#x2F;3311 kangle主机管理系统登陆</span><br><span class="line"></span><br><span class="line">3389 远程桌⾯</span><br><span class="line"></span><br><span class="line">4440 rundeck 参考WooYun: 借⽤新浪某服务成功漫游新浪内⽹</span><br><span class="line"></span><br><span class="line">5432 PostgreSQL </span><br><span class="line"></span><br><span class="line">5900 vnc </span><br><span class="line"></span><br><span class="line">5984 CouchDB http:&#x2F;&#x2F;xxx:5984&#x2F;_utils&#x2F; </span><br><span class="line"></span><br><span class="line">6082 varnish 参考WooYun: Varnish HTTP accelerator CLI 未授权访问易导致⽹站被直接篡改或者作为代理进⼊内⽹</span><br><span class="line"></span><br><span class="line">6379 redis未授权</span><br><span class="line"></span><br><span class="line">7001,7002 WebLogic默认弱⼝令，反序列</span><br><span class="line"></span><br><span class="line">7778 Kloxo主机控制⾯板登录</span><br><span class="line"></span><br><span class="line">8000-9090 都是⼀些常⻅的web端⼝，有些运维喜欢把管理后台开在这些⾮80的端⼝上</span><br><span class="line"></span><br><span class="line">8080 tomcat&#x2F;WDCP主机管理系统，默认弱⼝令</span><br><span class="line"></span><br><span class="line">8080,8089,9090 JBOSS </span><br><span class="line"></span><br><span class="line">8083 Vestacp主机管理系统 （国外⽤较多）</span><br><span class="line"></span><br><span class="line">8649 ganglia </span><br><span class="line"></span><br><span class="line">8888 amh&#x2F;LuManager 主机管理系统默认端⼝</span><br><span class="line"></span><br><span class="line">9200,9300 elasticsearch 参考WooYun: 多玩某服务器ElasticSearch命令执⾏漏洞</span><br><span class="line"></span><br><span class="line">10000 Virtualmin&#x2F;Webmin 服务器虚拟主机管理系统</span><br><span class="line"></span><br><span class="line">11211 memcache未授权访问</span><br><span class="line"></span><br><span class="line">27017,27018 Mongodb未授权访问</span><br><span class="line"></span><br><span class="line">28017 mongodb统计⻚⾯</span><br><span class="line"></span><br><span class="line">50000 SAP命令执⾏</span><br><span class="line"></span><br><span class="line">50070,50030 hadoop默认端⼝未授权访问 </span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="三、深信服⼀⾯"><a href="#三、深信服⼀⾯" class="headerlink" title="三、深信服⼀⾯"></a>三、深信服⼀⾯</h3><p>了解哪些漏洞⽂件上传有哪些防护⽅式 </p>
 <p>⽤什么扫描端⼝，⽬录 </p>
 <p>如何判断注⼊ </p>
 <p>注⼊有防护怎么办 </p>
@@ -7873,30 +7707,24 @@ $s_func($info);
 <p>ddos 如何防护 </p>
 <p>有没有抓过包，会不会写 wireshark 过滤规则 </p>
 <p>清理⽇志要清理哪些 </p>
-<p>四、SQL 注⼊防护1、使⽤安全的 API </p>
+<h4 id="四、SQL-注⼊防护"><a href="#四、SQL-注⼊防护" class="headerlink" title="四、SQL 注⼊防护"></a>四、SQL 注⼊防护</h4><p>1、使⽤安全的 API </p>
 <p>2、对输⼊的特殊字符进⾏ Escape 转义处理 </p>
 <p>3、使⽤⽩名单来规范化输⼊验证⽅法 </p>
 <p>4、对客户端输⼊进⾏控制，不允许输⼊ SQL 注⼊相关的特殊字符 </p>
 <p>5、服务器端在提交数据库进⾏ SQL 查询之前，对特殊字符进⾏过滤、转义、替换、删除。 </p>
 <p>6、规范编码, 字符集 </p>
-<p>五、为什么参数化查询可以防⽌ SQL 注⼊ </p>
-<p>原理: </p>
-<p>使⽤参数化查询数据库服务器不会把参数的内容当作 sql 指令的⼀部分来执⾏，是在数据库完成 sql 指令的编译后才套 </p>
+<h4 id="五、为什么参数化查询可以防⽌-SQL-注⼊"><a href="#五、为什么参数化查询可以防⽌-SQL-注⼊" class="headerlink" title="五、为什么参数化查询可以防⽌ SQL 注⼊"></a>五、为什么参数化查询可以防⽌ SQL 注⼊</h4><h5 id="原理"><a href="#原理" class="headerlink" title="原理:"></a>原理:</h5><p>使⽤参数化查询数据库服务器不会把参数的内容当作 sql 指令的⼀部分来执⾏，是在数据库完成 sql 指令的编译后才套 </p>
 <p>⽤参数运⾏ </p>
-<p>简单的说: 参数化能防注⼊的原因在于, 语句是语句，参数是参数，参数的值并不是语句的⼀部分，数据库只按语句的语 </p>
-<p>义跑</p>
-<p>六、SQL 头注⼊点</p>
-<p>UA</p>
+<p>简单的说: 参数化能防注⼊的原因在于, 语句是语句，参数是参数，参数的值并不是语句的⼀部分，数据库只按语句的语 义跑</p>
+<h4 id="六、SQL-头注⼊点"><a href="#六、SQL-头注⼊点" class="headerlink" title="六、SQL 头注⼊点"></a>六、SQL 头注⼊点</h4><p>UA</p>
 <p>REFERER</p>
 <p>COOKIE</p>
 <p>IP</p>
-<p>七、盲注是什么？怎么盲注？ </p>
-<p>盲注是在 SQL 注⼊攻击过程中，服务器关闭了错误回显，我们单纯通过服务器返回内容的变化来判断是否存在 SQL 注 </p>
+<h4 id="七、盲注是什么？怎么盲注？"><a href="#七、盲注是什么？怎么盲注？" class="headerlink" title="七、盲注是什么？怎么盲注？"></a>七、盲注是什么？怎么盲注？</h4><p>盲注是在 SQL 注⼊攻击过程中，服务器关闭了错误回显，我们单纯通过服务器返回内容的变化来判断是否存在 SQL 注 </p>
 <p>⼊和利⽤的⽅式。盲注的⼿段有两种，⼀个是通过⻚⾯的返回内容是否正确 (boolean-based)，来验证是否存在注⼊。</p>
 <p>⼀个是通过 sql 语句处理时间的不同来判断是否存在注⼊ (time-based)，在这⾥，可以⽤ benchmark，sleep 等造成延 </p>
 <p>时效果的函数，也可以通过构造⼤笛卡⼉积的联合查询表来达到延时的⽬的。 </p>
-<p>⼋、宽字节注⼊产⽣原理以及根本原因1、产⽣原理 </p>
-<p>在数据库使⽤了宽字符集⽽ WEB 中没考虑这个问题的情况下，在 WEB 层，由于 0XBF27 是两个字符，在 PHP 中⽐如 </p>
+<h4 id="⼋、宽字节注⼊产⽣原理以及根本原因1、产⽣原理"><a href="#⼋、宽字节注⼊产⽣原理以及根本原因1、产⽣原理" class="headerlink" title="⼋、宽字节注⼊产⽣原理以及根本原因1、产⽣原理"></a>⼋、宽字节注⼊产⽣原理以及根本原因1、产⽣原理</h4><p>在数据库使⽤了宽字符集⽽ WEB 中没考虑这个问题的情况下，在 WEB 层，由于 0XBF27 是两个字符，在 PHP 中⽐如 </p>
 <p>addslash 和 magic_quotes_gpc 开启时，由于会对 0x27 单引号进⾏转义，因此 0xbf27 会变成 0xbf5c27, ⽽数据进⼊</p>
 <p>数据库中时，由于 0XBF5C 是⼀个另外的字符，因此 \ 转义符号会被前⾯的 bf 带着 “吃掉”，单引号由此逃逸出来可以 </p>
 <p>⽤来闭合语句。 </p>
@@ -7919,8 +7747,7 @@ $s_func($info);
 <p>UPDATE user SET password=’MD5(mypass)’ WHERE username=’admin’#)’, homepage=’$homepage’ WHERE id=’$id’</p>
 <p>c、修改 id 值为 ‘ OR username=’admin’ 之后 SQL 语句变为</p>
 <p>UPDATE user SET password=’MD5($password)’, homepage=’$homepage’ WHERE id=’’ OR username=’admin’</p>
-<p>九、SQL 如何写 shell / 单引被过滤怎么办 </p>
-<p>写 shell: root 权限，GPC 关闭，知道⽂件路径 outfifile 函数</p>
+<h4 id="九、SQL-如何写-shell-单引被过滤怎么办"><a href="#九、SQL-如何写-shell-单引被过滤怎么办" class="headerlink" title="九、SQL 如何写 shell / 单引被过滤怎么办"></a>九、SQL 如何写 shell / 单引被过滤怎么办</h4><p>写 shell: root 权限，GPC 关闭，知道⽂件路径 outfifile 函数</p>
 <p>`<a href="http://127.0.0.1:81/sqli.php?id=1">http://127.0.0.1:81/sqli.php?id=1</a> into outfile ‘C:\wamp64\www\phpinfo.php’ FIELDS TERMINATED BY ‘&lt;?php phpinfo</p>
 <p>(); ?&gt;’`</p>
 <p>`<a href="http://127.0.0.1:81/sqli.php?id=-1">http://127.0.0.1:81/sqli.php?id=-1</a> union select 1,0x3c3f70687020706870696e666f28293b203f3e,3,4 into outfile ‘C:\w</p>
@@ -7933,8 +7760,7 @@ $s_func($info);
 <p>2、mysql 的⽹站注⼊，5.0 以上和 5.0 以下有什么区别 </p>
 <p>5 0 以下没有 information schema 这个系统表 ⽆法列表名等 只能暴⼒跑表名。5.0 以下没有 information_schema 这个系统表，⽆法列表名等，只能暴⼒跑表名。 </p>
 <p>5.0 以下是多⽤户单操作，5.0 以上是多⽤户多操做。 </p>
-<p>⼗、XSS </p>
-<p>1、XSS 原理 </p>
+<h4 id="⼗、XSS"><a href="#⼗、XSS" class="headerlink" title="⼗、XSS"></a>⼗、XSS</h4><p>1、XSS 原理 </p>
 <p>反射型 </p>
 <p>⽤户提交的数据中可以构造代码来执⾏，从⽽实现窃取⽤户信息等攻击。需要诱使⽤户 “点击” ⼀个恶意链接，才能攻击 </p>
 <p>成功</p>
@@ -7969,8 +7795,7 @@ $s_func($info);
 <p>正常情况下，⼀个是产⽣ XSS 点的⻚⾯不属于 self ⻚⾯，⽤户之间产⽣交互⾏为的⻚⾯，都可能造成 XSS Worm 的产 </p>
 <p>⽣。</p>
 <p>不⼀定需要存储型 XSS </p>
-<p>⼗⼀、CSRF </p>
-<p>1、CSRF 原理 </p>
+<h4 id="⼗⼀、CSRF"><a href="#⼗⼀、CSRF" class="headerlink" title="⼗⼀、CSRF"></a>⼗⼀、CSRF</h4><p>1、CSRF 原理 </p>
 <p>CSRF 是跨站请求伪造攻击，由客户端发起, 是由于没有在关键操作执⾏时进⾏是否由⽤户⾃愿发起的确认 </p>
 <p>2、防御验证 Referer </p>
 <p>添加 token </p>
@@ -7986,8 +7811,7 @@ $s_func($info);
 <p>信息泄露有可能是缓存、⽇志、get，也有可能是利⽤跨站 </p>
 <p>很多跳转登录的都依赖token，有⼀个跳转漏洞加反射型跨站就可以组合成登录劫持了 </p>
 <p>另外也可以结合着其它业务来描述token的安全性及设计不好怎么被绕过⽐如抢红包业务之类的 </p>
-<p>⼗⼀、SSRF </p>
-<p>SSRF(Server-Side Request Forgery: 服务器端请求伪造) 是⼀种由攻击者构造形成由服务端发起请求的⼀个安全漏洞。 </p>
+<h4 id="⼗二、SSRF"><a href="#⼗二、SSRF" class="headerlink" title="⼗二、SSRF"></a>⼗二、SSRF</h4><p>SSRF(Server-Side Request Forgery: 服务器端请求伪造) 是⼀种由攻击者构造形成由服务端发起请求的⼀个安全漏洞。 </p>
 <p>⼀般情况下，SSRF 攻击的⽬标是从外⽹⽆法访问的内部系统。（正是因为它是由服务端发起的，所以它能够请求到与它 </p>
 <p>相连⽽与外⽹隔离的内部系统） </p>
 <p>SSRF 形成的原因⼤都是由于服务端提供了从其他服务器应⽤获取数据的功能且没有对⽬标地址做过滤与限制。⽐如从指 </p>
@@ -7995,75 +7819,67 @@ $s_func($info);
 <p>1、监测SSRF 漏洞的验证⽅法： </p>
 <p>1）因为 SSRF 漏洞是让服务器发送请求的安全漏洞，所以我们就可以通过抓包分析发送的请求是否是由服务器的发送 </p>
 <p>的，从⽽来判断是否存在 SSRF 漏洞 </p>
-<p>2）在⻚⾯源码中查找访问的资源地址 ，如果该资源地址类型为 <a href="http://www.baidu.com/xxx.php?image=（地址）的就可能存">www.baidu.com/xxx.php?image=（地址）的就可能存</a> </p>
-<p>在 SSRF 漏洞 4</p>
-<p>[1] </p>
+<p>2）在⻚⾯源码中查找访问的资源地址 ，如果该资源地址类型为 <a href="http://www.baidu.com/xxx.php?image=（地址）的就可能存">www.baidu.com/xxx.php?image=（地址）的就可能存</a> 在 SSRF 漏洞 </p>
 <p>2、SSRF 漏洞的成因 防御 绕过 </p>
 <p>成因：模拟服务器对其他服务器资源进⾏请求，没有做合法性验证。利⽤：构造恶意内⽹ IP 做探测，或者使⽤其余所⽀ </p>
 <p>持的协议对其余服务进⾏攻击。防御：禁⽌跳转，限制协议，内外⽹限制，URL 限制。绕过：使⽤不同协议，针对 IP， </p>
 <p>IP 格式的绕过，针对 URL，恶意 URL 增添其他字符，@之类的。301 跳转 + dns rebindding。 </p>
-<p>⼗⼆、上传 </p>
-<p>1、⽂件上传漏洞原理 </p>
-<p>由于程序员在对⽤户⽂件上传部分的控制不⾜或者处理缺陷，⽽导致⽤户可以越过其本身权限向服务器上传可执⾏的动 </p>
+<h4 id="⼗三、上传"><a href="#⼗三、上传" class="headerlink" title="⼗三、上传"></a>⼗三、上传</h4><h5 id="1、⽂件上传漏洞原理"><a href="#1、⽂件上传漏洞原理" class="headerlink" title="1、⽂件上传漏洞原理"></a>1、⽂件上传漏洞原理</h5><p>由于程序员在对⽤户⽂件上传部分的控制不⾜或者处理缺陷，⽽导致⽤户可以越过其本身权限向服务器上传可执⾏的动 </p>
 <p>态脚本⽂件 </p>
-<p>2、常⻅的上传绕过⽅式 </p>
-<p>前端 js 验证：禁⽤ js/burp 改包 </p>
+<h5 id="2、常⻅的上传绕过⽅式"><a href="#2、常⻅的上传绕过⽅式" class="headerlink" title="2、常⻅的上传绕过⽅式"></a>2、常⻅的上传绕过⽅式</h5><p>前端 js 验证：禁⽤ js/burp 改包 </p>
 <p>⼤⼩写 </p>
 <p>双重后缀名 </p>
 <p>过滤绕过 pphphp-&gt;php </p>
-<p>3、防护⽂件上传⽬录设置为不可执⾏ </p>
-<p>使⽤⽩名单判断⽂件上传类型 </p>
+<h5 id="3、防护⽂件上传⽬录设置为不可执⾏"><a href="#3、防护⽂件上传⽬录设置为不可执⾏" class="headerlink" title="3、防护⽂件上传⽬录设置为不可执⾏"></a>3、防护⽂件上传⽬录设置为不可执⾏</h5><p>使⽤⽩名单判断⽂件上传类型 </p>
 <p>⽤随机数改写⽂件名和路径 </p>
-<p>4、审查上传点的元素有什么意义？ </p>
-<p>有些站点的上传⽂件类型的限制是在前端实现的，这时只要增加上传类型就能突破限制了。 </p>
-<p>⼗三、⽂件包含 </p>
-<p>1、原理 </p>
-<p>引⼊⼀段⽤户能控制的脚本或代码，并让服务器端执⾏ include() 等函数通过动态变量的⽅式引⼊需要包含的⽂件； </p>
+<h5 id="4、审查上传点的元素有什么意义？"><a href="#4、审查上传点的元素有什么意义？" class="headerlink" title="4、审查上传点的元素有什么意义？"></a>4、审查上传点的元素有什么意义？</h5><p>有些站点的上传⽂件类型的限制是在前端实现的，这时只要增加上传类型就能突破限制了。 </p>
+<h4 id="⼗四、⽂件包含"><a href="#⼗四、⽂件包含" class="headerlink" title="⼗四、⽂件包含"></a>⼗四、⽂件包含</h4><h5 id="1、原理"><a href="#1、原理" class="headerlink" title="1、原理"></a>1、原理</h5><p>引⼊⼀段⽤户能控制的脚本或代码，并让服务器端执⾏ include() 等函数通过动态变量的⽅式引⼊需要包含的⽂件； </p>
 <p>⽤户能够控制该动态变量。 </p>
-<p>2、导致⽂件包含的函数 </p>
-<p>PHP：include(), include_once(), require(), re-quire_once(), fopen(), readfifile(), … JSP/Servlet：ava.io.File(), </p>
+<h5 id="2、导致⽂件包含的函数"><a href="#2、导致⽂件包含的函数" class="headerlink" title="2、导致⽂件包含的函数"></a>2、导致⽂件包含的函数</h5><p>PHP：include(), include_once(), require(), re-quire_once(), fopen(), readfifile(), … JSP/Servlet：ava.io.File(), </p>
 <p>java.io.Fil-eReader(), … ASP：include fifile, include virtual, </p>
-<p>3、本地⽂件包含 </p>
-<p>能够打开并包含本地⽂件的漏洞，被称为本地⽂件包含漏洞 </p>
-<p>⼗四、逻辑漏扫 </p>
-<p>1、⾦融⾏业常⻅逻辑漏洞 </p>
-<p>单针对⾦融业务的 主要是数据的篡改 (涉及⾦融数据，或部分业务的判断数据)，由竞争条件或者设计不当引起的薅⽺ </p>
+<h5 id="3、本地⽂件包含"><a href="#3、本地⽂件包含" class="headerlink" title="3、本地⽂件包含"></a>3、本地⽂件包含</h5><p>能够打开并包含本地⽂件的漏洞，被称为本地⽂件包含漏洞 </p>
+<h4 id="⼗五、逻辑漏扫"><a href="#⼗五、逻辑漏扫" class="headerlink" title="⼗五、逻辑漏扫"></a>⼗五、逻辑漏扫</h4><h5 id="1、⾦融⾏业常⻅逻辑漏洞"><a href="#1、⾦融⾏业常⻅逻辑漏洞" class="headerlink" title="1、⾦融⾏业常⻅逻辑漏洞"></a>1、⾦融⾏业常⻅逻辑漏洞</h5><p>单针对⾦融业务的 主要是数据的篡改 (涉及⾦融数据，或部分业务的判断数据)，由竞争条件或者设计不当引起的薅⽺ </p>
 <p>⽑，交易 / 订单信息泄露，⽔平越权对别⼈的账户查看或恶意操作，交易或业务步骤绕过。 </p>
-<p>⼗五、中间⼈攻击 </p>
-<p>中间 攻 （缺 ） 的攻 客户 与 务 之间在 的 中缺 造成的中间⼈攻击是⼀个（缺乏）相互认证的攻击；由于客户端与服务器之间在 SSL 握⼿的过程中缺乏相互认证⽽造成的漏洞 </p>
+<h4 id="⼗五、中间⼈攻击"><a href="#⼗五、中间⼈攻击" class="headerlink" title="⼗五、中间⼈攻击"></a>⼗五、中间⼈攻击</h4><p>中间 攻 （缺 ） 的攻 客户 与 务 之间在 的 中缺 造成的中间⼈攻击是⼀个（缺乏）相互认证的攻击；由于客户端与服务器之间在 SSL 握⼿的过程中缺乏相互认证⽽造成的漏洞 </p>
 <p>防御中间⼈攻击的⽅案通常基于⼀下⼏种技术 </p>
-<p>\1. 公钥基础建设 PKI 使⽤ PKI 相互认证机制，客户端验证服务器，服务器验证客户端；上述两个例⼦中都是只验证服务 </p>
+<ol>
+<li>公钥基础建设 PKI 使⽤ PKI 相互认证机制，客户端验证服务器，服务器验证客户端；上述两个例⼦中都是只验证服务 </li>
+</ol>
 <p>器，这样就造成了 SSL 握⼿环节的漏洞，⽽如果使⽤相互认证的的话，基本可以更强⼒的相互认证</p>
-<p>\2. 延迟测试 </p>
+<ol start="2">
+<li>延迟测试 </li>
+</ol>
 <p>使⽤复杂加密哈希函数进⾏计算以造成数⼗秒的延迟；如果双⽅通常情况下都要花费 20 秒来计算，并且整个通讯花费 </p>
 <p>了 60 秒计算才到达对⽅，这就能表明存在第三⽅中间⼈。 </p>
-<p>\3. 使⽤其他形式的密钥交换形式</p>
-<p>ARP 欺骗 </p>
-<p>原理</p>
+<ol start="3">
+<li>使⽤其他形式的密钥交换形式</li>
+</ol>
+<h5 id="ARP-欺骗"><a href="#ARP-欺骗" class="headerlink" title="ARP 欺骗"></a>ARP 欺骗</h5><p>原理</p>
 <p>每台主机都有⼀个 ARP 缓存表，缓存表中记录了 IP 地址与 MAC 地址的对应关系，⽽局域⽹数据传输依靠的是 MAC</p>
 <p>地址。在 ARP 缓存表机制存在⼀个缺陷，就是当请求主机收到 ARP 应答包后，不会去验证⾃⼰是否向对⽅主机发送过</p>
 <p>ARP 请求包，就直接把这个返回包中的 IP 地址与 MAC 地址的对应关系保存进 ARP 缓存表中，如果原有相同 IP 对应关 </p>
 <p>系，原有的则会被替换。这样攻击者就有了偷听主机传输的数据的可能 </p>
 <p>防护</p>
-<p>\1. 在主机绑定⽹关 MAC 与 IP 地址为静态（默认为动态），命令：arp -s ⽹关 IP ⽹关 MAC </p>
-<p>\2. 在⽹关绑定主机 MAC 与 IP 地址</p>
-<p>\3. 使⽤ ARP 防⽕墙 </p>
-<p>⼗六、DDOS1、DDOS 原理 </p>
-<p>利⽤合理的请求造成资源过载，导致服务不可⽤ </p>
-<p>syn 洪流的原理 </p>
-<p>伪造⼤量的源 IP 地址，分别向服务器端发送⼤量的 SYN 包，此时服务器端会返回 SYN/ACK 包，因为源地址是伪造 </p>
+<ol>
+<li><p>在主机绑定⽹关 MAC 与 IP 地址为静态（默认为动态），命令：arp -s ⽹关 IP ⽹关 MAC </p>
+</li>
+<li><p>在⽹关绑定主机 MAC 与 IP 地址</p>
+</li>
+<li><p>使⽤ ARP 防⽕墙 </p>
+</li>
+</ol>
+<h4 id="⼗六、DDOS1、DDOS-原理"><a href="#⼗六、DDOS1、DDOS-原理" class="headerlink" title="⼗六、DDOS1、DDOS 原理"></a>⼗六、DDOS1、DDOS 原理</h4><p>利⽤合理的请求造成资源过载，导致服务不可⽤ </p>
+<h5 id="syn-洪流的原理"><a href="#syn-洪流的原理" class="headerlink" title="syn 洪流的原理"></a>syn 洪流的原理</h5><p>伪造⼤量的源 IP 地址，分别向服务器端发送⼤量的 SYN 包，此时服务器端会返回 SYN/ACK 包，因为源地址是伪造 </p>
 <p>的，所以伪造的 IP 并不会应答，服务器端没有收到伪造 IP 的回应，会重试 3～5 次并且等待⼀个 SYNTime（⼀般为 </p>
 <p>30 秒⾄ 2 分钟），如果超时则丢弃这个连接。攻击者⼤量发送这种伪造源地址的 SYN 请求，服务器端将会消耗⾮常多 </p>
 <p>的资源（CPU 和内存）来处理这种半连接，同时还要不断地对这些 IP 进⾏ SYN+ACK 重试。最后的结果是服务器⽆暇 </p>
 <p>理睬正常的连接请求，导致拒绝服务。 </p>
-<p>CC 攻击原理 </p>
-<p>对⼀些消耗资源较⼤的应⽤⻚⾯不断发起正常的请求，以达到消耗服务端资源的⽬的。 </p>
+<h5 id="CC-攻击原理"><a href="#CC-攻击原理" class="headerlink" title="CC 攻击原理"></a>CC 攻击原理</h5><p>对⼀些消耗资源较⼤的应⽤⻚⾯不断发起正常的请求，以达到消耗服务端资源的⽬的。 </p>
 <p>2、DOSS 防护 </p>
 <p>SYN Cookie/SYN Proxy、safereset 等算法。SYN Cookie 的主要思想是为每⼀个 IP 地址分配⼀个 “Cookie”，并统计每 </p>
 <p>个 IP 地址的访问频率。如果在短时间内收到⼤量的来⾃同⼀个 IP 地址的数据包，则认为受到攻击，之后来⾃这个 IP 地 </p>
 <p>址的包将被丢弃。 </p>
-<p>⼗七、提权 </p>
-<p>MySQL 两种提权⽅式 </p>
+<h4 id="⼗七、提权"><a href="#⼗七、提权" class="headerlink" title="⼗七、提权"></a>⼗七、提权</h4><p>MySQL 两种提权⽅式 </p>
 <p>udf 提权, mof 提权 </p>
 <p>MySQL_UDF 提取 </p>
 <p>要求: 1. ⽬标系统是 Windows(Win2000,XP,Win2003)；2. 拥有 MYSQL 的某个⽤户账号，此账号必须有对 mysql 的 </p>
@@ -8087,8 +7903,7 @@ $s_func($info);
 
 <p>执⾏成功后，即可添加⼀个普通⽤户，然后你可以更改命令，再上传导出执⾏把⽤户提升到管理员权限，然后 3389 连 </p>
 <p>接之就 ok 了。 </p>
-<p>⼗⼋、特殊漏洞 </p>
-<p>1、Struts2-045 </p>
+<h4 id="⼗⼋、特殊漏洞"><a href="#⼗⼋、特殊漏洞" class="headerlink" title="⼗⼋、特殊漏洞"></a>⼗⼋、特殊漏洞</h4><p>1、Struts2-045 </p>
 <p>2、Redis 未授权 </p>
 <p>产⽣原因 </p>
 <p>Redis 默认情况下，会绑定在 0.0.0.0:6379，这样将会将 Redis 服务暴露到公⽹上，如果在没有开启认证的情况下，可 </p>
@@ -8134,8 +7949,7 @@ $s_func($info);
 <p>原理</p>
 <p>通过调⽤加密 API 将 payload 加密放⼊⼀个会被执⾏的段字节中。但是具体回答⼯程中我只回答道了 SSRF ⽼洞， </p>
 <p>m3u8 头，偏移量，加密。 </p>
-<p>⼗九、安全知识 </p>
-<p>1、WEB </p>
+<h4 id="⼗九、安全知识"><a href="#⼗九、安全知识" class="headerlink" title="⼗九、安全知识"></a>⼗九、安全知识</h4><p>1、WEB </p>
 <p>常⻅ WEB 开发 JAVA 框架</p>
 <p>STRUTS,SPRING 常⻅的 java 框架漏洞 其实⾯试官问这个问题的时候我不太清楚他要问什么，我提到 struts 的 045048，java 常⻅反序列化。045 错误处理引⼊了 ognl 表达式 048 封装 action 的过程中有⼀步调⽤ getstackvalue 递归 </p>
 <p>获取 ognl 表达式 反序列化 操作对象，通过⼿段引⼊。apache common 的反射机制、readobject 的重写，其实具体的 </p>
