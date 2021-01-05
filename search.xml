@@ -8040,15 +8040,15 @@ In get/set mode no capture occurs.</code></pre><blockquote>
   <entry>
     <title>正则小技巧和数据过滤处理</title>
     <url>/2021/01/05/WEB/%E6%AD%A3%E5%88%99%E5%B0%8F%E6%8A%80%E5%B7%A7%E5%92%8C%E6%95%B0%E6%8D%AE%E8%BF%87%E6%BB%A4%E5%A4%84%E7%90%86/</url>
-    <content><![CDATA[<h2 id="正则基础"><a href="#正则基础" class="headerlink" title="正则基础"></a>正则基础</h2><blockquote>
+    <content><![CDATA[<h1 id="正则基础"><a href="#正则基础" class="headerlink" title="正则基础"></a>正则基础</h1><blockquote>
 <p>首先讲一下正则的规则只需要管What How即可 其他无需考虑</p>
 </blockquote>
-<h3 id="匹配字符-What"><a href="#匹配字符-What" class="headerlink" title="匹配字符(What)"></a>匹配字符(What)</h3><ul>
+<h2 id="匹配字符-What"><a href="#匹配字符-What" class="headerlink" title="匹配字符(What)"></a>匹配字符(What)</h2><ul>
 <li><code>.</code></li>
 <li><code>[abcd]</code> <code>[a-zA-Z]</code> <code>[^abcd]</code></li>
 <li><code>\d</code> <code>\s</code> <code>\t</code> <code>\w</code> …</li>
 </ul>
-<h3 id="匹配数量-How"><a href="#匹配数量-How" class="headerlink" title="匹配数量(How)"></a>匹配数量(How)</h3><ul>
+<h2 id="匹配数量-How"><a href="#匹配数量-How" class="headerlink" title="匹配数量(How)"></a>匹配数量(How)</h2><ul>
 <li><code>*</code></li>
 <li><code>+</code></li>
 <li><code>?</code></li>
@@ -8056,16 +8056,16 @@ In get/set mode no capture occurs.</code></pre><blockquote>
 <li><code>&#123;n,&#125;</code></li>
 <li><code>&#123;n,m&#125;</code></li>
 </ul>
-<h3 id="子匹配"><a href="#子匹配" class="headerlink" title="子匹配"></a>子匹配</h3><ul>
+<h2 id="子匹配"><a href="#子匹配" class="headerlink" title="子匹配"></a>子匹配</h2><ul>
 <li><code>()</code></li>
 </ul>
-<h3 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h3><ul>
+<h2 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h2><ul>
 <li><code>a*</code> Greedy 贪婪</li>
 <li><code>a*?</code> Lazy</li>
 <li><code>|</code> 或</li>
 <li><code>^</code> <code>$</code></li>
 </ul>
-<h2 id="用法1"><a href="#用法1" class="headerlink" title="用法1"></a>用法1</h2><p>使用数据如下：</p>
+<h1 id="用法1"><a href="#用法1" class="headerlink" title="用法1"></a>用法1</h1><p>使用数据如下：</p>
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">2	wangwei	200	false	false	791	true	</span><br><span class="line">8	wangjing	200	false	false	791	true	</span><br><span class="line">72	lihong	200	false	false	791	true	</span><br><span class="line">94	wangxin	200	false	false	791	true	</span><br><span class="line">107	liujuan	200	false	false	791	true	</span><br><span class="line">119	zhangbo	200	false	false	791	true	</span><br><span class="line">145	zhanghao	200	false	false	791	true	</span><br><span class="line">169	zhangbin	200	false	false	791	true	</span><br><span class="line">185	wangjing	200	false	false	791	true	</span><br><span class="line">224	liuxin	200	false	false	791	true	</span><br><span class="line">260	yanglin	200	false	false	790	true	</span><br><span class="line">354	likai	200	false	false	791	true	</span><br><span class="line">390	lixiang	200	false	false	791	true	</span><br><span class="line">435	zhangbo	200	false	false	791	true	</span><br><span class="line">436	wangxin	200	false	false	791	true	</span><br></pre></td></tr></table></figure>
 
 <p>推荐一个网站</p>
@@ -8083,13 +8083,22 @@ In get/set mode no capture occurs.</code></pre><blockquote>
 
 <img src="https://oss-map.oss-cn-beijing.aliyuncs.com/img/image-20210105210650979.png" alt="image-20210105210650979" style="zoom:50%;">
 
-<h2 id="用法2"><a href="#用法2" class="headerlink" title="用法2"></a>用法2</h2><p>使用vim进行正则匹配</p>
+<h1 id="用法2"><a href="#用法2" class="headerlink" title="用法2"></a>用法2</h1><p>使用vim进行正则匹配</p>
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">:s&#x2F;abc&#x2F;def&#x2F;g 用def替换abc，g为global全局的意思</span><br><span class="line">%s&#x2F;200.*&#x2F;&#x2F;g</span><br></pre></td></tr></table></figure>
 
-<p><img src="https://oss-map.oss-cn-beijing.aliyuncs.com/img/image-20210105210939127.png" alt="image-20210105210939127"></p>
+<img src="https://oss-map.oss-cn-beijing.aliyuncs.com/img/image-20210105210939127.png" alt="image-20210105210939127" style="zoom:50%;">
+
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">%s&#x2F;\(\d\+\s\)&#x2F;&#x2F;g</span><br></pre></td></tr></table></figure>
 
-<p><img src="https://oss-map.oss-cn-beijing.aliyuncs.com/img/image-20210105210951458.png" alt="image-20210105210951458"></p>
+<img src="https://oss-map.oss-cn-beijing.aliyuncs.com/img/image-20210105210951458.png" alt="image-20210105210951458" style="zoom:50%;">
+
+
+
+<p>参考链接：</p>
+<p><a href="https://regex101.com/">https://regex101.com/</a></p>
+<p><a href="https://www.runoob.com/python/python-reg-expressions.html">https://www.runoob.com/python/python-reg-expressions.html</a></p>
+<p><a href="https://www.cnblogs.com/penseur/archive/2011/02/25/1964522.html">https://www.cnblogs.com/penseur/archive/2011/02/25/1964522.html</a></p>
+<p><a href="https://gist.github.com/JavaCS3/e36e494e78a02049950bfa7c7ebeb929">https://gist.github.com/JavaCS3/e36e494e78a02049950bfa7c7ebeb929</a></p>
 ]]></content>
       <categories>
         <category>WEB安全</category>
@@ -8218,258 +8227,6 @@ In get/set mode no capture occurs.</code></pre><blockquote>
       <tags>
         <tag>Frida</tag>
         <tag>Hook</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>adb使用整理</title>
-    <url>/2021/01/05/Android/adb%E4%BD%BF%E7%94%A8%E6%95%B4%E7%90%86/</url>
-    <content><![CDATA[<h2 id="adb使用"><a href="#adb使用" class="headerlink" title="adb使用"></a>adb使用</h2><h3 id="adb连接"><a href="#adb连接" class="headerlink" title="adb连接"></a>adb连接</h3><pre><code>adb connect ip:5555
-adb devices
-adb -s device-id shell  //指定某个设备(插充电设备或USB网络时)
-// 查看网络状态
-adb shell netstat
-
-// 通过 tcp/ip 连接，默认端口 5555
-adb connect host:port
-
-// 转发套接字连接
-adb forward local remote</code></pre><h3 id="adb-截图发送到当前用户目录下"><a href="#adb-截图发送到当前用户目录下" class="headerlink" title="adb 截图发送到当前用户目录下"></a>adb 截图发送到当前用户目录下</h3><pre><code>adb exec-out screencap -p &gt; 1.png</code></pre><h3 id="adb文件导出-导入"><a href="#adb文件导出-导入" class="headerlink" title="adb文件导出/导入"></a>adb文件导出/导入</h3><h4 id="从电脑上复制文件到设备"><a href="#从电脑上复制文件到设备" class="headerlink" title="从电脑上复制文件到设备"></a>从电脑上复制文件到设备</h4><pre><code>// 把 a.png 从电脑上拷贝到设备sd卡上
-adb push ~/a.png /mnt/sdcard/
-
-// 把 a.png 从电脑上拷贝到设备sd卡上并重命名为 b.png
-adb push ~/a.png /mnt/sdcard/b.png</code></pre><p>​    </p>
-<pre><code>// 把 pic目录下所有文件从电脑上拷贝到设备sd卡上
-adb push ~/pic/ /mnt/sdcard/</code></pre><h4 id="从设备复制文件到电脑"><a href="#从设备复制文件到电脑" class="headerlink" title="从设备复制文件到电脑"></a>从设备复制文件到电脑</h4><pre><code>// 把 a.png 从设备sd卡上拷贝到电脑上
-adb pull /mnt/sdcard/a.png ~/
-
-// 把 a.png 从设备sd卡上拷贝到电脑上并命名为b.png
-adb pull /mnt/sdcard/a.png ~/b.png
-
-// 把pics目录下所有文件从设备sd卡上拷贝到电脑上
-adb pull /mnt/sdcard/pics/ ~/pics/</code></pre><p>​    </p>
-<h4 id="一些基本命令"><a href="#一些基本命令" class="headerlink" title="一些基本命令"></a>一些基本命令</h4><pre><code>// 列出sd卡根目录下所有文件
-adb shell ls /sdcard/
-
-// 定位到 /sdcard/目录
-adb shell cd /sdcard/
-
-// 删除某文件
-// -f 强制删除文件不需要确认
-// -r 递归删除文件夹内文件
-// -i 删除文件前需要确认
-adb shell rm /sdcard/1.txt
-
-// 创建目录
-adb shell mkdir /sdcard/temp/
-// 指定 -p 递归创建目录
-adb shell mkdir -p  /sdcard/temp/test/abc/hello/
-
-// 创建文件
-adb shell touch /sdcard/1.txt
-
-// 显示当前所在目录
-adb shell pwd
-
-// 拷贝文件1.txt到test目录
-adb shell cp /sdcard/1.txt /sdcard/test/
-
-// 移动文件，移动同一目录下文件相当于重命名文件
-adb shell mv /sdcard/1.txt /sdcard/2.text</code></pre><h3 id="adb修改手机代理"><a href="#adb修改手机代理" class="headerlink" title="adb修改手机代理"></a>adb修改手机代理</h3><h4 id="全局代理"><a href="#全局代理" class="headerlink" title="全局代理"></a>全局代理</h4><pre><code>设置代理：
-adb shell settings put global http_proxy 代理IP地址:端口号
-如：
-adb shell settings put global http_proxy 192.168.137.97:8888
-
-移除代理：
-adb shell settings delete global http_proxy
-adb shell settings delete global global_http_proxy_host
-adb shell settings delete global global_http_proxy_port</code></pre><h4 id="证书安装"><a href="#证书安装" class="headerlink" title="证书安装"></a>证书安装</h4><blockquote>
-<p>手机获取Root权限后，直接把Base64文本格式的根证书文件复制到etc/security/cacerts文件夹里，然后到设置(Settings) – 安全(Security) – 受信任的凭据(Trusted credentials)里面，此时你要安装的根证书应该会显示已经安装好了。这样安装之后根证书是作为系统证书使用的，而不是按照方法一安装方式的用户证书。</p>
-</blockquote>
-<p>.cer（非.crt）格式文件</p>
-<p><a href="http://wiki.cacert.org/FAQ/ImportRootCert#CAcert_user_trusted_certificates">http://wiki.cacert.org/FAQ/ImportRootCert#CAcert_user_trusted_certificates</a></p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">a. openssl x509 -inform DER -subject_hash_old -in CA_Name.cer    | head -1</span><br><span class="line">得到类似字符串：9a5ba575</span><br><span class="line">b.cat CA_Name.cer  &gt; 9a5ba575.0</span><br><span class="line">c.openssl x509 -inform DER -text -in CA_Name.cer    -out &#x2F;dev&#x2F;null &gt;&gt; 9a5ba575.0</span><br><span class="line">d.放入&#x2F;system&#x2F;ca-certificates&#x2F;files&#x2F;</span><br><span class="line">实际测试，可能会报错，报错后不管格式，DER 换成PEM 试试</span><br><span class="line">编译到：&#x2F;system&#x2F;etc&#x2F;security&#x2F;cacerts&#x2F;</span><br><span class="line">e:烧录重启验证</span><br></pre></td></tr></table></figure>
-
-
-<p><a href="http://wiki.cacert.org/FAQ/ImportRootCert#CAcert_user_trusted_certificates">http://wiki.cacert.org/FAQ/ImportRootCert#CAcert_user_trusted_certificates</a></p>
-<p>Fiddler默认是cer证书，如何转为pem呢？指令如下：</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">openssl x509 -inform der -in abc.cer -out out.pem</span><br></pre></td></tr></table></figure>
-
-<p><a href="https://segmentfault.com/a/1190000017035564">https://segmentfault.com/a/1190000017035564</a><br>解决只读文件无法写入的问题：</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">adb remount</span><br><span class="line">adb shell</span><br><span class="line">chmod 777 system</span><br></pre></td></tr></table></figure>
-
-
-
-<h4 id="第三方apk"><a href="#第三方apk" class="headerlink" title="第三方apk"></a>第三方apk</h4><p>AndroidProxySetter工具可以帮助我们使用adb命令可以快速进行wifi代理的设置和清除<br>GitHub地址：</p>
-<pre><code>https://github.com/jpkrause/AndroidProxySetter</code></pre><p>下好apk后，安装到手机</p>
-<pre><code>adb install proxy-setter-debug-0.2.1.apk</code></pre><p>设置代理：</p>
-<p>adb shell am start -n tk.elevenk.proxysetter/.MainActivity -e host 代理IP地址 -e port 端口号 -e ssid WIFI名称 -e reset-wifi true -e key WIFI密码</p>
-<p>如：</p>
-<p>adb shell am start -n tk.elevenk.proxysetter/.MainActivity -e host 127.0.0.1 -e port 8888 -e ssid YOUR-WIFI-NAME -e reset-wifi true -e key YOUR-WIFI-PASSWORD</p>
-<h4 id="查看进程"><a href="#查看进程" class="headerlink" title="查看进程"></a>查看进程</h4><pre><code>// 列出进程列表 ，其中包含进程的 pid 等信息
-adb shell ps
-
-// 杀死指定pid的进程
-adb shell kill pid
-
-// 查看指定进程信息
-adb shell ps -x pid </code></pre><p>​    </p>
-<h3 id="apk管理"><a href="#apk管理" class="headerlink" title="apk管理"></a>apk管理</h3><h4 id="adb导出（手机apk到电脑）"><a href="#adb导出（手机apk到电脑）" class="headerlink" title="adb导出（手机apk到电脑）"></a>adb导出（手机apk到电脑）</h4><pre><code>1、adb shell pm list package
-打印出来所有安装到手机上的APP包名
-adb shell pm list package com.huawei.   //查找包含com.huawei的包
-
-2、adb shell pm path com.xxx.xxx
-找出安装后的包名应用的apk所在位置
-
-3、adb pull path_apk  out_apk
-path_apk为apk在手机上的目录，即2中的apk在手机中的目录，out_apk为导出apk的目标路径。
-
-4、通过adb命令查看Android手机已安装应用的版本号versionCode和versionName
-adb shell dumpsys package  [PackageName] | findstr versionCode
-adb shell dumpsys package  [PackageName] | findstr versionName</code></pre><h3 id="日志输出"><a href="#日志输出" class="headerlink" title="日志输出"></a>日志输出</h3><pre><code>// 查看指定 tag 日志
-adb logcat -s tag
-
-// 清除log缓存
-adb logcat -c</code></pre><h3 id="启动activity"><a href="#启动activity" class="headerlink" title="启动activity"></a>启动activity</h3><pre><code>// 启动应用
-// -n 指定包名/包名+启动类的类名 ，启动类的类名必须是完整路径
-adb shell am start -n package/package-activity
-
-// 停止应用
-adb shell am force-stop package
-
-// 启动 service
-adb shell am startservice [options] &lt;INTENT&gt;
-举例：adb shell am startservice -a com.lt.test.action.ONESERVICE
-举例：adb shell am startservice -n com.lt.test/.MyService
-
-// 发送广播
-adb shell am broadcast [options] &lt;INTENT&gt;
-// 发送一个广播去关闭一个activity
-adb shell am broadcast -a &quot;action_finish&quot; 
-// 恢复出厂设置的方法，会清除内存所有内容
-adb shell am broadcast -a android.intent.action.MASTER_CLEAR
-adb shell am broadcast -n com.lt.test/.MyBroadcast
-
-// 列举出所有包含&lt;INTENT&gt;的package
-adb shell pm list packages [options] &lt;INTENT&gt;
-adb shell pm list packages com.lt</code></pre><p>​    </p>
-<h3 id="管理安装包"><a href="#管理安装包" class="headerlink" title="管理安装包"></a>管理安装包</h3><pre><code>adb shell pm
-安装应用程序
-adb install xxx.apk
-
-// 覆盖安装(保留缓存和数据)
-adb install -r xxx.apk
-
-// 安装apk到sd卡
-adb install -s xxx.apk
-
-卸载应用程序
-adb uninstall package
-
-// 卸载时保留数据和缓存目录
-adb uninstall -k package</code></pre><p>​    </p>
-<pre><code>列出设备上的所有权限
-adb shell pm list permissions
-
-列出设备上安装的所有app的包名
-adb shell pm list packages
-
-// 列出指定包名对应的apk路径
-adb shell pm path com.android.search
-
-// 清空指定包名对应的应用的数据和缓存文件，开发时很有用
-adb shell pm clear com.android.search</code></pre><p>​    </p>
-<pre><code>列出设备上的所有feature
-adb shell pm list features</code></pre><h3 id="adb安装证书"><a href="#adb安装证书" class="headerlink" title="adb安装证书"></a>adb安装证书</h3><p>adb shell am start -n com.android.certinstaller/.CertInstallerMain -a android.intent.action.VIEW -t application/x-x509-ca-cert file:///sdcard/cacert.cer</p>
-<p>参考：<a href="https://www.jianshu.com/p/f547b05a5335">https://www.jianshu.com/p/f547b05a5335</a></p>
-<h3 id="查看系统信息"><a href="#查看系统信息" class="headerlink" title="查看系统信息"></a>查看系统信息</h3><pre><code>// 获取系统属性，可以获取到一大堆关于系统信息（键值对形式）
-adb shell getprop 
-
-// 获取系统属性并过滤出包含version的信息
-adb shell getprop | grep version</code></pre><p>​    </p>
-<pre><code>查看 cpu 和 内存使用情况
-// 每隔一秒会刷新一次 cpu 和 内存情况
-adb shell top
-
-// 查看占用内存前3的应用
-adb shell top -m 3
-
-// 刷新3次内存信息（不指定-n参数的话默认每秒会刷新1次数据）：
-adb shell top -n 3
-
-// 查看占用内存前3的应用，刷新1次
-adb shell top -m 3 -n 1</code></pre><p>​    </p>
-<pre><code>查看系统当前 cpu 使用情况
-adb shell cat /proc/cpuinfo
-adb shell cat /proc/stat
-
-查看系统当前内存使用情况
-adb shell cat /proc/meminfo
-
-查看指定包名应用内存使用情况，各项信息具体说明
-adb shell dumpsys meminfo package</code></pre><p>​    </p>
-<pre><code>查看 service
-adb shell service list
-adb shell cat /system/build.prop
-
-电池相关
-// 查看电量管理信息，其中可以知道当前那个应用持有WAKE_LOCK锁
-adb shell dumpsys power
-
-// 查看电池用量情况
-adb shell dumpsys battery
-
-// 查看电池使用日志
-adb shell dumpsys batterystats
-图形界面日志分析参考google提供的工具 https://github.com/google/battery-historian</code></pre><h3 id="查看当前activity"><a href="#查看当前activity" class="headerlink" title="查看当前activity"></a>查看当前activity</h3><pre><code>logcat | grep ActivityManager
-adb shell dumpsys activity activities
-adb shell dumpsys activity activities | findstr &quot;应用包名&quot; 
-
-过滤字符串忽略大小写 : adb logcat | grep -i wifi ;
-
-过滤固定字符串 : 只要命令行出现的日志都可以过滤, 不管是不是标签;
-
--- 命令 : adb logcat | grep Wifi ;</code></pre><h2 id="APP安全测试"><a href="#APP安全测试" class="headerlink" title="APP安全测试"></a>APP安全测试</h2><h3 id="组件安全"><a href="#组件安全" class="headerlink" title="组件安全"></a>组件安全</h3><h4 id="activity-是否ddos"><a href="#activity-是否ddos" class="headerlink" title="activity 是否ddos"></a>activity 是否ddos</h4><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">adb shell am start -S -n 包名&#x2F;Activity名</span><br></pre></td></tr></table></figure>
-
-
-
-<h4 id="BroadcastReceiver拒绝服务"><a href="#BroadcastReceiver拒绝服务" class="headerlink" title="BroadcastReceiver拒绝服务"></a>BroadcastReceiver拒绝服务</h4><p>查看AndroidManifest.xml是否存在Receiver导出<br>利用adb命令启动被导出的Receiver</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">adb shell am broadcast –n pachage_name&#x2F;receiver_name</span><br></pre></td></tr></table></figure>
-
-
-
-<h4 id="service拒绝服务"><a href="#service拒绝服务" class="headerlink" title="service拒绝服务"></a>service拒绝服务</h4><p>查看AndroidManifest.xml是否存在Service导出<br>利用adb命令启动被导出的Service</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">adb shell am start service –n pachage_name&#x2F;service_name</span><br></pre></td></tr></table></figure>
-
-
-
-<h4 id="Provider目录遍历"><a href="#Provider目录遍历" class="headerlink" title="Provider目录遍历"></a>Provider目录遍历</h4><p>查看Provider是否导出<br>查看反编译代码,检查OpenFile函数中是否包含路径校验逻辑</p>
-<h4 id="Ptrace注入"><a href="#Ptrace注入" class="headerlink" title="Ptrace注入"></a>Ptrace注入</h4><p>检测方法一：</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">推送inject和libpayload.so到手机&#x2F;data&#x2F;local&#x2F;tmp中</span><br><span class="line">为inject添加执行权限</span><br><span class="line">执行注入命令inject 进程名 &#x2F;data&#x2F;local&#x2F;tmp&#x2F;libpayload.so 任意字符串</span><br><span class="line">adb logcat -s 360Inject抓取日志分析是否注入成功</span><br></pre></td></tr></table></figure>
-
-<p>检测方法二：</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">frida-trace -U -i &quot;recv*&quot;  -f 包名</span><br><span class="line">cat &#x2F;proc&#x2F;PID&#x2F;maps |grep frida</span><br></pre></td></tr></table></figure>
-
-<h4 id="SharedPreferences明文保存敏感信息"><a href="#SharedPreferences明文保存敏感信息" class="headerlink" title="SharedPreferences明文保存敏感信息"></a>SharedPreferences明文保存敏感信息</h4><p>跳转到app的数据目录</p>
-<p>查看所有xml文件,检测是否包含敏感数据</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">adb shell</span><br><span class="line">cd &#x2F;data&#x2F;data&#x2F;package_name&#x2F;hared_prefs&#x2F;</span><br></pre></td></tr></table></figure>
-
-<p>查看所有xml文件,检测是否包含敏感数据</p>
-<h4 id="SQLite明文保存敏感信息"><a href="#SQLite明文保存敏感信息" class="headerlink" title="SQLite明文保存敏感信息"></a>SQLite明文保存敏感信息</h4><p>跳转到app的database目录</p>
-<p>查看所有db文件,检测是否包含敏感数据</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">adb shell</span><br><span class="line">cd &#x2F;data&#x2F;data&#x2F;package_name&#x2F;database&#x2F;</span><br></pre></td></tr></table></figure>
-
-<p>查看所有db文件,检测是否包含敏感数据</p>
-<h4 id="log敏感信息检测"><a href="#log敏感信息检测" class="headerlink" title="log敏感信息检测"></a>log敏感信息检测</h4><p>使用logcat命令抓取log</p>
-<p>分析日志中是否包含敏感信息</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">shell adb logcat &gt; logfile.log</span><br></pre></td></tr></table></figure>
-
-<p>分析日志中是否包含敏感信息</p>
-]]></content>
-      <categories>
-        <category>Android</category>
-      </categories>
-      <tags>
-        <tag>adb</tag>
       </tags>
   </entry>
   <entry>
@@ -8618,6 +8375,256 @@ adb shell dumpsys activity activities | findstr &quot;应用包名&quot;
       <tags>
         <tag>Frida</tag>
         <tag>Hook</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>adb使用总结</title>
+    <url>/2021/01/05/Android/adb%E4%BD%BF%E7%94%A8%E6%80%BB%E7%BB%93/</url>
+    <content><![CDATA[<h1 id="adb使用"><a href="#adb使用" class="headerlink" title="adb使用"></a>adb使用</h1><h2 id="adb连接"><a href="#adb连接" class="headerlink" title="adb连接"></a>adb连接</h2><pre><code>adb connect ip:5555
+adb devices
+adb -s device-id shell  //指定某个设备(插充电设备或USB网络时)
+// 查看网络状态
+adb shell netstat
+
+// 通过 tcp/ip 连接，默认端口 5555
+adb connect host:port
+
+// 转发套接字连接
+adb forward local remote</code></pre><h2 id="adb-截图发送到当前用户目录下"><a href="#adb-截图发送到当前用户目录下" class="headerlink" title="adb 截图发送到当前用户目录下"></a>adb 截图发送到当前用户目录下</h2><pre><code>adb exec-out screencap -p &gt; 1.png</code></pre><h2 id="adb文件导出-导入"><a href="#adb文件导出-导入" class="headerlink" title="adb文件导出/导入"></a>adb文件导出/导入</h2><h3 id="从电脑上复制文件到设备"><a href="#从电脑上复制文件到设备" class="headerlink" title="从电脑上复制文件到设备"></a>从电脑上复制文件到设备</h3><pre><code>// 把 a.png 从电脑上拷贝到设备sd卡上
+adb push ~/a.png /mnt/sdcard/
+
+// 把 a.png 从电脑上拷贝到设备sd卡上并重命名为 b.png
+adb push ~/a.png /mnt/sdcard/b.png</code></pre><p>​    </p>
+<pre><code>// 把 pic目录下所有文件从电脑上拷贝到设备sd卡上
+adb push ~/pic/ /mnt/sdcard/</code></pre><h3 id="从设备复制文件到电脑"><a href="#从设备复制文件到电脑" class="headerlink" title="从设备复制文件到电脑"></a>从设备复制文件到电脑</h3><pre><code>// 把 a.png 从设备sd卡上拷贝到电脑上
+adb pull /mnt/sdcard/a.png ~/
+
+// 把 a.png 从设备sd卡上拷贝到电脑上并命名为b.png
+adb pull /mnt/sdcard/a.png ~/b.png
+
+// 把pics目录下所有文件从设备sd卡上拷贝到电脑上
+adb pull /mnt/sdcard/pics/ ~/pics/</code></pre><p>​    </p>
+<h3 id="一些基本命令"><a href="#一些基本命令" class="headerlink" title="一些基本命令"></a>一些基本命令</h3><pre><code>// 列出sd卡根目录下所有文件
+adb shell ls /sdcard/
+
+// 定位到 /sdcard/目录
+adb shell cd /sdcard/
+
+// 删除某文件
+// -f 强制删除文件不需要确认
+// -r 递归删除文件夹内文件
+// -i 删除文件前需要确认
+adb shell rm /sdcard/1.txt
+
+// 创建目录
+adb shell mkdir /sdcard/temp/
+// 指定 -p 递归创建目录
+adb shell mkdir -p  /sdcard/temp/test/abc/hello/
+
+// 创建文件
+adb shell touch /sdcard/1.txt
+
+// 显示当前所在目录
+adb shell pwd
+
+// 拷贝文件1.txt到test目录
+adb shell cp /sdcard/1.txt /sdcard/test/
+
+// 移动文件，移动同一目录下文件相当于重命名文件
+adb shell mv /sdcard/1.txt /sdcard/2.text</code></pre><h2 id="adb修改手机代理"><a href="#adb修改手机代理" class="headerlink" title="adb修改手机代理"></a>adb修改手机代理</h2><h3 id="全局代理"><a href="#全局代理" class="headerlink" title="全局代理"></a>全局代理</h3><pre><code>设置代理：
+adb shell settings put global http_proxy 代理IP地址:端口号
+如：
+adb shell settings put global http_proxy 192.168.137.97:8888
+
+移除代理：
+adb shell settings delete global http_proxy
+adb shell settings delete global global_http_proxy_host
+adb shell settings delete global global_http_proxy_port</code></pre><h3 id="证书安装"><a href="#证书安装" class="headerlink" title="证书安装"></a>证书安装</h3><blockquote>
+<p>手机获取Root权限后，直接把Base64文本格式的根证书文件复制到etc/security/cacerts文件夹里，然后到设置(Settings) – 安全(Security) – 受信任的凭据(Trusted credentials)里面，此时你要安装的根证书应该会显示已经安装好了。这样安装之后根证书是作为系统证书使用的，而不是按照方法一安装方式的用户证书。</p>
+</blockquote>
+<p>.cer（非.crt）格式文件</p>
+<p><a href="http://wiki.cacert.org/FAQ/ImportRootCert#CAcert_user_trusted_certificates">http://wiki.cacert.org/FAQ/ImportRootCert#CAcert_user_trusted_certificates</a></p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">a. openssl x509 -inform DER -subject_hash_old -in CA_Name.cer    | head -1</span><br><span class="line">得到类似字符串：9a5ba575</span><br><span class="line">b.cat CA_Name.cer  &gt; 9a5ba575.0</span><br><span class="line">c.openssl x509 -inform DER -text -in CA_Name.cer    -out &#x2F;dev&#x2F;null &gt;&gt; 9a5ba575.0</span><br><span class="line">d.放入&#x2F;system&#x2F;ca-certificates&#x2F;files&#x2F;</span><br><span class="line">实际测试，可能会报错，报错后不管格式，DER 换成PEM 试试</span><br><span class="line">编译到：&#x2F;system&#x2F;etc&#x2F;security&#x2F;cacerts&#x2F;</span><br><span class="line">e:烧录重启验证</span><br></pre></td></tr></table></figure>
+
+
+<p><a href="http://wiki.cacert.org/FAQ/ImportRootCert#CAcert_user_trusted_certificates">http://wiki.cacert.org/FAQ/ImportRootCert#CAcert_user_trusted_certificates</a></p>
+<p>Fiddler默认是cer证书，如何转为pem呢？指令如下：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">openssl x509 -inform der -in abc.cer -out out.pem</span><br></pre></td></tr></table></figure>
+
+<p><a href="https://segmentfault.com/a/1190000017035564">https://segmentfault.com/a/1190000017035564</a><br>解决只读文件无法写入的问题：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">adb remount</span><br><span class="line">adb shell</span><br><span class="line">chmod 777 system</span><br></pre></td></tr></table></figure>
+
+<h3 id="第三方apk"><a href="#第三方apk" class="headerlink" title="第三方apk"></a>第三方apk</h3><p>AndroidProxySetter工具可以帮助我们使用adb命令可以快速进行wifi代理的设置和清除<br>GitHub地址：<a href="https://github.com/jpkrause/AndroidProxySetter">https://github.com/jpkrause/AndroidProxySetter</a></p>
+<p>下好apk后，安装到手机</p>
+<pre><code>adb install proxy-setter-debug-0.2.1.apk</code></pre><p>设置代理：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">adb shell am start -n tk.elevenk.proxysetter&#x2F;.MainActivity -e host 代理IP地址 -e port 端口号 -e ssid WIFI名称 -e reset-wifi true -e key WIFI密码</span><br></pre></td></tr></table></figure>
+
+<p>如：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">adb shell am start -n tk.elevenk.proxysetter&#x2F;.MainActivity -e host 127.0.0.1 -e port 8888 -e ssid YOUR-WIFI-NAME -e reset-wifi true -e key YOUR-WIFI-PASSWORD</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="查看进程"><a href="#查看进程" class="headerlink" title="查看进程"></a>查看进程</h3><pre><code>// 列出进程列表 ，其中包含进程的 pid 等信息
+adb shell ps
+
+// 杀死指定pid的进程
+adb shell kill pid
+
+// 查看指定进程信息
+adb shell ps -x pid </code></pre><h2 id="apk管理"><a href="#apk管理" class="headerlink" title="apk管理"></a>apk管理</h2><h3 id="adb导出（手机apk到电脑）"><a href="#adb导出（手机apk到电脑）" class="headerlink" title="adb导出（手机apk到电脑）"></a>adb导出（手机apk到电脑）</h3><pre><code>1、adb shell pm list package
+打印出来所有安装到手机上的APP包名
+adb shell pm list package com.huawei.   //查找包含com.huawei的包
+
+2、adb shell pm path com.xxx.xxx
+找出安装后的包名应用的apk所在位置
+
+3、adb pull path_apk  out_apk
+path_apk为apk在手机上的目录，即2中的apk在手机中的目录，out_apk为导出apk的目标路径。
+
+4、通过adb命令查看Android手机已安装应用的版本号versionCode和versionName
+adb shell dumpsys package  [PackageName] | findstr versionCode
+adb shell dumpsys package  [PackageName] | findstr versionName</code></pre><h2 id="日志输出"><a href="#日志输出" class="headerlink" title="日志输出"></a>日志输出</h2><pre><code>// 查看指定 tag 日志
+adb logcat -s tag
+
+// 清除log缓存
+adb logcat -c</code></pre><h2 id="启动activity"><a href="#启动activity" class="headerlink" title="启动activity"></a>启动activity</h2><pre><code>// 启动应用
+// -n 指定包名/包名+启动类的类名 ，启动类的类名必须是完整路径
+adb shell am start -n package/package-activity
+
+// 停止应用
+adb shell am force-stop package
+
+// 启动 service
+adb shell am startservice [options] &lt;INTENT&gt;
+举例：adb shell am startservice -a com.lt.test.action.ONESERVICE
+举例：adb shell am startservice -n com.lt.test/.MyService
+
+// 发送广播
+adb shell am broadcast [options] &lt;INTENT&gt;
+// 发送一个广播去关闭一个activity
+adb shell am broadcast -a &quot;action_finish&quot; 
+// 恢复出厂设置的方法，会清除内存所有内容
+adb shell am broadcast -a android.intent.action.MASTER_CLEAR
+adb shell am broadcast -n com.lt.test/.MyBroadcast
+
+// 列举出所有包含&lt;INTENT&gt;的package
+adb shell pm list packages [options] &lt;INTENT&gt;
+adb shell pm list packages com.lt</code></pre><h2 id="管理安装包"><a href="#管理安装包" class="headerlink" title="管理安装包"></a>管理安装包</h2><pre><code>adb shell pm
+安装应用程序
+adb install xxx.apk
+
+// 覆盖安装(保留缓存和数据)
+adb install -r xxx.apk
+
+// 安装apk到sd卡
+adb install -s xxx.apk
+
+卸载应用程序
+adb uninstall package
+
+// 卸载时保留数据和缓存目录
+adb uninstall -k package</code></pre><p>​    </p>
+<pre><code>列出设备上的所有权限
+adb shell pm list permissions
+
+列出设备上安装的所有app的包名
+adb shell pm list packages
+
+// 列出指定包名对应的apk路径
+adb shell pm path com.android.search
+
+// 清空指定包名对应的应用的数据和缓存文件，开发时很有用
+adb shell pm clear com.android.search</code></pre><p>​    </p>
+<pre><code>列出设备上的所有feature
+adb shell pm list features</code></pre><h2 id="adb安装证书"><a href="#adb安装证书" class="headerlink" title="adb安装证书"></a>adb安装证书</h2><p>adb shell am start -n com.android.certinstaller/.CertInstallerMain -a android.intent.action.VIEW -t application/x-x509-ca-cert file:///sdcard/cacert.cer</p>
+<p>参考：<a href="https://www.jianshu.com/p/f547b05a5335">https://www.jianshu.com/p/f547b05a5335</a></p>
+<h2 id="查看系统信息"><a href="#查看系统信息" class="headerlink" title="查看系统信息"></a>查看系统信息</h2><pre><code>// 获取系统属性，可以获取到一大堆关于系统信息（键值对形式）
+adb shell getprop 
+
+// 获取系统属性并过滤出包含version的信息
+adb shell getprop | grep version</code></pre><p>​    </p>
+<pre><code>查看 cpu 和 内存使用情况
+// 每隔一秒会刷新一次 cpu 和 内存情况
+adb shell top
+
+// 查看占用内存前3的应用
+adb shell top -m 3
+
+// 刷新3次内存信息（不指定-n参数的话默认每秒会刷新1次数据）：
+adb shell top -n 3
+
+// 查看占用内存前3的应用，刷新1次
+adb shell top -m 3 -n 1</code></pre><p>​    </p>
+<pre><code>查看系统当前 cpu 使用情况
+adb shell cat /proc/cpuinfo
+adb shell cat /proc/stat
+
+查看系统当前内存使用情况
+adb shell cat /proc/meminfo
+
+查看指定包名应用内存使用情况，各项信息具体说明
+adb shell dumpsys meminfo package</code></pre><p>​    </p>
+<pre><code>查看 service
+adb shell service list
+adb shell cat /system/build.prop
+
+电池相关
+// 查看电量管理信息，其中可以知道当前那个应用持有WAKE_LOCK锁
+adb shell dumpsys power
+
+// 查看电池用量情况
+adb shell dumpsys battery
+
+// 查看电池使用日志
+adb shell dumpsys batterystats
+图形界面日志分析参考google提供的工具 https://github.com/google/battery-historian</code></pre><h2 id="查看当前activity"><a href="#查看当前activity" class="headerlink" title="查看当前activity"></a>查看当前activity</h2><pre><code>logcat | grep ActivityManager
+adb shell dumpsys activity activities
+adb shell dumpsys activity activities | findstr &quot;应用包名&quot; 
+
+过滤字符串忽略大小写 : adb logcat | grep -i wifi ;
+
+过滤固定字符串 : 只要命令行出现的日志都可以过滤, 不管是不是标签;
+
+-- 命令 : adb logcat | grep Wifi ;</code></pre><h1 id="APP安全测试"><a href="#APP安全测试" class="headerlink" title="APP安全测试"></a>APP安全测试</h1><h2 id="组件安全"><a href="#组件安全" class="headerlink" title="组件安全"></a>组件安全</h2><h3 id="activity-是否可以被ddos"><a href="#activity-是否可以被ddos" class="headerlink" title="activity 是否可以被ddos"></a>activity 是否可以被ddos</h3><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">adb shell am start -S -n 包名&#x2F;Activity名</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="BroadcastReceiver拒绝服务"><a href="#BroadcastReceiver拒绝服务" class="headerlink" title="BroadcastReceiver拒绝服务"></a>BroadcastReceiver拒绝服务</h3><p>查看AndroidManifest.xml是否存在Receiver导出<br>利用adb命令启动被导出的Receiver</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">adb shell am broadcast –n pachage_name&#x2F;receiver_name</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="service拒绝服务"><a href="#service拒绝服务" class="headerlink" title="service拒绝服务"></a>service拒绝服务</h3><p>查看AndroidManifest.xml是否存在Service导出<br>利用adb命令启动被导出的Service</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">adb shell am start service –n pachage_name&#x2F;service_name</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="Provider目录遍历"><a href="#Provider目录遍历" class="headerlink" title="Provider目录遍历"></a>Provider目录遍历</h3><p>查看Provider是否导出<br>查看反编译代码,检查OpenFile函数中是否包含路径校验逻辑</p>
+<h3 id="Ptrace注入"><a href="#Ptrace注入" class="headerlink" title="Ptrace注入"></a>Ptrace注入</h3><h4 id="检测方法一："><a href="#检测方法一：" class="headerlink" title="检测方法一："></a>检测方法一：</h4><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">推送inject和libpayload.so到手机&#x2F;data&#x2F;local&#x2F;tmp中</span><br><span class="line">为inject添加执行权限</span><br><span class="line">执行注入命令inject 进程名 &#x2F;data&#x2F;local&#x2F;tmp&#x2F;libpayload.so 任意字符串</span><br><span class="line">adb logcat -s 360Inject抓取日志分析是否注入成功</span><br></pre></td></tr></table></figure>
+
+<h4 id="检测方法二："><a href="#检测方法二：" class="headerlink" title="检测方法二："></a>检测方法二：</h4><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">frida-trace -U -i &quot;recv*&quot;  -f 包名</span><br><span class="line">cat &#x2F;proc&#x2F;PID&#x2F;maps |grep frida</span><br></pre></td></tr></table></figure>
+
+<h3 id="SharedPreferences明文保存敏感信息"><a href="#SharedPreferences明文保存敏感信息" class="headerlink" title="SharedPreferences明文保存敏感信息"></a>SharedPreferences明文保存敏感信息</h3><p>跳转到app的数据目录</p>
+<p>查看所有xml文件,检测是否包含敏感数据</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">adb shell</span><br><span class="line">cd &#x2F;data&#x2F;data&#x2F;package_name&#x2F;hared_prefs&#x2F;</span><br></pre></td></tr></table></figure>
+
+<p>查看所有xml文件,检测是否包含敏感数据</p>
+<h3 id="SQLite明文保存敏感信息"><a href="#SQLite明文保存敏感信息" class="headerlink" title="SQLite明文保存敏感信息"></a>SQLite明文保存敏感信息</h3><p>跳转到app的database目录</p>
+<p>查看所有db文件,检测是否包含敏感数据</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">adb shell</span><br><span class="line">cd &#x2F;data&#x2F;data&#x2F;package_name&#x2F;database&#x2F;</span><br></pre></td></tr></table></figure>
+
+<p>查看所有db文件,检测是否包含敏感数据</p>
+<h3 id="log敏感信息检测"><a href="#log敏感信息检测" class="headerlink" title="log敏感信息检测"></a>log敏感信息检测</h3><p>使用logcat命令抓取log</p>
+<p>分析日志中是否包含敏感信息</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">shell adb logcat &gt; logfile.log</span><br></pre></td></tr></table></figure>
+
+<p>分析日志中是否包含敏感信息</p>
+]]></content>
+      <categories>
+        <category>Android</category>
+      </categories>
+      <tags>
+        <tag>adb</tag>
       </tags>
   </entry>
 </search>

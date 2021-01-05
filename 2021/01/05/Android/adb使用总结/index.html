@@ -1,0 +1,279 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"><meta><title>adb使用总结 - ol4three</title><meta description="adb使用adb连接adb connect ip:5555 adb devices adb -s device-id shell  &amp;#x2F;&amp;#x2F;指定某个设备(插充电设备或USB网络时) &amp;#x2F;&amp;#x2F; 查看网络状态 adb shell netstat  &amp;#x2F;&amp;#x2F; 通过 tcp&amp;#x2F;ip 连接，默认端口 5555 adb connect host:port  &amp;#x2F;&amp;#x2F; 转发套接字连接 adb forward local remo"><meta property="og:type" content="blog"><meta property="og:title" content="adb使用总结"><meta property="og:url" content="http://www.ol4three.com/2021/01/05/Android/adb%E4%BD%BF%E7%94%A8%E6%80%BB%E7%BB%93/"><meta property="og:site_name" content="ol4three"><meta property="og:description" content="adb使用adb连接adb connect ip:5555 adb devices adb -s device-id shell  &amp;#x2F;&amp;#x2F;指定某个设备(插充电设备或USB网络时) &amp;#x2F;&amp;#x2F; 查看网络状态 adb shell netstat  &amp;#x2F;&amp;#x2F; 通过 tcp&amp;#x2F;ip 连接，默认端口 5555 adb connect host:port  &amp;#x2F;&amp;#x2F; 转发套接字连接 adb forward local remo"><meta property="og:locale" content="en_US"><meta property="og:image" content="http://www.ol4three.com/img/og_image.png"><meta property="article:published_time" content="2021-01-05T13:19:41.000Z"><meta property="article:modified_time" content="2021-01-05T13:32:14.763Z"><meta property="article:author" content="ol4three"><meta property="article:tag" content="adb"><meta property="twitter:card" content="summary"><meta property="twitter:image" content="/img/og_image.png"><script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":"http://www.ol4three.com/2021/01/05/Android/adb%E4%BD%BF%E7%94%A8%E6%80%BB%E7%BB%93/"},"headline":"ol4three","image":["http://www.ol4three.com/img/og_image.png"],"datePublished":"2021-01-05T13:19:41.000Z","dateModified":"2021-01-05T13:32:14.763Z","author":{"@type":"Person","name":"ol4three"},"description":"adb使用adb连接adb connect ip:5555 adb devices adb -s device-id shell  &#x2F;&#x2F;指定某个设备(插充电设备或USB网络时) &#x2F;&#x2F; 查看网络状态 adb shell netstat  &#x2F;&#x2F; 通过 tcp&#x2F;ip 连接，默认端口 5555 adb connect host:port  &#x2F;&#x2F; 转发套接字连接 adb forward local remo"}</script><link rel="canonical" href="http://www.ol4three.com/2021/01/05/Android/adb%E4%BD%BF%E7%94%A8%E6%80%BB%E7%BB%93/"><link rel="icon" href="/img/logo.svg"><link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.12.0/css/all.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@9.12.0/styles/atom-one-light.css"><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@400;600&amp;family=Source+Code+Pro"><link rel="stylesheet" href="/css/default.css"><style>body>.footer,body>.navbar,body>.section{opacity:0}</style><!--!--><!--!--><script src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" defer></script><!--!--><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lightgallery@1.6.8/dist/css/lightgallery.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/css/justifiedGallery.min.css"><!--!--><!--!--><script src="https://cdn.jsdelivr.net/npm/pace-js@1.0.2/pace.min.js"></script><script data-ad-client="1" src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js" async></script><meta name="generator" content="Hexo 5.1.1"><link rel="alternate" href="/atom.xml" title="ol4three" type="application/atom+xml">
+</head><body class="is-3-column"><nav class="navbar navbar-main"><div class="container"><div class="navbar-brand justify-content-center"><a class="navbar-item navbar-logo" href="/"><img src="/img/logo.svg" alt="ol4three" height="28"></a></div><div class="navbar-menu"><div class="navbar-start"><a class="navbar-item" href="/">Home</a><a class="navbar-item" href="/about">About</a><a class="navbar-item" href="/Security%20Incidents">Security Incidents</a><a class="navbar-item" href="/Vulnerabilities">Vulnerabilities</a><a class="navbar-item" href="/Read%20Team">Read Team</a><a class="navbar-item" href="/Stop%20learning">Stop learning</a><a class="navbar-item" href="/archives">Archives</a><a class="navbar-item" href="/categories">Categories</a><a class="navbar-item" href="/tags">Tags</a></div><div class="navbar-end"><a class="navbar-item" target="_blank" rel="noopener" title="Download on GitHub" href="https://github.com/ppoffice/hexo-theme-icarus"><i class="fab fa-github"></i></a><a class="navbar-item is-hidden-tablet catalogue" title="Catalogue" href="javascript:;"><i class="fas fa-list-ul"></i></a><a class="navbar-item search" title="Search" href="javascript:;"><i class="fas fa-search"></i></a></div></div></div></nav><section class="section"><div class="container"><div class="columns"><div class="column order-2 column-main is-8-tablet is-8-desktop is-9-widescreen"><div class="card"><article class="card-content article" role="article"><h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal"><i class="fas fa-angle-double-right"></i>adb使用总结</h1><div class="article-meta size-small is-uppercase level is-mobile"><div class="level-left"><span class="level-item"><i class="far fa-calendar-alt"> </i><time dateTime="${date_xml(page.date)}" title="${date_xml(page.date)}">2021-01-05</time></span><span class="level-item">Updated&nbsp;<time dateTime="2021-01-05T13:32:14.763Z" title="2021-01-05T13:32:14.763Z">2021-01-05</time></span><span class="level-item is-hidden-mobile"><i class="far fa-calendar-check"> </i><time dateTime="${date_xml(page.updated)}" title="${date_xml(page.updated)}">2021-01-05</time></span><span class="level-item"><a class="link-muted" href="/categories/Android/">Android</a></span><span class="level-item">15 minutes read (About 2318 words)</span><span class="level-item" id="busuanzi_container_page_pv"><span id="busuanzi_value_page_pv">0</span>&nbsp;visits</span></div></div><h1 class="title is-3 is-size-4-mobile">adb使用总结</h1><div class="content"><h1 id="adb使用"><a href="#adb使用" class="headerlink" title="adb使用"></a>adb使用</h1><h2 id="adb连接"><a href="#adb连接" class="headerlink" title="adb连接"></a>adb连接</h2><pre><code>adb connect ip:5555
+adb devices
+adb -s device-id shell  //指定某个设备(插充电设备或USB网络时)
+// 查看网络状态
+adb shell netstat
+
+// 通过 tcp/ip 连接，默认端口 5555
+adb connect host:port
+
+// 转发套接字连接
+adb forward local remote</code></pre><h2 id="adb-截图发送到当前用户目录下"><a href="#adb-截图发送到当前用户目录下" class="headerlink" title="adb 截图发送到当前用户目录下"></a>adb 截图发送到当前用户目录下</h2><pre><code>adb exec-out screencap -p &gt; 1.png</code></pre><h2 id="adb文件导出-导入"><a href="#adb文件导出-导入" class="headerlink" title="adb文件导出/导入"></a>adb文件导出/导入</h2><h3 id="从电脑上复制文件到设备"><a href="#从电脑上复制文件到设备" class="headerlink" title="从电脑上复制文件到设备"></a>从电脑上复制文件到设备</h3><pre><code>// 把 a.png 从电脑上拷贝到设备sd卡上
+adb push ~/a.png /mnt/sdcard/
+
+// 把 a.png 从电脑上拷贝到设备sd卡上并重命名为 b.png
+adb push ~/a.png /mnt/sdcard/b.png</code></pre><p>​    </p>
+<pre><code>// 把 pic目录下所有文件从电脑上拷贝到设备sd卡上
+adb push ~/pic/ /mnt/sdcard/</code></pre><h3 id="从设备复制文件到电脑"><a href="#从设备复制文件到电脑" class="headerlink" title="从设备复制文件到电脑"></a>从设备复制文件到电脑</h3><pre><code>// 把 a.png 从设备sd卡上拷贝到电脑上
+adb pull /mnt/sdcard/a.png ~/
+
+// 把 a.png 从设备sd卡上拷贝到电脑上并命名为b.png
+adb pull /mnt/sdcard/a.png ~/b.png
+
+// 把pics目录下所有文件从设备sd卡上拷贝到电脑上
+adb pull /mnt/sdcard/pics/ ~/pics/</code></pre><p>​    </p>
+<h3 id="一些基本命令"><a href="#一些基本命令" class="headerlink" title="一些基本命令"></a>一些基本命令</h3><pre><code>// 列出sd卡根目录下所有文件
+adb shell ls /sdcard/
+
+// 定位到 /sdcard/目录
+adb shell cd /sdcard/
+
+// 删除某文件
+// -f 强制删除文件不需要确认
+// -r 递归删除文件夹内文件
+// -i 删除文件前需要确认
+adb shell rm /sdcard/1.txt
+
+// 创建目录
+adb shell mkdir /sdcard/temp/
+// 指定 -p 递归创建目录
+adb shell mkdir -p  /sdcard/temp/test/abc/hello/
+
+// 创建文件
+adb shell touch /sdcard/1.txt
+
+// 显示当前所在目录
+adb shell pwd
+
+// 拷贝文件1.txt到test目录
+adb shell cp /sdcard/1.txt /sdcard/test/
+
+// 移动文件，移动同一目录下文件相当于重命名文件
+adb shell mv /sdcard/1.txt /sdcard/2.text</code></pre><h2 id="adb修改手机代理"><a href="#adb修改手机代理" class="headerlink" title="adb修改手机代理"></a>adb修改手机代理</h2><h3 id="全局代理"><a href="#全局代理" class="headerlink" title="全局代理"></a>全局代理</h3><pre><code>设置代理：
+adb shell settings put global http_proxy 代理IP地址:端口号
+如：
+adb shell settings put global http_proxy 192.168.137.97:8888
+
+移除代理：
+adb shell settings delete global http_proxy
+adb shell settings delete global global_http_proxy_host
+adb shell settings delete global global_http_proxy_port</code></pre><h3 id="证书安装"><a href="#证书安装" class="headerlink" title="证书安装"></a>证书安装</h3><blockquote>
+<p>手机获取Root权限后，直接把Base64文本格式的根证书文件复制到etc/security/cacerts文件夹里，然后到设置(Settings) – 安全(Security) – 受信任的凭据(Trusted credentials)里面，此时你要安装的根证书应该会显示已经安装好了。这样安装之后根证书是作为系统证书使用的，而不是按照方法一安装方式的用户证书。</p>
+</blockquote>
+<p>.cer（非.crt）格式文件</p>
+<p><a target="_blank" rel="noopener" href="http://wiki.cacert.org/FAQ/ImportRootCert#CAcert_user_trusted_certificates">http://wiki.cacert.org/FAQ/ImportRootCert#CAcert_user_trusted_certificates</a></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">a. openssl x509 -inform DER -subject_hash_old -in CA_Name.cer    | head -1</span><br><span class="line">得到类似字符串：9a5ba575</span><br><span class="line">b.cat CA_Name.cer  &gt; 9a5ba575.0</span><br><span class="line">c.openssl x509 -inform DER -text -in CA_Name.cer    -out &#x2F;dev&#x2F;null &gt;&gt; 9a5ba575.0</span><br><span class="line">d.放入&#x2F;system&#x2F;ca-certificates&#x2F;files&#x2F;</span><br><span class="line">实际测试，可能会报错，报错后不管格式，DER 换成PEM 试试</span><br><span class="line">编译到：&#x2F;system&#x2F;etc&#x2F;security&#x2F;cacerts&#x2F;</span><br><span class="line">e:烧录重启验证</span><br></pre></td></tr></table></figure>
+
+
+<p><a target="_blank" rel="noopener" href="http://wiki.cacert.org/FAQ/ImportRootCert#CAcert_user_trusted_certificates">http://wiki.cacert.org/FAQ/ImportRootCert#CAcert_user_trusted_certificates</a></p>
+<p>Fiddler默认是cer证书，如何转为pem呢？指令如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">openssl x509 -inform der -in abc.cer -out out.pem</span><br></pre></td></tr></table></figure>
+
+<p><a target="_blank" rel="noopener" href="https://segmentfault.com/a/1190000017035564">https://segmentfault.com/a/1190000017035564</a><br>解决只读文件无法写入的问题：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">adb remount</span><br><span class="line">adb shell</span><br><span class="line">chmod 777 system</span><br></pre></td></tr></table></figure>
+
+<h3 id="第三方apk"><a href="#第三方apk" class="headerlink" title="第三方apk"></a>第三方apk</h3><p>AndroidProxySetter工具可以帮助我们使用adb命令可以快速进行wifi代理的设置和清除<br>GitHub地址：<a target="_blank" rel="noopener" href="https://github.com/jpkrause/AndroidProxySetter">https://github.com/jpkrause/AndroidProxySetter</a></p>
+<p>下好apk后，安装到手机</p>
+<pre><code>adb install proxy-setter-debug-0.2.1.apk</code></pre><p>设置代理：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">adb shell am start -n tk.elevenk.proxysetter&#x2F;.MainActivity -e host 代理IP地址 -e port 端口号 -e ssid WIFI名称 -e reset-wifi true -e key WIFI密码</span><br></pre></td></tr></table></figure>
+
+<p>如：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">adb shell am start -n tk.elevenk.proxysetter&#x2F;.MainActivity -e host 127.0.0.1 -e port 8888 -e ssid YOUR-WIFI-NAME -e reset-wifi true -e key YOUR-WIFI-PASSWORD</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="查看进程"><a href="#查看进程" class="headerlink" title="查看进程"></a>查看进程</h3><pre><code>// 列出进程列表 ，其中包含进程的 pid 等信息
+adb shell ps
+
+// 杀死指定pid的进程
+adb shell kill pid
+
+// 查看指定进程信息
+adb shell ps -x pid </code></pre><h2 id="apk管理"><a href="#apk管理" class="headerlink" title="apk管理"></a>apk管理</h2><h3 id="adb导出（手机apk到电脑）"><a href="#adb导出（手机apk到电脑）" class="headerlink" title="adb导出（手机apk到电脑）"></a>adb导出（手机apk到电脑）</h3><pre><code>1、adb shell pm list package
+打印出来所有安装到手机上的APP包名
+adb shell pm list package com.huawei.   //查找包含com.huawei的包
+
+2、adb shell pm path com.xxx.xxx
+找出安装后的包名应用的apk所在位置
+
+3、adb pull path_apk  out_apk
+path_apk为apk在手机上的目录，即2中的apk在手机中的目录，out_apk为导出apk的目标路径。
+
+4、通过adb命令查看Android手机已安装应用的版本号versionCode和versionName
+adb shell dumpsys package  [PackageName] | findstr versionCode
+adb shell dumpsys package  [PackageName] | findstr versionName</code></pre><h2 id="日志输出"><a href="#日志输出" class="headerlink" title="日志输出"></a>日志输出</h2><pre><code>// 查看指定 tag 日志
+adb logcat -s tag
+
+// 清除log缓存
+adb logcat -c</code></pre><h2 id="启动activity"><a href="#启动activity" class="headerlink" title="启动activity"></a>启动activity</h2><pre><code>// 启动应用
+// -n 指定包名/包名+启动类的类名 ，启动类的类名必须是完整路径
+adb shell am start -n package/package-activity
+
+// 停止应用
+adb shell am force-stop package
+
+// 启动 service
+adb shell am startservice [options] &lt;INTENT&gt;
+举例：adb shell am startservice -a com.lt.test.action.ONESERVICE
+举例：adb shell am startservice -n com.lt.test/.MyService
+
+// 发送广播
+adb shell am broadcast [options] &lt;INTENT&gt;
+// 发送一个广播去关闭一个activity
+adb shell am broadcast -a &quot;action_finish&quot; 
+// 恢复出厂设置的方法，会清除内存所有内容
+adb shell am broadcast -a android.intent.action.MASTER_CLEAR
+adb shell am broadcast -n com.lt.test/.MyBroadcast
+
+// 列举出所有包含&lt;INTENT&gt;的package
+adb shell pm list packages [options] &lt;INTENT&gt;
+adb shell pm list packages com.lt</code></pre><h2 id="管理安装包"><a href="#管理安装包" class="headerlink" title="管理安装包"></a>管理安装包</h2><pre><code>adb shell pm
+安装应用程序
+adb install xxx.apk
+
+// 覆盖安装(保留缓存和数据)
+adb install -r xxx.apk
+
+// 安装apk到sd卡
+adb install -s xxx.apk
+
+卸载应用程序
+adb uninstall package
+
+// 卸载时保留数据和缓存目录
+adb uninstall -k package</code></pre><p>​    </p>
+<pre><code>列出设备上的所有权限
+adb shell pm list permissions
+
+列出设备上安装的所有app的包名
+adb shell pm list packages
+
+// 列出指定包名对应的apk路径
+adb shell pm path com.android.search
+
+// 清空指定包名对应的应用的数据和缓存文件，开发时很有用
+adb shell pm clear com.android.search</code></pre><p>​    </p>
+<pre><code>列出设备上的所有feature
+adb shell pm list features</code></pre><h2 id="adb安装证书"><a href="#adb安装证书" class="headerlink" title="adb安装证书"></a>adb安装证书</h2><p>adb shell am start -n com.android.certinstaller/.CertInstallerMain -a android.intent.action.VIEW -t application/x-x509-ca-cert file:///sdcard/cacert.cer</p>
+<p>参考：<a target="_blank" rel="noopener" href="https://www.jianshu.com/p/f547b05a5335">https://www.jianshu.com/p/f547b05a5335</a></p>
+<h2 id="查看系统信息"><a href="#查看系统信息" class="headerlink" title="查看系统信息"></a>查看系统信息</h2><pre><code>// 获取系统属性，可以获取到一大堆关于系统信息（键值对形式）
+adb shell getprop 
+
+// 获取系统属性并过滤出包含version的信息
+adb shell getprop | grep version</code></pre><p>​    </p>
+<pre><code>查看 cpu 和 内存使用情况
+// 每隔一秒会刷新一次 cpu 和 内存情况
+adb shell top
+
+// 查看占用内存前3的应用
+adb shell top -m 3
+
+// 刷新3次内存信息（不指定-n参数的话默认每秒会刷新1次数据）：
+adb shell top -n 3
+
+// 查看占用内存前3的应用，刷新1次
+adb shell top -m 3 -n 1</code></pre><p>​    </p>
+<pre><code>查看系统当前 cpu 使用情况
+adb shell cat /proc/cpuinfo
+adb shell cat /proc/stat
+
+查看系统当前内存使用情况
+adb shell cat /proc/meminfo
+
+查看指定包名应用内存使用情况，各项信息具体说明
+adb shell dumpsys meminfo package</code></pre><p>​    </p>
+<pre><code>查看 service
+adb shell service list
+adb shell cat /system/build.prop
+
+电池相关
+// 查看电量管理信息，其中可以知道当前那个应用持有WAKE_LOCK锁
+adb shell dumpsys power
+
+// 查看电池用量情况
+adb shell dumpsys battery
+
+// 查看电池使用日志
+adb shell dumpsys batterystats
+图形界面日志分析参考google提供的工具 https://github.com/google/battery-historian</code></pre><h2 id="查看当前activity"><a href="#查看当前activity" class="headerlink" title="查看当前activity"></a>查看当前activity</h2><pre><code>logcat | grep ActivityManager
+adb shell dumpsys activity activities
+adb shell dumpsys activity activities | findstr &quot;应用包名&quot; 
+
+过滤字符串忽略大小写 : adb logcat | grep -i wifi ;
+
+过滤固定字符串 : 只要命令行出现的日志都可以过滤, 不管是不是标签;
+
+-- 命令 : adb logcat | grep Wifi ;</code></pre><h1 id="APP安全测试"><a href="#APP安全测试" class="headerlink" title="APP安全测试"></a>APP安全测试</h1><h2 id="组件安全"><a href="#组件安全" class="headerlink" title="组件安全"></a>组件安全</h2><h3 id="activity-是否可以被ddos"><a href="#activity-是否可以被ddos" class="headerlink" title="activity 是否可以被ddos"></a>activity 是否可以被ddos</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">adb shell am start -S -n 包名&#x2F;Activity名</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="BroadcastReceiver拒绝服务"><a href="#BroadcastReceiver拒绝服务" class="headerlink" title="BroadcastReceiver拒绝服务"></a>BroadcastReceiver拒绝服务</h3><p>查看AndroidManifest.xml是否存在Receiver导出<br>利用adb命令启动被导出的Receiver</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">adb shell am broadcast –n pachage_name&#x2F;receiver_name</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="service拒绝服务"><a href="#service拒绝服务" class="headerlink" title="service拒绝服务"></a>service拒绝服务</h3><p>查看AndroidManifest.xml是否存在Service导出<br>利用adb命令启动被导出的Service</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">adb shell am start service –n pachage_name&#x2F;service_name</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="Provider目录遍历"><a href="#Provider目录遍历" class="headerlink" title="Provider目录遍历"></a>Provider目录遍历</h3><p>查看Provider是否导出<br>查看反编译代码,检查OpenFile函数中是否包含路径校验逻辑</p>
+<h3 id="Ptrace注入"><a href="#Ptrace注入" class="headerlink" title="Ptrace注入"></a>Ptrace注入</h3><h4 id="检测方法一："><a href="#检测方法一：" class="headerlink" title="检测方法一："></a>检测方法一：</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">推送inject和libpayload.so到手机&#x2F;data&#x2F;local&#x2F;tmp中</span><br><span class="line">为inject添加执行权限</span><br><span class="line">执行注入命令inject 进程名 &#x2F;data&#x2F;local&#x2F;tmp&#x2F;libpayload.so 任意字符串</span><br><span class="line">adb logcat -s 360Inject抓取日志分析是否注入成功</span><br></pre></td></tr></table></figure>
+
+<h4 id="检测方法二："><a href="#检测方法二：" class="headerlink" title="检测方法二："></a>检测方法二：</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">frida-trace -U -i &quot;recv*&quot;  -f 包名</span><br><span class="line">cat &#x2F;proc&#x2F;PID&#x2F;maps |grep frida</span><br></pre></td></tr></table></figure>
+
+<h3 id="SharedPreferences明文保存敏感信息"><a href="#SharedPreferences明文保存敏感信息" class="headerlink" title="SharedPreferences明文保存敏感信息"></a>SharedPreferences明文保存敏感信息</h3><p>跳转到app的数据目录</p>
+<p>查看所有xml文件,检测是否包含敏感数据</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">adb shell</span><br><span class="line">cd &#x2F;data&#x2F;data&#x2F;package_name&#x2F;hared_prefs&#x2F;</span><br></pre></td></tr></table></figure>
+
+<p>查看所有xml文件,检测是否包含敏感数据</p>
+<h3 id="SQLite明文保存敏感信息"><a href="#SQLite明文保存敏感信息" class="headerlink" title="SQLite明文保存敏感信息"></a>SQLite明文保存敏感信息</h3><p>跳转到app的database目录</p>
+<p>查看所有db文件,检测是否包含敏感数据</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">adb shell</span><br><span class="line">cd &#x2F;data&#x2F;data&#x2F;package_name&#x2F;database&#x2F;</span><br></pre></td></tr></table></figure>
+
+<p>查看所有db文件,检测是否包含敏感数据</p>
+<h3 id="log敏感信息检测"><a href="#log敏感信息检测" class="headerlink" title="log敏感信息检测"></a>log敏感信息检测</h3><p>使用logcat命令抓取log</p>
+<p>分析日志中是否包含敏感信息</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">shell adb logcat &gt; logfile.log</span><br></pre></td></tr></table></figure>
+
+<p>分析日志中是否包含敏感信息</p>
+</div><div class="article-licensing box"><div class="licensing-title"><p>adb使用总结</p><p><a href="http://www.ol4three.com/2021/01/05/Android/adb%E4%BD%BF%E7%94%A8%E6%80%BB%E7%BB%93/">http://www.ol4three.com/2021/01/05/Android/adb%E4%BD%BF%E7%94%A8%E6%80%BB%E7%BB%93/</a></p></div><div class="licensing-meta level is-mobile"><div class="level-left"><div class="level-item is-narrow"><div><h6>Author</h6><p>ol4three</p></div></div><div class="level-item is-narrow"><div><h6>Posted on</h6><p>2021-01-05</p></div></div><div class="level-item is-narrow"><div><h6>Updated on</h6><p>2021-01-05</p></div></div><div class="level-item is-narrow"><div><h6>Licensed under</h6><p><a class="icon" rel="noopener" target="_blank" title="Creative Commons" href="https://creativecommons.org/"><i class="fab fa-creative-commons"></i></a><a class="icon" rel="noopener" target="_blank" title="Attribution" href="https://creativecommons.org/licenses/by/4.0/"><i class="fab fa-creative-commons-by"></i></a><a class="icon" rel="noopener" target="_blank" title="Noncommercial" href="https://creativecommons.org/licenses/by-nc/4.0/"><i class="fab fa-creative-commons-nc"></i></a></p></div></div></div></div></div><hr style="height:1px;margin:1rem 0"><div class="level is-mobile is-flex"><div class="article-tags is-size-7 is-uppercase"><i class="fas fa-tags has-text-grey"></i> <a class="link-muted" rel="tag" href="/tags/adb/">adb </a></div></div><div class="sharethis-inline-share-buttons"></div><script src=" " defer></script></article></div><div class="card"><div class="card-content"><h3 class="menu-label has-text-centered">Like this article? Support the author with</h3><div class="buttons is-centered"><a class="button is-info donate"><span class="icon is-small"><i class="fab fa-alipay"></i></span><span>Alipay</span><span class="qrcode"><img src="https://oss-map.oss-cn-beijing.aliyuncs.com/img/2761608916501_.pic_hd.jpg" alt="Alipay"></span></a><a class="button is-success donate"><span class="icon is-small"><i class="fab fa-weixin"></i></span><span>Wechat</span><span class="qrcode"><img src="https://oss-map.oss-cn-beijing.aliyuncs.com/img/2771608916512_.pic.jpg" alt="Wechat"></span></a></div></div></div><nav class="post-navigation mt-4 level is-mobile"><div class="level-end"><a class="article-nav-next level level-item link-muted" href="/2021/01/05/WEB/%E6%AD%A3%E5%88%99%E5%B0%8F%E6%8A%80%E5%B7%A7%E5%92%8C%E6%95%B0%E6%8D%AE%E8%BF%87%E6%BB%A4%E5%A4%84%E7%90%86/"><span class="level-item">正则小技巧和数据过滤处理</span><i class="level-item fas fa-chevron-right"></i></a></div></nav><div class="card"><div class="card-content"><h3 class="title is-5">Comments</h3><div class="content" id="valine-thread"></div><script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script><script src="https://cdn.jsdelivr.net/npm/valine@1.4.14/dist/Valine.min.js"></script><script>new Valine({
+            el: '#valine-thread' ,
+            appId: "Mi7VTJ1Ohx0XKeYNBRfjWrY5-gzGzoHsz",
+            appKey: "kqSPJKxTTPM9aNVRrWttS4HT",
+            
+            avatar: "mm",
+            
+            meta: ["nick","mail","link"],
+            pageSize: 10,
+            lang: "en",
+            
+            highlight: true,
+            
+            
+            
+            
+            
+            requiredFields: [],
+        });</script></div></div></div><div class="column column-left is-4-tablet is-4-desktop is-3-widescreen  order-1 is-sticky"><div class="card widget"><div class="card-content"><nav class="level"><div class="level-item has-text-centered flex-shrink-1"><div><figure class="image is-128x128 mx-auto mb-2"><img class="avatar" src="/img/avatar.png" alt="ol4three"></figure><p class="title is-size-4 is-block line-height-inherit">ol4three</p><p class="is-size-6 is-block">醒来时世界都远了，我需要最狂的风，和最静的海。</p><p class="is-size-6 is-flex justify-content-center"><i class="fas fa-map-marker-alt mr-1"></i><span>BeiJing,China</span></p></div></div></nav><nav class="level is-mobile"><div class="level-item has-text-centered is-marginless"><div><p class="heading">Posts</p><a href="/archives"><p class="title">87</p></a></div></div><a class="level-item has-text-centered is-marginless" href="/categories"><div><p class="heading">Categories</p><div><p class="title">9</p></div></div></a><div class="level-item has-text-centered is-marginless"><div><p class="heading">Tags</p><a href="/tags"><p class="title">79</p></a></div></div></nav><div class="level"><a class="level-item button is-primary is-rounded" href="https://github.com/ol4three" target="_blank" rel="noopener">Follow</a></div><div class="level is-mobile"><a class="level-item button is-transparent is-marginless" target="_blank" rel="noopener" title="Github" href="https://github.com/ol4three"><i class="fab fa-github"></i></a><a class="level-item button is-transparent is-marginless" target="_blank" rel="noopener" title="Facebook" href="https://facebook.com"><i class="fab fa-facebook"></i></a><a class="level-item button is-transparent is-marginless" target="_blank" rel="noopener" title="Twitter" href="https://twitter.com"><i class="fab fa-twitter"></i></a><a class="level-item button is-transparent is-marginless" target="_blank" rel="noopener" title="Dribbble" href="https://dribbble.com"><i class="fab fa-dribbble"></i></a><a class="level-item button is-transparent is-marginless" target="_blank" rel="noopener" title="RSS" href="/"><i class="fas fa-rss"></i></a></div></div></div><div class="card widget" id="toc"><div class="card-content"><div class="menu"><h3 class="menu-label">Catalogue</h3><ul class="menu-list"><li><a class="is-flex" href="#adb使用"><span class="mr-2">1</span><span>adb使用</span></a><ul class="menu-list"><li><a class="is-flex" href="#adb连接"><span class="mr-2">1.1</span><span>adb连接</span></a></li><li><a class="is-flex" href="#adb-截图发送到当前用户目录下"><span class="mr-2">1.2</span><span>adb 截图发送到当前用户目录下</span></a></li><li><a class="is-flex" href="#adb文件导出-导入"><span class="mr-2">1.3</span><span>adb文件导出/导入</span></a><ul class="menu-list"><li><a class="is-flex" href="#从电脑上复制文件到设备"><span class="mr-2">1.3.1</span><span>从电脑上复制文件到设备</span></a></li><li><a class="is-flex" href="#从设备复制文件到电脑"><span class="mr-2">1.3.2</span><span>从设备复制文件到电脑</span></a></li><li><a class="is-flex" href="#一些基本命令"><span class="mr-2">1.3.3</span><span>一些基本命令</span></a></li></ul></li><li><a class="is-flex" href="#adb修改手机代理"><span class="mr-2">1.4</span><span>adb修改手机代理</span></a><ul class="menu-list"><li><a class="is-flex" href="#全局代理"><span class="mr-2">1.4.1</span><span>全局代理</span></a></li><li><a class="is-flex" href="#证书安装"><span class="mr-2">1.4.2</span><span>证书安装</span></a></li><li><a class="is-flex" href="#第三方apk"><span class="mr-2">1.4.3</span><span>第三方apk</span></a></li><li><a class="is-flex" href="#查看进程"><span class="mr-2">1.4.4</span><span>查看进程</span></a></li></ul></li><li><a class="is-flex" href="#apk管理"><span class="mr-2">1.5</span><span>apk管理</span></a><ul class="menu-list"><li><a class="is-flex" href="#adb导出（手机apk到电脑）"><span class="mr-2">1.5.1</span><span>adb导出（手机apk到电脑）</span></a></li></ul></li><li><a class="is-flex" href="#日志输出"><span class="mr-2">1.6</span><span>日志输出</span></a></li><li><a class="is-flex" href="#启动activity"><span class="mr-2">1.7</span><span>启动activity</span></a></li><li><a class="is-flex" href="#管理安装包"><span class="mr-2">1.8</span><span>管理安装包</span></a></li><li><a class="is-flex" href="#adb安装证书"><span class="mr-2">1.9</span><span>adb安装证书</span></a></li><li><a class="is-flex" href="#查看系统信息"><span class="mr-2">1.10</span><span>查看系统信息</span></a></li><li><a class="is-flex" href="#查看当前activity"><span class="mr-2">1.11</span><span>查看当前activity</span></a></li></ul></li><li><a class="is-flex" href="#APP安全测试"><span class="mr-2">2</span><span>APP安全测试</span></a><ul class="menu-list"><li><a class="is-flex" href="#组件安全"><span class="mr-2">2.1</span><span>组件安全</span></a><ul class="menu-list"><li><a class="is-flex" href="#activity-是否可以被ddos"><span class="mr-2">2.1.1</span><span>activity 是否可以被ddos</span></a></li><li><a class="is-flex" href="#BroadcastReceiver拒绝服务"><span class="mr-2">2.1.2</span><span>BroadcastReceiver拒绝服务</span></a></li><li><a class="is-flex" href="#service拒绝服务"><span class="mr-2">2.1.3</span><span>service拒绝服务</span></a></li><li><a class="is-flex" href="#Provider目录遍历"><span class="mr-2">2.1.4</span><span>Provider目录遍历</span></a></li><li><a class="is-flex" href="#检测方法二："><span class="mr-2">2.1.5</span><span>检测方法二：</span></a></li><li><a class="is-flex" href="#SharedPreferences明文保存敏感信息"><span class="mr-2">2.1.6</span><span>SharedPreferences明文保存敏感信息</span></a></li><li><a class="is-flex" href="#SQLite明文保存敏感信息"><span class="mr-2">2.1.7</span><span>SQLite明文保存敏感信息</span></a></li><li><a class="is-flex" href="#log敏感信息检测"><span class="mr-2">2.1.8</span><span>log敏感信息检测</span></a></li></ul></li></ul></li></ul></div></div><style>.menu-list > li > a.is-active + .menu-list { display: block; }.menu-list > li > a + .menu-list { display: none; }</style><script src="/js/toc.js" defer></script></div><div class="card widget"><div class="card-content"><div class="menu"><h3 class="menu-label">Links</h3><ul class="menu-list"><li><a class="level is-mobile is-mobile" href="http://118.25.15.216:8080/login" target="_blank" rel="noopener"><span class="level-left"><span class="level-item">Java-sec-code</span></span><span class="level-right"><span class="level-item tag">118.25.15.216</span></span></a></li><li><a class="level is-mobile is-mobile" href="http://b0urne.top" target="_blank" rel="noopener"><span class="level-left"><span class="level-item">B0urne</span></span><span class="level-right"><span class="level-item tag">b0urne.top</span></span></a></li><li><a class="level is-mobile is-mobile" href="http://xcniao.ol4three.com" target="_blank" rel="noopener"><span class="level-left"><span class="level-item">Xcniao</span></span><span class="level-right"><span class="level-item tag">xcniao.ol4three.com</span></span></a></li><li><a class="level is-mobile is-mobile" href="http://tengxiaofei.run" target="_blank" rel="noopener"><span class="level-left"><span class="level-item">Tengxiaofei</span></span><span class="level-right"><span class="level-item tag">tengxiaofei.run</span></span></a></li><li><a class="level is-mobile is-mobile" href="https://lalalaxiaoyuren.github.io" target="_blank" rel="noopener"><span class="level-left"><span class="level-item">smail_fish</span></span><span class="level-right"><span class="level-item tag">lalalaxiaoyuren.github.io</span></span></a></li><li><a class="level is-mobile is-mobile" href="https://vinadiakt.github.io" target="_blank" rel="noopener"><span class="level-left"><span class="level-item">vinadiak</span></span><span class="level-right"><span class="level-item tag">vinadiakt.github.io</span></span></a></li></ul></div></div></div><div class="card widget"><div class="card-content"><div class="menu"><h3 class="menu-label">Categories</h3><ul class="menu-list"><li><a class="level is-mobile is-marginless" href="/categories/Android/"><span class="level-start"><span class="level-item">Android</span></span><span class="level-end"><span class="level-item tag">6</span></span></a></li><li><a class="level is-mobile is-marginless" href="/categories/CTF/"><span class="level-start"><span class="level-item">CTF</span></span><span class="level-end"><span class="level-item tag">2</span></span></a></li><li><a class="level is-mobile is-marginless" href="/categories/IOT/"><span class="level-start"><span class="level-item">IOT</span></span><span class="level-end"><span class="level-item tag">22</span></span></a></li><li><a class="level is-mobile is-marginless" href="/categories/WEB%E5%AE%89%E5%85%A8/"><span class="level-start"><span class="level-item">WEB安全</span></span><span class="level-end"><span class="level-item tag">36</span></span></a></li><li><a class="level is-mobile is-marginless" href="/categories/%E4%BA%8C%E8%BF%9B%E5%88%B6%E5%AE%89%E5%85%A8/"><span class="level-start"><span class="level-item">二进制安全</span></span><span class="level-end"><span class="level-item tag">10</span></span></a></li><li><a class="level is-mobile is-marginless" href="/categories/%E5%86%85%E7%BD%91%E6%B8%97%E9%80%8F/"><span class="level-start"><span class="level-item">内网渗透</span></span><span class="level-end"><span class="level-item tag">4</span></span></a></li><li><a class="level is-mobile is-marginless" href="/categories/%E5%8D%8F%E8%AE%AE%E5%88%86%E6%9E%90/"><span class="level-start"><span class="level-item">协议分析</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile is-marginless" href="/categories/%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/"><span class="level-start"><span class="level-item">环境配置</span></span><span class="level-end"><span class="level-item tag">4</span></span></a></li><li><a class="level is-mobile is-marginless" href="/categories/%E8%B7%AF%E7%94%B1%E5%99%A8/"><span class="level-start"><span class="level-item">路由器</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li></ul></div></div></div><div class="card widget"><div class="card-content"><h3 class="menu-label">Recents</h3><article class="media"><div class="media-content size-small"><p><time dateTime="2021-01-05T13:19:41.000Z">2021-01-05</time></p><p class="title is-6"><a class="link-muted" href="/2021/01/05/Android/adb%E4%BD%BF%E7%94%A8%E6%80%BB%E7%BB%93/">adb使用总结</a></p><p class="is-uppercase"><a class="link-muted" href="/categories/Android/">Android</a></p></div></article><article class="media"><div class="media-content size-small"><p><time dateTime="2021-01-05T12:41:39.000Z">2021-01-05</time></p><p class="title is-6"><a class="link-muted" href="/2021/01/05/WEB/%E6%AD%A3%E5%88%99%E5%B0%8F%E6%8A%80%E5%B7%A7%E5%92%8C%E6%95%B0%E6%8D%AE%E8%BF%87%E6%BB%A4%E5%A4%84%E7%90%86/">正则小技巧和数据过滤处理</a></p><p class="is-uppercase"><a class="link-muted" href="/categories/WEB%E5%AE%89%E5%85%A8/">WEB安全</a></p></div></article><article class="media"><div class="media-content size-small"><p><time dateTime="2021-01-05T07:57:36.000Z">2021-01-05</time></p><p class="title is-6"><a class="link-muted" href="/2021/01/05/Android/frida/Frida-Android%E9%80%86%E5%90%91%E4%B9%8B%E5%8A%A8%E6%80%81%E5%8A%A0%E8%BD%BDdex-Hook-%E4%B8%8A/">Frida--Android逆向之动态加载dex Hook(上)</a></p><p class="is-uppercase"><a class="link-muted" href="/categories/Android/">Android</a></p></div></article><article class="media"><div class="media-content size-small"><p><time dateTime="2021-01-04T15:02:15.000Z">2021-01-04</time></p><p class="title is-6"><a class="link-muted" href="/2021/01/04/%E4%BA%8C%E8%BF%9B%E5%88%B6%E5%AE%89%E5%85%A8/crackme%E7%B3%BB%E5%88%97/crackme-%E7%B3%BB%E5%88%97%E4%B9%8B-crackme4/">crackme-系列之-crackme4</a></p><p class="is-uppercase"><a class="link-muted" href="/categories/%E4%BA%8C%E8%BF%9B%E5%88%B6%E5%AE%89%E5%85%A8/">二进制安全</a></p></div></article><article class="media"><div class="media-content size-small"><p><time dateTime="2020-12-30T01:55:25.000Z">2020-12-30</time></p><p class="title is-6"><a class="link-muted" href="/2020/12/30/WEB/2020-%E6%9C%80%E6%96%B0%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95%E2%BE%AF%E8%AF%95%E9%A2%98%E5%90%88%E9%9B%86/">2020 最新渗透测试⾯试题合集</a></p><p class="is-uppercase"><a class="link-muted" href="/categories/WEB%E5%AE%89%E5%85%A8/">WEB安全</a></p></div></article></div></div><div class="card widget"><div class="card-content"><div class="menu"><h3 class="menu-label">Tags</h3><div class="field is-grouped is-grouped-multiline"><div class="control"><a class="tags has-addons" href="/tags/360/"><span class="tag">360</span><span class="tag is-grey-lightest">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/AWD/"><span class="tag">AWD</span><span class="tag is-grey-lightest">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/ActiveMQ/"><span class="tag">ActiveMQ</span><span class="tag is-grey-lightest">2</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Amazon/"><span class="tag">Amazon</span><span class="tag is-grey-lightest">7</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Apache/"><span class="tag">Apache</span><span class="tag is-grey-lightest">2</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Apache-Cocoon-XML/"><span class="tag">Apache-Cocoon-XML</span><span class="tag is-grey-lightest">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Apereo-Cas/"><span class="tag">Apereo Cas</span><span class="tag is-grey-lightest">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/AppWeb/"><span class="tag">AppWeb</span><span class="tag is-grey-lightest">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Apple-T2/"><span class="tag">Apple T2</span><span class="tag is-grey-lightest">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/BLE/"><span class="tag">BLE</span><span class="tag is-grey-lightest">2</span></a></div><div class="control"><a class="tags has-addons" href="/tags/BadUsb/"><span class="tag">BadUsb</span><span class="tag is-grey-lightest">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/CTF/"><span class="tag">CTF</span><span class="tag is-grey-lightest">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Cisco/"><span class="tag">Cisco</span><span class="tag is-grey-lightest">2</span></a></div><div class="control"><a class="tags has-addons" href="/tags/DMA/"><span class="tag">DMA</span><span class="tag is-grey-lightest">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Drozer/"><span class="tag">Drozer</span><span class="tag is-grey-lightest">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/EDR/"><span class="tag">EDR</span><span class="tag is-grey-lightest">2</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Exchange-Server/"><span class="tag">Exchange-Server</span><span class="tag is-grey-lightest">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Frida/"><span class="tag">Frida</span><span class="tag is-grey-lightest">3</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Google-Hacking/"><span class="tag">Google-Hacking</span><span class="tag is-grey-lightest">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/HTTP%E8%AF%B7%E6%B1%82%E8%B5%B0%E7%A7%81%E5%8D%8F%E8%AE%AE/"><span class="tag">HTTP请求走私协议</span><span class="tag is-grey-lightest">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Hook/"><span class="tag">Hook</span><span class="tag is-grey-lightest">3</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Horde-Groupware-Webmail-Edition/"><span class="tag">Horde Groupware Webmail Edition</span><span class="tag is-grey-lightest">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Httpdecrypt/"><span class="tag">Httpdecrypt</span><span class="tag is-grey-lightest">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Huawei/"><span class="tag">Huawei</span><span class="tag is-grey-lightest">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/IOT/"><span class="tag">IOT</span><span class="tag is-grey-lightest">17</span></a></div><div class="control"><a class="tags has-addons" href="/tags/JCG/"><span class="tag">JCG</span><span class="tag is-grey-lightest">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/MSF/"><span class="tag">MSF</span><span class="tag is-grey-lightest">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Mybatis/"><span class="tag">Mybatis</span><span class="tag is-grey-lightest">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Mysql-python/"><span class="tag">Mysql-python</span><span class="tag is-grey-lightest">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/NC/"><span class="tag">NC</span><span class="tag is-grey-lightest">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/PHP%E7%BD%91%E7%AB%99/"><span class="tag">PHP网站</span><span class="tag is-grey-lightest">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/PhpStudy/"><span class="tag">PhpStudy</span><span class="tag is-grey-lightest">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Pligg/"><span class="tag">Pligg</span><span class="tag is-grey-lightest">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/PowerSploit/"><span class="tag">PowerSploit</span><span class="tag is-grey-lightest">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Pwn/"><span class="tag">Pwn</span><span class="tag is-grey-lightest">3</span></a></div><div class="control"><a class="tags has-addons" href="/tags/RCE/"><span class="tag">RCE</span><span class="tag is-grey-lightest">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/SDK/"><span class="tag">SDK</span><span class="tag is-grey-lightest">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/SGX/"><span class="tag">SGX</span><span class="tag is-grey-lightest">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/SQLI-labs/"><span class="tag">SQLI-labs</span><span class="tag is-grey-lightest">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/SQL%E6%B3%A8%E5%85%A5/"><span class="tag">SQL注入</span><span class="tag is-grey-lightest">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Sql%E6%B3%A8%E5%85%A5/"><span class="tag">Sql注入</span><span class="tag is-grey-lightest">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Thunderbolt-3/"><span class="tag">Thunderbolt 3</span><span class="tag is-grey-lightest">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Ubertooth-one/"><span class="tag">Ubertooth one</span><span class="tag is-grey-lightest">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/VIM/"><span class="tag">VIM</span><span class="tag is-grey-lightest">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/VPN/"><span class="tag">VPN</span><span class="tag is-grey-lightest">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/XiaoMi/"><span class="tag">XiaoMi</span><span class="tag is-grey-lightest">2</span></a></div><div class="control"><a class="tags has-addons" href="/tags/ZTE/"><span class="tag">ZTE</span><span class="tag is-grey-lightest">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/adb/"><span class="tag">adb</span><span class="tag is-grey-lightest">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/crackme/"><span class="tag">crackme</span><span class="tag is-grey-lightest">4</span></a></div><div class="control"><a class="tags has-addons" href="/tags/crunch/"><span class="tag">crunch</span><span class="tag is-grey-lightest">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/icarus/"><span class="tag">icarus</span><span class="tag is-grey-lightest">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/iot/"><span class="tag">iot</span><span class="tag is-grey-lightest">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/java%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96/"><span class="tag">java反序列化</span><span class="tag is-grey-lightest">4</span></a></div><div class="control"><a class="tags has-addons" href="/tags/nginx%E8%A7%A3%E6%9E%90%E6%BC%8F%E6%B4%9E/"><span class="tag">nginx解析漏洞</span><span class="tag is-grey-lightest">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/sangfor/"><span class="tag">sangfor</span><span class="tag is-grey-lightest">4</span></a></div><div class="control"><a class="tags has-addons" href="/tags/scrcpy/"><span class="tag">scrcpy</span><span class="tag is-grey-lightest">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/sql%E6%B3%A8%E5%85%A5/"><span class="tag">sql注入</span><span class="tag is-grey-lightest">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/struts2/"><span class="tag">struts2</span><span class="tag is-grey-lightest">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E4%B8%89%E6%98%9F/"><span class="tag">三星</span><span class="tag is-grey-lightest">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E4%BB%A3%E7%90%86%E8%BD%AC%E5%8F%91/"><span class="tag">代理转发</span><span class="tag is-grey-lightest">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E5%86%85%E7%BD%91%E6%B8%97%E9%80%8F/"><span class="tag">内网渗透</span><span class="tag is-grey-lightest">2</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E5%8D%8F%E8%AE%AE%E5%88%86%E6%9E%90/"><span class="tag">协议分析</span><span class="tag is-grey-lightest">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E5%90%8E%E6%B8%97%E9%80%8F/"><span class="tag">后渗透</span><span class="tag is-grey-lightest">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E5%A0%86/"><span class="tag">堆</span><span class="tag is-grey-lightest">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E5%A4%A9%E8%9E%8D%E4%BF%A1/"><span class="tag">天融信</span><span class="tag is-grey-lightest">2</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E5%AE%8F%E7%97%85%E6%AF%92/"><span class="tag">宏病毒</span><span class="tag is-grey-lightest">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E5%AE%9D%E5%A1%94/"><span class="tag">宝塔</span><span class="tag is-grey-lightest">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E6%9C%AA%E6%8E%88%E6%9D%83%E8%AE%BF%E9%97%AE%E6%BC%8F%E6%B4%9E/"><span class="tag">未授权访问漏洞</span><span class="tag is-grey-lightest">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E6%AD%A3%E5%88%99/"><span class="tag">正则</span><span class="tag is-grey-lightest">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E6%B3%9B%E5%BE%AEOA/"><span class="tag">泛微OA</span><span class="tag is-grey-lightest">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E7%94%A8%E5%8F%8B/"><span class="tag">用友</span><span class="tag is-grey-lightest">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E7%BA%A2%E9%98%9F%E7%99%BE%E7%A7%91%E5%85%A8%E4%B9%A6/"><span class="tag">红队百科全书</span><span class="tag is-grey-lightest">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E7%BB%BF%E7%9B%9F/"><span class="tag">绿盟</span><span class="tag is-grey-lightest">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E8%93%9D%E7%89%99/"><span class="tag">蓝牙</span><span class="tag is-grey-lightest">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E8%B7%AF%E7%94%B1%E5%99%A8/"><span class="tag">路由器</span><span class="tag is-grey-lightest">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E9%80%9A%E8%BE%BEOA/"><span class="tag">通达OA</span><span class="tag is-grey-lightest">3</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E9%9D%A2%E8%AF%95/"><span class="tag">面试</span><span class="tag is-grey-lightest">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E9%BB%98%E8%AE%A4%E5%AF%86%E7%A0%81/"><span class="tag">默认密码</span><span class="tag is-grey-lightest">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E9%BD%90%E6%B2%BB%E5%A0%A1%E5%9E%92%E6%9C%BA/"><span class="tag">齐治堡垒机</span><span class="tag is-grey-lightest">1</span></a></div></div></div></div></div><div class="card widget"><div class="card-content"><div class="menu"><h3 class="menu-label">Subscribe for updates</h3><form action="https://feedburner.google.com/fb/a/mailverify" method="post" target="popupwindow" onsubmit="window.open(&#039;https://feedburner.google.com/fb/a/mailverify?uri=&#039;,&#039;popupwindow&#039;,&#039;scrollbars=yes,width=550,height=520&#039;);return true"><input type="hidden" value="" name="uri"><input type="hidden" name="loc" value="en_US"><div class="field has-addons"><div class="control has-icons-left is-expanded"><input class="input" name="email" type="email" placeholder="Email"><span class="icon is-small is-left"><i class="fas fa-envelope"></i></span></div><div class="control"><input class="button is-primary" type="submit" value="Subscribe"></div></div></form></div></div></div><div class="card widget"><div class="card-content"><div class="menu"><h3 class="menu-label">Advertisement</h3><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script><ins class="adsbygoogle" style="display:block" data-ad-client="1" data-ad-slot="1" data-ad-format="auto" data-full-width-responsive="true"></ins><script>(adsbygoogle = window.adsbygoogle || []).push({});</script></div></div></div></div><!--!--></div></div></section><footer class="footer"><div class="container"><div class="level"><div class="level-start"><a class="footer-logo is-block mb-2" href="/"><img src="/img/logo.svg" alt="ol4three" height="28"></a><p class="size-small"><span>&copy; 2021 ol4three</span>  Powered by <a href="https://www.ol4three.com" target="_blank" rel="noopener">ol4three</a> <br><span id="busuanzi_container_site_uv">Visited by <span id="busuanzi_value_site_uv">0</span> users</span></p></div><div class="level-end"><div class="field has-addons"><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Creative Commons" href="https://creativecommons.org/"><i class="fab fa-creative-commons"></i></a></p><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Attribution 4.0 International" href="https://creativecommons.org/licenses/by/4.0/"><i class="fab fa-creative-commons-by"></i></a></p><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Download on GitHub" href="https://github.com/ppoffice/hexo-theme-icarus"><i class="fab fa-github"></i></a></p></div></div></div></div></footer><script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script><script src="https://cdn.jsdelivr.net/npm/moment@2.22.2/min/moment-with-locales.min.js"></script><script>moment.locale("en");</script><script>var IcarusThemeSettings = {
+            article: {
+                highlight: {
+                    clipboard: true,
+                    fold: 'unfolded'
+                }
+            }
+        };</script><script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.4/dist/clipboard.min.js" defer></script><script src="/js/animation.js"></script><a id="back-to-top" title="Back to top" href="javascript:;"><i class="fas fa-chevron-up"></i></a><script src="/js/back_to_top.js" defer></script><!--!--><!--!--><!--!--><script src="https://cdn.jsdelivr.net/npm/lightgallery@1.6.8/dist/js/lightgallery.min.js" defer></script><script src="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/js/jquery.justifiedGallery.min.js" defer></script><script>window.addEventListener("load", () => {
+            if (typeof $.fn.lightGallery === 'function') {
+                $('.article').lightGallery({ selector: '.gallery-item' });
+            }
+            if (typeof $.fn.justifiedGallery === 'function') {
+                if ($('.justified-gallery > p > .gallery-item').length) {
+                    $('.justified-gallery > p > .gallery-item').unwrap();
+                }
+                $('.justified-gallery').justifiedGallery();
+            }
+        });</script><!--!--><!--!--><!--!--><script src="/js/main.js" defer></script><div class="searchbox"><div class="searchbox-container"><div class="searchbox-header"><div class="searchbox-input-container"><input class="searchbox-input" type="text" placeholder="Type something..."></div><a class="searchbox-close" href="javascript:;">×</a></div><div class="searchbox-body"></div></div></div><script src="/js/insight.js" defer></script><script>document.addEventListener('DOMContentLoaded', function () {
+            loadInsight({"contentUrl":"/content.json"}, {"hint":"Type something...","untitled":"(Untitled)","posts":"Posts","pages":"Pages","categories":"Categories","tags":"Tags"});
+        });</script></body></html>
