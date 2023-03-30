@@ -41776,4 +41776,153 @@ adb shell dumpsys activity activities | findstr &quot;应用包名&quot;
         <tag>DLL劫持</tag>
       </tags>
   </entry>
+  <entry>
+    <title>OSS云存储相关安全风险</title>
+    <url>/2022/07/27/WEB/OSS%E4%BA%91%E5%AD%98%E5%82%A8%E7%9B%B8%E5%85%B3%E5%AE%89%E5%85%A8%E9%A3%8E%E9%99%A9/</url>
+    <content><![CDATA[<p>​    OSS服务作为一项重要的云上服务，承担了存储用户数据的重要功能。对象存储服务提供了细粒度的访问权限控制功能，以保证用户数据的安全性。<strong>如果使用OSS服务时安全意识不足或对访问权限以及访问策略错误理解，将会导致数据被非法访问或篡改，产生严重后果。</strong></p>
+<p>本文将介绍下相关OSS云存储相关方面的风险问题，老规矩先上一张图。</p>
+<img src="https://oss-map.oss-cn-beijing.aliyuncs.com/img/image-20230330091632227.png" alt="image-20230330091632227" style="zoom:50%;">
+
+ <a id="more"></a>
+
+<h2 id="0x00-础介绍"><a href="#0x00-础介绍" class="headerlink" title="0x00 础介绍"></a>0x00 础介绍</h2><blockquote>
+<p>​    对象存储OSS是一种云存储服务，可以存储大量非结构化数据，例如图像、视频和文本等。由于 OSS 是一种公共云服务，因此存在安全方面的问题。其中，最大的问题之一是数据隐私和安全。企业应该制定一些安全措施来保护数据的机密性和完整性。例如，使用加密技术对数据进行加密，并使用访问控制策略来限制用户对数据的访问。</p>
+</blockquote>
+<p>​    对象存储作为云原生的一项重要功能，面临着一系列安全挑战。但在对象存储所导致的安全问题中，绝大部分是由于用户使用此功能时错误的配置导致的。据统计，由于缺乏经验或人为错误导致的存储桶错误配置所造成的安全问题占所有云安全漏洞的16%。例如<strong>2017年美国新闻与金融信息公司道琼斯（Dow Jones &amp; Company）发生用户数据泄露事件</strong>，安全研究人员在亚马逊云服务器上发现440万道琼斯客户的细节信息，被泄露信息包含<strong>客户姓名、ID、住址、订阅细节、信用卡后四位和部分电话号码</strong>。 道琼斯公司已确认此事，称有220万客户数据受影响，数据泄露的主要原因是道琼斯公司对服务器的权限配置错误。</p>
+<p>下面将介绍下对象存储OSS产品中涉及的几个基本概念，方便后续对其涉及到的安全风险更好的了解。</p>
+<h3 id="存储空间（Bucket）"><a href="#存储空间（Bucket）" class="headerlink" title="存储空间（Bucket）"></a>存储空间（Bucket）</h3><p>存储空间是用户用于存储对象（Object）的容器，所有的对象都必须隶属于某个存储空间。存储空间具有各种配置属性，包括地域、访问权限、存储类型等。用户可以根据实际需求，创建不同类型的存储空间来存储不同的数据。</p>
+<h3 id="对象（Object）"><a href="#对象（Object）" class="headerlink" title="对象（Object）"></a>对象（Object）</h3><p>对象是OSS存储数据的基本单元，也被称为OSS的文件。和传统的文件系统不同，对象没有文件目录层级结构的关系。对象由元信息（Object Meta），用户数据（Data）和文件名（Key）组成，并且由存储空间内部唯一的Key来标识。对象元信息是一组键值对，表示了对象的一些属性，比如最后修改时间、大小等信息，同时用户也可以在元信息中存储一些自定义的信息。对象的生命周期是从上传成功到被删除为止。在整个生命周期内，除通过追加方式上传的Object可以通过继续追加上传写入数据外，其他方式上传的Object内容无法编辑。</p>
+<h3 id="OjbectKey"><a href="#OjbectKey" class="headerlink" title="OjbectKey"></a>OjbectKey</h3><p>在各语言SDK中，ObjectKey、Key以及ObjectName是同一概念，均表示对Object执行相关操作时需要填写的Object名称。例如向某一存储空间上传Object时，ObjectKey表示上传的Object所在存储空间的完整名称，即包含文件后缀在内的完整路径，如填写为abc/efg/123.jpg。</p>
+<h3 id="Region（地域）"><a href="#Region（地域）" class="headerlink" title="Region（地域）"></a>Region（地域）</h3><p>Region表示OSS的数据中心所在物理位置。用户可以根据费用、请求来源等选择合适的地域创建Bucket。一般来说，距离用户更近的Region访问速度更快。Region是在创建Bucket的时候指定的，一旦指定之后就不允许更改。该Bucket下所有的Object都存储在对应的数据中心，目前不支持Object级别的Region设置。</p>
+<h3 id="Endpoint（访问域名）"><a href="#Endpoint（访问域名）" class="headerlink" title="Endpoint（访问域名）"></a>Endpoint（访问域名）</h3><p>Endpoint表示OSS对外服务的访问域名。OSS以HTTP RESTful API的形式对外提供服务，当访问不同的Region的时候，需要不同的域名。通过内网和外网访问同一个Region所需要的Endpoint也是不同的。</p>
+<h3 id="6-AccessKey（访问密钥）"><a href="#6-AccessKey（访问密钥）" class="headerlink" title="6.AccessKey（访问密钥）"></a>6.AccessKey（访问密钥）</h3><p>AccessKey简称AK，指的是访问身份验证中用到的<strong>AccessKey</strong> ID和<strong>AccessKey Secret</strong>。OSS通过使用AccessKey ID和AccessKey Secret对称加密的方法来验证某个请求的发送者身份。AccessKey ID用于标识用户；AccessKey Secret是用户用于加密签名字符串和OSS用来验证签名字符串的密钥，必须保密。</p>
+<p>AccessKey包含以下三种：</p>
+<ul>
+<li>Bucket的拥有者申请的AccessKey。</li>
+<li>被Bucket的拥有者通过RAM授权给第三方请求者的AccessKey。</li>
+<li>被Bucket的拥有者通过STS授权给第三方请求者的AccessKey。</li>
+</ul>
+<h3 id="AK-SK访问控制"><a href="#AK-SK访问控制" class="headerlink" title="AK/SK访问控制"></a>AK/SK访问控制</h3><p>原始AK/SK是指您在注册OSS服务时，系统自动分配的AK（Access Key ID） / SK（Secret Access Key）。主要用于对用户的调用行为进行鉴权和认证，相当于API专用的用户名及密码。您向OSS发送的每个请求，都需要通过鉴权认证通过后，OSS才会处理您的请求。</p>
+<p>移动端场景使用原始AK/SK鉴权的交互过程如下图所示：</p>
+<p><img src="https://oss-map.oss-cn-beijing.aliyuncs.com/img/image-20230330092537813.png" alt="image-20230330092537813"></p>
+<p>使用原始的AK/SK下发到移动端势必会存在一定的安全风险，因此，原始AK/SK鉴权方式只推荐您在测试过程中使用，提供正式服务时推荐使用STS方式鉴权。</p>
+<p><strong>STS临时授权访问</strong></p>
+<p>BOS可以通过STS机制实现第三方的临时授权访问。STS（Security Token Service）是由OSS服务商提供的临时授权服务。通过STS，您可以为第三方用户颁发一个自定义时效和权限的访问凭证。第三方用户可以使用该访问凭证直接调用API访问OSS资源。</p>
+<p><img src="https://oss-map.oss-cn-beijing.aliyuncs.com/img/image-20230330092606510.png" alt="image-20230330092606510"></p>
+<p><strong>使用STS的优点：</strong></p>
+<ul>
+<li>不需要向第三方用户透露您的管理账号或AK/SK信息，只需要向STS申请一个<strong>临时访问凭证</strong>并颁发给第三方用户即可，且这个访问凭证拥有的权限和有效期均可由自己去定义。</li>
+<li>您不需要关注该权限的撤销问题，<strong>临时访问凭证在过期后会自动失效</strong>。</li>
+<li>STS临时访问的权限也需要进行严格把控，利用STS申请的AK/SK、临时凭证Token也会存在一定的<strong>安全风险</strong>。</li>
+</ul>
+<h2 id="0x01-常见风险点"><a href="#0x01-常见风险点" class="headerlink" title="0x01 常见风险点"></a>0x01 常见风险点</h2><p>常见的OSS安全风险点有如下几种，下面将会分别进行介绍。</p>
+<h3 id="存储空间访问权限"><a href="#存储空间访问权限" class="headerlink" title="存储空间访问权限"></a>存储空间访问权限</h3><p>存储空间（Bucket）是存储对象（Object）的容器。对象都隶属于存储空间，存储空间的访问权限（ACL）有以下三类：</p>
+<table>
+<thead>
+<tr>
+<th>访问权限</th>
+<th>描述</th>
+<th>访问权限值</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>私有</td>
+<td>存储空间的拥有者和授权用户有文件的读写权限，其他用户没有权限操作文件。</td>
+<td>oss.ACLPrivate</td>
+</tr>
+<tr>
+<td>公共读</td>
+<td>存储空间的拥有者和授权用户有文件的读写权限，其他用户只有读权限。请谨慎使用该权限。</td>
+<td>oss.ACLPublicRead</td>
+</tr>
+<tr>
+<td>公共读写</td>
+<td>所有用户都有文件的读写权限。请谨慎使用该权限。</td>
+<td>oss.ACLPublicReadWrite</td>
+</tr>
+</tbody></table>
+<img src="https://oss-map.oss-cn-beijing.aliyuncs.com/img/image-20230330092659927.png" alt="image-20230330092659927" style="zoom:50%;">
+
+<p>在上传文件（Object）时未指定文件的ACL，则文件的ACL均默认继承Bucket ACL。 故申请OSS Bucket一般<strong>禁止申请公共读写</strong>。<strong>公共读写意味着互联网上任何用户都可以对该Object进行访问，并且向该Object写入数据</strong>。这有可能造成数据的外泄以及费用激增，若被人恶意写入违法信息还可能会影响公司商誉。</p>
+<p>如果想加速文件访问，可以配置OSS 私有Bucket回源。但需要注意，开启OSS私有Bucket回源授权后，即授权CDN对您所有Bucket的只读权限，不只是对当前Bucket授权。</p>
+<h3 id="AccessKey泄漏"><a href="#AccessKey泄漏" class="headerlink" title="AccessKey泄漏"></a>AccessKey泄漏</h3><p>AccessKey是用户访问内部资源最重要的身份凭证。用户调用API时的通信加密和身份认证会使用API凭证（即基于非对称密钥算法的鉴权密钥对）。API凭证是云上用户调用云服务API、访问云上资源的唯一身份凭证。API凭证相当于登录密码。用户可以使用<strong>AccessKey（简称AK）构造一个API请求（或者使用云服务**</strong>SDK<strong>**）来操作资源。AccessKey包括AccessKey ID和AccessKey Secret。其中AccessKey ID用于标识用户，AccessKey Secret是用来验证用户身份合法性的密钥。AccessKey Secret必须保密。</strong></p>
+<p>但在实际开发过程中，部分开发人员意识不强。前端开发者有些会直接使用<strong>SDK**</strong>上传，硬编码AccessKey进行上传，这种方式极其危险<strong>，前端禁止使用该操作上传文件。可以让后端上传，或者通过STS服务颁发一个临时访问凭证。该临时访问凭证可在规定时间内访问OSS资源。临时访问凭证无需透露长期密钥，使OSS资源访问相对安全。但是同时</strong>STS认证权限存在问题仍然会导致严重后果**：</p>
+<ol>
+<li><strong>利用 AK/SK泄漏调用IAM权限进行用户级操作</strong></li>
+<li><strong>利用 AK/SK泄漏调用Bucket相关权限操作</strong></li>
+</ol>
+<p><img src="https://oss-map.oss-cn-beijing.aliyuncs.com/img/image-20230330093633261.png" alt="image-20230330093633261"></p>
+<h3 id="文件覆盖风险"><a href="#文件覆盖风险" class="headerlink" title="文件覆盖风险"></a>文件覆盖风险</h3><p>如果在<strong>配置存储桶</strong>时，管理员错误的<strong>将存储桶权限，配置为可写</strong>，这将会导致攻击者可上传任意文件到存储桶中，或覆盖已经存在的文件。</p>
+<p><img src="https://oss-map.oss-cn-beijing.aliyuncs.com/img/image-20230330093924697.png" alt="image-20230330093924697"></p>
+<p>如果错误配置权限，可以通过<strong>去除掉PutObject权限</strong>方式解决。但如果必须使用到该权限，该如何做呢？</p>
+<blockquote>
+<p>在Web、App等应用开发中，经常会发生此类问题。例如场景：在一个Web应用使用对象存储来存储用户上传视频，且通过客户端直传的方式将用户上传的视频上传至Bucket中，并希望在存储桶/app/路径中存储桶用户的头像，由于后端开发时为了方便而进行了不规范的存储桶Policy配置，在生成用户用以上传视频的临时密钥时直接将此临时密钥允许访问的 resource 指定为 acs:oss:<em>:</em>:app/image/<em>路径。 这样以来，系统为每个用户所生成的用以上传的临时密钥虽然不相同，但是这个临时密钥都拥有acs:oss:</em>:<em>:app/image/</em>路径中的所有资源的读写权限，<strong>这将会带来严重的安全问题</strong>。</p>
+</blockquote>
+<p>此时<strong>可通过控制Policy</strong>，限制生成的临时认证权限。通过每个用户的用户标识来为每一个用户设置一个独用的路径，例如可以在为用户生成临时密钥时，<strong>将policy中resource 指定为 acs:oss:***</strong>:<strong>***:app/image/${user_id}/</strong></p>
+<h3 id="Bucket接管风险"><a href="#Bucket接管风险" class="headerlink" title="Bucket接管风险"></a>Bucket接管风险</h3><p>当我们正常进行测试并访问static-good-boy.huoxian.cn。</p>
+<p>1、static-good-boy.huoxian.cn指向了static-good-boy.oss-cn-beijing.aliyuncs.com这个子域名</p>
+<p>2、static-good-boy.oss-cn-beijing.aliyuncs.com这个桶不存在</p>
+<p>也就是说我只要申请 static-good-boy这个桶，那么我就可以控制static-good-boy.oss-cn-beijing.aliyuncs.com的内容，而static-good-boy.huoxian.cn指向了static-good-boy.oss-cn-beijing.aliyuncs.com，就相当于变相的控制了static-good-boy.huoxian.cn，而在static-good-boy.huoxian.cn上窃取其他huoxian.cn子域名的一些cookie等信息是有很大可能的~</p>
+<img src="https://oss-map.oss-cn-beijing.aliyuncs.com/img/image-20230330095020126.png" alt="image-20230330095020126" style="zoom:50%;">
+
+<p>创建同名Bucket</p>
+<img src="https://oss-map.oss-cn-beijing.aliyuncs.com/img/image-20230330095041385.png" alt="image-20230330095041385" style="zoom:50%;">
+
+<p>创建完成后，上传文件进行测试</p>
+<figure class="highlight"><table><tr><td class="code"><pre><span class="line">&lt;html&gt;</span><br><span class="line">&lt;meta&gt;</span><br><span class="line">take over by mkdd~&lt;br&gt;</span><br><span class="line">&lt;input value=&quot;click&quot; onclick=&quot;alert(document.cookie)&quot;&gt;</span><br><span class="line">&lt;/html&gt;</span><br></pre></td></tr></table></figure>
+
+<p>成功上传后访问链接，成功<strong>接管</strong>OSS服务</p>
+<p>static-good-boy.huoxian.cn/mkdd.html</p>
+<img src="https://oss-map.oss-cn-beijing.aliyuncs.com/img/image-20230330095137450.png" alt="image-20230330095137450" style="zoom:50%;">
+
+<h3 id="XSS风险"><a href="#XSS风险" class="headerlink" title="XSS风险"></a>XSS风险</h3><p>如果目标的对象存储支持 html 解析，那就可以利用<strong>任意文件上传</strong>进行 <strong>XSS</strong> <strong>钓鱼、挂暗链、挂黑页、供应链投毒</strong>等操作，常见的文件有<strong>SVG、html</strong>等文件，会被OSS解析。研发在使用对象存储时，需要根据业务需要在服务端先<strong>校验文件后缀类型</strong>，再校验Content-Type是否属与此后缀类型相匹配；储存方需要对文件后缀类型与文件MIME强关联，<strong>例如禁止jpeg后缀的文件MIME变成text/html。</strong></p>
+<img src="https://oss-map.oss-cn-beijing.aliyuncs.com/img/image-20230330095231355.png" alt="image-20230330095231355" style="zoom:50%;">
+
+<h3 id="内容安全"><a href="#内容安全" class="headerlink" title="内容安全"></a>内容安全</h3><p>除了常见的OSS应用安全之外，还有上传内容安全也值得注意。随着业务的急剧发展，上面的数据呈现爆炸式增长。上传大量的的视频、图片，这些日益增长的内容中充斥着各种不可控的风险因素，例如<strong>色情视频和图片、涉政暴恐内容、各种垃圾广告</strong>等。随着政府监管的日渐严格，<strong>网站及平台需要加强对网站内容的管理和检测。所以对于上传文件的输入点，需要接入风控进行审核</strong>。</p>
+<h2 id="0x02-安全建设意见"><a href="#0x02-安全建设意见" class="headerlink" title="0x02 安全建设意见"></a>0x02 安全建设意见</h2><h3 id="数据加密"><a href="#数据加密" class="headerlink" title="数据加密"></a>数据加密</h3><p>使用加密技术对数据进行加密，保护数据的机密性和完整性。同时，应该确保加密密钥的安全性。</p>
+<h3 id="强化身份认证"><a href="#强化身份认证" class="headerlink" title="强化身份认证"></a>强化身份认证</h3><p>采用多重身份认证方式，例如密码、短信验证码、生物识别等，以提高用户身份认证的安全性。</p>
+<h3 id="访问控制"><a href="#访问控制" class="headerlink" title="访问控制"></a>访问控制</h3><p>采用访问控制策略控制用户对数据的访问权限，限制不必要的访问。</p>
+<h3 id="数据备份和恢复"><a href="#数据备份和恢复" class="headerlink" title="数据备份和恢复"></a>数据备份和恢复</h3><p>建立相应的备份和恢复策略，以确保在出现故障或存在勒索行为时可以快速恢复数据。</p>
+<h3 id="安全漏洞管理"><a href="#安全漏洞管理" class="headerlink" title="安全漏洞管理"></a>安全漏洞管理</h3><ol>
+<li>采用网络安全技术，例如防火墙、入侵检测系统等，加强对OSS的网络安全保护。</li>
+<li>建立安全漏洞管理机制，及时发现和修复潜在的安全漏洞，以减少安全风险。</li>
+</ol>
+<h3 id="安全监管"><a href="#安全监管" class="headerlink" title="安全监管"></a>安全监管</h3><p>建立安全监管机制，对企业的安全管理进行监管，确保企业的安全策略得到执行。</p>
+<h3 id="安全审计"><a href="#安全审计" class="headerlink" title="安全审计"></a>安全审计</h3><p>定期对 OSS 进行安全审计，及时发现和修复潜在的安全漏洞。</p>
+<h3 id="安全培训"><a href="#安全培训" class="headerlink" title="安全培训"></a>安全培训</h3><p>对员工进行安全培训，提高员工的安全意识和安全素养，降低因员工操作失误导致的安全问题。</p>
+]]></content>
+      <categories>
+        <category>WEB安全</category>
+      </categories>
+      <tags>
+        <tag>OSS</tag>
+        <tag>云存储</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Python多线程实现进度条</title>
+    <url>/2022/06/07/WEB/Python%E5%A4%9A%E7%BA%BF%E7%A8%8B%E5%AE%9E%E7%8E%B0%E8%BF%9B%E5%BA%A6%E6%9D%A1/</url>
+    <content><![CDATA[<h1 id="Python多线程显示进度条的方式"><a href="#Python多线程显示进度条的方式" class="headerlink" title="Python多线程显示进度条的方式"></a>Python多线程显示进度条的方式</h1><p>使用python进行多线程任务时，有时需要获取及时进度来清晰的感知的任务进度，目前收集以下几种实用的方式。</p>
+<p><img src="https://oss-map.oss-cn-beijing.aliyuncs.com/img/image-20230307090922846.png" alt="image-20230307090922846"></p>
+<a id="more"></a>
+
+<h2 id="使用-multiprocessing-进行记录"><a href="#使用-multiprocessing-进行记录" class="headerlink" title="使用 multiprocessing 进行记录"></a>使用 <code>multiprocessing</code> 进行记录</h2><p>利用 <code>callback</code>来检测每个任务的完成，返回值为主函数的return。<strong>apply_async(subprocess, args=(i,), callback=log)</strong></p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment">#!/usr/bin/env python</span></span><br><span class="line"><span class="comment"># -*- coding:utf-8 -*-</span></span><br><span class="line"><span class="comment"># @Time    : 2018/5/23 14:15</span></span><br><span class="line"><span class="comment"># @Author  : zhouyuyao</span></span><br><span class="line"><span class="comment"># @File    : demon1.py</span></span><br><span class="line"><span class="keyword">import</span> multiprocessing</span><br><span class="line"><span class="keyword">import</span> os</span><br><span class="line"><span class="keyword">import</span> time</span><br><span class="line"><span class="keyword">from</span> datetime <span class="keyword">import</span> datetime</span><br><span class="line"><span class="keyword">from</span> tqdm <span class="keyword">import</span> tqdm</span><br><span class="line"></span><br><span class="line"><span class="keyword">global</span> flag</span><br><span class="line">flag = <span class="number">0</span></span><br><span class="line"><span class="keyword">global</span> max</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">log</span>(<span class="params">i</span>):</span></span><br><span class="line">    print(i)</span><br><span class="line">    <span class="keyword">global</span> flag</span><br><span class="line">    flag =  flag + <span class="number">1</span></span><br><span class="line">    print(process_bar(flag, max))</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">process_bar</span>(<span class="params">num, total</span>):</span></span><br><span class="line">    print(num,total)</span><br><span class="line">    rate = float(num)/total</span><br><span class="line">    ratenum = int(<span class="number">50</span>*rate)</span><br><span class="line">    r = <span class="string">&quot;[%s%s]&quot;</span> % (<span class="string">&#x27;&gt;&#x27;</span>*ratenum, <span class="string">&#x27; &#x27;</span>*(<span class="number">50</span>-ratenum))</span><br><span class="line">    <span class="comment">#r = f&quot;\\r[&#123;&#x27;&gt;&#x27;*ratenum&#125;&#123;&#x27; &#x27;*(30-ratenum)&#125; ](&#123;num,&#125;/&#123;total&#125;) &quot;</span></span><br><span class="line">    <span class="keyword">return</span> r</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">subprocess</span>(<span class="params">number</span>):</span></span><br><span class="line">    <span class="comment"># 子进程</span></span><br><span class="line">    callback_res = <span class="string">&quot;call back&quot;</span></span><br><span class="line">    print(<span class="string">&#x27;这是第&#123;0&#125;个子进程&#x27;</span>.format(number))</span><br><span class="line">    pid = os.getpid()              <span class="comment"># 得到当前进程号</span></span><br><span class="line">    print(<span class="string">&#x27;当前进程号：&#123;0&#125;，开始时间：&#123;1&#125;&#x27;</span>.format(pid, datetime.now().isoformat()))</span><br><span class="line">    time.sleep(<span class="number">2</span>)                 <span class="comment"># 当前进程休眠30秒</span></span><br><span class="line">    print(<span class="string">&#x27;当前进程号：&#123;0&#125;，结束时间：&#123;1&#125;&#x27;</span>.format(pid, datetime.now().isoformat()))</span><br><span class="line">    <span class="keyword">return</span> callback_res</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">&#x27;__main__&#x27;</span>:</span><br><span class="line">    <span class="comment"># 主进程</span></span><br><span class="line">    print(<span class="string">&#x27;这是主进程，进程编号：&#123;0&#125;&#x27;</span>.format(os.getpid()))</span><br><span class="line">    t_start = datetime.now()</span><br><span class="line">    max = <span class="number">4</span></span><br><span class="line">    pool = multiprocessing.Pool(<span class="number">2</span>)</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">4</span>):</span><br><span class="line">        pool.apply_async(subprocess, args=(i,), callback=log)</span><br><span class="line">    pool.close()</span><br><span class="line">    pool.join()</span><br><span class="line">    t_end = datetime.now()</span><br><span class="line">    print(<span class="string">&#x27;主进程用时：&#123;0&#125;毫秒&#x27;</span>.format((t_end - t_start).microseconds))</span><br></pre></td></tr></table></figure>
+
+<h2 id="使用ProcessPoolExecutor-进行记录"><a href="#使用ProcessPoolExecutor-进行记录" class="headerlink" title="使用ProcessPoolExecutor 进行记录"></a>使用<code>ProcessPoolExecutor</code> 进行记录</h2><p><a href="https://www.cnblogs.com/goldsunshine/p/16878089.html">python 线程池 ThreadPoolExecutor</a></p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> time</span><br><span class="line"><span class="keyword">from</span> concurrent.futures <span class="keyword">import</span> ThreadPoolExecutor, wait, ALL_COMPLETED, FIRST_COMPLETED, as_completed</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">action</span>(<span class="params">second</span>):</span></span><br><span class="line">    print(second)</span><br><span class="line">    time.sleep(second)</span><br><span class="line">    <span class="keyword">return</span> second</span><br><span class="line"></span><br><span class="line">lists = [<span class="number">4</span>, <span class="number">5</span>, <span class="number">2</span>, <span class="number">3</span>]</span><br><span class="line">all_task = []</span><br><span class="line"><span class="keyword">with</span> ThreadPoolExecutor(max_workers=<span class="number">2</span>) <span class="keyword">as</span> pool:</span><br><span class="line">    <span class="keyword">for</span> second <span class="keyword">in</span> lists:</span><br><span class="line">        all_task.append(pool.submit(action, second))</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> future <span class="keyword">in</span> as_completed(all_task):</span><br><span class="line">        print(<span class="string">f&quot;<span class="subst">&#123;future.result()&#125;</span> 返回&quot;</span>)</span><br><span class="line"></span><br><span class="line">    print(<span class="string">&quot;----complete-----&quot;</span>)</span><br></pre></td></tr></table></figure>
+
+<h2 id="使用队列-queue-的方式进行返回"><a href="#使用队列-queue-的方式进行返回" class="headerlink" title="使用队列 queue 的方式进行返回"></a>使用队列 <code>queue</code> 的方式进行返回</h2><figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment">#!/usr/bin/env python</span></span><br><span class="line"><span class="comment"># -*- coding:utf-8 -*-</span></span><br><span class="line"><span class="comment"># @Time    : 2018/5/23 14:15</span></span><br><span class="line"><span class="comment"># @Author  : zhouyuyao</span></span><br><span class="line"><span class="comment"># @File    : demon1.py</span></span><br><span class="line"><span class="keyword">import</span> queue,time</span><br><span class="line"><span class="keyword">from</span> concurrent.futures <span class="keyword">import</span> ThreadPoolExecutor</span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">run</span>(<span class="params">url_queue</span>):</span></span><br><span class="line">    <span class="keyword">while</span> <span class="keyword">not</span> url_queue.empty():</span><br><span class="line">        url_list = url_queue.get()</span><br><span class="line">        i = url_list[<span class="number">0</span>]</span><br><span class="line">        num = url_list[<span class="number">1</span>]</span><br><span class="line">    print(i*<span class="number">30</span>)</span><br><span class="line">    print(<span class="string">f&quot;is Ok <span class="subst">&#123;num&#125;</span>&quot;</span>)</span><br><span class="line">    time.sleep(<span class="number">3</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">&#x27;__main__&#x27;</span>:</span><br><span class="line">    url_queue = queue.Queue(maxsize=<span class="number">5</span>)</span><br><span class="line">    num = <span class="number">0</span></span><br><span class="line">    all_task = []</span><br><span class="line">    <span class="keyword">with</span> ThreadPoolExecutor(max_workers=<span class="number">8</span>) <span class="keyword">as</span> pool:</span><br><span class="line">        <span class="keyword">for</span> url <span class="keyword">in</span> range(<span class="number">20</span>):</span><br><span class="line">            url_queue.put([url, num])</span><br><span class="line">            num += <span class="number">1</span></span><br><span class="line">            all_task.append(pool.submit(run, url_queue))</span><br></pre></td></tr></table></figure>
+
+]]></content>
+      <categories>
+        <category>Code</category>
+      </categories>
+      <tags>
+        <tag>Python</tag>
+        <tag>multiprocessing</tag>
+        <tag>ProcessPoolExecutor</tag>
+        <tag>queue</tag>
+      </tags>
+  </entry>
 </search>
